@@ -1,0 +1,54 @@
+/* Basic styles */
+@import url("./styles/footer.css");
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 1rem;
+}
+
+p {
+  padding: 1rem;
+}
+
+/* Layout styles */
+
+header,
+main,
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box; /* Ensures padding is included in width calculations */
+}
+
+header {
+  background-color: #ddd;
+}
+
+main {
+  flex-grow: 1; /* Allows main content to take up remaining space */
+}
+
+footer {
+  background-color: #eee;
+}
+
+/* Responsiveness */
+
+@media (max-width: 768px) {
+  header,
+  main,
+  footer {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: flex-start; /* Left-align content */
+  }
+  nav {
+    display: none; /* Hide navigation on smaller screens (optional) */
+  }
+}
