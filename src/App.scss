@@ -8,6 +8,11 @@ $themeColor : #009969;
   box-sizing: border-box;
 }
 
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 body {
   font-family: "Roboto Condensed", sans-serif;
   margin: 0;
@@ -25,7 +30,6 @@ p {
 
 /* Layout styles */
 
-header,
 main,
 footer {
   display: flex;
@@ -47,7 +51,6 @@ footer {
 /* Responsiveness */
 
 @media (max-width: 768px) {
-  header,
   main,
   footer {
     flex-direction: column; /* Stack elements vertically on smaller screens */
@@ -55,5 +58,12 @@ footer {
   }
   nav {
     display: none; /* Hide navigation on smaller screens (optional) */
+  }
+}
+
+
+@media(max-width:768px){
+  .hide_on_tab{
+    display: none;
   }
 }
