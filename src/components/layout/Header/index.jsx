@@ -2,8 +2,10 @@ import React from 'react'
 
 const Header =() => {
   return (
-    <header>
-    <h1>Mineral Portal</h1>
+  <header className='header_main'>
+      <div className='header_inner container'>
+        dfas
+      </div>
   </header>
   )
 }
