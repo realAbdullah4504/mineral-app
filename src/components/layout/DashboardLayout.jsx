@@ -5,7 +5,7 @@ import Content from "./Content";
 
 export const DashboardLayout = ({ children }) => {
   return (
-    <div className="max-w-[1440px] mx-auto">
+    <div className="">
     <Header/>
     <Content>
         {children}
