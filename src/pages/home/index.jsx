@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="max-w-[1440px] mx-auto">
+    <>
       Home Page Content
       <div>Slider</div>
       <div>Welcome portal section</div>
@@ -11,7 +11,7 @@ const Home = () => {
       <div>Mineral Portal</div>
       <div>News and Events</div>
       <div>Financial Stats</div>
-    </div>
+    </>
   );
 };
 export default Home;
