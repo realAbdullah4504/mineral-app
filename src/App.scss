@@ -32,10 +32,8 @@ p {
 
 main,
 footer {
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   box-sizing: border-box; /* Ensures padding is included in width calculations */
 }
 

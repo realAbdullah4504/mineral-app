@@ -4,9 +4,8 @@ import React from "react";
 const Home = () => {
   return (
     <>
-      Home Page Content
       <Slider />
-      <div>Welcome portal section</div>
+      <div className="">Welcome portal section</div>
       <GeologicalSection />
       <div>Global miners</div>
       <div>Mineral Portal</div>
