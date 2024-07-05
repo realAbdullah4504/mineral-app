@@ -1,11 +1,11 @@
-import { GeologicalSection } from "components";
+import { GeologicalSection, Slider } from "components";
 import React from "react";
 
 const Home = () => {
   return (
     <>
       Home Page Content
-      <div>Slider</div>
+      <Slider />
       <div>Welcome portal section</div>
       <GeologicalSection />
       <div>Global miners</div>
