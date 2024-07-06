@@ -3,7 +3,7 @@ import CoalImage from "assets/images/coal.png";
 import CopperImage from "assets/images/copper.png";
 import GoldImage from "assets/images/gold.png";
 
-export const Slider2 = () => {
+export const MineralSlider = () => {
   const [sliderContent, setSliderContent] = useState({
     first: {
       title: "01",
