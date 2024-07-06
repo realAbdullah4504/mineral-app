@@ -3,7 +3,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <>
+    <div className="min-w-[1440px]">
       <Slider />
       <div className="">Welcome portal section</div>
       <GeologicalSection />
@@ -11,7 +11,7 @@ const Home = () => {
       <div>Mineral Portal</div>
       <div>News and Events</div>
       <div>Financial Stats</div>
-    </>
+    </div>
   );
 };
 export default Home;
