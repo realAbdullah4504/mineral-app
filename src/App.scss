@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-$themeColor : #009969;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+$themeColor: #009969;
 
 @import "./styles/header.scss";
 @import url("./styles/footer.css");
@@ -19,7 +19,8 @@ body {
   padding: 0;
 }
 
-h1, h2 {
+h1,
+h2 {
   margin: 0;
   padding: 1rem;
 }
@@ -36,7 +37,6 @@ footer {
   align-items: center;
   box-sizing: border-box; /* Ensures padding is included in width calculations */
 }
-
 
 main {
   flex-grow: 1; /* Allows main content to take up remaining space */
@@ -59,9 +59,8 @@ footer {
   }
 }
 
-
-@media(max-width:768px){
-  .hide_on_tab{
+@media (max-width: 768px) {
+  .hide_on_tab {
     display: none;
   }
 }
