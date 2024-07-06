@@ -1,5 +1,6 @@
 import { Container, SectionTitle } from "components/UI";
 import React from "react";
+import arrowRight from '../../assets/images/arrowRight.png'
 
 export const NewsAndEvent = () => {
   return (
@@ -21,7 +22,7 @@ export const NewsAndEvent = () => {
         <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
         China, Pakistan agree to strengthen mining cooperation
         </div>
-        <div className="text-[11px] leading-[13px]">READ MORE</div>
+        <div className="text-[11px] flex gap-2 mt-2 leading-[13px]"><span>READ MORE</span> <img src={arrowRight} width={'12.67px'} height={'12.67px'}/></div>
         </div>
       </div>
       </div>
@@ -31,7 +32,7 @@ export const NewsAndEvent = () => {
         <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
         China, Pakistan agree to strengthen mining cooperation
         </div>
-        <div className="text-[11px] leading-[13px]">READ MORE</div>
+        <div className="text-[11px] flex gap-2 mt-2 leading-[13px]"><span>READ MORE</span> <img src={arrowRight} width={'12.67px'} height={'12.67px'}/></div>
         </div>
       </div>
       </div>
@@ -41,7 +42,7 @@ export const NewsAndEvent = () => {
         <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
         China, Pakistan agree to strengthen mining cooperation
         </div>
-        <div className="text-[11px] leading-[13px]">READ MORE</div>
+        <div className="text-[11px] flex gap-2 mt-2 leading-[13px]"><span>READ MORE</span> <img src={arrowRight} width={'12.67px'} height={'12.67px'}/></div>
         </div>
       </div>
       </div>
