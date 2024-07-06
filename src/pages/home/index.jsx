@@ -1,16 +1,22 @@
-import { GeologicalSection, Slider } from "components";
 import React from "react";
+import {
+  GeologicalSection,
+  Slider,
+  MiningSection,
+  GlobalMinerSection,
+  GisMineSection,
+  NewsAndEvent,
+} from "components";
 
 const Home = () => {
   return (
     <div className="min-w-[1440px]">
       <Slider />
-      <div className="">Welcome portal section</div>
+      <MiningSection />
       <GeologicalSection />
-      <div>Global miners</div>
-      <div>Mineral Portal</div>
-      <div>News and Events</div>
-      <div>Financial Stats</div>
+      <GlobalMinerSection />
+      <GisMineSection />
+      <NewsAndEvent />
     </div>
   );
 };
