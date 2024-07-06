@@ -9,7 +9,7 @@ export const MineralPotentialLinks = () => {
       className="relative bg-cover bg-center"
       style={{ backgroundImage: `url(${linksBG})` }}
     >
-      <Container classes="mb-[12rem]">
+      <Container classes="mb-[15.375rem]">
         <div className="max-w-[73.625rem] mx-auto shadow-2xl">
           <h2 className="text-white text-[64px] font-bold text-center ">
             Important Links
