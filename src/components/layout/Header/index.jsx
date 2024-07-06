@@ -40,7 +40,7 @@ const Header =() => {
           </div>
           <div className='header_bottom'>
             <div className='header_bottom_menu'>
-            <Link to="#">Home</Link>
+            <Link to="/">Home</Link>
             <ul className='has_sub_menu'>
               <li>Investment
                 <ul className='sub_menu'>

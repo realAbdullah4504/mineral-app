@@ -1,11 +1,11 @@
 export const SubMenuInvestment = [
     {
         name: "Mineral Potential of Pakistan",
-        link: "#"
+        link: "/mineral-potential"
     },
     {
-        name: "Investement Opportunities",
-        link: "#"
+        name: "Investment Opportunities",
+        link: "/investment-opportunities"
     },
     {
         name: "Starting New Business",
