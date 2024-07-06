@@ -2,7 +2,12 @@ import React from "react";
 import Vector from "../../../assets/images/Vector.svg";
 import styles from "./Card.module.css"; // Assuming your module CSS file is named Card.module.css
 
-export const Card = ({ image }) => {
+export const Card = ({
+  title = "",
+  description = "",
+  buttonText,
+  image = "",
+}) => {
   return (
     <div
       className={`flip-card ${styles.flipCard} w-[262.08px] h-[410px] perspective-1000`}
@@ -14,12 +19,12 @@ export const Card = ({ image }) => {
           className={`flip-card-front ${styles.flipCardFront} absolute w-full backface-hidden bg-cover ${image} font-ibm-plex-sans rounded-[4px] flex flex-col justify-end items-center gap-[12px] pb-[21px] overflow-hidden`}
         >
           <span className="font-[600] w-[80%] text-[32px] leading-[40px] text-white">
-            Mineralization Zones
+            {title}
           </span>
           <div className="bg-[#27AE60CC] py-[8px] w-[217px] flex gap-[6.24px] rounded-[4px] justify-center">
             <img src={Vector} alt="Vector" />
             <span className="font-[500] text-[16px] leading-[16px] text-white">
-              Potohar Plateau, Punjab
+              {buttonText}
             </span>
           </div>
         </div>
@@ -28,10 +33,7 @@ export const Card = ({ image }) => {
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <span className="font-[500] w-[80%] text-[16px] leading-[20px] text-white">
-              Pakistan's geological formations, shaped by its location on
-              tectonic plates account for the presence of minerals like Emerald
-              in Swat Valley, Rubies in Hunza Valley, gold & copper in
-              Balochistan & coal in Thar.
+              {description}
             </span>
           </div>
         </div>

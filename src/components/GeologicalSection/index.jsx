@@ -3,6 +3,30 @@ import Arrow11 from "../../assets/images/Arrow11.png";
 
 /* Pakistan’s Geological Significance */
 
+const geologicalData = [
+  {
+    title: "Mineralization Zones",
+    description:
+      "Pakistan’s geological formations, shaped by its location on tectonic plates account for the presence of minerals like Emerald in Swat Valley, Rubies in Hunza Valley, gold & copper in Balochistan & coal in Thar.",
+    buttonText: "Potohar Plateau, Punjab",
+    image: "bg-san-andreas-fault",
+  },
+  {
+    title: "Mountainous Terrain",
+    description:
+      "The mountainous terrain of Pakistan hosts a wealth of minerals including marble, limestone, gypsum, chromite, rare gemstones & granite. They are abundant in regions of Swat, Hunza, Himalayan & Karakoram Range.",
+    buttonText: "Rakaposhi Mountain GB",
+    image: "bg-pexels-dario-fernandez-ruz",
+  },
+  {
+    title: "Deserts & Fertile Plains",
+    description:
+      " The deserts & fertile plains of Pakistan are rich in minerals essentials of salt in the Khewra mines, coal reserves in the desert of Thar. Fertile plains of Sindh & Punjab boast clay, silica sand and gold",
+    buttonText: "Thar Desert, Tahrparkar",
+    image: "bg-pexels-jack-redgate",
+  },
+];
+
 export const GeologicalSection = () => {
   return (
     <div className="bg-geological-section bg-cover min-h-[723px] w-full  bg-no-repeat text-white flex justify-evenly items-center">
@@ -28,9 +52,17 @@ export const GeologicalSection = () => {
         </div>
       </div>
       <div className="flex gap-[33px]">
-        <Card image="bg-san-andreas-fault" />
-        <Card image="bg-pexels-dario-fernandez-ruz" />
-        <Card image="bg-pexels-jack-redgate" />
+        {geologicalData?.map(
+          ({ title, description, buttonText, image }, index) => (
+            <Card
+              key={index}
+              title={title}
+              description={description}
+              buttonText={buttonText}
+              image={image}
+            />
+          )
+        )}
       </div>
     </div>
   );
