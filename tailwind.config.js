@@ -14,6 +14,7 @@ export default {
         'pakistan-image': "url('/src/assets/images/pakistanPic.png')",
         'china-image': "url('/src/assets/images/China.png')",
         'rectangle-image': "url('/src/assets/images/Rectangle.png')",
+        'president-image': "url('/src/assets/images/President.png')",
       },
       fontFamily: {
         'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
