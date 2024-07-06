@@ -8,7 +8,10 @@ export default {
     extend: {
       backgroundImage: {
         'geological-section': "url('/src/assets/images/geological-section.png')",
-        'san-andreas-fault': "url('/src/assets/images/san-andreas-fault.png')"
+        'san-andreas-fault': "url('/src/assets/images/san-andreas-fault.png')",
+        'pakistan-image': "url('/src/assets/images/pakistanPic.png')",
+        'china-image': "url('/src/assets/images/China.png')",
+        'rectangle-image': "url('/src/assets/images/Rectangle.png')",
       },
       fontFamily: {
         'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
