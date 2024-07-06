@@ -10,7 +10,7 @@ import {
 
 const Home = () => {
   return (
-    <div className="min-w-[1440px]">
+    <div className="min-w-[1280px]">
       <Slider />
       <MiningSection />
       <GeologicalSection />
