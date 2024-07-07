@@ -11,6 +11,8 @@ import { NewsAndEvent } from "./EventSection";
 import { MineralPotentialLinks } from "./MineralPotentialLinks";
 import { MineralPotentialSlider } from "./MineralPotentialSlider";
 import { MineralClassification } from "./MineralClasification";
+import { MiningFrontier } from "./Investment/InvestmentPotential/MiningFrontier";
+
 export {
   DashboardLayout,
   GeologicalSection,
@@ -24,5 +26,6 @@ export {
   MineralSectorPotential,
   MineralPotentialLinks,
   MineralPotentialSlider , 
-  MineralClassification
+  MineralClassification , 
+  MiningFrontier
 };

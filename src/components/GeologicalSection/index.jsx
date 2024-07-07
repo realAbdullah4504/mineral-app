@@ -1,5 +1,5 @@
 import { Card } from "./Card";
-import Arrow11 from "../../assets/images/Arrow11.png";
+import Arrow from "../../assets/images/Arrow.png";
 import { Container } from "components/UI";
 
 /* Pakistan’s Geological Significance */
@@ -47,7 +47,7 @@ export const GeologicalSection = () => {
             <span className="font-[400] text-[14.26px] leading-[15.54px]">
               Explore
             </span>{" "}
-            <img src={Arrow11} className="mr-2" alt="Arrow" />
+            <img src={Arrow} className="mr-2" alt="Arrow" />
           </div>
         </div>
         <div className="flex gap-[33px]">
