@@ -9,6 +9,7 @@ import { GlobalMinerSection } from "./GlobalMinor";
 import { GisMineSection } from "./MineSection";
 import { NewsAndEvent } from "./EventSection";
 import { MineralPotentialLinks } from "./MineralPotentialLinks";
+import { MineralPotentialSlider } from "./MineralPotentialSlider";
 export {
   DashboardLayout,
   GeologicalSection,
@@ -21,4 +22,5 @@ export {
   PakistanMap,
   MineralSectorPotential,
   MineralPotentialLinks,
+  MineralPotentialSlider
 };

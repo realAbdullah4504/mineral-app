@@ -4,12 +4,15 @@ import {
   PakistanMap,
   MineralSectorPotential,
   MineralPotentialLinks,
+  MineralPotentialSlider
+
 } from "components";
 
 const MineralPotential = () => {
   return (
     <div className="max-w-[100%]">
       <MineralSlider />
+      <MineralPotentialSlider />
       <MineralSectorPotential />
       <PakistanMap />
       <MineralPotentialLinks />
