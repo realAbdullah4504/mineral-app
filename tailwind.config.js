@@ -15,6 +15,8 @@ export default {
         'china-image': "url('/src/assets/images/China.png')",
         'rectangle-image': "url('/src/assets/images/Rectangle.png')",
         'president-image': "url('/src/assets/images/President.png')",
+        'Energy-image' : "url('/src/assets/images/Energy.png')" , 
+        'gypsum-image' : "url('/src/assets/images/gemstoneClassification.png')" , 
       },
       fontFamily: {
         'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
