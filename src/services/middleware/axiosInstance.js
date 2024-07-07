@@ -2,7 +2,7 @@ import axios from "axios";
 import { logOut } from "utils/helpers";
 import { defaultConfig } from "./defaultConfig";
 import { getCookie, setCookie } from "services/session/cookies";
-import { NEXT_PUBLIC_API_URL } from "utils/constants/url";
+import { REACT_APP_BASE_URL } from "utils/constant/url";
 
 function deleteAllCookies() {
   var cookies = document.cookie.split(";");
@@ -18,7 +18,7 @@ function deleteAllCookies() {
 const axiosInstance = axios.create({
   ...defaultConfig(),
 
-  baseURL: NEXT_PUBLIC_API_URL,
+  baseURL: REACT_APP_BASE_URL,
 });
 axiosInstance.defaults.timeout = 4200000;
 
