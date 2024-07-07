@@ -102,7 +102,7 @@
     position: absolute;
     right: 20%;
     transform: scale(.8);
-    opacity: .40;
+    opacity: .70;
 
 }
 .avenue_image.previous1{
@@ -110,7 +110,7 @@
     position: absolute;
     right: 35%;
     transform: scale(.6);
-    opacity: .40;
+    opacity: .50;
 
 }
 .avenue_image.previous2{
@@ -180,4 +180,34 @@
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
+  }
+
+  @media(max-width:1200px){
+    .avenueslider_inner{
+        max-width: 95%;
+    }
+  }
+
+  @media(max-width:1024px){
+    .pages_heading_h2{
+        max-width: 95%;
+        font-size: 20px;
+    }
+    .avenueslider{
+        flex-wrap: wrap;
+    }
+    .avenueslider_left{
+        width: 100%;
+    }
+    .avenueslider_right{
+        width: 100%;
+    }
+    .previous,.previous1,.previous2{
+        display: none;
+    }
+    .avenue_image.current {
+        z-index: 5;
+        position: relative;
+        right: 0;
+    }
   }
