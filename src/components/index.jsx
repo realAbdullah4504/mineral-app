@@ -10,6 +10,9 @@ import { GisMineSection } from "./MineSection";
 import { NewsAndEvent } from "./EventSection";
 import { MineralPotentialLinks } from "./MineralPotentialLinks";
 import { AvenueForMineralSlider } from "./AvenueForMineralSlider";
+import { MineralPotentialSlider } from "./MineralPotentialSlider";
+import { MineralClassification } from "./MineralClasification";
+import { MiningFrontier } from "./Investment/InvestmentPotential/MiningFrontier";
 
 export {
   DashboardLayout,
@@ -23,5 +26,8 @@ export {
   PakistanMap,
   MineralSectorPotential,
   MineralPotentialLinks,
-  AvenueForMineralSlider
+  AvenueForMineralSlider,
+  MineralPotentialSlider , 
+  MineralClassification , 
+  MiningFrontier
 };

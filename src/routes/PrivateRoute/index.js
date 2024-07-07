@@ -3,7 +3,7 @@ import { getCookie } from "services/session/cookies";
 import PropTypes from "prop-types";
 
 const useAuth = () => {
-  const accessToken = getCookie("accessToken");
+  const accessToken = getCookie("token");
   return accessToken ? true : false;
 };
 

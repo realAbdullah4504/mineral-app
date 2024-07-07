@@ -3,8 +3,8 @@ import {SliderData} from "./avenueSliderData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import LeftArrow from "./../../assets/images/leftarrow.png"
-import RightArrow from "./../../assets/images/rightarrow.png"
+import LeftArrow from "./../../assets/images/arrowL.png"
+import RightArrow from "./../../assets/images/arrowR.png"
 
 export const AvenueForMineralSlider = () => {
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0);

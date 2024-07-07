@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoImg from "./../../../assets/images/logo.jpg";
 import hamburgerICon from "./../../../assets/images/hamburger.svg";
 import CloseIcon from "./../../../assets/images/x.svg";
@@ -7,11 +8,20 @@ import {SubMenuInvestment,SubMenuMapsAndReports,SubMenuExpartriateSecurity,
   SubMenuMineralTestingLabs,SubMenuResearchAndDevelopment,SubMenuFiscal,SubMenuStatistics,
   SubMenuIntiatives,SubMenuWhoIsWho,SubMenuCSR,
   SubMenuGovernance,SubMenuActsAndLaws,SubMenuRulesAndRegulations} from "./menu";
+  import { getCookie } from 'services/session/cookies';
+  import { logOut } from 'utils/helpers';
+
 const Header =() => {
   const [menuMobile, setMobileMenu] = useState(false);
-
+  const navigate = useNavigate();
+  const token = getCookie('token');
+  const userInfo = token ? jwtDecode(token) : {};
   const MenuToggle = () => {
     setMobileMenu(prev => !prev);
+  }
+  const logoutHandler = () => {
+    logOut();
+    navigate("/login")
   }
   return (
   <header className='header_main'>
@@ -31,10 +41,18 @@ const Header =() => {
               </Link>
             </div>
             <div className="header_column" id="flexible-width-2">
-            <div className='header_menu_2'>
-                <Link to="#">Log In</Link>
+              {
+                token ? 
+                <div className='header_menu_2'>
+                <Link to="#">{userInfo?.UserFullName || ""}</Link>
+                <Link onClick={()=> logoutHandler()} to="/login">Log out</Link>
+                </div>
+                : <div className='header_menu_2'>
+                <Link to="/login">Log In</Link>
                 <Link to="#">Sign Up</Link>
-              </div>
+                </div>
+              }
+            
             </div>
             </div>
           </div>

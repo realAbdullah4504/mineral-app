@@ -1,0 +1,54 @@
+.mining-frontier {
+    text-align: center;
+    margin: 29px 0px 29px 0px;
+    padding: 0px;
+  }
+  
+  .mining-frontier h1 {
+    font-family: IBM Plex Sans;
+    font-size: 43px;
+    font-weight: 500;
+    line-height: 55.9px;
+    text-align: center;
+   }
+  
+  .mining-frontier h2 {
+    font-family: IBM Plex Sans;
+    font-size: 43px;
+    font-weight: 500;
+    line-height: 55.9px;
+    text-align: center;
+    color: #009969;
+    ;
+  }
+  
+  .mining-frontier p {
+    max-width: 458px;
+    margin: auto;
+    font-family: IBM Plex Sans;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 19.62px;
+    text-align: center;
+    
+  }
+.arrow-img{
+    width: 60px;
+    padding-left: 5px;
+
+  }
+  
+  .view-projects-button {
+    max-width: 170px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: black;
+    background-color:transparent;
+    border-radius: 15px; 
+  border: 3px solid black;
+    cursor: pointer;
+  }
+  
+  .view-projects-button:hover {
+    background-color: white;
+  }
