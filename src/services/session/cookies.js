@@ -8,7 +8,6 @@ export function setCookie(cname, cvalue, exdays) {
 
 export function getCookie(cname) {
   var name = cname + "=";
-  if (process.browser) {
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(";");
     for (var i = 0; i < ca.length; i++) {
@@ -21,5 +20,4 @@ export function getCookie(cname) {
       }
     }
     return "";
-  }
 }
