@@ -8,6 +8,10 @@ export const SubMenuInvestment = [
         link: "/investment-opportunities"
     },
     {
+        name: "Fiscal Incentives",
+        link: "#"
+    },
+    {
         name: "Starting New Business",
         link: "#"
     },
@@ -31,10 +35,7 @@ export const SubMenuInvestment = [
         name: "Special Investment Facilitation Council",
         link: "#"
     },
-    {
-        name: "Fiscal Incentives",
-        link: "#"
-    }
+   
 
 ]
 
