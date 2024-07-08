@@ -6,7 +6,6 @@ import {
   GlobalMinerSection,
   GisMineSection,
   NewsAndEvent,
-  AvenueForMineralSlider,
 } from "components";
 
 const Home = () => {
@@ -18,7 +17,6 @@ const Home = () => {
       <GlobalMinerSection />
       <GisMineSection />
       <NewsAndEvent />
-      <AvenueForMineralSlider/>
     </div>
   );
 };
