@@ -6,7 +6,8 @@ import {
   MineralPotentialLinks,
   MineralPotentialSlider,
   MineralClassification ,  
-  MiningFrontier
+  MiningFrontier , 
+  MineralWealth
 } from "components";
 
 const MineralPotential = () => {
@@ -14,6 +15,7 @@ const MineralPotential = () => {
     <div className="max-w-[100%]">
       <MineralSlider />
       {/* <MineralClassification/> */}
+      <MineralWealth/>
       <MiningFrontier/>
       <MineralPotentialSlider />
       <MineralSectorPotential />
