@@ -12,11 +12,11 @@ export const SubMenuInvestment = [
         link: "#"
     },
     {
-        name: "Starting New Business",
+        name: "Access to Geological Data",
         link: "#"
     },
     {
-        name: "Access to Geological Data",
+        name: "Starting New Business",
         link: "#"
     },
     {

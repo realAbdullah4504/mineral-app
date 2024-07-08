@@ -13,6 +13,8 @@ import { AvenueForMineralSlider } from "./AvenueForMineralSlider";
 import { MineralPotentialSlider } from "./MineralPotentialSlider";
 import { MineralClassification } from "./MineralClasification";
 import { MiningFrontier } from "./Investment/InvestmentPotential/MiningFrontier";
+import { InvestmentOpportunitySection } from './InvestmentOpportunity';
+import {MineralWealthSection} from './MineralWealthSection'
 
 export {
   DashboardLayout,
@@ -29,5 +31,7 @@ export {
   AvenueForMineralSlider,
   MineralPotentialSlider , 
   MineralClassification , 
-  MiningFrontier
+  MiningFrontier,
+  InvestmentOpportunitySection,
+  MineralWealthSection
 };
