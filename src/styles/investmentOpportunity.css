@@ -1,0 +1,62 @@
+.Investment-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 11,441px;
+    height: Hug (613px)px;
+    padding: 60px ;
+    gap: 40px;
+    opacity: 0px;
+
+}
+
+.Investment-information {
+    width: Fill (682px)px;
+    height: Hug (420px)px;
+    gap: 20px;
+    opacity: 0px;
+
+}
+
+.header {
+    font-family: IBM Plex Sans;
+    font-size: 35px;
+    line-height: 84px;
+    text-align: left;
+
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.green {
+    color: #27AE60;
+}
+
+.Investment-content {
+    font-family: Helvetica Neue;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: left;
+
+}
+
+.learn-more {
+    color: #27AE60;
+    border: none;
+    cursor: pointer;
+    width: 83px;
+    height: 20px;
+    gap: 0px;
+    opacity: 0px;
+    font-weight: bold;
+    display: inline;
+    
+}
+
+.Investment-image  {
+    width: 419px;
+    height: 493px;
+}

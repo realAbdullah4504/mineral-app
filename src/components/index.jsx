@@ -9,10 +9,13 @@ import { GlobalMinerSection } from "./GlobalMinor";
 import { GisMineSection } from "./MineSection";
 import { NewsAndEvent } from "./EventSection";
 import { MineralPotentialLinks } from "./MineralPotentialLinks";
+import { AvenueForMineralSlider } from "./AvenueForMineralSlider";
 import { MineralPotentialSlider } from "./MineralPotentialSlider";
 import { MineralClassification } from "./MineralClasification";
 import { MiningFrontier } from "./Investment/InvestmentPotential/MiningFrontier";
 import { MineralWealth } from "./MineralWeakth";
+import { InvestmentOpportunitySection } from './InvestmentOpportunity';
+import {MineralWealthSection} from './MineralWealthSection'
 
 export {
   DashboardLayout,
@@ -26,8 +29,11 @@ export {
   PakistanMap,
   MineralSectorPotential,
   MineralPotentialLinks,
+  AvenueForMineralSlider,
   MineralPotentialSlider , 
   MineralClassification , 
   MiningFrontier , 
-  MineralWealth
+  MineralWealth,
+  InvestmentOpportunitySection,
+  MineralWealthSection
 };
