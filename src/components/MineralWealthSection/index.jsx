@@ -2,7 +2,7 @@ import React from 'react'
 import {Container} from '../UI/Container';
 export const MineralWealthSection = () => {
   return (
-    <Container>
+    <Container classes='pt-[36px]'>
         <h1 className='font-roboto-condensed font-semibold text-[64px] leading-[75px]'>
             PAKISTAN’S MINERAL 
             <span className='text-[#27AE60]'> WEALTH </span>

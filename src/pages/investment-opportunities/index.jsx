@@ -3,7 +3,8 @@ import {
   MineralClassification ,  
   AvenueForMineralSlider,
   InvestmentOpportunitySection,
-  MineralWealthSection
+  MineralWealthSection,
+  MineralWealth
 } from "components";
 
 const InvestmentOpportunity= () => {
@@ -12,6 +13,7 @@ const InvestmentOpportunity= () => {
       <InvestmentOpportunitySection/>
       <MineralClassification/>
       <MineralWealthSection/>
+      <MineralWealth/>
       <AvenueForMineralSlider/>
     </div>
   );
