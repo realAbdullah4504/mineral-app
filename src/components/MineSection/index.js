@@ -1,14 +1,22 @@
 import React from "react";
-import Map from 'assets/images/Map.png';
-import { Container } from "components/UI";
+import Map from "assets/images/PakMap.jpeg";
+import { Container, Button } from "components/UI";
 import { SectionTitle } from "components/UI/SectionTitle";
 export const GisMineSection = () => {
   return (
     <Container classes="px-[124.56px]">
       <SectionTitle heading="GIS Mines & Mineral Portal" />
-      <div className="w-full">
+      <Button
+        className="btns"
+        path="/access-to-geological-data"
+        buttonStyle="hbtn--primary"
+        buttonSize="hbtn--large"
+      >
+        Explore GIS Mineral Portal <i className="far fa-play-circle" />
+      </Button>
+      <div className="w-full mt-5">
         <img src={Map} alt="pakistan map" className="w-full" />
       </div>
-    </Container >
+    </Container>
   );
 };

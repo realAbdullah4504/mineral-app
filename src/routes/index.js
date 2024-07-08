@@ -9,6 +9,7 @@ const Home = lazy(() => import('../pages/home'));
 const MineralPotential = lazy(() => import('../pages/mineral-potential'));
 const Login = lazy(() => import('../pages/login'));
 const InvestmentOpportunity = lazy(() => import('../pages/investment-opportunities'));
+const ATGDBusiness = lazy(() => import('../pages/ATGDBusiness'));
 
 
 const AppRouter = () => (
@@ -30,6 +31,10 @@ const AppRouter = () => (
         <Route
           path="/investment-opportunities"
           element={<PrivateRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
+        />
+         <Route
+          path="/access-to-geological-data"
+          element={<PrivateRoute component={ATGDBusiness} layout={DashboardLayout} />}
         />
   </Routes>
     </Suspense>
