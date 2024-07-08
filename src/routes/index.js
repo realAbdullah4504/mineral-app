@@ -8,6 +8,7 @@ import {  DashboardLayout } from 'components';
 const Home = lazy(() => import('../pages/home'));
 const MineralPotential = lazy(() => import('../pages/mineral-potential'));
 const Login = lazy(() => import('../pages/login'));
+const InvestmentOpportunity = lazy(() => import('../pages/investment-opportunities'));
 
 
 const AppRouter = () => (
@@ -25,6 +26,10 @@ const AppRouter = () => (
         <Route
           path="/mineral-potential"
           element={<PrivateRoute component={MineralPotential} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/investment-opportunities"
+          element={<PrivateRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
         />
   </Routes>
     </Suspense>
