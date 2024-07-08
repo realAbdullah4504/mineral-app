@@ -26,7 +26,7 @@ const AppRouter = () => (
         />
         <Route
           path="/mineral-potential"
-          element={<PrivateRoute component={MineralPotential} layout={DashboardLayout} />}
+          element={<PublicRoute component={MineralPotential} layout={DashboardLayout} />}
         />
         <Route
           path="/investment-opportunities"
