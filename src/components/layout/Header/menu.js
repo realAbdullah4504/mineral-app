@@ -12,7 +12,7 @@ export const SubMenuInvestment = [
         link: "#"
     },
     {
-        name: "Interactive GIS  Portal",
+        name: "GIS  Portal",
         link: "/gis-portal"
     },
     {

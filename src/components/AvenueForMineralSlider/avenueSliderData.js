@@ -7,21 +7,21 @@ export const SliderData = [
     {
         title: "BARITE-LEAD-ZINC KHUZDAR",
         img: Slider1,
-        description: "The Lasbela Khuzdar belt holds immense potential for sustainable quantities of lead-zinc & barite. Mining in the Duddar area is underway since 2015 & feasibility study in the Gunga area has been completed with an estimate of 69 million tons of Barite-Lead-Zinc. Exploration license covering an area of 200sq/km is available for potential investment/joint venture"
+        description: "The Lasbela Khuzdar belt holds immense potential for sustainable quantities of lead-zinc & barite. Mining in the Duddar area is underway since 2015 & feasibility study in the Gunga area has been completed with an estimate of 69 million tons of Barite-Lead-Zinc.Exploration license covering an area of 200sq/km is available for potential investment/joint venture"
     },
     {
-        title: "CARITE-LEAD-ZINC KHUZDAR",
+        title: "CHINIOT IRON ORE",
         img: Slider2,
-        description: "The Lasbela Khuzdar belt holds immense potential for sustainable quantities of lead-zinc & barite. Mining in the Duddar area is underway since 2015 & feasibility study in the Gunga area has been completed with an estimate of 69 million tons of Barite-Lead-Zinc. Exploration license covering an area of 200sq/km is available for potential investment/joint venture"
+        description: "Chiniot holds one of the largest deposits of iron ore in Pakistan. According to National Instrument 43101 Report, Pakistan has an estimated 205 million tons of iron ore reserves, whereas the mine capacity is 4.5 million tons per annum. The estimated investment cost according to this report is USD1.3 billion with expected IRR of>20%."
     },
     {
-        title: "DARITE-LEAD-ZINC KHUZDAR",
+        title: "SODA ASH PLANT",
         img: Slider3,
-        description: "The Lasbela Khuzdar belt holds immense potential for sustainable quantities of lead-zinc & barite. Mining in the Duddar area is underway since 2015 & feasibility study in the Gunga area has been completed with an estimate of 69 million tons of Barite-Lead-Zinc. Exploration license covering an area of 200sq/km is available for potential investment/joint venture"
+        description: "Soda Ash and caustic soda production has doubled in Pakistan since 2012. This market is expected to grow at 6% CARGR to upto 65 million tons in 2026. Kalabagh & Jatta-Bahawalpur have combined reserve of 20 billion tons of industrial salt which is used in the manufacturing of soda ash. The sites also offer accessibility to western parts of CPEC & Afghanistan, opening roads towards Central Asia. The expected IRR of this project is upto 50% with a 2 year payback period."
     },
     {
-        title: "EARITE-LEAD-ZINC KHUZDAR",
+        title: "THAR COALFIELD BLOCKS",
         img: Slider4,
-        description: "The Lasbela Khuzdar belt holds immense potential for sustainable quantities of lead-zinc & barite. Mining in the Duddar area is underway since 2015 & feasibility study in the Gunga area has been completed with an estimate of 69 million tons of Barite-Lead-Zinc. Exploration license covering an area of 200sq/km is available for potential investment/joint venture"
+        description: "Thar coal field covers an area of 9100 square kilometers with total resources exceeding 175 billion tons, which is one of the largest coal deposits in the world. The portion of coal resources have been divided in 12 blocks out of which 3 blocks have been allocated to local and international companies for mining, power generation and gasification. Two mining projects are in commercial production while the remaining blocks are available for investment."
     }
 ]

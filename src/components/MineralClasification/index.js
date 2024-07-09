@@ -14,7 +14,7 @@ import arrowR from "../../assets/images/arrowR.png"
 import arrowL from "../../assets/images/arrowL.png"
 
 export const MineralClassification = () => {
-    const [tab, setTab] = useState(["Metallic Minerals", "Energy", "Gemstones", "Dimension Stones", "Industrial Stones"])
+    const [tab, setTab] = useState(["Energy", "Gemstones", "Dimension Stones", "Industrial Stones", "Metallic Minerals"])
     const [activeTab, setActiveTab] = useState(1)
     const [data, setData] = useState([
         {

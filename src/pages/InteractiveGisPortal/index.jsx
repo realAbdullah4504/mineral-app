@@ -7,7 +7,7 @@ const InteractiveGisPortal= () => {
   return (
     <div className="max-w-[100%] my-20">
        <Container>
-      <div className="flex ml-10 mt-[20px] text-center">
+      <div className="flex ml-10 mt-[20px] text-center my-10">
         <div className="max-w">
           <span className="font-ibm-plex-sans font-semibold  text-[64px] p-[0px] mr-5">
           Welcome to
@@ -20,6 +20,14 @@ const InteractiveGisPortal= () => {
           </div>
         </div>
       </div>
+      
+      <iframe
+          id="gis1"
+          title="GIS IFrame"
+          className="gis__ifrmae"
+          src="https://arcg.is/GuCL90"
+          loading="eager"
+        ></iframe>
     </Container>
     </div>
   );

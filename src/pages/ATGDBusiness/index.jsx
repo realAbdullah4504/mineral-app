@@ -23,13 +23,6 @@ function ATGDBusiness() {
           description="The geological data of Pakistan provide reports and maps of the geological form surface & subsurface distribution of rocks and minerals which are present in specific regions. This data is essentials for mineral exploration, civil engineering works, soil surveys and various conservation projects. This data provides geological mapping of Pakistan’s minerals that will in turn help increase the efficacy & ease of mineral exploration & mining."
         />
 
-        <iframe
-          id="gis1"
-          title="GIS IFrame"
-          className="gis__ifrmae"
-          src="https://arcg.is/GuCL90"
-          loading="eager"
-        ></iframe>
       </div>
     </Container>
   );
