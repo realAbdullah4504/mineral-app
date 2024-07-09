@@ -8,7 +8,7 @@ export const GisMineSection = () => {
       <SectionTitle heading="GIS Mines & Mineral Portal" />
       <Button
         className="btns"
-        path="/access-to-geological-data"
+        path="/gis-portal"
         buttonStyle="hbtn--primary"
         buttonSize="hbtn--large"
       >
