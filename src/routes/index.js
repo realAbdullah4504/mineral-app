@@ -19,7 +19,7 @@ const AppRouter = () => (
       <Routes>
         <Route
           path="/"
-          element={<PrivateRoute component={Home} layout={DashboardLayout} />}
+          element={<PublicRoute component={Home} layout={DashboardLayout} />}
         />
         <Route
           path="/login"
@@ -31,15 +31,15 @@ const AppRouter = () => (
         />
         <Route
           path="/investment-opportunities"
-          element={<PrivateRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
+          element={<PublicRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
         />
          <Route
           path="/access-to-geological-data"
-          element={<PrivateRoute component={ATGDBusiness} layout={DashboardLayout} />}
+          element={<PublicRoute component={ATGDBusiness} layout={DashboardLayout} />}
         />
         <Route
           path="/gis-portal"
-          element={<PrivateRoute component={InteractiveGisPortal} layout={DashboardLayout} />}
+          element={<PublicRoute component={InteractiveGisPortal} layout={DashboardLayout} />}
         />
   </Routes>
     </Suspense>

@@ -69,7 +69,7 @@ const Footer = () => {
             <button className="text-left mb-4">Initiatives & Projects</button>
             <button className="text-left mb-4">Who is Who</button>
             <button className="text-left mb-4">CSR</button>
-            <button className="text-left mb-4">FAQ&apos;s</button>
+            <button className="text-left mb-4">FAQs</button>
             <button className="text-left mb-4">Research & Development</button>
           </div>
         </div>

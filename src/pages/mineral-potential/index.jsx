@@ -12,7 +12,6 @@ const MineralPotential = () => {
   return (
     <div className="max-w-[100%]">
       <MineralSlider />
-      
       <MiningFrontier/>
       <MineralPotentialSlider />
       <MineralSectorPotential />

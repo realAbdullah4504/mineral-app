@@ -17,14 +17,14 @@ const geologicalData = [
     description:
       "The mountainous terrain of Pakistan hosts a wealth of minerals including marble, limestone, gypsum, chromite, rare gemstones & granite. They are abundant in regions of Swat, Hunza, Himalayan & Karakoram Range.",
     buttonText: "Rakaposhi Mountain GB",
-    image: "bg-pexels-dario-fernandez-ruz",
+    image: "bg-pexels-jack-redgate",
   },
   {
     title: "Deserts & Fertile Plains",
     description:
       " The deserts & fertile plains of Pakistan are rich in minerals essentials of salt in the Khewra mines, coal reserves in the desert of Thar. Fertile plains of Sindh & Punjab boast clay, silica sand and gold",
     buttonText: "Thar Desert, Tahrparkar",
-    image: "bg-pexels-jack-redgate",
+    image: "bg-pexels-dario-fernandez-ruz",
   },
 ];
 
