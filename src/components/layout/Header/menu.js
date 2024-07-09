@@ -12,8 +12,12 @@ export const SubMenuInvestment = [
         link: "#"
     },
     {
+        name: "Interactive GIS  Portal",
+        link: "/gis-portal"
+    },
+    {
         name: "Access to Geological Data",
-        link: "#"
+        link: "/access-to-geological-data"
     },
     {
         name: "Starting New Business",

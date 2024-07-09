@@ -10,6 +10,7 @@ const MineralPotential = lazy(() => import('../pages/mineral-potential'));
 const Login = lazy(() => import('../pages/login'));
 const InvestmentOpportunity = lazy(() => import('../pages/investment-opportunities'));
 const ATGDBusiness = lazy(() => import('../pages/ATGDBusiness'));
+const InteractiveGisPortal = lazy(() => import('../pages/InteractiveGisPortal'));
 
 
 const AppRouter = () => (
@@ -35,6 +36,10 @@ const AppRouter = () => (
          <Route
           path="/access-to-geological-data"
           element={<PrivateRoute component={ATGDBusiness} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/gis-portal"
+          element={<PrivateRoute component={InteractiveGisPortal} layout={DashboardLayout} />}
         />
   </Routes>
     </Suspense>

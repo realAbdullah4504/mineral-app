@@ -1,4 +1,5 @@
 import React from "react";
+import InvestmentOpportunities from "assets/images/InvestmentOpportunity.png";
 import {
   MineralClassification ,  
   AvenueForMineralSlider,
@@ -13,6 +14,7 @@ const InvestmentOpportunity= () => {
       <InvestmentOpportunitySection
       title="INVESTMENT"
       subTitle="OPPORTUNITIES"
+      avatar={InvestmentOpportunities}
       description="Pakistan, with reserves of 92 known minerals, spanning a yearly
       production of 68.52 million metric tons (Ministry of Planning,
       Development & Reform Government of Pakistan) is a lucrative

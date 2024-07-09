@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "components/UI";
-import InvestmentOpportunity from "assets/images/InvestmentOpportunity.png";
+
 
 export const InvestmentOpportunitySection = ({title = "", subTitle = "", description = "", avatar=""}) => {
   return (
@@ -21,11 +21,14 @@ export const InvestmentOpportunitySection = ({title = "", subTitle = "", descrip
           </a>
         </div>
         <div className="ml-20 mb-10">
-          <img
-            src={avatar}
-            alt="Investment opportunities"
-            style={{ width: "100%", height: "493px" }}
-          />
+          {
+            avatar? 
+            <img
+              src={avatar}
+              alt="Investment opportunities"
+              style={{ width: "100%", height: "493px" }}
+            /> : ""
+          }
         </div>
       </div>
     </Container>
