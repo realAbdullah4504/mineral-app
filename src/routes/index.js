@@ -7,42 +7,102 @@ import { DashboardLayout } from "components";
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
-const InvestmentOpportunity = lazy(() => import("../pages/investment-opportunities"));
+const InvestmentOpportunity = lazy(() =>
+  import("../pages/investment-opportunities")
+);
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
-const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"));
+const InteractiveGisPortal = lazy(() =>
+  import("../pages/InteractiveGisPortal")
+);
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
-const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
+const MineralDevelopmentStrategy = lazy(() =>
+  import("../pages/MineralDevelopmentStrategy")
+);
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
+const InstitutionalArrangement = lazy(() =>
+  import("../pages/InstitutionalArrangement")
+);
+
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
       <Routes>
-        <Route path="/" element={<PublicRoute component={Home} layout={DashboardLayout} />} />
-        <Route path="/login" element={<PublicRoute component={Login} layout={DashboardLayout} />} />
+        <Route
+          path="/"
+          element={<PublicRoute component={Home} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/login"
+          element={<PublicRoute component={Login} layout={DashboardLayout} />}
+        />
         <Route
           path="/mineral-potential"
-          element={<PublicRoute component={MineralPotential} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={MineralPotential}
+              layout={DashboardLayout}
+            />
+          }
         />
         <Route
           path="/investment-opportunities"
-          element={<PublicRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={InvestmentOpportunity}
+              layout={DashboardLayout}
+            />
+          }
         />
         <Route
           path="/access-to-geological-data"
-          element={<PublicRoute component={ATGDBusiness} layout={DashboardLayout} />}
+          element={
+            <PublicRoute component={ATGDBusiness} layout={DashboardLayout} />
+          }
         />
-        <Route path="/gis-portal" element={<PublicRoute component={InteractiveGisPortal} layout={DashboardLayout} />} />
+        <Route
+          path="/gis-portal"
+          element={
+            <PublicRoute
+              component={InteractiveGisPortal}
+              layout={DashboardLayout}
+            />
+          }
+        />
         <Route
           path="/business-investment"
-          element={<PublicRoute component={BusinessInvestment} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={BusinessInvestment}
+              layout={DashboardLayout}
+            />
+          }
         />
         <Route
           path="/mineral-development-strategy"
-          element={<PublicRoute component={MineralDevelopmentStrategy} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={MineralDevelopmentStrategy}
+              layout={DashboardLayout}
+            />
+          }
         />
-           <Route
+        <Route
           path="/fiscal-incentives"
-          element={<PublicRoute component={FiscalIncentives} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={FiscalIncentives}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/institutional-arrangement"
+          element={
+            <PublicRoute
+              component={InstitutionalArrangement}
+              layout={DashboardLayout}
+            />
+          }
         />
       </Routes>
     </Suspense>

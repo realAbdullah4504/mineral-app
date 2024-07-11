@@ -124,7 +124,7 @@ export const SubMenuStatistics = [
 export const SubMenuGovernance = [
     {
         name: "Institutional Arrangement",
-        link: "#"
+        link: "/institutional-arrangement"
     },
     {
         name: "Policies",
