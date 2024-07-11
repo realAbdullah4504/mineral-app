@@ -25,7 +25,7 @@ function FiscalIncentives() {
     return   <div
     style={{
         width: "100%",
-        height: "784px",
+        height: "auto",
         backgroundImage: `url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

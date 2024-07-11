@@ -243,10 +243,10 @@ const Header = ({ title = "" }) => {
             <Link to="#">About Us</Link>
             <Link to="#">News</Link>
             <Link to="#">FAQs</Link>
-            <Link to="#">Log in</Link>
+            <Link to="/login">Log in</Link>
             <Link to="#">Sign up</Link>
-            <Link to="#">Home</Link>
-            <Link to="#">Investment</Link>
+            <Link to="/">Home</Link>
+            <Link to="/business-investment">Investment</Link>
             <Link to="#">Services</Link>
             <Link to="#">Legal</Link>
             <Link to="#">Fiscal</Link>
