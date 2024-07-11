@@ -15,7 +15,7 @@ const MineralPotential = () => {
       <MiningFrontier />
       <MineralPotentialSlider />
       <MineralSectorPotential />
-      <PakistanMap />
+      {/* <PakistanMap /> */}
       <MineralPotentialLinks />
     </div>
   );
