@@ -9,7 +9,7 @@ export const SubMenuInvestment = [
     },
     {
         name: "Fiscal Incentives",
-        link: "#"
+        link: "/fiscal-incentives"
     },
     {
         name: "Mineral Development Strategy",

@@ -22,7 +22,7 @@ import {
 import { getCookie } from "services/session/cookies";
 import { logOut } from "utils/helpers";
 
-const Header = () => {
+const Header = ({ title = "" }) => {
   const [menuMobile, setMobileMenu] = useState(false);
   const navigate = useNavigate();
   const token = getCookie("token");
@@ -36,7 +36,7 @@ const Header = () => {
   };
   return (
     <header className="header_main">
-      <div className="header_inner container hide_on_tab">
+      <div className="header_inner container hide_on_tab" style={{ position: "relative" }}>
         <div className="header_top">
           <div className="header_top_inner">
             <div className="header_column" id="flexible-width-1">
@@ -217,6 +217,7 @@ const Header = () => {
             </ul>
           </div>
         </div>
+        <div style={{ position: "absolute", top: "200px" }}>{title}</div>
       </div>
       <div className="header_tab">
         <div className="header_mobile_inner fkex justify-between">
@@ -225,10 +226,7 @@ const Header = () => {
               <img src={LogoImg} alt="" />
             </Link>
           </div>
-          <div
-            className={`hamburger_icon ${menuMobile ? "open" : ""}`}
-            onClick={MenuToggle}
-          >
+          <div className={`hamburger_icon ${menuMobile ? "open" : ""}`} onClick={MenuToggle}>
             <img src={hamburgerICon} className="hamburger" alt="" />
             <img src={CloseIcon} className="closeicon" alt="" />
           </div>
