@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import rightArrow from '../../assets/images/rightArrow.png'
-// import leftArrow from "../../assets/images/leftArrow.png";
+import rightArrow from '../../assets/images/rightarrow.png'
+import leftArrow from "../../assets/images/leftarrow.png";
 import copperSlider from "assets/images/copperSlide.png";
 import goldSlider from "assets/images/goldSlider.png";
 import chromiteSlider from "assets/images/chromiteSlider.png";
@@ -178,7 +178,7 @@ export const MineralPotentialSlider = () => {
             <div className="w-full flex">
               {index == 2 ? (
                 <span onClick={leftHandler} className="w-[40px] ml-[30px] mt-[60px]">
-                  {/* <img src={leftArrow} width={10} height={10} /> */}
+                  <img src={leftArrow} width={10} height={10} />
                 </span>
               ) : (
                 <span className="px-[20px] ml-[10px] mt-[60px]"></span>
@@ -189,7 +189,7 @@ export const MineralPotentialSlider = () => {
               </span>
               {index == 2 ? (
                 <span onClick={rightHandler} className="w-[40px] mr-[30px] flex justify-end mt-[60px]">
-                  <span className="w-fit h-fit">{/* <img src={rightArrow} width={10} height={10} /> */}</span>
+                  <span className="w-fit h-fit"><img src={rightArrow} width={10} height={10} /></span>
                 </span>
               ) : (
                 <span className="px-[20px] mr-[10px] mt-[60px] "></span>
