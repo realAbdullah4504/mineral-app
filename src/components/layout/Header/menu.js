@@ -13,7 +13,7 @@ export const SubMenuInvestment = [
     },
     {
         name: "Mineral Development Strategy",
-        link: "#"
+        link: "/mineral-development-strategy"
     },
     {
         name: "Special Investment Facilitation Council (SIFC)",
