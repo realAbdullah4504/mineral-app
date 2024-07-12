@@ -7,6 +7,7 @@ import {  DashboardLayout } from 'components';
 
 const Home = lazy(() => import('../pages/home'));
 const MineralPotential = lazy(() => import('../pages/mineral-potential'));
+const Fiscal = lazy(() => import('../pages/fiscal'));
 const Login = lazy(() => import('../pages/login'));
 
 
@@ -25,6 +26,10 @@ const AppRouter = () => (
         <Route
           path="/mineral-potential"
           element={<PublicRoute component={MineralPotential} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/fiscal"
+          element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
         />
   </Routes>
     </Suspense>
