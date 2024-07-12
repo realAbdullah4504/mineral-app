@@ -9,6 +9,7 @@ import { GlobalMinerSection } from "./GlobalMinor";
 import { GisMineSection } from "./MineSection";
 import { NewsAndEvent } from "./EventSection";
 import { MineralPotentialLinks } from "./MineralPotentialLinks";
+import { AvenueForMineralSlider } from "./AvenueForMineralSlider";
 import { MineralPotentialSlider } from "./MineralPotentialSlider";
 import { MineralClassification } from "./MineralClasification";
 import { MiningFrontier } from "./Investment/InvestmentPotential/MiningFrontier";
@@ -18,6 +19,8 @@ import { FiscalEconomicEnclaves } from "./FiscalEconomicEnclaves";
 import { FiscalDeveloperIncentive } from "./FiscalDevoloperIncentive";
 import { FiscalCard } from "./FiscalCard";
 import { FiscalCardBlock } from "./FiscalCardBlock"; 
+import { InvestmentOpportunitySection } from './InvestmentOpportunity';
+import { MineralWealthSection } from './MineralWealthSection'
 
 export {
   DashboardLayout,
@@ -31,6 +34,7 @@ export {
   PakistanMap,
   MineralSectorPotential,
   MineralPotentialLinks,
+  AvenueForMineralSlider,
   MineralPotentialSlider , 
   MineralClassification , 
   MiningFrontier , 
@@ -39,5 +43,8 @@ export {
   FiscalEconomicEnclaves , 
   FiscalDeveloperIncentive , 
   FiscalCard , 
-  FiscalCardBlock
+  FiscalCardBlock , 
+  MineralWealth,
+  InvestmentOpportunitySection,
+  MineralWealthSection
 };

@@ -9,62 +9,48 @@ export const SubMenuInvestment = [
     },
     {
         name: "Fiscal Incentives",
+        link: "/fiscal-incentives"
+    },
+    {
+        name: "Mineral Development Strategy",
+        link: "/mineral-development-strategy"
+    },
+    {
+        name: "Special Investment Facilitation Council (SIFC)",
+        link: "#"
+    },
+    {
+        name: "Applying for Mineral Title",
+        link: "#"
+    },
+    {
+        name: "Development Schemes",
         link: "#"
     },
     {
         name: "Starting New Business",
         link: "#"
     },
-    {
-        name: "Access to Geological Data",
-        link: "#"
-    },
-    {
-        name: "Apply for Mineral Title",
-        link: "#"
-    },
-    {
-        name: "Mineral Development Strategies",
-        link: "#"
-    },
-    {
-        name: "Development Scheme",
-        link: "#"
-    },
-    {
-        name: "Special Investment Facilitation Council",
-        link: "#"
-    },
+    
+    
    
 
 ]
 
 export const SubMenuMapsAndReports = [
     {
-        name: "Geological",
-        link: "#"
+        name: "GIS Portal",
+        link: "/gis-portal"
     },
     {
-        name: "Geochemical",
-        link: "#"
-    },
-    {
-        name: "Geophysical",
-        link: "#"
-    },
-    {
-        name: "Aerial & Imagery",
-        link: "#"
-    },
-    {
-        name: "Topography",
-        link: "#"
+        name: "Geological Data",
+        link: "/access-to-geological-data"
     },
 ]
 
 export const SubMenuExpartriateSecurity = [
     {
-        name: "Company Registration",
+        name: "NOC Sponsor Company",
         link: "#"
     },
     {
@@ -75,42 +61,35 @@ export const SubMenuExpartriateSecurity = [
 
 export const SubMenuMineralTestingLabs = [
     {
-        name: "Company Registration",
+        name: "Tests Information",
         link: "#"
     },
     {
-        name: "Expat NOC Application",
+        name: "Applying for Mineral Test",
+        link: "#"
+    },
+    {
+        name: "View Results",
         link: "#"
     }
 ]
 
 export const SubMenuResearchAndDevelopment = [
-    {
-        name: "Company Registration",
-        link: "#"
-    },
-    {
-        name: "Expat NOC Application",
-        link: "#"
-    }
+    
 ]
 
 
 export const SubMenuFiscal = [
     {
-        name: "Tax Structure",
+        name: "Taxes Structure",
         link: "#"
     },
     {
-        name: "Royalties",
+        name: "Royalty Fee",
         link: "#"
     },
     {
-        name: "Cess & Leveies",
-        link: "#"
-    },
-    {
-        name: "CSR Contributions",
+        name: "Cess & Levy",
         link: "#"
     }
 ]
@@ -144,7 +123,7 @@ export const SubMenuStatistics = [
 
 export const SubMenuGovernance = [
     {
-        name: "Institutation Arrangement",
+        name: "Institutional Arrangement",
         link: "#"
     },
     {
@@ -177,15 +156,11 @@ export const SubMenuRulesAndRegulations = [
 
 export const SubMenuIntiatives = [
     {
-        name: "Mojor Mining Project",
+        name: "Major Mining Projects",
         link: "#"
     },
     {
-        name: "Abandoned Mines",
-        link: "#"
-    },
-    {
-        name: "Traning & SKill Development",
+        name: "Training & Skill Development",
         link: "#"
     }
 ]
@@ -193,6 +168,14 @@ export const SubMenuIntiatives = [
 export const SubMenuWhoIsWho = [
     {
         name: "Government Organizations",
+        link: "#"
+    },
+    {
+        name: "Academia and R&D",
+        link: "#"
+    },
+    {
+        name: "Mining Professionals",
         link: "#"
     },
     {
@@ -204,7 +187,7 @@ export const SubMenuWhoIsWho = [
         link: "#"
     },
     {
-        name: "Downstream Industries",
+        name: "Downstream Industry",
         link: "#"
     },
     {
@@ -213,10 +196,6 @@ export const SubMenuWhoIsWho = [
     },
     {
         name: "Legal & Tax Services",
-        link: "#"
-    },
-    {
-        name: "Academia",
         link: "#"
     },
     {
@@ -235,6 +214,10 @@ export const SubMenuCSR = [
         link: "#"
     },
     {
+        name: "CSR Contribution",
+        link: "#"
+    },
+    {
         name: "Success Stories",
         link: "#"
     },
@@ -243,7 +226,7 @@ export const SubMenuCSR = [
         link: "#"
     },
     {
-        name: "Community Engagement",
+        name: "Voice of Community",
         link: "#"
     }
 ]

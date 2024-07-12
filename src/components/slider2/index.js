@@ -7,18 +7,20 @@ export const MineralSlider = () => {
   const [sliderContent, setSliderContent] = useState({
     first: {
       title: "01",
-      description: `Pakistan has significant coal reserves, primarily found in the Thar Desert region. The Thar coalfield is one of the largest lignite coalfields in the world, offering potential for energy production and industrial development.`,
-      image: CoalImage,
+      description: `Pakistan has world's 5th biggest gold mine, with huge reserves in Balochistan. The Reko Diq field project is a testament to the lucrative gold potential in Pakistan.`,
+      image: GoldImage,
+  
     },
     sec: {
       title: "02",
-      description: `Pakistan has world's 5th biggest gold mine, with huge reserves in Balochistan. The Reko Diq field project is a testament to the lucrative gold potential in Pakistan.`,
-      image: GoldImage,
+      description: `With the world's 5th biggest copper mine, Pakistan has one of the largest under-developed copper deposits in the world. The Reko Diq & Saindak projects make Pakistan a noteworthy player in the global copper market.`,
+      image: CopperImage,
     },
     thr: {
       title: "03",
-      description: `With the world's 5th biggest copper mine, Pakistan has one of the largest under-developed copper deposits in the world. The Reko Diq & Saindak projects make Pakistan a noteworthy player in the global copper market.`,
-      image: CopperImage,
+      description: `Pakistan has significant coal reserves, primarily found in the Thar Desert region. The Thar coalfield is one of the largest lignite coalfields in the world, offering potential for energy production and industrial development.`,
+      image: CoalImage,
+     
     },
   });
   const [active, setActive] = useState(0);

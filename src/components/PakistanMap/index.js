@@ -4,7 +4,8 @@ import map from "assets/images/PakMap.png";
 export const PakistanMap = () => {
   return (
     <div className="flex w-full justify-center">
-      <img src={map} alt="Geological Map of Pakistan" />
+      {/* <h1 className="text-bold">Geological Map</h1> */}
+      {/* <img src={map} alt="Geological Map of Pakistan" /> */}
     </div>
   );
 };
