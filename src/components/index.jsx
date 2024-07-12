@@ -44,7 +44,6 @@ export {
   FiscalDeveloperIncentive , 
   FiscalCard , 
   FiscalCardBlock , 
-  MineralWealth,
   InvestmentOpportunitySection,
   MineralWealthSection
 };

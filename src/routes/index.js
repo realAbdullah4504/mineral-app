@@ -1,12 +1,3 @@
-import React, { Suspense, lazy } from 'react'
-import { PublicRoute } from './PublicRoute'
-import { PrivateRoute } from './PrivateRoute';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import {  DashboardLayout } from 'components';
-
-
-
-
 
 import React, { Suspense, lazy } from "react";
 import { PublicRoute } from "./PublicRoute";
