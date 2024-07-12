@@ -22,7 +22,7 @@ const LegalPolicies = () => {
             National Mineral Policy
           </div>
           <div
-            className="font-helvetica font-normal text-[22px] leading-[25px] mt-4"
+            className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
             style={{ whiteSpace: "pre-line" }}
           >
             The policy focuses on attracting local and foreign investment in the
