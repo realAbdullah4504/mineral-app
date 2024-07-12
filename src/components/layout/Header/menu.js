@@ -9,11 +9,11 @@ export const SubMenuInvestment = [
     },
     {
         name: "Fiscal Incentives",
-        link: "#"
+        link: "/fiscal-incentives"
     },
     {
         name: "Mineral Development Strategy",
-        link: "#"
+        link: "/mineral-development-strategy"
     },
     {
         name: "Special Investment Facilitation Council (SIFC)",

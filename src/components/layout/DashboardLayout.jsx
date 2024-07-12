@@ -6,11 +6,9 @@ import Content from "./Content";
 export const DashboardLayout = ({ children }) => {
   return (
     <div className="layout_main">
-    <Header/>
-    <Content>
-        {children}
-    </Content>
-    <Footer/>
+      <Header />
+      <Content>{children}</Content>
+      <Footer />
     </div>
-  )
-}
+  );
+};

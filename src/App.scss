@@ -7,7 +7,7 @@ $themeColor: #009969;
 @import url("./styles/MiningFrontier.css");
 @import url("./styles/Button.css");
 @import url("./styles/investmentOpportunity.css");
-
+@import url("./styles/BusinessInvestment.css");
 * {
   box-sizing: border-box;
 }
@@ -26,12 +26,12 @@ body {
 h1,
 h2 {
   margin: 0;
-  padding: 1rem;
+  // padding: 1rem;
 }
 
-p {
-  padding: 1rem;
-}
+// p {
+//   padding: 1rem;
+// }
 
 /* Layout styles */
 
