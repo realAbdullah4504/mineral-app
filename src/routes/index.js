@@ -1,3 +1,4 @@
+
 import React, { Suspense, lazy } from "react";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
@@ -13,6 +14,8 @@ const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"))
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
+const Fiscal = lazy(() => import('../pages/fiscal'));
+
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -24,6 +27,11 @@ const AppRouter = () => (
           element={<PublicRoute component={MineralPotential} layout={DashboardLayout} />}
         />
         <Route
+          path="/fiscal"
+          element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
+        />
+    
+    <Route
           path="/investment-opportunities"
           element={<PublicRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
         />
