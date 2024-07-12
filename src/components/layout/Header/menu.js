@@ -128,7 +128,7 @@ export const SubMenuGovernance = [
     },
     {
         name: "Policies",
-        link: "#"
+        link: "/legal-policies"
     }
 ]
 

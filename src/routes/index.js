@@ -3,6 +3,7 @@ import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "components";
+import LegalPolicies from "pages/policies";
 
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
@@ -100,6 +101,15 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={InstitutionalArrangement}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/legal-policies"
+          element={
+            <PublicRoute
+              component={LegalPolicies}
               layout={DashboardLayout}
             />
           }

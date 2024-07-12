@@ -17,19 +17,19 @@ In each of the provinces, a separate Department of Mines & Minerals has been est
 
       <div className="bg-[#F4FBF7] w-[100%] mt-8">
         <ul className="list-disc ml-36">
-          <li className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px]">Reconnaissance License (01 year, non-renewable)</li>
-          <li className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px]">Prospecting License (03 years, renewable, total 5 years)</li>
-          <li className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px]">Exploration License (03 years, renewable, total 9 years)</li>
-          <li className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px]">
+          <li className="font-helvetica font-normal text-[22px] leading-[25px]">Reconnaissance License (01 year, non-renewable)</li>
+          <li className="font-helvetica font-normal text-[22px] leading-[25px]">Prospecting License (03 years, renewable, total 5 years)</li>
+          <li className="font-helvetica font-normal text-[22px] leading-[25px]">Exploration License (03 years, renewable, total 9 years)</li>
+          <li className="font-helvetica font-normal text-[22px] leading-[25px]">
             Mineral Deposit Retention License (01 year, renewable, total 2
             years)
           </li>
-          <li className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px]">Mining Permit (10 years, renewable)</li>
-          <li className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px]">Mining Lease (30 years, renewable)</li>
+          <li className="font-helvetica font-normal text-[22px] leading-[25px]">Mining Permit (10 years, renewable)</li>
+          <li className="font-helvetica font-normal text-[22px] leading-[25px]">Mining Lease (30 years, renewable)</li>
         </ul>
       </div>
 
-      <div className="font-ibm-plex-sans font-[400px] text-[22px] leading-[25px] mt-8">
+      <div className="font-helvetica font-normal text-[22px] leading-[25px] mt-8">
         The Provincial Departments are mandated to map resources, grant, renew &
         cancel mineral titles, regulate mining and development operations,
         occupational health, safety & environment (HSE) concerns, collect fees &
