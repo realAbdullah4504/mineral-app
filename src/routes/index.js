@@ -37,6 +37,9 @@ const ConsessionRules = lazy(() =>
 const LaborWelfare = lazy(() =>
   import("../pages/labor-welfare")
 );
+const LegalFramework = lazy(() =>
+  import("../pages/legal-framework")
+);
 
 const AppRouter = () => (
   <Router>
@@ -160,6 +163,15 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={LaborWelfare}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/legal-framework"
+          element={
+            <PublicRoute
+              component={LegalFramework}
               layout={DashboardLayout}
             />
           }

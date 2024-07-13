@@ -1,5 +1,5 @@
 import BreadCrumbs from "components/Breadcrumbs";
-import CardComponent from "components/Card";
+import CardComponent from "components/Cards/simpleCard";
 import { Container } from "components/UI";
 import React from "react";
 
@@ -11,20 +11,19 @@ const cardContent = [
 
 const LegalPolicies = () => {
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '/', label: 'Legal Framework' },
-    { path: '/', label: 'Governance' },
-    { path: '#', label: 'Policies' },
+    { path: "/", label: "Home" },
+    { path: "/legal-framework", label: "Legal Framework" },
+    { path: "/", label: "Governance" },
+    { path: "#", label: "Policies" },
   ];
 
   return (
-    <Container>
+    <Container classes="mt-8">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex flex-wrap mt-[20px]">
         <div className="max-w-[100%]">
           <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
             Policies
-
             <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
           </h1>
           <div className="font-ibm-plex-sans mt-8 font-semibold text-[36px] p-[0px]">
@@ -45,23 +44,27 @@ const LegalPolicies = () => {
             discovery & scientific development of world-class mineral deposits
             in remote areas.
           </div>
-
-          <CardComponent
-            content={{
-              text: "National Mineral Policy, 2013",
-              color: "#009969",
-            }}
-          />
+          <div className="flex flex-wrap mt-6 space-x-4">
+            <CardComponent
+              content={{
+                text: "National Mineral Policy, 2013",
+                color: "#009969",
+              }}
+            />
+          </div>
 
           <div className="font-ibm-plex-sans mt-7 font-semibold text-[36px] p-[0px]">
             Provincial Policies
           </div>
 
           <div className="">
-            <CardComponent content={cardContent} />
+            <div className="flex flex-wrap mt-6 space-x-4">
+              <CardComponent content={cardContent} />
 
-            {/* large gap */}
+              {/* large gap */}
+            </div>
             <div className="mt-64"></div>
+
           </div>
         </div>
       </div>

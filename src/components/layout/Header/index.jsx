@@ -35,6 +35,10 @@ const Header = ({ title = "" }) => {
     logOut();
     navigate("/login");
   };
+
+  const handleNavigate = (url) => {
+    navigate(url);
+  };
   return (
     <>
       <header className="header_main">
@@ -126,8 +130,8 @@ const Header = ({ title = "" }) => {
                 </li>
               </ul>
               <ul className="has_sub_menu">
-                <li>
-                  Legal
+                <li >
+                  <div onClick={() => handleNavigate("/legal-framework")}>Legal</div>
                   <ul className="sub_menu services_sub_menus mega_menu_legal">
                     <div className="services_sub_menu_inner">
                       <div className="services_sub_menu">

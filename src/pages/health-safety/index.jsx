@@ -1,5 +1,5 @@
 import BreadCrumbs from "components/Breadcrumbs";
-import CardComponent from "components/Card";
+import CardComponent from "components/Cards/simpleCard";
 import { Container } from "components/UI";
 import React from "react";
 
@@ -14,14 +14,14 @@ const cardContent = [
 
 const HealthSafety = () => {
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '/', label: 'Legal Framework' },
-    { path: '/', label: 'Acts & Laws' },
-    { path: '#', label: 'Health & Safety' },
+    { path: "/", label: "Home" },
+    { path: "/legal-framework", label: "Legal Framework" },
+    { path: "/", label: "Acts & Laws" },
+    { path: "#", label: "Health & Safety" },
   ];
 
   return (
-    <Container>
+    <Container classes="mt-8">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex flex-wrap mt-[20px]">
         <div className="max-w-[100%]">
@@ -46,20 +46,23 @@ const HealthSafety = () => {
             conditions of miners and workers in mines. {" "}
           </div>
 
-          <CardComponent
-            content={{
-              text: "Mines ACT, 1923",
-              color: "#009969",
-            }}
-          />
+          <div className="flex flex-wrap mt-6 space-x-4">
+            <CardComponent
+              content={{
+                text: "Mines ACT, 1923",
+                color: "#009969",
+              }}
+            />
+          </div>
 
           <div className="font-ibm-plex-sans mt-7 font-semibold text-[36px] p-[0px]">
             Provincial Health & Safety Regulation
           </div>
 
           <div className="">
-            <CardComponent content={cardContent} />
-
+            <div className="flex flex-wrap mt-6 space-x-4">
+              <CardComponent content={cardContent} />
+            </div>
             {/* large gap */}
             <div className="mt-64"></div>
           </div>

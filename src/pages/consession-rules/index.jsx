@@ -1,5 +1,5 @@
 import BreadCrumbs from "components/Breadcrumbs";
-import CardComponent from "components/Card";
+import CardComponent from "components/Cards/simpleCard";
 import { Container } from "components/UI";
 import React from "react";
 
@@ -15,13 +15,13 @@ const cardContent = [
 const ConsessionRules = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "/", label: "Legal Framework" },
+    { path: "/legal-framework", label: "Legal Framework" },
     { path: "/", label: "Rules & Regulations" },
     { path: "#", label: "Concession Rules" },
   ];
 
   return (
-    <Container>
+    <Container classes="mt-8">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
 
       <div className="flex flex-wrap mt-[20px]">
@@ -135,8 +135,9 @@ const ConsessionRules = () => {
           </div>
 
           <div className="">
-            <CardComponent content={cardContent} />
-
+            <div className="flex flex-wrap mt-6 space-x-4">
+              <CardComponent content={cardContent} />
+            </div>
             {/* large gap */}
             <div className="mt-64"></div>
           </div>

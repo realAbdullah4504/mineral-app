@@ -5,13 +5,14 @@ import React from "react";
 const InstitutionalArrangement = () => {
   const breadcrumbs = [
     { path: '/', label: 'Home' },
-    { path: '/', label: 'Legal Framework' },
+    { path: '/legal-framework', label: 'Legal Framework' },
     { path: '/', label: 'Governance' },
     { path: '#', label: 'Institutional Arrangement' },
   ];
 
   return (
-    <Container>
+    
+    <Container classes="mt-8">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <InstitutionalArrangementSection
         title="Institutional Arrangement"
