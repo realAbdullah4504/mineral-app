@@ -5,89 +5,30 @@ import BusinessInvestmentEcoSystem from "assets/images/businessinvestementstrate
 
 function MineralDevelopmentStrategy() {
     return <div >
-       <div  style={{
-      width: "100%",
-      height: "401px",
-      backgroundImage: `url(${BusinessInvestmentBg})`,
-      backgroundSize: "cover",
-      display: "flex",  
-       alignItems: "center", 
-         justifyContent: "center",
-        
-    
-    }}>
-      <div  style={{
-      width: "60%",
-    backgroundColor: "white",
-      display: "flex",  
-       alignItems: "center", 
-         justifyContent: "center",
-          fontSize: "70px",
-             padding: "20px",
-         wordSpacing: "20px",
-         fontWeight:"700"
-    
-    }}> Mineral Development Strategies</div>
+       <div className="mineral-development" style={{
+    backgroundImage: `url(${BusinessInvestmentBg})` }}>
+      <div  className="mineral-development-title"> Mineral Development Strategies</div>
     
     </div>
-<div style={{
-width:"70%",
-  height:"300px",
-      display: "flex",  
-      flexDirection:"column",
-       alignItems: "center", 
-         justifyContent: "space-evenly",
-    margin:"auto",
-             padding: "20px",
-       alignSelf:"center"
-    
-    }}>
-        <p style={{fontSize:"20px"}} >
+<div  className="mineral-developmen-strategy">
+        <p >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
           Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
           tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
           sollicitudin Sed feugiat lorem et felis auctor, at tempor risus convallis. In hac habitasse platea dictumst.
           Phasellus semper augue et mi dapibus, sit amet sollicitudin
         </p>
-      <div  style={{
-fontSize: "40px",
-    
-fontWeight:"400"
-    }}>-National Mineral Development Programe -<span style={{ color: '#009969' }}>National Strategy</span>
-</div>
+      <h1 >-National Mineral Development Programe -<span style={{ color: '#009969' }}>National Strategy</span>
+</h1>
 
     </div>
-    <div  style={{
-      width: "100%",
-      height:"1074px",
-      display: "flex",  
-
-       alignItems: "center", 
-         justifyContent: "center",
-         
-    
-    }}> <img src={BusinessInvestmentDevelopment} alt="Business Investment Development" /></div>
-    <div style={{
-width:"70%",
-  height:"300px",
-      display: "flex",  
-      flexDirection:"column",
-
-         justifyContent: "space-evenly",
-    margin:"auto",
-             padding: "20px",
-       alignSelf:"center"
-    
-    }}>
-      <div  style={{
-fontSize: "40px",
-    
-fontWeight:"400"
-    }}>EcoSystem Of The Mining Sector
+    <div  className="mineral-development-strategy-graph" > <img src={BusinessInvestmentDevelopment} alt="Business Investment Development" /></div>
+    <div className="mineral-development-ecosystem">
+      <h1>EcoSystem Of The Mining Sector
 
 
-    </div>
-    <p style={{fontSize:"20px"}} >
+    </h1>
+    <p  >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
           Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
           tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
@@ -96,16 +37,7 @@ fontWeight:"400"
         </p>
 
         </div>;
-        <div  style={{
-      width: "100%",
-      height:"497px",
-      display: "flex",  
-
-       alignItems: "center", 
-         justifyContent: "center",
-         
-    
-    }}> <img src={BusinessInvestmentEcoSystem} alt="Business Investment Development"    /></div>
+        <div className="mineral-development-ecosystem-graph"> <img src={BusinessInvestmentEcoSystem} alt="Business Investment Development"    /></div>
     </div>;
 }
 

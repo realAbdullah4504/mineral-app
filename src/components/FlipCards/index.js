@@ -15,6 +15,7 @@ export function FlipCards({ title = "Front Content", flip = false, flipContent =
       window.location.href = link; 
     }
   };
+
   return (
     <div className="flip-card-content" onClick={handleClick} style={{ cursor: link ? 'pointer' : 'default' }}>
       {isHovered && flip ? (

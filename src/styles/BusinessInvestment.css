@@ -1,16 +1,28 @@
 .business-investment-container {
-  width: 85%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin: auto;
   justify-content: center;
   /* min-height: 100%; */
 }
+.mineral-development {
+  width: 100%;
+  height: 401px;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .business-investment-container-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(277px, 1fr)); /* Minimum width 277px, expand to fill remaining space */
   gap: 20px ; /* Horizontal and vertical gap */
+  width: 60%;
+  margin: auto;
+  padding-bottom: 30px;
 }
 
 .flip-card-content {
@@ -21,6 +33,7 @@
   border-radius: 10px;
   background: white;
   max-width: 277px; /* Maximum width of each card */
+  margin: auto;
 }
 
 .flip-card-front,
@@ -44,4 +57,261 @@
 .flip-card-back {
   background: #009969;
   color: white;
+}
+.bread-crumbs div h1 h1 span {
+  border-bottom: 5px solid green;
+  display: inline-block;
+  border-radius: 5px;
+}
+.mineral-development-title{
+  width: 60%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+  padding: 20px;
+  word-spacing: 20px;
+  font-weight: 700;
+}
+
+.mineral-developmen-strategy{
+  width: 70%;
+height: 300px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+margin: auto;
+padding: 20px;
+align-self: center;
+
+}
+.mineral-developmen-strategy p{
+  font-size: 20px;
+  
+  }
+  .mineral-developmen-strategy h1{
+    font-size: 40px;
+    font-weight: 600;
+   text-align: center;
+  
+    }
+.mineral-development-strategy-graph{
+  width: 100%;
+height: 1074px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.mineral-development-ecosystem{
+  width: 70%;
+height: 300px;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+margin: auto;
+padding: 20px;
+align-self: center;
+
+  }
+.mineral-development-ecosystem h1{
+  font-size: 40px;
+  font-weight: 600;
+}
+.mineral-development-ecosystem p{
+  font-size: 20px;
+}
+@media only screen and (max-width: 1400px) {
+
+  .mineral-development-title {
+    font-size: 40px;
+  }
+  .mineral-developmen-strategy{
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-developmen-strategy p{
+    font-size: 20px;
+    
+    }
+    .mineral-developmen-strategy h1{
+      width: 80%;
+      font-size: 30px;
+    
+
+        
+    
+      }
+      .mineral-development-ecosystem h1{
+        width: 80%;
+        font-size: 30px;
+       
+      }
+        .mineral-development-ecosystem p{
+        font-size: 20px;
+      }
+      .mineral-development-strategy-graph{
+        height: 800px;
+      }
+}
+
+
+.mineral-development-ecosystem-graph{
+  width: 100%;
+height: 497px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 20px;
+
+}
+
+@media only screen and (max-width: 1000px) {
+  .business-investment-container-cards {
+    width: 80%;
+    margin: auto;
+  }
+  .mineral-development-title {
+    font-size: 30px;
+  }
+  .mineral-developmen-strategy{
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-development-ecosystem{
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-developmen-strategy p{
+    font-size: 20px;
+    
+    }
+    .mineral-developmen-strategy h1{
+      margin-top: 20px;
+      width: 80%;
+      font-size: 30px;
+      
+        
+    
+      }
+      .mineral-development-ecosystem h1{
+   
+        width: 80%;
+        font-size: 30px;
+     
+      }
+      .mineral-development-ecosystem p{
+        font-size: 20px;
+      }
+      
+
+      .mineral-development-strategy-graph{
+        height: 700px;
+      }
+      .mineral-development-ecosystem-graph{
+        height: 400px;
+      }
+}
+
+
+.business-mining-card-content{
+
+  /* Drop shadow */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust values as needed */
+  
+  /* Border radius */
+  border-radius: 5px;
+
+}
+.business-mining-cards {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 30px;
+  font-size: 20px;
+}
+
+
+.business-mining-card-content p{
+padding: 10px;
+}
+
+.business-mining-card-title{
+
+  background-color: green;
+  color: white;
+}
+.business-mining-card-title{
+  height: 20%;
+font-size: 2rem;
+font-weight: 600;
+}
+
+
+@media only screen and (max-width: 768px){
+
+  .mineral-development-title {
+    font-size: 25px;
+    width: 75%;
+  }
+  .mineral-developmen-strategy{
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-developmen-strategy p{
+    font-size: 13px;
+    
+    }
+    .mineral-developmen-strategy h1{
+      width: 90%;
+      font-size: 20px;
+    
+        
+    
+      }
+      .mineral-development-ecosystem h1{
+        width: 90%;
+        font-size: 20px;
+       
+      }
+      .mineral-development-ecosystem p{
+        font-size: 13px;
+      }
+      
+      .mineral-development-strategy-graph{
+        height: 550px;
+      }
+      .mineral-development-ecosystem-graph{
+        height: 300px;
+     
+      }
+
+  
+}
+
+@media   only screen and (max-width: 510px){
+  .mineral-development-title{
+    font-size: 20px;
+  width: 90%;
+  word-spacing: 5px;
+  }
+  .mineral-development-strategy-graph{
+    height: 350px;
+  }
+  .mineral-development-ecosystem-graph{
+    height: 100px;
+  }
+  .business-mining-cards{
+
+    display: grid;
+    height: 216px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); /* Minimum width 277px, expand to fill remaining space */
+    gap: 20px ; /* Horizontal and vertical gap */
+    width: 90%;
+   
+  }
 }

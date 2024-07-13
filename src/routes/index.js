@@ -15,6 +15,8 @@ const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
 const Fiscal = lazy(() => import('../pages/fiscal'));
+const FiscalCPEC= lazy(()=>import("../pages/FiscalCPEC"))
+const StartingNewBusiness= lazy(()=>import("../pages/StartingNewBusiness"))
 
 const AppRouter = () => (
   <Router>
@@ -51,6 +53,14 @@ const AppRouter = () => (
            <Route
           path="/fiscal-incentives"
           element={<PublicRoute component={FiscalIncentives} layout={DashboardLayout} />}
+        />
+          <Route
+          path="/fiscal-CPEC"
+          element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />}
+        />
+            <Route
+          path="/starting-new-business"
+          element={<PublicRoute component={StartingNewBusiness} layout={DashboardLayout} />}
         />
       </Routes>
     </Suspense>
