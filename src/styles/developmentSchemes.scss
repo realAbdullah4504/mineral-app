@@ -1,0 +1,48 @@
+
+.intiatives_main{
+    .intiatives_Inner{
+        display: flex;
+        .intiatives_left{
+            background: url("../assets/images/federal_govt_image.png");
+            width: 324px;
+            min-height: 720px;
+        }  
+        .intiatives_right{
+            flex:1;
+            background-color: #F4FBF7;
+            align-items: center;
+            justify-content: center;
+            .intiative_right_inner{
+                padding: 50px;
+                box-sizing: border-box;
+            }
+        }
+    }
+     
+}
+.intiative_right_content_heading{
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 45px;
+    font-weight: 600;
+    line-height: 60px;
+    text-align: left;
+    color: #27AE60;
+    marigin-bottom:50px;
+   
+}
+
+.intiative_right_content_content{
+    ul {
+    background-color:#27AE60 ;
+    list-style-type: disc;
+    padding: 50px;
+    box-sizing: border-box;
+    li {
+        color: #fff;
+        gap: 0px;
+        border-radius: 8px 0px 0px 0px;
+        opacity: 0px;
+
+    }
+    }
+}
