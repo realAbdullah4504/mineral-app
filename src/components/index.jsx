@@ -21,6 +21,9 @@ import { FiscalCard } from "./FiscalCard";
 import { FiscalCardBlock } from "./FiscalCardBlock"; 
 import { InvestmentOpportunitySection } from './InvestmentOpportunity';
 import { MineralWealthSection } from './MineralWealthSection'
+import { FiscalExport } from "./FiscalExport";
+import { FiscalExportImg } from "./FiscalExportImg";
+import { FiscalExportTable } from "./FiscalExportTable";
 
 export {
   DashboardLayout,
@@ -45,5 +48,8 @@ export {
   FiscalCard , 
   FiscalCardBlock , 
   InvestmentOpportunitySection,
-  MineralWealthSection
+  MineralWealthSection  , 
+  FiscalExport , 
+  FiscalExportImg , 
+  FiscalExportTable
 };
