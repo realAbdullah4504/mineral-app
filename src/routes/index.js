@@ -3,7 +3,6 @@ import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "components";
-import LegalPolicies from "pages/policies";
 
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
@@ -22,6 +21,15 @@ const MineralDevelopmentStrategy = lazy(() =>
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
 const InstitutionalArrangement = lazy(() =>
   import("../pages/InstitutionalArrangement")
+);
+const LegalPolicies = lazy(() =>
+  import("../pages/policies")
+);
+const MiningOperations = lazy(() =>
+  import("../pages/mining-operations")
+);
+const HealthSafety = lazy(() =>
+  import("../pages/health-safety")
 );
 
 const AppRouter = () => (
@@ -110,6 +118,24 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={LegalPolicies}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/mining-operations"
+          element={
+            <PublicRoute
+              component={MiningOperations}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/health-safety"
+          element={
+            <PublicRoute
+              component={HealthSafety}
               layout={DashboardLayout}
             />
           }

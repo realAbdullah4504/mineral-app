@@ -135,11 +135,11 @@ export const SubMenuGovernance = [
 export const SubMenuActsAndLaws = [
     {
         name: "Mining Operations",
-        link: "#"
+        link: "/mining-operations"
     },
     {
         name: "Health & Safety",
-        link: "#"
+        link: "/health-safety"
     }
 ]
 
