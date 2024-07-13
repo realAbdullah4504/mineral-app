@@ -12,6 +12,7 @@ const InvestmentOpportunity = lazy(() =>
   import("../pages/investment-opportunities")
 );
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
+
 const InteractiveGisPortal = lazy(() =>
   import("../pages/InteractiveGisPortal")
 );
@@ -41,6 +42,13 @@ const LaborWelfare = lazy(() =>
 const LegalFramework = lazy(() =>
   import("../pages/legal-framework")
 );
+const ApplyingForMineralTitle = lazy(() =>
+  import("../pages/ApplyingForMineralTitle")
+);
+const DevelopmentSchemes = lazy(() =>
+  import("../pages/DevelopmentSchemes")
+);
+
 const Fiscal = lazy(() => import('../pages/fiscal'));
 const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
 
@@ -106,6 +114,26 @@ const AppRouter = () => (
             />
           }
         />
+         <Route
+          path="/applying-for-mineral-title"
+          element={
+            <PublicRoute
+              component={ApplyingForMineralTitle}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/development-schemes"
+          element={
+            <PublicRoute
+              component={DevelopmentSchemes}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        
+
         <Route
           path="/mineral-development-strategy"
           element={
