@@ -15,6 +15,7 @@ const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
 const Fiscal = lazy(() => import('../pages/fiscal'));
+const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
 
 const AppRouter = () => (
   <Router>
@@ -30,7 +31,10 @@ const AppRouter = () => (
           path="/fiscal"
           element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
         />
-    
+    <Route
+          path="/fiscal-export"
+          element={<PublicRoute component={FiscalExportProcessing} layout={DashboardLayout} />}
+        />
     <Route
           path="/investment-opportunities"
           element={<PublicRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
