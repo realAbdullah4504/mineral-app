@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import rightArrow from '../../assets/images/rightarrow.png'
-import leftArrow from "../../assets/images/leftarrow.png";
-import copperSlider from "assets/images/copperSlide.png";
-import goldSlider from "assets/images/goldSlider.png";
-import chromiteSlider from "assets/images/chromiteSlider.png";
-import coalSlider from "assets/images/coalSlider.png";
-import saltSlider from "assets/images/saltSlider.png";
-import ironSlider from "assets/images/ironSlider.png";
-import limeSlider from "assets/images/limeSlider.png";
-import marbelSlider from "assets/images/marbelSlider.png";
-import BriteSlider from "assets/images/BriteSlider.png";
-import gemstonesSlider from "assets/images/gemstonesSlider.png";
-import gypsumSlider from "assets/images/gypsumSlider.png";
+import leftArrow from '../../assets/images/leftarrow.png'
+import copperSlider from 'assets/images/copperSlide.png'
+import goldSlider from 'assets/images/goldSlider.png'
+import chromiteSlider from 'assets/images/chromiteSlider.png'
+import coalSlider from 'assets/images/coalSlider.png'
+import saltSlider from 'assets/images/saltSlider.png'
+import ironSlider from 'assets/images/ironSlider.png'
+import limeSlider from 'assets/images/limeSlider.png'
+import marbelSlider from 'assets/images/marbelSlider.png'
+import BriteSlider from 'assets/images/BriteSlider.png'
+import gemstonesSlider from 'assets/images/gemstonesSlider.png'
+import gypsumSlider from 'assets/images/gypsumSlider.png'
 
 export const MineralPotentialSlider = () => {
   const [active, setActive] = useState(2);

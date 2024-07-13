@@ -5,19 +5,19 @@ import { FlipCards } from "components/FlipCards";
 function FiscalIncentives() {
     const businessAndInvestmentcards = [
         {
-          title: "Mineral Potential of Pakistan",
+          title: "Special Economic Zones",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
         },
         {
-          title: "Mineral Potential of Pakistan",
+          title: "Export Processing Zones",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
         },
         {
-          title: "Mineral Potential of Pakistan",
+          title: "CPEC",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
         },
         {
-          title: "Mineral Potential of Pakistan",
+          title: "Tax Exemptions",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
         },
         
@@ -40,10 +40,8 @@ function FiscalIncentives() {
         {" "}
         <h1 style={{ fontSize: "60px", fontWeight: "600" }}>Fiscal Incentives</h1>
         <p style={{ fontSize: "20px"}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at temp
+        The Government of Pakistan has introduced a number of initiatives and incentives, aimed at facilitating local and foreign investors, collaborators and industrial ventures. Explore how the Government of Pakistan is fostering an enabling environment for the minerals and mining sector of Pakistan
+
         </p>
         <div className="business-investment-container-cards" style={{ width: "90%",margin:"40px auto 30px auto" }}>
           {businessAndInvestmentcards.map((item) => (

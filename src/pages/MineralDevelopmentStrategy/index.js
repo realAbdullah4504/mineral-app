@@ -27,7 +27,7 @@ function MineralDevelopmentStrategy() {
          wordSpacing: "20px",
          fontWeight:"700"
     
-    }}> Mineral Development Strategies</div>
+    }}> Mineral Development Strategy</div>
     
     </div>
 <div style={{
@@ -43,17 +43,13 @@ width:"70%",
     
     }}>
         <p style={{fontSize:"20px"}} >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at tempor risus convallis. In hac habitasse platea dictumst.
-          Phasellus semper augue et mi dapibus, sit amet sollicitudin
+        Pakistan is home to a competitive and extensive mineral wealth. The mineral development strategies takes into account radical and innovative measures for uplifting of the minerals sector with coordinated efforts of all stakeholders including provincial authorities. The new initiatives will greatly help exploit Pakistan’s true mineral potential.
         </p>
       <div  style={{
 fontSize: "40px",
     
 fontWeight:"400"
-    }}>-National Mineral Development Programe -<span style={{ color: '#009969' }}>National Strategy</span>
+    }}>National Mineral Development Programe -<span style={{ color: '#009969' }}>National Strategy</span>
 </div>
 
     </div>
@@ -83,16 +79,12 @@ width:"70%",
 fontSize: "40px",
     
 fontWeight:"400"
-    }}>EcoSystem Of The Mining Sector
+    }}>ECOSYSTEM OF THE MINING SECTOR
 
 
     </div>
     <p style={{fontSize:"20px"}} >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at tempor risus convallis. In hac habitasse platea dictumst.
-          Phasellus semper augue et mi dapibus, sit amet sollicitudin
+    The Federal Government drives & integrates all relevant stakeholders and creates a conducive eco-system for the mining industry development. The ecosystem is a cohesive framework of policies, incentives and resources coordinated by all relevant stakeholders under single governing structure lead by the Planning Commission of Pakistan. The end result of the framework/ecosystem is to integrate and optimize the mine-to-market value chain by aligning the production with national consumption and export potential of the country
         </p>
 
         </div>;

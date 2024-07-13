@@ -1,3 +1,4 @@
+
 import React, { Suspense, lazy } from "react";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
@@ -40,6 +41,7 @@ const LaborWelfare = lazy(() =>
 const LegalFramework = lazy(() =>
   import("../pages/legal-framework")
 );
+const Fiscal = lazy(() => import('../pages/fiscal'));
 
 const AppRouter = () => (
   <Router>
@@ -63,6 +65,11 @@ const AppRouter = () => (
           }
         />
         <Route
+          path="/fiscal"
+          element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
+        />
+    
+    <Route
           path="/investment-opportunities"
           element={
             <PublicRoute
