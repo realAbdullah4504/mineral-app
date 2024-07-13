@@ -6,40 +6,36 @@ function BusinessInvestment() {
   const businessAndInvestmentcards = [
     {
       title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      flipContent: "Pakistan has some of the world's largest mineral reserves, offering significant potential for long-term development.",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Investment Opportunities",
+      flipContent: "The diverse mineral resources in Pakistan offer lucrative opportunities for investors with significant potential returns.",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dohandleClicklor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Fiscal Incentives",
+      flipContent: "The Government of Pakistan has introduced financial incentives, such as tax and custom duty relief, to encourage investment. This section explores these benefits in detail.",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-    },
-    {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-    },
-    {
-      title: "Mineral Development Strategies",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Mineral Development Strategy",
+      flipContent: "Regional & National level development plans to enhance investment in mining sector.",
       link:'/mineral-development-strategy'
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Special Investment Facilitation Council",
+      flipContent: "SIFC focuses on investment and privatization in defense, agriculture, minerals, IT and telecommunication, and energy.",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Applying for Mineral Title",
+      flipContent: "Understand the process of applying for a mineral title to start mining.",      
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Development Schemes",
+      flipContent: "Government implemented schemes for future planning and development of the mineral sector.",
+    },
+    {
+      title: "Starting a New Business",
+      flipContent: "Starting a business in Pakistan has never been easier. Now you can set-up just by following a few steps.",
     },
   ];
   return (
@@ -63,13 +59,10 @@ function BusinessInvestment() {
           display: "inline-block",
    
           borderRadius: "5px",
-        }}>Business</span> & Investemnt</h1>
+        }}>Business</span> & Investement</h1>
         <p style={{fontSize: "20px"}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at tempor risus convallis. In hac habitasse platea dictumst.
-          Phasellus semper augue et mi dapibus, sit amet sollicitudin
+        The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment. 
+
         </p>
         <div className="business-investment-container-cards" style={{ width: "70%", margin: "auto ", padding: "30px",margin:"40px auto 30px auto" }}>
           {businessAndInvestmentcards.map((item) => (

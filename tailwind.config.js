@@ -18,10 +18,12 @@ export default {
         'Energy-image' : "url('/src/assets/images/Energy.png')" , 
         'gypsum-image' : "url('/src/assets/images/gemstoneClassification.png')" , 
         'export-bg-image' : "url('/src/assets/images/export-bg.png')" , 
+        'institutional-arrangement-image' : "url('/src/assets/images/InstitutionalArrangement.png')" ,
       },
       fontFamily: {
         'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
         'ibm-plex-sans': ['"IBM Plex Sans"', 'sans-serif'],
+        'helvetica': ['"Helvetica Neue"', 'sans-serif'],
       },
     },
   },
