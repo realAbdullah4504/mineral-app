@@ -146,11 +146,11 @@ export const SubMenuActsAndLaws = [
 export const SubMenuRulesAndRegulations = [
     {
         name: "Concession Rules",
-        link: "#"
+        link: "/consession-rules"
     },
     {
         name: "Labor Welfare",
-        link: "#"
+        link: "/labor-welfare"
     }
 ]
 

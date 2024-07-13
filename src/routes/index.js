@@ -31,6 +31,12 @@ const MiningOperations = lazy(() =>
 const HealthSafety = lazy(() =>
   import("../pages/health-safety")
 );
+const ConsessionRules = lazy(() =>
+  import("../pages/consession-rules")
+);
+const LaborWelfare = lazy(() =>
+  import("../pages/labor-welfare")
+);
 
 const AppRouter = () => (
   <Router>
@@ -136,6 +142,24 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={HealthSafety}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/consession-rules"
+          element={
+            <PublicRoute
+              component={ConsessionRules}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/labor-welfare"
+          element={
+            <PublicRoute
+              component={LaborWelfare}
               layout={DashboardLayout}
             />
           }

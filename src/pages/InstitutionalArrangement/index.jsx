@@ -3,9 +3,16 @@ import { InstitutionalArrangementSection } from "components/InstitutionalArrange
 import { Container } from "components/UI";
 import React from "react";
 const InstitutionalArrangement = () => {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/', label: 'Legal Framework' },
+    { path: '/', label: 'Governance' },
+    { path: '#', label: 'Institutional Arrangement' },
+  ];
+
   return (
     <Container>
-      <BreadCrumbs />
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
       <InstitutionalArrangementSection
         title="Institutional Arrangement"
         subTitle="Federal Jurisdiction"

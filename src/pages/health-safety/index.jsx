@@ -1,3 +1,4 @@
+import BreadCrumbs from "components/Breadcrumbs";
 import CardComponent from "components/Card";
 import { Container } from "components/UI";
 import React from "react";
@@ -12,8 +13,16 @@ const cardContent = [
 ];
 
 const HealthSafety = () => {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/', label: 'Legal Framework' },
+    { path: '/', label: 'Acts & Laws' },
+    { path: '#', label: 'Health & Safety' },
+  ];
+
   return (
     <Container>
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex flex-wrap mt-[20px]">
         <div className="max-w-[100%]">
           <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
