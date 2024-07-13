@@ -1,6 +1,6 @@
 import React from 'react'
 import { FiscalEconomicZone , FiscalEconomicEnclaves , FiscalDeveloperIncentive , FiscalCardBlock } from 'components'
-const Fiscal = () => {
+const SpecialEconomicZones = () => {
   return (
     <div className='px-10'>
       <FiscalEconomicZone/>
@@ -11,4 +11,4 @@ const Fiscal = () => {
   )
 }
 
-export default Fiscal
+export default SpecialEconomicZones;
