@@ -266,13 +266,7 @@ const Header = ({ title = "" }) => {
           </div>
         </div>
       </header>
-      <div
-        className="header_inner container hide_on_tab"
-        style={{ position: "relative" }}
-      >
-        {" "}
-        <BreadCrumbs />{" "}
-      </div>
+
     </>
   );
 };
