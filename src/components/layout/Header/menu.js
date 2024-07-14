@@ -117,33 +117,33 @@ export const SubMenuStatistics = [
 export const SubMenuGovernance = [
   {
     name: "Institutional Arrangement",
-    link: "#",
+    link: "/institutional-arrangement",
   },
   {
     name: "Policies",
-    link: "#",
+    link: "/legal-policies",
   },
 ];
 
 export const SubMenuActsAndLaws = [
   {
     name: "Mining Operations",
-    link: "#",
+    link: "/mining-operations",
   },
   {
     name: "Health & Safety",
-    link: "#",
+    link: "/health-safety",
   },
 ];
 
 export const SubMenuRulesAndRegulations = [
   {
     name: "Concession Rules",
-    link: "#",
+    link: "/consession-rules",
   },
   {
     name: "Labor Welfare",
-    link: "#",
+    link: "/labor-welfare",
   },
 ];
 
