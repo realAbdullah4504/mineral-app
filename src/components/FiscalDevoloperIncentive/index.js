@@ -15,7 +15,7 @@ export const FiscalDeveloperIncentive = () => {
                     </ul>
                 </div>
                 <div className='text-[20px] leading-[25px] font-roboto-condensed mt-[20px]'>
-                The Board of Investment (BOI) has launched a Special Information System module (SEZMIS) that aims to act as a one-shop stop for investors. The module will enable transparent disposal of zone & enterprise entry applications by online registration, channeling the legal provisions of the SEZ Act & rules.
+                The Board of Investment (BOI) has launched a Special Information System module (SEZMIS) that aims to act as a one-shop stop for investors. The module will enable transparent disposal of zone & enterprise entry applications by online registration, channeling the legal provisions of the SEZ Act & Rules.
                 </div>
                 
             </div>
@@ -23,7 +23,7 @@ export const FiscalDeveloperIncentive = () => {
             <img className='relative m-auto' src={Evolution} width={1140} height={706}/>
         </div>
         <div className='relative m-auto max-w-[1179px] mt-[70px]'>
-            <div className='text-[64px] leading-[84px] font-bold font-ibm-plex-sans'>SEZ Leading to Mining <span className='text-[#27AE60]'>Glory</span> </div>
+            <div className='text-[64px] leading-[84px] font-bold font-ibm-plex-sans'>SEZs Leading to Mining <span className='text-[#27AE60]'>Glory</span> </div>
        <div className='text-[18px] leading-[25px] text-[#40384F] mt-[10px] '>
        The implementation of Special Economic Zones (SEZs) in Pakistan is poised to significantly benefit the mining industry in several ways. These benefits stem from a combination of policy incentives, infrastructure development, and regulatory reforms designed to attract investment and enhance productivity in the sector.
        </div>

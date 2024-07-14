@@ -56,45 +56,45 @@ export const FiscalExportTable = () => {
             discretion: 'Saindak EPZ, a Gold and Copper Project in Balochistan, produces 20,000 tons of blister copper yearly. Its 2019-20 exports totaled US $55.002 million, with cumulative exports at US $2258.647 million. The project has created 1500 job opportunities for Pakistanis alongside foreign workers.',
             listing: [
                 {
-                    title: 'EPZ  Notified on 2',
-                    discretion: 'May 12, 2004, Revised on May 12, 2016, Extended to 2035'
+                    title: 'EPZ  Notified on',
+                    discretion: 'October 13, 2001'
                 }
                 ,
                 {
-                    title: 'Location 2',
-                    discretion: 'District Lasbella, Balochistan'
+                    title: 'Location',
+                    discretion: 'District Chagai, Balochistan'
                 }
                 ,
                 {
-                    title: 'Leased to 2',
-                    discretion: 'MCC HUAYE Duddar Mining Company'
+                    title: 'Leased to',
+                    discretion: 'MCC Resource Development Company Pvt Ltd, MRDL'
                 }
                 ,
                 {
-                    title: 'Land/Zone Area 2',
-                    discretion: '1500 Acres'
+                    title: 'Land/Zone Area',
+                    discretion: '1284 Acres'
                 },
                 {
-                    title: 'Project Stakeholder 2',
-                    discretion: 'Ministry PNR Govt. of Balochistan along with MCC HDM Company'
+                    title: 'Project Stakeholder',
+                    discretion: 'Federal Ministry of Petroleum & Natural Resources, Govt. of Balochistan, M/s. MRDL /MCC of China/ MSL / EPZA'
                 }
                 ,
                 {
-                    title: 'Incentives 2',
+                    title: 'Incentives',
                     discretion: '100% Import/Export'
                 },
                 {
-                    title: 'EPZA Role 2',
+                    title: 'EPZA Role',
                     discretion: 'Security & Regulatory Functions'
                 }
                 ,
                 {
-                    title: 'Product 2',
-                    discretion: 'Zinc & Lead'
+                    title: 'Product',
+                    discretion: 'Blister Copper & Gold'
                 },
                 {
-                    title: 'Work Force 2',
-                    discretion: '500 Approx'
+                    title: 'Work Force',
+                    discretion: '1500 Approx'
                 },
             ]
         },
@@ -103,45 +103,36 @@ export const FiscalExportTable = () => {
             discretion: 'To exploit the mineral resources of Boyal Muhammad Khel, North Waziristan, open-pit mining is planned up to the depth of 1325m from MSL and installation of Copper beneficiation plant at the mouth of the mine is accomplished for 1500 MTPD. The project is 100 per cent indigenous and already contributing scientifically towards the socioeconomic development of the area through CSR, employment generation, and building of social infrastructure.'
             , listing: [
                 {
-                    title: 'EPZ  Notified on 3',
-                    discretion: 'May 12, 2004, Revised on May 12, 2016, Extended to 2035'
+                    title: 'Notified on',
+                    discretion: '9th August 2023'
                 }
                 ,
                 {
-                    title: 'Location 3',
-                    discretion: 'District Lasbella, Balochistan'
+                    title: 'Location',
+                    discretion: 'North Waziristan'
                 }
                 ,
                 {
-                    title: 'Leased to 3',
-                    discretion: 'MCC HUAYE Duddar Mining Company'
-                }
-                ,
-                {
-                    title: 'Land/Zone Area 3',
-                    discretion: '1500 Acres'
+                    title: 'Area',
+                    discretion: '30 Sq Km'
                 },
                 {
-                    title: 'Project Stakeholder 3',
-                    discretion: 'Ministry PNR Govt. of Balochistan along with MCC HDM Company'
+                    title: 'Stakeholder',
+                    discretion: 'Minerals Development Department (MDD), DEW'
                 }
                 ,
                 {
-                    title: 'Incentives 3',
-                    discretion: '100% Import/Export'
+                    title: 'Lease Time',
+                    discretion: '30 Years'
                 },
                 {
-                    title: 'EPZA Role 3',
-                    discretion: 'Security & Regulatory Functions'
+                    title: 'Leased to',
+                    discretion: '30 Years'
                 }
                 ,
                 {
-                    title: 'Product 3',
-                    discretion: 'Zinc & Lead'
-                },
-                {
-                    title: 'Work Force 3',
-                    discretion: '500 Approx'
+                    title: 'Product',
+                    discretion: 'Copper'
                 },
             ]
         },

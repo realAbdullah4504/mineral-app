@@ -49,7 +49,7 @@ width:"70%",
 fontSize: "40px",
     
 fontWeight:"400"
-    }}>National Mineral Development Programe -<span style={{ color: '#009969' }}>National Strategy</span>
+    }}>National Mineral Development Programe -<span style={{ color: '#009969' }}> National Strategy</span>
 </div>
 
     </div>
