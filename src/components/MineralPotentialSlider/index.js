@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import rightArrow from '../../assets/images/rightarrow.png'
-import leftArrow from '../../assets/images/leftarrow.png'
+import rightArrow from '../../assets/images/Slider_right_arrow.png'
+import leftArrow from '../../assets/images/slider_left_arrow.png'
 import copperSlider from 'assets/images/copperSlide.png'
 import goldSlider from 'assets/images/goldSlider.png'
 import chromiteSlider from 'assets/images/chromiteSlider.png'

@@ -2,7 +2,7 @@ import React from 'react';
 
 const BreadCrumbs = ({ breadcrumbs }) => {
   return (
-    <ol className="flex items-center whitespace-nowrap">
+    <ol className="flex items-center sm:flex-nowrap flex-wrap sm:whitespace-nowrap">
       {breadcrumbs.map((breadcrumb, index) => (
         <li key={index} className="inline-flex items-center">
           <a

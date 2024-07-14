@@ -21,11 +21,11 @@ export const SubMenuInvestment = [
   },
   {
     name: "Applying for Mineral Title",
-    link: "#",
+    link: "/applying-for-mineral-title",
   },
   {
     name: "Development Schemes",
-    link: "#",
+    link: "/development-schemes",
   },
   {
     name: "Starting New Business",

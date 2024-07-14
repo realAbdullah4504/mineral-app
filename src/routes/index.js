@@ -9,11 +9,11 @@ const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
 const InvestmentOpportunity = lazy(() => import("../pages/investment-opportunities"));
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
+
 const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"));
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
-// const Fiscal = lazy(() => import("../pages/fiscal"));
 const FiscalCPEC = lazy(() => import("../pages/FiscalCPEC"));
 const StartingNewBusiness = lazy(() => import("../pages/StartingNewBusiness"));
 const SpecialInvestmentFacilities = lazy(() => import("../pages/SpecialInvestmentFacilities"));
@@ -24,6 +24,10 @@ const HealthSafety = lazy(() => import("../pages/health-safety"));
 const ConsessionRules = lazy(() => import("../pages/consession-rules"));
 const LaborWelfare = lazy(() => import("../pages/labor-welfare"));
 const LegalFramework = lazy(() => import("../pages/legal-framework"));
+const ApplyingForMineralTitle = lazy(() => import("../pages/ApplyingForMineralTitle"));
+const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
+
+// const Fiscal = lazy(() => import('../pages/fiscal'));
 const SpecialEconomicZones = lazy(() => import("../pages/SpecialEconomicZones"));
 const FiscalExportProcessing = lazy(() => import("../pages/fiscalExportProcessing"));
 
@@ -60,6 +64,15 @@ const AppRouter = () => (
           path="/business-investment"
           element={<PublicRoute component={BusinessInvestment} layout={DashboardLayout} />}
         />
+        <Route
+          path="/applying-for-mineral-title"
+          element={<PublicRoute component={ApplyingForMineralTitle} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/development-schemes"
+          element={<PublicRoute component={DevelopmentSchemes} layout={DashboardLayout} />}
+        />
+
         <Route
           path="/mineral-development-strategy"
           element={<PublicRoute component={MineralDevelopmentStrategy} layout={DashboardLayout} />}
