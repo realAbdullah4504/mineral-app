@@ -1,26 +1,41 @@
 .business-investment-container {
-  width: 85%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin: auto;
   justify-content: center;
   /* min-height: 100%; */
 }
+.mineral-development {
+  width: 100%;
+  height: 401px;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .business-investment-container-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(277px, 1fr)); /* Minimum width 277px, expand to fill remaining space */
-  gap: 20px ; /* Horizontal and vertical gap */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(277px, 1fr)
+  ); /* Minimum width 277px, expand to fill remaining space */
+  gap: 20px; /* Horizontal and vertical gap */
+  width: 70%;
+  margin: auto;
+  padding-bottom: 30px;
 }
 
 .flip-card-content {
   position: relative;
   width: 100%; /* Ensures each card takes full width of its grid cell */
   height: 236px; /* Fixed height for each card */
-  border: 3px  ; /* Adjust border style as needed */
+  border: 3px; /* Adjust border style as needed */
   border-radius: 10px;
   background: white;
   max-width: 277px; /* Maximum width of each card */
+  margin: auto;
 }
 
 .flip-card-front,
@@ -37,11 +52,438 @@
 .flip-card-front {
   color: #009969;
 }
-.flip-card-front:hover{
+.flip-card-front:hover {
   background-color: #009969;
-  color:white
+  color: white;
 }
 .flip-card-back {
   background: #009969;
   color: white;
+}
+.bread-crumbs div h1 h1 span {
+  border-bottom: 5px solid #009969;
+  display: inline-block;
+  border-radius: 5px;
+}
+.mineral-development-title {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+  padding: 20px;
+  word-spacing: 20px;
+  font-weight: 700;
+}
+
+.mineral-developmen-strategy {
+  width: 70%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 20px;
+  align-self: center;
+}
+.mineral-developmen-strategy p {
+  font-size: 20px;
+}
+.mineral-developmen-strategy h1 {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+}
+.mineral-development-strategy-graph {
+  width: 100%;
+  height: 1074px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mineral-development-ecosystem {
+  width: 70%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 20px;
+  align-self: center;
+}
+.mineral-development-ecosystem h1 {
+  font-size: 40px;
+  font-weight: 600;
+}
+.mineral-development-ecosystem p {
+  font-size: 20px;
+}
+.special-investment-roadmap-graph {
+  display: flex;
+  align-items: center;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+.special-investment-roadmap-graph ul {
+  padding-left: 10px;
+  list-style-type: disc; /* Set the list style to dots (bullets) */
+  list-style-position: inside; /* Optional: control the position of the bullets */
+}
+.special-investment-facilities-intro button {
+  margin: auto;
+  margin: 20px;
+  background-size: cover;
+  padding: 10px;
+
+  color: #009969;
+}
+.special-investment-facilities-intro-moreinfo {
+  width: 150px;
+  height: 40;
+  margin: auto;
+}
+.special-investment-facilities-intro-moreinfo button {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+@media only screen and (max-width: 1400px) {
+  .mineral-development-title {
+    font-size: 40px;
+  }
+  .mineral-developmen-strategy {
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-developmen-strategy p {
+    font-size: 20px;
+  }
+  .mineral-developmen-strategy h1 {
+    width: 80%;
+    font-size: 30px;
+  }
+  .mineral-development-ecosystem h1 {
+    width: 80%;
+    font-size: 30px;
+  }
+  .mineral-development-ecosystem p {
+    font-size: 20px;
+  }
+  .mineral-development-strategy-graph {
+    height: 800px;
+  }
+}
+
+.mineral-development-ecosystem-graph {
+  width: 100%;
+  height: 497px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .business-investment-container-cards {
+    width: 80%;
+    margin: auto;
+  }
+  .mineral-development-title {
+    font-size: 30px;
+  }
+  .mineral-developmen-strategy {
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-development-ecosystem {
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-developmen-strategy p {
+    font-size: 20px;
+  }
+  .mineral-developmen-strategy h1 {
+    margin-top: 20px;
+    width: 80%;
+    font-size: 30px;
+  }
+  .mineral-development-ecosystem h1 {
+    width: 80%;
+    font-size: 30px;
+  }
+  .mineral-development-ecosystem p {
+    font-size: 20px;
+  }
+
+  .mineral-development-strategy-graph {
+    height: 700px;
+  }
+  .mineral-development-ecosystem-graph {
+    height: 400px;
+  }
+}
+
+.business-mining-card-content {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.business-mining-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(555px, 1fr));
+  gap: 30px;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 30px;
+  font-size: 20px;
+}
+
+.business-mining-card-content p {
+  padding: 15px;
+}
+
+.business-mining-card-title {
+  background-color: #009969;
+  color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.business-mining-card-title {
+  padding: 15px;
+  height: 60px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+}
+.starting-business-intro .intro-container .intro-section .intro-main-section div h1 {
+  font-size: 48px;
+}
+.starting-business-intro .intro-container .intro-section .intro-main-section div p {
+  font-size: 18px;
+}
+.starting-business-investor .intro-container .intro-section .intro-main-section div h1 {
+  font-size: 45px;
+}
+.starting-business-investor .intro-container .intro-section .intro-main-section div p {
+  font-size: 17px;
+}
+.pre-req-investors {
+  margin: auto;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.pre-req-investors-content {
+  padding-left: 20px;
+  font-family: IBM Plex Sans;
+}
+.pre-req-investors-content h1 {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.pre-req-investors-content ul li h1 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.pre-req-investors-content ul li p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 3px;
+}
+.special-investment-facilities-intro {
+  font-family: Helvetica Neue;
+
+  line-height: 25px;
+}
+.special-investment-facilities-intro .intro-container .intro-section .intro-main-section div h1 {
+  font-size: 48px;
+  font-weight: 700;
+}
+.special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div p {
+  font-size: 18px;
+  font-family: Helvetica Neue;
+}
+.special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div h6 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 10px;
+  font-family: Helvetica Neue;
+}
+.special-investment-roadmap-graph {
+  margin: auto;
+  width: 80%;
+}
+.special-investment-roadmap-graph img {
+  margin: auto;
+}
+@media only screen and (max-width: 1200px) {
+  .starting-business-intro .intro-container .intro-section .intro-main-section div h1 {
+    font-size: 25px;
+  }
+  .starting-business-investor .intro-container .intro-section .intro-main-section div h1 {
+    font-size: 25px;
+  }
+  .starting-business-investor .intro-container .intro-section .intro-main-section div p {
+    font-size: 13px;
+  }
+  .pre-req-investors-content h1 {
+    font-size: 20px;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div h1 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div p {
+    font-size: 15px;
+    font-family: Helvetica Neue;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div h6 {
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 10px;
+    font-family: Helvetica Neue;
+  }
+
+  .special-investment-roadmap-graph ul li {
+    font-size: 14px;
+  }
+  .special-investment-roadmap-graph {
+    margin: auto;
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .pre-req-investors {
+    margin: auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .special-investment-roadmap-graph ul li {
+    font-size: 12px;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div h6 {
+    margin-top: 70px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .mineral-development-title {
+    font-size: 25px;
+    width: 75%;
+  }
+  .mineral-developmen-strategy {
+    margin-top: 20px;
+    width: 90%;
+  }
+  .mineral-developmen-strategy p {
+    font-size: 13px;
+  }
+  .mineral-developmen-strategy h1 {
+    width: 90%;
+    font-size: 20px;
+  }
+  .mineral-development-ecosystem h1 {
+    width: 90%;
+    font-size: 20px;
+  }
+  .mineral-development-ecosystem p {
+    font-size: 13px;
+  }
+
+  .mineral-development-strategy-graph {
+    height: 550px;
+  }
+  .mineral-development-ecosystem-graph {
+    height: 300px;
+  }
+  .starting-business-intro .intro-container .intro-section .intro-main-section div h1 {
+    font-size: 15px;
+  }
+  .starting-business-intro .intro-container .intro-section .intro-main-section div p {
+    font-size: 13px;
+  }
+  .starting-business-intro .intro-container .intro-section .intro-main-section {
+    width: 90%;
+  }
+  .business-mining-cards {
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    font-size: 13px;
+  }
+  .pre-req-investors {
+    width: 90%;
+  }
+  .special-investment-roadmap-graph {
+    margin-top: 0px;
+    width: 90%;
+    height: 300px;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div p {
+    font-size: 13px;
+    font-family: Helvetica Neue;
+  }
+  .special-investment-facilities-intro .intro-container .intro-section .intro-main-section div div h6 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 10px;
+    font-family: Helvetica Neue;
+  }
+  .special-investment-roadmap-graph ul li {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .special-investment-roadmap-graph {
+    height: 280px;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .mineral-development-title {
+    font-size: 20px;
+    width: 90%;
+    word-spacing: 5px;
+  }
+  .mineral-development-strategy-graph {
+    height: 350px;
+  }
+  .mineral-development-ecosystem-graph {
+    height: 100px;
+  }
+  .starting-business-investor .intro-container .intro-section .intro-main-section div h1 {
+    font-size: 20px;
+  }
+  .special-investment-roadmap-graph {
+    margin-top: 70px;
+    height: 400px;
+  }
+}
+.image-wrapper {
+  width: fit-content;
+  height: calc(100% - 15px);
+  overflow: hidden;
+  position: relative;
+}
+
+.cropped-image {
+  position: relative;
+  top: -15px;
+  width: 80%;
+  margin: auto;
 }

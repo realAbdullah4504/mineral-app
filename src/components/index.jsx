@@ -24,6 +24,7 @@ import { MineralWealthSection } from './MineralWealthSection'
 import { FiscalExport } from "./FiscalExport";
 import { FiscalExportImg } from "./FiscalExportImg";
 import { FiscalExportTable } from "./FiscalExportTable";
+import {FiscalTaxExemption} from "./FiscalTaxExamption"
 
 export {
   DashboardLayout,
@@ -51,5 +52,6 @@ export {
   MineralWealthSection  , 
   FiscalExport , 
   FiscalExportImg , 
-  FiscalExportTable
+  FiscalExportTable , 
+  FiscalTaxExemption
 };

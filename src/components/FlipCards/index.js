@@ -1,51 +1,31 @@
-import { hover } from "@testing-library/user-event/dist/hover";
 import React, { useState } from "react";
 
-export function FlipCards({ title = "Front Content", flip = false, flipContent = "" ,changebg=false, link=""}) {
+export function FlipCards({ title = "Front Content", flip = false, flipContent = "", changebg = false, link = "" }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouse = () => {
     if (flip) {
       setIsHovered((prevState) => !prevState);
     }
-   
   };
   const handleClick = () => {
     if (link) {
-      window.location.href = link; 
+      window.location.href = link;
     }
   };
+
   return (
-    <div className="flip-card-content" onClick={handleClick} style={{ cursor: link ? 'pointer' : 'default' }}>
+    <div className="flip-card-content" onClick={handleClick} style={{ cursor: link ? "pointer" : "default" }}>
       {isHovered && flip ? (
         <div className="flip-card-back" onMouseLeave={handleMouse}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {" "}
-            <h1
-              style={{
-                fontSize: "28px",
-                fontWeight: "500",
-                paddingTop: "40px",
-                paddingLeft: "20px",
-                lineHeight: "1.2",
-              }}
-            >
-              {title}
-            </h1>
-            <p style={{ padding: "10px", lineHeight: "2", fontWeight: "300", paddingLeft: "20px" }}>{flipContent} . </p>
+          <div>
+            <h1>{title}</h1>
+            <p>{flipContent}</p>
           </div>
         </div>
       ) : (
-        <div className="flip-card-front" onMouseEnter={handleMouse}  >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              padding: "10px",
-              height: "100%",
-            }}
-          >
+        <div className="flip-card-front" onMouseEnter={handleMouse}>
+          <div>
             {" "}
             <svg
               style={{ transform: "rotate(-49.3deg)", marginLeft: "160px" }}
@@ -64,7 +44,7 @@ export function FlipCards({ title = "Front Content", flip = false, flipContent =
                 d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               />
             </svg>
-            <h1 style={{ fontSize: "28px", fontWeight: "500", padding: "15px", lineHeight: "1.2" }}>{title}</h1>
+            <h1>{title}</h1>
           </div>
         </div>
       )}

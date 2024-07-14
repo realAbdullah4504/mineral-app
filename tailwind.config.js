@@ -25,6 +25,9 @@ export default {
         'ibm-plex-sans': ['"IBM Plex Sans"', 'sans-serif'],
         'helvetica': ['"Helvetica Neue"', 'sans-serif'],
       },
+      colors:{
+        'textGreen': '#27AE60'
+      }
     },
   },
   plugins: [],
