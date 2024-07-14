@@ -12,7 +12,7 @@ function MineralDevelopmentStrategy() {
           backgroundImage: `url(${BusinessInvestmentBg})`,
         }}
       >
-        <div className="mineral-development-title"> Mineral Development Strategies</div>
+        <div className="mineral-development-title"> Mineral Development Strategy</div>
       </div>
       <div className="mineral-developmen-strategy">
         <p>
@@ -22,7 +22,7 @@ function MineralDevelopmentStrategy() {
           mineral potential.
         </p>
         <h1>
-          -National Mineral Development Programe -<span style={{ color: "#009969" }}>National Strategy</span>
+          National Mineral Development Programe -<span style={{ color: "#009969" }}>National Strategy</span>
         </h1>
       </div>
       <div className="mineral-development-strategy-graph">
