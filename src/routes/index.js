@@ -41,7 +41,8 @@ const LaborWelfare = lazy(() =>
 const LegalFramework = lazy(() =>
   import("../pages/legal-framework")
 );
-const Fiscal = lazy(() => import('../pages/fiscal'));
+const SpecialEconomicZones = lazy(() => import('../pages/SpecialEconomicZones'));
+const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
 
 const AppRouter = () => (
   <Router>
@@ -65,10 +66,13 @@ const AppRouter = () => (
           }
         />
         <Route
-          path="/fiscal"
-          element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
+          path="/special-economic-zones"
+          element={<PublicRoute component={SpecialEconomicZones} layout={DashboardLayout} />}
         />
-    
+    <Route
+          path="/export-processing-zones"
+          element={<PublicRoute component={FiscalExportProcessing} layout={DashboardLayout} />}
+        />
     <Route
           path="/investment-opportunities"
           element={

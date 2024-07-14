@@ -7,23 +7,28 @@ function FiscalIncentives() {
         {
           title: "Special Economic Zones",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+          link:"/special-economic-zones"
+
         },
         {
           title: "Export Processing Zones",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+          link:"/export-processing-zones"
         },
         {
           title: "CPEC",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+          link:"#"
         },
         {
           title: "Tax Exemptions",
           flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+          link:"#"
         },
         
     ]
     return   <div
-    style={{
+        style={{
         width: "100%",
         height: "auto",
         backgroundImage: `url(${FiscalIncentivesBg})`,
@@ -45,7 +50,7 @@ function FiscalIncentives() {
         </p>
         <div className="business-investment-container-cards" style={{ width: "90%",margin:"40px auto 30px auto" }}>
           {businessAndInvestmentcards.map((item) => (
-      <FlipCards title={item.title} flip={false} flipContent={item.flipContent} changebg={true} />
+      <FlipCards title={item.title} flip={false} flipContent={item.flipContent} link={item?.link} changebg={true} />
   
           ))}
         </div>
