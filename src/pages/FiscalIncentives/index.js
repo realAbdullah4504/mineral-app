@@ -22,6 +22,7 @@ function FiscalIncentives() {
     {
       title: "Tax Exemptions",
       flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      link: "/fiscal-tax",
     },
   ];
 

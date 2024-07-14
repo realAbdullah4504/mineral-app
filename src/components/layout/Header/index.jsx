@@ -81,8 +81,8 @@ const Header = ({ title = "" }) => {
             <div className="header_bottom_menu">
               <Link to="/">Home</Link>
               <ul className="has_sub_menu">
-                <li onClick={() => handleNavigate('/business-investment')}>
-                  Investment
+                <li>
+                Investment
                   <ul className="sub_menu">
                     {SubMenuInvestment?.map((data, i) => (
                       <Link to={data?.link} key={i}>
