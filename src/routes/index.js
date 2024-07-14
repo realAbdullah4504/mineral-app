@@ -44,6 +44,8 @@ const LegalFramework = lazy(() =>
 const Fiscal = lazy(() => import('../pages/fiscal'));
 const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
 
+const FiscalTax = lazy(() => import('../pages/fiscalTax'));
+
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -183,6 +185,15 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={LegalFramework}
+              layout={DashboardLayout}
+            />
+          }
+        />
+          <Route
+          path="/fiscal-tax"
+          element={
+            <PublicRoute
+              component={FiscalTax}
               layout={DashboardLayout}
             />
           }

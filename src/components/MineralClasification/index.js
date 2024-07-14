@@ -88,7 +88,7 @@ export const MineralClassification = () => {
                     data.map((dataSub, index) => {
                         return (
                             <div className={` relative rounded-lg ${index == 1 ? 'grow' : ''}  p-2 ${index > 2 ? 'hidden' : ''} ${index == 0 ? '-ml-[150px]' : index == 2 ? ' -mr-[150px] ':''} `}>
-                                <img className='rounded-xl' src={dataSub.avatar} width={index == 1 ? 800 :530} height={index == 1 ? 400 : 351} />
+                                <img className={`rounded-xl ${index == 1 && 'w-full'} `} src={dataSub.avatar} width={index == 1 ? 800 :530} height={index == 1 ? 400 : 351} />
                                 <div className={` ${index != 1 ? 'hidden' : ''} bg-white absolute  p-8 mx-12  -mt-[100px]  z-50 rounded-lg`}>
                                     <div className='flex gap-4  items-center font-ibm-plex-sans'>
                                         <img className='' src={dataSub?.icon} width={40} height={40} />

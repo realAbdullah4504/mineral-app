@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+.title{
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 84px;
+}
