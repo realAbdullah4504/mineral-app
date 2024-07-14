@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import rightarrow from 'assets/images/rightarrow.png'
-import leftarrow from 'assets/images/leftarrow.png'
+import rightarrow from 'assets/images/Slider_right_arrow.png'
+import leftarrow from 'assets/images/slider_left_arrow.png'
 
 export const FiscalExportTable = () => {
     const [list, setList] = useState([
