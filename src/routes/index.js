@@ -49,7 +49,7 @@ const DevelopmentSchemes = lazy(() =>
   import("../pages/DevelopmentSchemes")
 );
 
-const Fiscal = lazy(() => import('../pages/fiscal'));
+// const Fiscal = lazy(() => import('../pages/fiscal'));
 const SpecialEconomicZones = lazy(() => import('../pages/SpecialEconomicZones'));
 const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
 
