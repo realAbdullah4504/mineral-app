@@ -7,10 +7,12 @@ function FiscalIncentives() {
     {
       title: "Special Economic Zones",
       flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      link: "/special-economic-zones",
     },
     {
       title: "Exporting Processing Zones",
       flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      link: "/export-processing-zones",
     },
     {
       title: "CPEC",
