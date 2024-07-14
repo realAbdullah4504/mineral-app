@@ -31,6 +31,8 @@ const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 const SpecialEconomicZones = lazy(() => import("../pages/SpecialEconomicZones"));
 const FiscalExportProcessing = lazy(() => import("../pages/fiscalExportProcessing"));
 
+const FiscalTax = lazy(() => import('../pages/fiscalTax'));
+
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -107,6 +109,15 @@ const AppRouter = () => (
         <Route
           path="/special-investment-facilities"
           element={<PublicRoute component={SpecialInvestmentFacilities} layout={DashboardLayout} />}
+        />
+          <Route
+          path="/fiscal-tax"
+          element={
+            <PublicRoute
+              component={FiscalTax}
+              layout={DashboardLayout}
+            />
+          }
         />
       </Routes>
     </Suspense>

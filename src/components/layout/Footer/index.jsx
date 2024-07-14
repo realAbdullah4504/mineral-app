@@ -9,8 +9,8 @@ import LinkedInLogo from "assets/images/logoLinkedIn.svg";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col  w-full px-[9.3rem] justify-center text-[#40384F] bg-[#FAFAFB]">
-      <div className="flex justify-between pt-[3.8rem]">
+    <div className="flex flex-col   w-full px-[9.3rem] justify-center text-[#40384F] bg-[#FAFAFB]">
+      <div className=" lg:flex   justify-between pt-[3.8rem]">
         <div className="flex flex-col pb-[6.688rem]">
           <img
             src={logo}
