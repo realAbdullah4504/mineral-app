@@ -3,6 +3,13 @@ import { Container } from "components/UI";
 import React from "react";
 import minertalFeeImage from "../../assets/images/mineral_title_fee.jpg"
 import minertalTitleTenure from "../../assets/images/mineral_title_tenure.jpg"
+import Sindh_img from "../../assets/images/Sindh_img.png"
+import Kpk_img from "../../assets/images/kpk_img.png"
+import Balochistan_img from "../../assets/images/Balochistan_img.png"
+import punjab_img from "../../assets/images/punjab_img.png"
+import Kashmirt_img from "../../assets/images/Kashmirt_img.png"
+import Gilgit_img from "../../assets/images/Gilgit_img.png"
+
 import {HowToApply} from "./howToApply.js";
 const ApplyingForMineralTitle = () => {
   const breadcrumbs = [
@@ -10,6 +17,39 @@ const ApplyingForMineralTitle = () => {
     { path: '# ', label: 'Business & Investment' },
     { path: '#', label: 'Applying For mineral title' },
   ];
+
+  const applyingForMineralTitleData = [
+    {
+      "title" : "Sindh",
+      "slug" : "sindh",
+      "image": Sindh_img,
+    },
+    {
+      "title" : "KPK",
+      "slug" : "kpk",
+      "image": Kpk_img,
+    },
+    {
+      "title" : "Balochistan",
+      "slug" : "valochistan",
+      "image": Balochistan_img,
+    },
+    {
+      "title" : "Punjab",
+      "slug" : "punjab",
+      "image": punjab_img,
+    },
+    {
+      "title" : "Kashmir",
+      "slug" : "kashmir",
+      "image": Kashmirt_img,
+    },
+    {
+      "title" : "Gilgit",
+      "slug" : "gilgit",
+      "image": Gilgit_img,
+    }
+  ]
 
   return (
     <>
@@ -32,9 +72,9 @@ const ApplyingForMineralTitle = () => {
         </div>
 
         <div className="apply_for_mineral_sec_2 xl:py-10 md:py-5 py-4">
-            <div className="page_subtitle text-center">Mineral Title Tenure</div>
+            <div className="page_subtitle text-center">Mineral Title <span>Tenure</span></div>
             <div className="table_strucutre">
-              <img src={minertalFeeImage} alt="" className="rounded-xl"/>
+              <img src={minertalTitleTenure} alt="" className="rounded-xl"/>
             </div>
         </div>
       </div>
@@ -56,7 +96,26 @@ const ApplyingForMineralTitle = () => {
       <div className="links_for_appliation_of_provincial">
         <div className="links_for_application_title text-center">
 
-        <h2 className="page-title text-center">Links for Application of <span>Provincial </span> Mineral Title</h2>
+        <h2 className="page-title text-center max-w-[1000px] mx-auto">Links for Application of <span>Provincial </span> Mineral Title</h2>
+
+        <div className="provitional_menerial_title_main">
+        <div className="provitional_menerial_title_inner">
+        <ul>
+        {applyingForMineralTitleData?.map((item,i) => 
+          <li key={i}>  
+            <div className="mineral_title_item">
+               <div className="mineral_title_heading">{item?.title}</div>
+               <div className="mineral_img">
+                  <img className="max-w-[411px]" src={item?.image} alt=""/>
+               </div>
+            </div>
+          </li>
+        )}
+        </ul>
+        
+        </div>
+        </div>
+
         </div>
       </div>
     </Container>

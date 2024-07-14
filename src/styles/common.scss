@@ -41,3 +41,16 @@ color: #40384F;
         }
     }
 }
+
+@media(max-width:767px){
+    .page-title{
+        font-size: 30px;
+        line-height: 40px;
+    }
+    .page_subtitle{
+        font-size: 26px;
+    }
+    .how_to_apply_for_mineral_heading{
+        font-size: 30px;
+    }
+}
