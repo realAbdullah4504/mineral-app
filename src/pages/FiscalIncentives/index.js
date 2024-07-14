@@ -3,45 +3,50 @@ import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 import { FlipCards } from "components/FlipCards";
 import IntroContainer from "components/IntroContainer";
 function FiscalIncentives() {
-    const fiscalIncentivesCards = [
-        {
-          title: "Mineral Potential of Pakistan",
-          flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-        },
-        {
-          title: "Mineral Potential of Pakistan",
-          flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
- 
-        },
-        {
-          title: "CPEC",
-          flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-                   link:"/fiscal-CPEC"
-        },
-        {
-          title: "Mineral Potential of Pakistan",
-          flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-        },
-        
-    ]
-    const cpecBreadCRumbItems=[{title:"Home",href:''},{title:"Fiscal Incentive",href:''},{title:"CPEC"}]
-    return   <div className="fiscal-incentivs-intro-bg"
-    style={{backgroundImage: `url(${FiscalIncentivesBg})` }}
-    >
-      <div className="business-investment-container" >
+  const fiscalIncentivesCards = [
+    {
+      title: "Special Economic Zones",
+      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    },
+    {
+      title: "Exporting Processing Zones",
+      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    },
+    {
+      title: "CPEC",
+      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      link: "/fiscal-CPEC",
+    },
+    {
+      title: "Tax Exemptions",
+      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    },
+  ];
 
-        <IntroContainer breadCRumbItems={cpecBreadCRumbItems} title="Fiscal Incentives" content='  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at temp' height="90%" width="85%" introHeight="280px"></IntroContainer>
-        <div className="fiscal-incentives-container-cards"   >
+  return (
+    <div className="fiscal-incentivs-intro-bg" style={{ backgroundImage: `url(${FiscalIncentivesBg})` }}>
+      <div className="business-investment-container">
+        <IntroContainer
+          title="Fiscal Incentives"
+          content="The Government of Pakistan has introduced a number of initiatives and incentives, aimed at facilitating local and foreign investors, collaborators and industrial ventures. Explore how the Government of Pakistan is fostering an enabling environment for the minerals and mining sector of Pakistan"
+          height="90%"
+          width="85%"
+          introHeight="280px"
+        ></IntroContainer>
+        <div className="fiscal-incentives-container-cards">
           {fiscalIncentivesCards.map((item) => (
-      <FlipCards title={item.title} flip={false} flipContent={item.flipContent}  link={item.link? item.link :""} changebg={true} />
-  
+            <FlipCards
+              title={item.title}
+              flip={false}
+              flipContent={item.flipContent}
+              link={item.link ? item.link : ""}
+              changebg={true}
+            />
           ))}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 }
 
 export default FiscalIncentives;

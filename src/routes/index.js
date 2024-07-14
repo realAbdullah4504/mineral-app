@@ -1,4 +1,3 @@
-
 import React, { Suspense, lazy } from "react";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
@@ -14,10 +13,10 @@ const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"))
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
-const Fiscal = lazy(() => import('../pages/fiscal'));
-const FiscalCPEC= lazy(()=>import("../pages/FiscalCPEC"))
-const StartingNewBusiness= lazy(()=>import("../pages/StartingNewBusiness"))
-
+const Fiscal = lazy(() => import("../pages/fiscal"));
+const FiscalCPEC = lazy(() => import("../pages/FiscalCPEC"));
+const StartingNewBusiness = lazy(() => import("../pages/StartingNewBusiness"));
+const SpecialInvestmentFacilities = lazy(() => import("../pages/SpecialInvestmentFacilities"));
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -28,12 +27,9 @@ const AppRouter = () => (
           path="/mineral-potential"
           element={<PublicRoute component={MineralPotential} layout={DashboardLayout} />}
         />
+        <Route path="/fiscal" element={<PublicRoute component={Fiscal} layout={DashboardLayout} />} />
+
         <Route
-          path="/fiscal"
-          element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
-        />
-    
-    <Route
           path="/investment-opportunities"
           element={<PublicRoute component={InvestmentOpportunity} layout={DashboardLayout} />}
         />
@@ -50,17 +46,20 @@ const AppRouter = () => (
           path="/mineral-development-strategy"
           element={<PublicRoute component={MineralDevelopmentStrategy} layout={DashboardLayout} />}
         />
-           <Route
+        <Route
           path="/fiscal-incentives"
           element={<PublicRoute component={FiscalIncentives} layout={DashboardLayout} />}
         />
-          <Route
-          path="/fiscal-CPEC"
-          element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />}
-        />
-            <Route
+        <Route path="/fiscal-CPEC" element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />} />
+
+        <Route
           path="/starting-new-business"
           element={<PublicRoute component={StartingNewBusiness} layout={DashboardLayout} />}
+        />
+
+        <Route
+          path="/special-investment-facilities"
+          element={<PublicRoute component={SpecialInvestmentFacilities} layout={DashboardLayout} />}
         />
       </Routes>
     </Suspense>

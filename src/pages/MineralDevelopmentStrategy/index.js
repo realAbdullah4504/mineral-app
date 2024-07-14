@@ -4,43 +4,48 @@ import BusinessInvestmentDevelopment from "assets/images/businessinvestemntstrat
 import BusinessInvestmentEcoSystem from "assets/images/businessinvestementstrategyecosystem.png";
 
 function MineralDevelopmentStrategy() {
-    return <div >
-       <div className="mineral-development" style={{
-    backgroundImage: `url(${BusinessInvestmentBg})` }}>
-      <div  className="mineral-development-title"> Mineral Development Strategies</div>
-    
-    </div>
-<div  className="mineral-developmen-strategy">
-        <p >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at tempor risus convallis. In hac habitasse platea dictumst.
-          Phasellus semper augue et mi dapibus, sit amet sollicitudin
+  return (
+    <div>
+      <div
+        className="mineral-development"
+        style={{
+          backgroundImage: `url(${BusinessInvestmentBg})`,
+        }}
+      >
+        <div className="mineral-development-title"> Mineral Development Strategies</div>
+      </div>
+      <div className="mineral-developmen-strategy">
+        <p>
+          Pakistan is home to a competitive and extensive mineral wealth. The mineral development strategies takes into
+          account radical and innovative measures for uplifting of the minerals sector with coordinated efforts of all
+          stakeholders including provincial authorities. The new initiatives will greatly help exploit Pakistan’s true
+          mineral potential.
         </p>
-      <h1 >-National Mineral Development Programe -<span style={{ color: '#009969' }}>National Strategy</span>
-</h1>
-
-    </div>
-    <div  className="mineral-development-strategy-graph" > <img src={BusinessInvestmentDevelopment} alt="Business Investment Development" /></div>
-    <div className="mineral-development-ecosystem">
-      <h1>EcoSystem Of The Mining Sector
-
-
-    </h1>
-    <p  >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at tempor risus convallis. In hac habitasse platea dictumst.
-          Phasellus semper augue et mi dapibus, sit amet sollicitudin
+        <h1>
+          -National Mineral Development Programe -<span style={{ color: "#009969" }}>National Strategy</span>
+        </h1>
+      </div>
+      <div className="mineral-development-strategy-graph">
+        {" "}
+        <img src={BusinessInvestmentDevelopment} alt="Business Investment Development" />
+      </div>
+      <div className="mineral-development-ecosystem">
+        <h1>EcoSystem Of The Mining Sector</h1>
+        <p>
+          The Federal Government drives & integrates all relevant stakeholders and creates a conducive eco-system for
+          the mining industry development. The ecosystem is a cohesive framework of policies, incentives and resources
+          coordinated by all relevant stakeholders under single governing structure lead by the Planning Commission of
+          Pakistan. The end result of the framework/ecosystem is to integrate and optimize the mine-to-market value
+          chain by aligning the production with national consumption and export potential of the country
         </p>
-
-        </div>;
-        <div className="mineral-development-ecosystem-graph"> <img src={BusinessInvestmentEcoSystem} alt="Business Investment Development"    /></div>
-    </div>;
+      </div>
+      ;
+      <div className="mineral-development-ecosystem-graph">
+        {" "}
+        <img src={BusinessInvestmentEcoSystem} alt="Business Investment Development" />
+      </div>
+    </div>
+  );
 }
 
-
 export default MineralDevelopmentStrategy;
-

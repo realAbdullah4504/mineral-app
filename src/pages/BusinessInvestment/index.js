@@ -6,43 +6,51 @@ function BusinessInvestment() {
   const businessAndInvestmentcards = [
     {
       title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      flipContent:
+        "Boasting some of the largest mineral reserve,Pakistan is destined to become the hortspot for mineral and mining activities for years to come",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Investment Opportunities",
+      flipContent:
+        "The diverse mineral resources in Pakistan offer lucrative opportunities for local and international investors",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dohandleClicklor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Fiscal Incentives",
+      flipContent:
+        "The Government of Pakistan has introduced financial incentives such as tax and custom-duty relief, to encourage investemnt. This section explores these benefits in details",
+      link: "/fiscal-incentives",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Mineral Development Strategy",
+      flipContent:
+        "Learn more about initiatives being taken by Government of Pakistan, regarding plans to enhance the minerals and mining sector",
+      link: "/mineral-development-strategy",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Special Investment Facilitation Council (SIFC)",
+
+      link: "/special-investment-facilities",
+      flipContent:
+        "SIFC, a special initiative for investment facilitation, with one of its core focuses being the mineral and mining sector of Pakistan",
     },
     {
-      title: "Mineral Development Strategies",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link:'/mineral-development-strategy'
+      title: "Applying for Mineral Title",
+      flipContent:
+        "This section will guide you about the process, types, tenures and provincial procedures for obtaining a mineral title",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Development Schemes",
+      flipContent:
+        "Government initiatives for future planning and enhancement of the mineral and mining sector of Pakistan",
     },
     {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-    },
-    {
-      title: "Mineral Potential of Pakistan",
-      flipContent: "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      title: "Starting New Business",
+
+      flipContent:
+        "Learn more about the different types of business entitles that can operate in the minerals & mining sector of Pakistan and how to get started",
+      link: "/starting-new-business",
     },
   ];
-  const cpecBreadCRumbItems=[{title:"Home",href:''},{title:"Fiscal Incentive",href:''},{title:"CPEC"}]
 
   return (
     <div
@@ -58,21 +66,35 @@ function BusinessInvestment() {
       }}
     >
       <div className="business-investment-container">
-   
-      <IntroContainer breadCRumbItems={cpecBreadCRumbItems} title={  <h1 ><span  style={{
-   
-   borderBottom: "5px solid green",
-   display: "inline-block",
+        <IntroContainer
+          title={
+            <h1>
+              <span
+                style={{
+                  borderBottom: "5px solid green",
+                  display: "inline-block",
+                  borderRadius: "5px",
+                }}
+              >
+                Business
+              </span>{" "}
+              & Investemnt
+            </h1>
+          }
+          content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment"
+          height="90%"
+          width="80%"
+          introHeight="280px"
+        ></IntroContainer>
 
-   borderRadius: "5px",
- }}>Business</span> & Investemnt</h1>}content='  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies sollicitudin.
-          Mauris varius eros vitae purus posuere, vel bibendum urna accumsan. Sed feugiat lorem et felis auctor, at
-          tempor risus convallis. In hac habitasse platea dictumst. Phasellus semper augue et mi dapibus, sit amet
-          sollicitudin Sed feugiat lorem et felis auctor, at temp' height="90%" width="80%" introHeight="280px"></IntroContainer>
-       
-        <div className="business-investment-container-cards" >
+        <div className="business-investment-container-cards">
           {businessAndInvestmentcards.map((item) => (
-            <FlipCards title={item.title} flip={true} flipContent={item.flipContent} link={item.link? item.link :""}></FlipCards>
+            <FlipCards
+              title={item.title}
+              flip={true}
+              flipContent={item.flipContent}
+              link={item.link ? item.link : ""}
+            ></FlipCards>
           ))}
         </div>
       </div>
