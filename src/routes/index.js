@@ -14,6 +14,11 @@ const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"))
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
+const SpecialEconomicZones = lazy(() => import('../pages/SpecialEconomicZones'));
+const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
+const Governance = lazy(() => import('../pages/governance'));
+const ActsLaws = lazy(() => import('../pages/acts-laws'));
+const RulesRegulations = lazy(() => import('../pages/rules-regulations'));
 const FiscalCPEC = lazy(() => import("../pages/FiscalCPEC"));
 const StartingNewBusiness = lazy(() => import("../pages/StartingNewBusiness"));
 const SpecialInvestmentFacilities = lazy(() => import("../pages/SpecialInvestmentFacilities"));
@@ -28,9 +33,6 @@ const ApplyingForMineralTitle = lazy(() => import("../pages/ApplyingForMineralTi
 const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 
 // const Fiscal = lazy(() => import('../pages/fiscal'));
-const SpecialEconomicZones = lazy(() => import("../pages/SpecialEconomicZones"));
-const FiscalExportProcessing = lazy(() => import("../pages/fiscalExportProcessing"));
-
 const FiscalTax = lazy(() => import('../pages/fiscalTax'));
 
 const AppRouter = () => (
@@ -115,6 +117,33 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={FiscalTax}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/governance"
+          element={
+            <PublicRoute
+              component={Governance}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/acts-laws"
+          element={
+            <PublicRoute
+              component={ActsLaws}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/rules-regulations"
+          element={
+            <PublicRoute
+              component={RulesRegulations}
               layout={DashboardLayout}
             />
           }

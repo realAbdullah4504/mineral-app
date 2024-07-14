@@ -12,7 +12,7 @@ const InstitutionalArrangement = () => {
 
   return (
     
-    <Container classes="mt-8">
+    <Container classes="mt-8 w-[90%]">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <InstitutionalArrangementSection
         title="Institutional Arrangement"

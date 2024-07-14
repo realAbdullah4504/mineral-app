@@ -8,6 +8,7 @@ import LinksCard from "components/Cards/linksCard";
 const cardContent = [
   {
     text: "Governance",
+    url: "/governance",
     color: "#009969",
     links: [
       { url: "/institutional-arrangement", text: "Institutional Arrangement" },
@@ -17,6 +18,7 @@ const cardContent = [
   },
   {
     text: "Acts & Laws",
+    url: "/acts-laws",
     color: "#009969",
     links: [
       { url: "/mining-operations", text: "Mining Operations" },
@@ -27,6 +29,7 @@ const cardContent = [
   {
     text: "Rules & Regulations",
     color: "#009969",
+    url: "/rules-regulations",
     links: [
       {
         url: "/consession-rules",
@@ -41,7 +44,7 @@ const cardContent = [
 const LegalFramework = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "/", label: "Legal Framework" },
+    { path: "#", label: "Legal Framework" },
   ];
 
   return (
@@ -57,7 +60,7 @@ const LegalFramework = () => {
         alignItems: "center",
       }}
     >
-      <Container classes="mt-8">
+      <Container classes="mt-8 w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <div className="flex flex-wrap mt-[20px]">
           <div className="max-w-[100%]">
