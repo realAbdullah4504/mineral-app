@@ -81,3 +81,18 @@
     }
     }
 }
+
+@media(max-width:767px){
+    .intiatives_main{
+        .intiatives_Inner{
+            flex-wrap: wrap;
+            .intiatives_left{
+                min-height: unset;
+                padding: 20px 10px;
+                width: 100%;
+                max-width: unset;
+            }
+        }
+    }
+    
+}

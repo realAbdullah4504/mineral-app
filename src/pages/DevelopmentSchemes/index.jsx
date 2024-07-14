@@ -63,7 +63,7 @@ const DevelopmentSchemes = () => {
        </Container>
           
           <Container classes="text-left flex w-full justify-start inline-block">
-           <div className="bg-white xl:text-[64px] font-bold rounded px-10 py-5 flex items-center"><span className="mr-2 inline-flex w-1 h-[50px] rounded bg-[#009969]"></span> <span>Development Initiatives</span></div>
+           <div className="bg-white xl:text-[64px] text-[30px] font-bold rounded px-10 py-5 flex items-center"><span className="mr-2 inline-flex w-1 h-[50px] rounded bg-[#009969]"></span> <span>Development Initiatives</span></div>
           </Container>
 
         </div>
