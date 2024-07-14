@@ -43,6 +43,9 @@ const LegalFramework = lazy(() =>
 );
 const SpecialEconomicZones = lazy(() => import('../pages/SpecialEconomicZones'));
 const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
+const Governance = lazy(() => import('../pages/governance'));
+const ActsLaws = lazy(() => import('../pages/acts-laws'));
+const RulesRegulations = lazy(() => import('../pages/rules-regulations'));
 
 const AppRouter = () => (
   <Router>
@@ -183,6 +186,33 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={LegalFramework}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/governance"
+          element={
+            <PublicRoute
+              component={Governance}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/acts-laws"
+          element={
+            <PublicRoute
+              component={ActsLaws}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/rules-regulations"
+          element={
+            <PublicRoute
+              component={RulesRegulations}
               layout={DashboardLayout}
             />
           }

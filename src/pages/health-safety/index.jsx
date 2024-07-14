@@ -21,7 +21,7 @@ const HealthSafety = () => {
   ];
 
   return (
-    <Container classes="mt-8">
+    <Container classes="mt-8 w-[90%]">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex flex-wrap mt-[20px]">
         <div className="max-w-[100%]">
