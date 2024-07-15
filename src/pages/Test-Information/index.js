@@ -11,7 +11,7 @@ const TestInformation = () => {
   ];
   return (
     <div className="mt-[3.4rem]">
-      <Container classes="w-fit">
+      <Container classes="mt-8 w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <div className="flex flex-col max-w-[70rem]">
           <div className="row text-[64px] font-semibold">Test Information</div>

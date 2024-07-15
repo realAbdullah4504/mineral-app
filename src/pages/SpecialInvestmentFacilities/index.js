@@ -3,19 +3,22 @@ import IntroContainer from "components/IntroContainer";
 import SpecialInvestentBg from "assets/images/SpecialInvestmentBg.png";
 import MoreInfo from "assets/images/MoreInfoRect.png";
 import BreadCrumbs from "components/Breadcrumbs";
+import { Container } from "components/UI";
 
 function SpecialInvestmentFacilities() {
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '/business-investment', label: 'Business & Investment' },
-    { path: '#', label: 'Special Investment Facilitation Council' },
+    { path: "/", label: "Home" },
+    { path: "/business-investment", label: "Business & Investment" },
+    { path: "#", label: "Special Investment Facilitation Council" },
   ];
   const investmentGoals = [
     {
-      description: "Enhance awareness of Pakistan’s latent potential in the relevant fields",
+      description:
+        "Enhance awareness of Pakistan’s latent potential in the relevant fields",
     },
     {
-      description: "Explore new opportunities to expand cooperation in the relevant fields.",
+      description:
+        "Explore new opportunities to expand cooperation in the relevant fields.",
     },
     {
       description: "Improving ease of doing business",
@@ -24,25 +27,22 @@ function SpecialInvestmentFacilities() {
       description: "Overcome systematic/bureaucratic hurdles.",
     },
     {
-      description: "Optimize horizontal-vertical synergy – coordination between federation and provinces.",
+      description:
+        "Optimize horizontal-vertical synergy – coordination between federation and provinces.",
     },
     {
-      description: "Facilitate timely decision-making and avoid duplication of effort.",
+      description:
+        "Facilitate timely decision-making and avoid duplication of effort.",
     },
     {
       description: "Fast-track investment and project implementation",
     },
   ];
   return (
-    <div>
+    <Container classes="mt-8 w-[90%]">
       {" "}
       <div className="special-investment-facilities-intro">
-        <div style={{
-          marginLeft: '70px',
-          marginTop: '30px',
-        }}>
-      <BreadCrumbs breadcrumbs={breadcrumbs} />
-      </div>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
         <IntroContainer
           title={
             <h1>
@@ -54,19 +54,21 @@ function SpecialInvestmentFacilities() {
               {" "}
               <p>
                 {" "}
-                SIFC focuses on investment & privatization, initially in five areas; Agriculture, Minerals, Information
-                Technology & Telecommunication and Energy. It will act as ‘Single Window” for multi-domain cooperation
-                in relevant fields with GCC countries in particular and other countries in general, for facilitation of
-                investment and developing an enabling policy environment
+                SIFC focuses on investment & privatization, initially in five
+                areas; Agriculture, Minerals, Information Technology &
+                Telecommunication and Energy. It will act as ‘Single Window” for
+                multi-domain cooperation in relevant fields with GCC countries
+                in particular and other countries in general, for facilitation
+                of investment and developing an enabling policy environment
               </p>
               <h6>
-                SIFC is targeted at a long-term road-map for growth, development and investment in the relevant fields,
-                by aiming to:
+                SIFC is targeted at a long-term road-map for growth, development
+                and investment in the relevant fields, by aiming to:
               </h6>
             </div>
           }
           introHeight="300px"
-          width="80%"
+          width="100%"
         ></IntroContainer>
         <div
           className="special-investment-roadmap-graph"
@@ -94,12 +96,16 @@ function SpecialInvestmentFacilities() {
               stroke="currentColor"
               class="size-6"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+              />
             </svg>
           </button>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 
