@@ -95,10 +95,10 @@ function BusinessInvestment() {
               >
                 Business
               </span>{" "}
-              & Investemnt
+              & Investment
             </h1>
           }
-          content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment"
+          content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment."
           height="90%"
           width="80%"
           introHeight="280px"
