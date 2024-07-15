@@ -6,9 +6,8 @@ const DevelopmentSchemes = () => {
   const [intiativeActive, setIntiativeActive] = useState("federal");
   const breadcrumbs = [
     { path: '/', label: 'Home' },
-    { path: '/legal-framework', label: 'Legal Framework' },
-    { path: '/', label: 'Governance' },
-    { path: '#', label: 'Institutional Arrangement' },
+    { path: '/business-investment', label: 'Business & Investment' },
+    { path: '#', label: 'Development Schemes' },
   ];
 
   const InstiativeTabsList = [
@@ -33,7 +32,7 @@ const DevelopmentSchemes = () => {
       "slug": "gilgit"
     },
     {
-      "title": "Ajk",
+      "title": "AJK",
       "slug": "ajk"
     },
     
@@ -63,7 +62,7 @@ const DevelopmentSchemes = () => {
        </Container>
           
           <Container classes="text-left flex w-full justify-start inline-block">
-           <div className="bg-white xl:text-[64px] text-[30px] font-bold rounded px-10 py-5 flex items-center"><span className="mr-2 inline-flex w-1 h-[50px] rounded bg-[#009969]"></span> <span>Development Initiatives</span></div>
+           <div className="bg-white xl:text-[64px] text-[30px] font-bold rounded px-10 py-5 flex items-center"><span className="mr-2 inline-flex w-1 h-[50px] rounded bg-[#009969]"></span> <span>Development Schemes</span></div>
           </Container>
 
         </div>
@@ -74,12 +73,12 @@ const DevelopmentSchemes = () => {
        <Container>
        <div className="page-title-main">
           <p className="intro_parahgraph font-helvetica xl:my-10 my-5">
-            Mineral development initiatives in Pakistan encompass a range of endeavors aimed at harnessing the country's rich mineral resources for economic growth and sustainable development. These schemes include exploration, extraction, processing, and value addition projects across diverse mineral sectors such as coal, copper, gold, limestone, and gemstones. Government policies and incentives, coupled with private sector investments and international collaborations, drive these schemes to promote mineral resource development, attract investments, create employment opportunities, and boost exports.
+            Mineral development schemes in Pakistan encompass a range of endeavors aimed at harnessing the country's rich mineral resources for economic growth and sustainable development. These schemes include exploration, extraction, processing, and value addition projects across diverse mineral sectors such as coal, copper, gold, limestone, and gemstones. Government policies and incentives, coupled with private sector investments and international collaborations, drive these schemes to promote mineral resource development, attract investments, create employment opportunities, and boost exports.
           </p>
         </div>
        </Container>
         <div className="intiatives_main">
-          <div className="intiative_title subpage_title font-semibold mb-5 xl:text-[50px] text-[30px] text-center">Initiatives</div>
+          <div className="intiative_title subpage_title font-semibold mb-5 xl:text-[50px] text-[30px] text-center">Schemes</div>
           <div className="intiatives_Inner">
             <div className="intiatives_left">
               <div className="intiatives_left_inner">
@@ -170,7 +169,7 @@ const DevelopmentSchemes = () => {
                     </div>
 
                     <div className={`${intiativeActive === "ajk" ? "active" : "" } gilgit_content intiative_contents`} data-id="ajk">
-                      <div className="intiative_right_content_heading mb-5">Ajk Government</div>
+                      <div className="intiative_right_content_heading mb-5">AJK Government</div>
                       <ul>
                         <li>Exploration and Evaluation for Ruby Occurrences/Deposits in Chitta Katha, Panj Katha & Usman Bahaik (Shounthar Nala) Dist. Neelum Azad Kashmir</li>
                         <li>Provision of Equipment for Resource Mapping & Exploration Map Updation in AJ&K</li>

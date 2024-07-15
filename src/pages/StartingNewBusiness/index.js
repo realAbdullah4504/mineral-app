@@ -4,8 +4,14 @@ import StartingBusiness from "assets/images/StartingBusiness.png";
 import PreReq from "assets/images/PreReqInvestors.png";
 import BusinessCards from "./BusinessCards";
 import { ShowMore } from "components/UI/ShowMore";
+import BreadCrumbs from "components/Breadcrumbs";
 
 function StartingNewBusiness() {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/business-investment', label: 'Business & Investment' },
+    { path: '#', label: 'Starting New Business' },
+  ];
   const miningPoints = [
     {
       title: "Sole Proprietorship",
@@ -115,6 +121,12 @@ function StartingNewBusiness() {
   return (
     <div>
       <div className="starting-business-intro">
+      <div style={{
+          marginLeft: '70px',
+          marginTop: '30px',
+        }}>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+        </div>
         {" "}
         <IntroContainer
           title="Registering your Mining Business in Pakistan"

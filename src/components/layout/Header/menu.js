@@ -58,7 +58,7 @@ export const SubMenuExpartriateSecurity = [
 export const SubMenuMineralTestingLabs = [
   {
     name: "Tests Information",
-    link: "#",
+    link: "/test-information",
   },
   {
     name: "Applying for Mineral Test",

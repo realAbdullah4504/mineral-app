@@ -1,5 +1,6 @@
 import React from "react";
 import InvestmentOpportunities from "assets/images/InvestmentOpportunity.png";
+import BreadCrumbs from "components/Breadcrumbs";
 import {
   MineralClassification ,  
   AvenueForMineralSlider,
@@ -9,8 +10,19 @@ import {
 } from "components";
 
 const InvestmentOpportunity= () => {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/business-investment', label: 'Business & Investment' },
+    { path: '#', label: 'Investment Opportunities' },
+  ];
   return (
     <div className="max-w-[100%]">
+      <div style={{
+          marginLeft: '70px',
+          marginTop: '30px',
+        }}>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+        </div>
       <InvestmentOpportunitySection
       title="INVESTMENT"
       subTitle="OPPORTUNITIES"

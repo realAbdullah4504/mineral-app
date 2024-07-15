@@ -25,9 +25,9 @@ export const SliderData = [
         img: Slider4,
         description: "Thar coal field covers an area of 9100 square kilometers with total resources exceeding 175 billion tons, which is one of the largest coal deposits in the world. The portion of coal resources have been divided in 12 blocks out of which 3 blocks have been allocated to local and international companies for mining, power generation and gasification. Two mining projects are in commercial production while the remaining blocks are available for investment."
     },
-    // {
-    //     title: "PINK ROCK SALT PROCESSING PLANT",
-    //     img: Slider5,
-    //     description: "The global Pink Himalayan Salt market was worth USD226.2 million in 2022 and is expected to grow upto USD265.7 million by 2028. The estimated reserves of pink salt in Pakistan are 10 billion tons which provides an opportunity to set up a state of the art rock salt upgradation & packing facility in Khewra/Warcha or Kalabagh. PMDC has signed a joint venture with Miracle Saltworks Collective Inc (MSCI) in Aug 2023 which will allow MSCI to invest $200 million with an estimated 150,000 tons of finished product, commencing from 2025."
-    // }
+     {
+         title: "PINK ROCK SALT PROCESSING PLANT",
+         img: Slider5,
+         description: "The global Pink Himalayan Salt market was worth USD226.2 million in 2022 and is expected to grow upto USD265.7 million by 2028. The estimated reserves of pink salt in Pakistan are 10 billion tons which provides an opportunity to set up a state of the art rock salt upgradation & packing facility in Khewra/Warcha or Kalabagh. PMDC has signed a joint venture with Miracle Saltworks Collective Inc (MSCI) in Aug 2023 which will allow MSCI to invest $200 million with an estimated 150,000 tons of finished product, commencing from 2025."
+     }
 ]
