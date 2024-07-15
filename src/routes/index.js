@@ -30,6 +30,7 @@ const Governance = lazy(() => import("../pages/governance"));
 const ActsLaws = lazy(() => import("../pages/acts-laws"));
 const RulesRegulations = lazy(() => import("../pages/rules-regulations"));
 const MineralTestingLabs = lazy(() => import("../pages/MineralTestingLabs"));
+const TestInformation = lazy(() => import("../pages/Test-Information"));
 const FiscalCPEC = lazy(() => import("../pages/FiscalCPEC"));
 const StartingNewBusiness = lazy(() => import("../pages/StartingNewBusiness"));
 const SpecialInvestmentFacilities = lazy(() =>
@@ -271,6 +272,12 @@ const AppRouter = () => (
               component={MineralTestingLabs}
               layout={DashboardLayout}
             />
+          }
+        />
+        <Route
+          path="/test-information"
+          element={
+            <PublicRoute component={TestInformation} layout={DashboardLayout} />
           }
         />
       </Routes>
