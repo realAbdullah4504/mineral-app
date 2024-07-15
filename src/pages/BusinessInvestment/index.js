@@ -3,6 +3,7 @@ import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 import { FlipCards } from "components/FlipCards";
 import IntroContainer from "components/IntroContainer";
 import BreadCrumbs from "components/Breadcrumbs";
+import { Container } from "components/UI";
 
 function BusinessInvestment() {
   const businessAndInvestmentcards = [
@@ -58,8 +59,8 @@ function BusinessInvestment() {
     },
   ];
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '#', label: 'Business & Investment' },
+    { path: "/", label: "Home" },
+    { path: "#", label: "Business & Investment" },
   ];
 
   return (
@@ -75,46 +76,42 @@ function BusinessInvestment() {
         alignItems: "center",
       }}
     >
-      <div className="business-investment-container">
-      <div style={{
-          marginLeft: '70px',
-          marginTop: '30px',
-        }}>
+      <Container classes="mt-8 w-[90%]">
+        <div className="business-investment-container">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
+          <IntroContainer
+            title={
+              <h1>
+                <span
+                  style={{
+                    borderBottom: "5px solid green",
+                    display: "inline-block",
+                    borderRadius: "5px",
+                  }}
+                >
+                  Business
+                </span>{" "}
+                & Investment
+              </h1>
+            }
+            content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment."
+            height="70%"
+            width="100%"
+            introHeight="280px"
+          ></IntroContainer>
 
+          <div className="business-investment-container-cards">
+            {businessAndInvestmentcards.map((item) => (
+              <FlipCards
+                title={item.title}
+                flip={true}
+                flipContent={item.flipContent}
+                link={item.link ? item.link : ""}
+              ></FlipCards>
+            ))}
+          </div>
         </div>
-        <IntroContainer
-          title={
-            <h1>
-              <span
-                style={{
-                  borderBottom: "5px solid green",
-                  display: "inline-block",
-                  borderRadius: "5px",
-                }}
-              >
-                Business
-              </span>{" "}
-              & Investment
-            </h1>
-          }
-          content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment."
-          height="90%"
-          width="80%"
-          introHeight="280px"
-        ></IntroContainer>
-
-        <div className="business-investment-container-cards">
-          {businessAndInvestmentcards.map((item) => (
-            <FlipCards
-              title={item.title}
-              flip={true}
-              flipContent={item.flipContent}
-              link={item.link ? item.link : ""}
-            ></FlipCards>
-          ))}
-        </div>
-      </div>
+      </Container>
     </div>
   );
 }

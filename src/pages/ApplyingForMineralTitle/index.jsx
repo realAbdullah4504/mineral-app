@@ -53,7 +53,7 @@ const ApplyingForMineralTitle = () => {
 
   return (
     <>
-    <Container classes="mt-8">
+    <Container classes="mt-8 w-[90%]">
       
       <div className="page_introduction_section my-5">
       
