@@ -24,7 +24,7 @@ export function FlipCards({ title = "Front Content", flip = false, flipContent =
           </div>
         </div>
       ) : (
-        <div className="flip-card-front" onMouseEnter={handleMouse}>
+        <div className="flip-card-front-business" onMouseEnter={handleMouse}>
           <div>
             {" "}
             <svg

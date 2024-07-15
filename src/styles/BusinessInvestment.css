@@ -38,7 +38,7 @@
   margin: auto;
 }
 
-.flip-card-front,
+.flip-card-front-business,
 .flip-card-back {
   position: absolute;
   width: 100%;
@@ -49,10 +49,10 @@
   border: 3px;
   border-radius: 10px;
 }
-.flip-card-front {
+.flip-card-front-business {
   color: #009969;
 }
-.flip-card-front:hover {
+.flip-card-front-business:hover {
   background-color: #009969;
   color: white;
 }
