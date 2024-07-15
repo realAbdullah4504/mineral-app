@@ -2,7 +2,13 @@ import React from "react";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 import { FlipCards } from "components/FlipCards";
 import IntroContainer from "components/IntroContainer";
+import BreadCrumbs from "components/Breadcrumbs";
 function FiscalIncentives() {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/business-investment', label: 'Business & Investment' },
+    { path: '#', label: 'Fiscal Incentives' },
+  ];
   const fiscalIncentivesCards = [
     {
       title: "Special Economic Zones",
@@ -29,6 +35,12 @@ function FiscalIncentives() {
   return (
     <div className="fiscal-incentivs-intro-bg" style={{ backgroundImage: `url(${FiscalIncentivesBg})` }}>
       <div className="business-investment-container">
+      <div style={{
+          marginLeft: '70px',
+          marginTop: '30px',
+        }}>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+        </div>
         <IntroContainer
           title="Fiscal Incentives"
           content="The Government of Pakistan has introduced a number of initiatives and incentives, aimed at facilitating local and foreign investors, collaborators and industrial ventures. Explore how the Government of Pakistan is fostering an enabling environment for the minerals and mining sector of Pakistan"

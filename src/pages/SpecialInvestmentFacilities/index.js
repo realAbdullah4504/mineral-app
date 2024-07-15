@@ -2,8 +2,14 @@ import React from "react";
 import IntroContainer from "components/IntroContainer";
 import SpecialInvestentBg from "assets/images/SpecialInvestmentBg.png";
 import MoreInfo from "assets/images/MoreInfoRect.png";
+import BreadCrumbs from "components/Breadcrumbs";
 
 function SpecialInvestmentFacilities() {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/business-investment', label: 'Business & Investment' },
+    { path: '#', label: 'Special Investment Facilitation Council' },
+  ];
   const investmentGoals = [
     {
       description: "Enhance awareness of Pakistan’s latent potential in the relevant fields",
@@ -31,6 +37,12 @@ function SpecialInvestmentFacilities() {
     <div>
       {" "}
       <div className="special-investment-facilities-intro">
+        <div style={{
+          marginLeft: '70px',
+          marginTop: '30px',
+        }}>
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
         <IntroContainer
           title={
             <h1>

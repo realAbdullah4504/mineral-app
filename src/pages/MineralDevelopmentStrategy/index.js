@@ -2,8 +2,15 @@ import React from "react";
 import BusinessInvestmentBg from "assets/images/businessInvestementStrategyBg.png";
 import BusinessInvestmentDevelopment from "assets/images/businessinvestemntstrategydevelopment.png";
 import BusinessInvestmentEcoSystem from "assets/images/businessinvestementstrategyecosystem.png";
+import BreadCrumbs from "components/Breadcrumbs";
+import { Container } from "components/UI";
 
 function MineralDevelopmentStrategy() {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/business-investment', label: 'Business & Investment' },
+    { path: '#', label: 'Mineral Development Strategy' },
+  ];
   return (
     <div>
       <div

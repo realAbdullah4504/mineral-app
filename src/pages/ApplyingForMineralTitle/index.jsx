@@ -14,7 +14,7 @@ import {HowToApply} from "./howToApply.js";
 const ApplyingForMineralTitle = () => {
   const breadcrumbs = [
     { path: '/', label: 'Home' },
-    { path: '# ', label: 'Business & Investment' },
+    { path: '/business-investment', label: 'Business & Investment' },
     { path: '#', label: 'Applying For mineral title' },
   ];
 
@@ -54,9 +54,11 @@ const ApplyingForMineralTitle = () => {
   return (
     <>
     <Container classes="mt-8">
-      <BreadCrumbs breadcrumbs={breadcrumbs} />
+      
       <div className="page_introduction_section my-5">
+      
       <div className="page-title-main">
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
           <h1 className="page-title">Applying for <span>Mineral Title</span></h1>
           <p className="intro_parahgraph my-4 font-helvetica">
           Mineral Title" refers to the legal rights granted by the government to individuals or companies to explore, develop, and extract minerals from a designated area. These titles are essential for regulating mining activities and ensuring that mineral resources are exploited in an orderly and lawful manner. Here are the main types of mineral titles typically found in Pakistan:
