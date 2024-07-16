@@ -22,7 +22,7 @@ const InitiativesProjects = () => {
       title: "Training & Skills Development",
       flipContent:
         "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/training-development",
+      link: "/training-skill",
     },
   ];
 

@@ -154,7 +154,7 @@ export const SubMenuIntiatives = [
   },
   {
     name: "Training & Skill Development",
-    link: "#",
+    link: "/training-skill",
   },
 ];
 

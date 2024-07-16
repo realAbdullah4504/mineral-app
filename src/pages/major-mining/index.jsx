@@ -31,10 +31,10 @@ const MajorMining = () => {
             <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
           </h1>
 
-          <div className="flex mt-16 w-full">
+          <div className="flex mt-16 w-full mb-20">
             {/* Sidebar */}
-            <div className="wmax-w-60 border-l-4 border-green-500 p-4">
-              <ul>
+            <div className="max-w-60  p-4">
+              <ul className="border-l-4 border-spacing-2 rounded border-green-500">
                 {options.map((option) => (
                   <li
                     key={option.id}

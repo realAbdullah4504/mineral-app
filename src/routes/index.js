@@ -54,6 +54,7 @@ const MajorMining = lazy(() => import("../pages/major-mining"));
 
 // const Fiscal = lazy(() => import('../pages/fiscal'));
 const FiscalTax = lazy(() => import("../pages/fiscalTax"));
+const TrainingSkill = lazy(() => import("../pages/training-skill"));
 
 const AppRouter = () => (
   <Router>
@@ -292,6 +293,12 @@ const AppRouter = () => (
           path="/major-mining"
           element={
             <PublicRoute component={MajorMining} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/training-skill"
+          element={
+            <PublicRoute component={TrainingSkill} layout={DashboardLayout} />
           }
         />
       </Routes>
