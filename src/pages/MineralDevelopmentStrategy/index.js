@@ -7,9 +7,9 @@ import { Container } from "components/UI";
 
 function MineralDevelopmentStrategy() {
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '/business-investment', label: 'Business & Investment' },
-    { path: '#', label: 'Mineral Development Strategy' },
+    { path: "/", label: "Home" },
+    { path: "/business-investment", label: "Business & Investment" },
+    { path: "#", label: "Mineral Development Strategy" },
   ];
   return (
     <div>
@@ -19,7 +19,12 @@ function MineralDevelopmentStrategy() {
           backgroundImage: `url(${BusinessInvestmentBg})`,
         }}
       >
-        <div className="mineral-development-title"> Mineral Development Strategy</div>
+        <div className="mineral-development-title-content">
+          <div className="mineral-development-title-wrapper">
+            <span className="mineral-development-title-border"></span>
+            <h1 className="mineral-development-title">Mineral Development Strategies</h1>
+          </div>
+        </div>
       </div>
       <div className="mineral-developmen-strategy">
         <p>
