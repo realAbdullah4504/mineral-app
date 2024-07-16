@@ -25,20 +25,20 @@ const MajorMining = () => {
     <Container classes="mt-8 w-[90%]">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex flex-wrap mt-[20px]">
-        <div className="max-w-[100%]">
+        <div className="w-full">
           <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
             Major Mining Projects
             <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
           </h1>
 
-          <div className="flex mt-16">
+          <div className="flex mt-16 w-full">
             {/* Sidebar */}
-            <div className="w-[20%] border-l-4 border-green-500 p-4">
+            <div className="wmax-w-60 border-l-4 border-green-500 p-4">
               <ul>
                 {options.map((option) => (
                   <li
                     key={option.id}
-                    className={`cursor-pointer font-semibold text-lg  p-2 ${
+                    className={`cursor-pointer font-semibold text-lg w-56 p-2 ${
                       selectedOption === option.id ? "bg-green-200" : ""
                     }`}
                     onClick={() => setSelectedOption(option.id)}
@@ -50,7 +50,7 @@ const MajorMining = () => {
             </div>
 
             {/* Content */}
-            <div className="w-[80%] p-4">
+            <div className="px-4 pl-10 w-full">
               <MajorMiningProjectSection selectedOption={selectedOption} />
             </div>
           </div>

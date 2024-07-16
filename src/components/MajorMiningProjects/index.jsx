@@ -1,10 +1,17 @@
 import React from "react";
+import Copper from "assets/images/copperProject.png";
+import LeadZinc from "assets/images/leadZinc.png";
+import CopperGold from "assets/images/copperGold.png";
+import TharCoal from "assets/images/tharCoal.png";
+import TharCoal2 from "assets/images/tharCoal2.png";
+import KhelCopper from "assets/images/khelCopper.png";
 
 const Content = [
   {
     id: "option1",
     label: "Reko Diq Copper Project",
-    location: "Location: District Chagai, Balochistan",
+    location: "District Chagai, Balochistan",
+    img: Copper,
     overview:
       "Considered one of the world's largest undeveloped copper and gold deposits, the Reko Diq project is currently under development by the Reko-Diq Mining Company. It has the potential to significantly boost Pakistan's mineral reserves and economic growth.",
     subheadings: [
@@ -23,7 +30,8 @@ const Content = [
   {
     id: "option2",
     label: "Duddar Lead-Zinc Project",
-    location: "Location: District Lasbela, Balochistan",
+    location: "District Lasbela, Balochistan",
+    img: LeadZinc,
     overview:
       "The Duddar project focuses on lead and zinc extraction, playing a crucial role in meeting Pakistan's metal needs and contributing to the local economy.",
     subheadings: [
@@ -42,7 +50,8 @@ const Content = [
   {
     id: "option3",
     label: "Saindak Copper Gold Project",
-    location: "Location: District Chagai, Balochistan",
+    location: "District Chagai, Balochistan",
+    img: CopperGold,
     overview:
       "The Saindak project has been operational since the early 2000s, producing copper, gold, and silver, significantly contributing to Pakistan's mineral exports.",
     subheadings: [
@@ -61,7 +70,8 @@ const Content = [
   {
     id: "option4",
     label: "Thar Coal Block-I (Sino-Sindh Resources Limited)",
-    location: "Location: Tharparkar, Sindh",
+    location: "Tharparkar, Sindh",
+    img: TharCoal,
     overview:
       "Thar Coal Block-I aims to harness the vast coal reserves of Tharparkar, providing a sustainable energy source and supporting Pakistan's energy security.",
     subheadings: [
@@ -80,7 +90,8 @@ const Content = [
   {
     id: "option5",
     label: "Thar Coal Block-II (Sindh Engro Coal Mining Company)",
-    location: "Location: Tharparkar, Sindh",
+    location: "Tharparkar, Sindh",
+    img: TharCoal2,
     overview:
       "Thar Coal Block-II is a joint venture to develop coal mines and power plants, addressing the energy needs of Pakistan and fostering economic development in the region.",
     subheadings: [
@@ -99,7 +110,8 @@ const Content = [
   {
     id: "option6",
     label: "Boya Muhammad Khel Copper Project",
-    location: "Location: North Waziristan, Khyber Pakhtunkhwa",
+    location: "North Waziristan, Khyber Pakhtunkhwa",
+    img: KhelCopper,
     overview:
       "The Boya Muhammad Khel project is focused on copper extraction, with the potential to enhance the local economy and contribute to Pakistan's mineral output.",
     subheadings: [
@@ -129,21 +141,39 @@ export const MajorMiningProjectSection = ({ selectedOption }) => {
   const restOfLabel = selectedContent.label.substring(firstSpaceIndex);
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold">
-        <span className="text-green-500">{firstWord}</span>
-        {restOfLabel}
-      </h2>
-      <p className="mt-2">{selectedContent.location}</p>
-      <h3 className="mt-4 text-xl font-semibold">Project Overview:</h3>
-      <p className="mt-2">{selectedContent.overview}</p>
-      <h3 className="mt-4 text-xl font-semibold">Project Details:</h3>
-      {selectedContent.subheadings.map((subheading, index) => (
-        <div key={index} className="mt-2">
-          <h4 className="text-lg font-semibold">{subheading.title}</h4>
-          <p>{subheading.detail}</p>
+    <div className="flex flex-col">
+      <div className="flex flex-row justify-between">
+      <div className="w-[70%] flex flex-col justify-between">
+          <div>
+            <h2 className="text-[60px] font-semibold font-ibm-plex-sans leading-[78px]">
+              <span className="text-green-500">{firstWord}</span>
+              {restOfLabel}
+            </h2>
+            <p className="mt-6 font-ibm-plex-sans font-normal text-[22px] leading-[28px]">
+              Location: <strong>{selectedContent.location}</strong>
+            </p>
+          </div>
+          <h3 className="text-xl font-semibold">Project Overview:</h3>
         </div>
-      ))}
+
+        <div className="w-[30%] flex justify-end">
+          <img
+            src={selectedContent.img}
+            alt={selectedContent.label}
+            className="w-60 h-56 object-cover rounded" 
+          />
+        </div>
+      </div>
+      <div>
+        <p className="mt-2">{selectedContent.overview}</p>
+        <h3 className="mt-4 text-[33px] leading-[33px] font-medium">Project Details:</h3>
+        {selectedContent.subheadings.map((subheading, index) => (
+          <div key={index} className="mt-2">
+            <h4 className="text-lg font-semibold">{subheading.title}</h4>
+            <p>{subheading.detail}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
