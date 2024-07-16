@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function FlipCards({ title = "Front Content", flip = false, flipContent = "", changebg = false, link = "" }) {
+export function FlipCards({ title = "Front Content",className = "", flip = false, flipContent = "", changebg = false, link = "" }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouse = () => {
@@ -15,7 +15,7 @@ export function FlipCards({ title = "Front Content", flip = false, flipContent =
   };
 
   return (
-    <div className="flip-card-content" onClick={handleClick} style={{ cursor: link ? "pointer" : "default" }}>
+    <div className={`flip-card-content ${className}`} onClick={handleClick} style={{ cursor: link ? "pointer" : "default" }}>
       {isHovered && flip ? (
         <div className="flip-card-back" onMouseLeave={handleMouse}>
           <div>

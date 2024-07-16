@@ -150,7 +150,7 @@ export const SubMenuRulesAndRegulations = [
 export const SubMenuIntiatives = [
   {
     name: "Major Mining Projects",
-    link: "#",
+    link: "/major-mining",
   },
   {
     name: "Training & Skill Development",

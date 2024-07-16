@@ -49,6 +49,8 @@ const ApplyingForMineralTitle = lazy(() =>
   import("../pages/ApplyingForMineralTitle")
 );
 const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
+const InitiativesProjects = lazy(() => import("../pages/initiatives"));
+const MajorMining = lazy(() => import("../pages/major-mining"));
 
 // const Fiscal = lazy(() => import('../pages/fiscal'));
 const FiscalTax = lazy(() => import("../pages/fiscalTax"));
@@ -278,6 +280,18 @@ const AppRouter = () => (
           path="/test-information"
           element={
             <PublicRoute component={TestInformation} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/initiatives-projects"
+          element={
+            <PublicRoute component={InitiativesProjects} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/major-mining"
+          element={
+            <PublicRoute component={MajorMining} layout={DashboardLayout} />
           }
         />
       </Routes>
