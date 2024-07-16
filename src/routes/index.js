@@ -45,6 +45,9 @@ const Fiscal = lazy(() => import('../pages/fiscal'));
 const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
 
 const FiscalTax = lazy(() => import('../pages/fiscalTax'));
+const FiscalTab = lazy(() => import('../pages/FiscalTab'));
+const Royalties = lazy(() => import('../pages/Roylaties'));
+const Cess = lazy(() => import('../pages/cess'));
 
 const AppRouter = () => (
   <Router>
@@ -194,6 +197,33 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={FiscalTax}
+              layout={DashboardLayout}
+            />
+          }
+        />
+           <Route
+          path="/fiscal-tab"
+          element={
+            <PublicRoute
+              component={FiscalTab}
+              layout={DashboardLayout}
+            />
+          }
+        />
+         <Route
+          path="/royalties"
+          element={
+            <PublicRoute
+              component={Royalties}
+              layout={DashboardLayout}
+            />
+          }
+        />
+          <Route
+          path="/cess"
+          element={
+            <PublicRoute
+              component={Cess}
               layout={DashboardLayout}
             />
           }
