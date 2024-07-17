@@ -75,15 +75,15 @@ export const SubMenuResearchAndDevelopment = [];
 export const SubMenuFiscal = [
   {
     name: "Taxes Structure",
-    link: "#",
+    link: "/fiscal-tax",
   },
   {
     name: "Royalty Fee",
-    link: "#",
+    link: "/royalty-fee",
   },
   {
     name: "Cess & Levy",
-    link: "#",
+    link: "/cess",
   },
 ];
 

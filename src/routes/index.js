@@ -52,8 +52,11 @@ const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 const InitiativesProjects = lazy(() => import("../pages/initiatives"));
 const MajorMining = lazy(() => import("../pages/major-mining"));
 
+const FiscalTax = lazy(() => import('../pages/fiscalTax'));
+const FiscalTab = lazy(() => import('../pages/FiscalTab'));
+const Royalties = lazy(() => import('../pages/Roylaties'));
+const Cess = lazy(() => import('../pages/cess'));
 // const Fiscal = lazy(() => import('../pages/fiscal'));
-const FiscalTax = lazy(() => import("../pages/fiscalTax"));
 const TrainingSkill = lazy(() => import("../pages/training-skill"));
 
 const AppRouter = () => (
@@ -301,6 +304,32 @@ const AppRouter = () => (
             <PublicRoute component={TrainingSkill} layout={DashboardLayout} />
           }
         />
+          <Route
+          path="/fiscal-tab"
+          element={
+            <PublicRoute
+              component={FiscalTab}
+              layout={DashboardLayout}
+            />
+          }
+        />
+         <Route
+          path="/royalty-fee"
+          element={
+            <PublicRoute
+              component={Royalties}
+              layout={DashboardLayout}
+            />
+          }
+        />
+          <Route
+          path="/cess"
+          element={
+            <PublicRoute
+              component={Cess}
+              layout={DashboardLayout} />
+          }
+            />
       </Routes>
     </Suspense>
   </Router>
