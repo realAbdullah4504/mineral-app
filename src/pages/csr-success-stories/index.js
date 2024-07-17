@@ -65,7 +65,7 @@ const CsrSuccessStories = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col mt-4">
             <img src={saindak} alt="Saindak Mine" />
           </div>
         </div>
@@ -99,7 +99,7 @@ const CsrSuccessStories = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col mt-4">
             <img src={duddar} alt="duddar Mine" />
           </div>
         </div>
@@ -134,8 +134,8 @@ const CsrSuccessStories = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col">
-            <img src={thar1} alt="duddar Mine" />
+          <div className="flex flex-col mt-4">
+            <img src={thar1} alt="Thar Mine" />
           </div>
         </div>
         <div className="flex justify-between mb-[60px]">
@@ -177,8 +177,8 @@ const CsrSuccessStories = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col">
-            <img src={thar2} alt="duddar Mine" />
+          <div className="flex flex-col mt-4">
+            <img src={thar2} alt="Thar Mine 2" />
           </div>
         </div>
         <div className="flex justify-between mb-[60px]">
@@ -214,7 +214,7 @@ const CsrSuccessStories = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col mt-4">
             <img src={boya} alt="Boya Mine" />
           </div>
         </div>
@@ -238,8 +238,8 @@ const CsrSuccessStories = () => {
               expected to be completed by 2024 with target production in 2028.
             </div>
           </div>
-          <div className="flex flex-col">
-            <img src={boya} alt="Boya Mine" />
+          <div className="flex flex-col mt-4">
+            <img src={reko} alt="Boya Mine" />
           </div>
         </div>
       </div>
