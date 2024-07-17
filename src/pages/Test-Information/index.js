@@ -32,7 +32,7 @@ const TestInformation = () => {
             (ICP-MS), enabling detailed chemical and physical analysis.
           </div>
         </div>
-        <div className="overflow-x-scroll mt-[2.5rem]">
+        <div className="mt-[2.5rem]">
           <table className="min-w-full bg-[#009969] bg-opacity-5 border-none font-semibold text-2xl text-center mb-5">
             <tbody>
               <tr>
@@ -193,7 +193,7 @@ const TestInformation = () => {
             </tbody>
           </table>
         </div>
-        <div className="overflow-x-scroll mt-[2.5rem] mb-[66px]">
+        <div className="mt-[2.5rem] mb-[66px]">
           <table className="min-w-full bg-[#009969] bg-opacity-5 border-none font-semibold text-2xl text-center mb-5">
             <tbody>
               <tr>

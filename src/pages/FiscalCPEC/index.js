@@ -10,6 +10,7 @@ import CPECMining from "../../assets/images/CpecMining.png";
 import IntroContainer from "components/IntroContainer";
 import { CpecCards } from "components/CpecProjectCards";
 import { ShowMore } from "components/UI/ShowMore";
+import BreadCrumbs from "components/Breadcrumbs";
 
 // const cpecBreadCRumbItems = [{ title: "Home", href: "" }, { title: "Fiscal Incentive", href: "" }, { title: "CPEC" }];
 const FiscalCPEC = () => {
@@ -62,9 +63,17 @@ const FiscalCPEC = () => {
       currStatus: "Operational",
     },
   ];
-
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/fiscal-incentives", label: "Fiscal Incentives" },
+    { path: "/fiscal-CPEC", label: "CPEC" },
+  ];
   return (
-    <div className="fiscal-cpec-content">
+    <div className="fiscal-cpec-content relative">
+       <div className=" absolute z-10 pl-[270px] pt-[50px] ">
+      <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
+
+      </div>
       <div className="fiscal-incents">
         {" "}
         <IntroContainer
@@ -76,6 +85,7 @@ const FiscalCPEC = () => {
         ></IntroContainer>
       </div>
       <div className="cpec-map">
+        
         <img src={CPECMap} alt="map not available"></img>
         <div>
           {" "}

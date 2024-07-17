@@ -25,6 +25,9 @@ import { FiscalExport } from "./FiscalExport";
 import { FiscalExportImg } from "./FiscalExportImg";
 import { FiscalExportTable } from "./FiscalExportTable";
 import {FiscalTaxExemption} from "./FiscalTaxExamption"
+import { TaxesStructure } from "./TaxesStructure";
+import { RoyaltiesComp } from "./RoyaltiesComp";
+import { CessComp } from "./CessComp";
 
 export {
   DashboardLayout,
@@ -53,5 +56,8 @@ export {
   FiscalExport , 
   FiscalExportImg , 
   FiscalExportTable , 
-  FiscalTaxExemption
+  FiscalTaxExemption , 
+  TaxesStructure , 
+  RoyaltiesComp , 
+  CessComp 
 };
