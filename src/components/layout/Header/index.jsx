@@ -82,7 +82,7 @@ const Header = ({ title = "" }) => {
               <Link to="/">Home</Link>
               <ul className="has_sub_menu">
                 <li>
-                  Investment
+                <div className="cursor-pointer" onClick={() => handleNavigate("/business-investment")}>Investment</div>
                   <ul className="sub_menu">
                     {SubMenuInvestment?.map((data, i) => (
                       <Link to={data?.link} key={i}>
@@ -131,7 +131,7 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li >
-                  <div onClick={() => handleNavigate("/legal-framework")}>Legal</div>
+                  <div className="cursor-pointer" onClick={() => handleNavigate("/legal-framework")}>Legal</div>
                   <ul className="sub_menu services_sub_menus mega_menu_legal">
                     <div className="services_sub_menu_inner">
                       <div className="services_sub_menu">
@@ -190,7 +190,7 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Initiatives
+                  <span className="cursor-pointer" onClick={() => handleNavigate('/initiatives-projects')}>Initiatives</span>
                   <ul className="sub_menu">
                     {SubMenuIntiatives?.map((data, i) => (
                       <Link to={data?.link} key={i}>

@@ -1,4 +1,3 @@
-
 import React, { Suspense, lazy } from "react";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
@@ -12,6 +11,7 @@ const InvestmentOpportunity = lazy(() =>
   import("../pages/investment-opportunities")
 );
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
+
 const InteractiveGisPortal = lazy(() =>
   import("../pages/InteractiveGisPortal")
 );
@@ -20,34 +20,44 @@ const MineralDevelopmentStrategy = lazy(() =>
   import("../pages/MineralDevelopmentStrategy")
 );
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
+const SpecialEconomicZones = lazy(() =>
+  import("../pages/SpecialEconomicZones")
+);
+const FiscalExportProcessing = lazy(() =>
+  import("../pages/fiscalExportProcessing")
+);
+const Governance = lazy(() => import("../pages/governance"));
+const ActsLaws = lazy(() => import("../pages/acts-laws"));
+const RulesRegulations = lazy(() => import("../pages/rules-regulations"));
+const MineralTestingLabs = lazy(() => import("../pages/MineralTestingLabs"));
+const TestInformation = lazy(() => import("../pages/Test-Information"));
+const FiscalCPEC = lazy(() => import("../pages/FiscalCPEC"));
+const StartingNewBusiness = lazy(() => import("../pages/StartingNewBusiness"));
+const SpecialInvestmentFacilities = lazy(() =>
+  import("../pages/SpecialInvestmentFacilities")
+);
 const InstitutionalArrangement = lazy(() =>
   import("../pages/InstitutionalArrangement")
 );
-const LegalPolicies = lazy(() =>
-  import("../pages/policies")
+const LegalPolicies = lazy(() => import("../pages/policies"));
+const MiningOperations = lazy(() => import("../pages/mining-operations"));
+const HealthSafety = lazy(() => import("../pages/health-safety"));
+const ConsessionRules = lazy(() => import("../pages/consession-rules"));
+const LaborWelfare = lazy(() => import("../pages/labor-welfare"));
+const LegalFramework = lazy(() => import("../pages/legal-framework"));
+const ApplyingForMineralTitle = lazy(() =>
+  import("../pages/ApplyingForMineralTitle")
 );
-const MiningOperations = lazy(() =>
-  import("../pages/mining-operations")
-);
-const HealthSafety = lazy(() =>
-  import("../pages/health-safety")
-);
-const ConsessionRules = lazy(() =>
-  import("../pages/consession-rules")
-);
-const LaborWelfare = lazy(() =>
-  import("../pages/labor-welfare")
-);
-const LegalFramework = lazy(() =>
-  import("../pages/legal-framework")
-);
-const Fiscal = lazy(() => import('../pages/fiscal'));
-const FiscalExportProcessing = lazy(() => import('../pages/fiscalExportProcessing'));
+const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
+const InitiativesProjects = lazy(() => import("../pages/initiatives"));
+const MajorMining = lazy(() => import("../pages/major-mining"));
 
 const FiscalTax = lazy(() => import('../pages/fiscalTax'));
 const FiscalTab = lazy(() => import('../pages/FiscalTab'));
 const Royalties = lazy(() => import('../pages/Roylaties'));
 const Cess = lazy(() => import('../pages/cess'));
+// const Fiscal = lazy(() => import('../pages/fiscal'));
+const TrainingSkill = lazy(() => import("../pages/training-skill"));
 
 const AppRouter = () => (
   <Router>
@@ -70,15 +80,27 @@ const AppRouter = () => (
             />
           }
         />
+        {/* <Route path="/fiscal" element={<PublicRoute component={Fiscal} layout={DashboardLayout} />} /> */}
+
         <Route
-          path="/fiscal"
-          element={<PublicRoute component={Fiscal} layout={DashboardLayout} />}
+          path="/special-economic-zones"
+          element={
+            <PublicRoute
+              component={SpecialEconomicZones}
+              layout={DashboardLayout}
+            />
+          }
         />
-    <Route
-          path="/fiscal-export"
-          element={<PublicRoute component={FiscalExportProcessing} layout={DashboardLayout} />}
+        <Route
+          path="/export-processing-zones"
+          element={
+            <PublicRoute
+              component={FiscalExportProcessing}
+              layout={DashboardLayout}
+            />
+          }
         />
-    <Route
+        <Route
           path="/investment-opportunities"
           element={
             <PublicRoute
@@ -112,6 +134,25 @@ const AppRouter = () => (
           }
         />
         <Route
+          path="/applying-for-mineral-title"
+          element={
+            <PublicRoute
+              component={ApplyingForMineralTitle}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/development-schemes"
+          element={
+            <PublicRoute
+              component={DevelopmentSchemes}
+              layout={DashboardLayout}
+            />
+          }
+        />
+
+        <Route
           path="/mineral-development-strategy"
           element={
             <PublicRoute
@@ -141,10 +182,7 @@ const AppRouter = () => (
         <Route
           path="/legal-policies"
           element={
-            <PublicRoute
-              component={LegalPolicies}
-              layout={DashboardLayout}
-            />
+            <PublicRoute component={LegalPolicies} layout={DashboardLayout} />
           }
         />
         <Route
@@ -159,49 +197,114 @@ const AppRouter = () => (
         <Route
           path="/health-safety"
           element={
-            <PublicRoute
-              component={HealthSafety}
-              layout={DashboardLayout}
-            />
+            <PublicRoute component={HealthSafety} layout={DashboardLayout} />
           }
         />
         <Route
           path="/consession-rules"
           element={
-            <PublicRoute
-              component={ConsessionRules}
-              layout={DashboardLayout}
-            />
+            <PublicRoute component={ConsessionRules} layout={DashboardLayout} />
           }
         />
         <Route
           path="/labor-welfare"
           element={
-            <PublicRoute
-              component={LaborWelfare}
-              layout={DashboardLayout}
-            />
+            <PublicRoute component={LaborWelfare} layout={DashboardLayout} />
           }
         />
         <Route
           path="/legal-framework"
           element={
+            <PublicRoute component={LegalFramework} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/fiscal-CPEC"
+          element={
+            <PublicRoute component={FiscalCPEC} layout={DashboardLayout} />
+          }
+        />
+
+        <Route
+          path="/starting-new-business"
+          element={
             <PublicRoute
-              component={LegalFramework}
+              component={StartingNewBusiness}
               layout={DashboardLayout}
             />
+          }
+        />
+
+        <Route
+          path="/special-investment-facilities"
+          element={
+            <PublicRoute
+              component={SpecialInvestmentFacilities}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/fiscal-tax"
+          element={
+            <PublicRoute component={FiscalTax} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/governance"
+          element={
+            <PublicRoute component={Governance} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/acts-laws"
+          element={
+            <PublicRoute component={ActsLaws} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/rules-regulations"
+          element={
+            <PublicRoute
+              component={RulesRegulations}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/mineral-testing-labs"
+          element={
+            <PublicRoute
+              component={MineralTestingLabs}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/test-information"
+          element={
+            <PublicRoute component={TestInformation} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/initiatives-projects"
+          element={
+            <PublicRoute component={InitiativesProjects} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/major-mining"
+          element={
+            <PublicRoute component={MajorMining} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/training-skill"
+          element={
+            <PublicRoute component={TrainingSkill} layout={DashboardLayout} />
           }
         />
           <Route
-          path="/fiscal-tax"
-          element={
-            <PublicRoute
-              component={FiscalTax}
-              layout={DashboardLayout}
-            />
-          }
-        />
-           <Route
           path="/fiscal-tab"
           element={
             <PublicRoute
@@ -224,10 +327,9 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={Cess}
-              layout={DashboardLayout}
-            />
+              layout={DashboardLayout} />
           }
-        />
+            />
       </Routes>
     </Suspense>
   </Router>

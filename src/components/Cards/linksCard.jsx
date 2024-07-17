@@ -7,17 +7,18 @@ const LinksCard = ({ content }) => {
         content.map((item, index) => (
           <div
             key={index}
-            className={`relative flex min-w-${
+            className={`relative flex min-w-80 min-w-${
               item?.minWidth ? item?.minWidth : 24
             } flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl px-4 py-8`}
           >
-            <h5
+            <a
+              href={item.url}
               className="block font-ibm-plex-sans text-left mb-2antialiased font-bold text-[23px] leading-[30px]"
               style={{ color: item.color }}
             >
               {item.text}
-            </h5>
-            <div className="flex flex-col items-start">
+            </a>
+            <div className="flex flex-col items-start gap-y-6 mt-4">
               {item?.links &&
                 item.links.map((link, linkIndex) => (
                   <a
@@ -33,16 +34,17 @@ const LinksCard = ({ content }) => {
         ))
       ) : (
         <div
-          className={`relative flex min-w-${
+          className={`relative min-w-80 flex min-w-${
             content?.minWidth ? content?.minWidth : "24"
           } flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-fit px-4 py-8`}
         >
-          <h5
+          <a
+            href={content.url}
             className="block font-ibm-plex-sans text-left mb-2 antialiased font-bold text-[23px] leading-[30px] "
             style={{ color: content.color }}
           >
             {content.text}
-          </h5>
+          </a>
           <div className="flex flex-col items-start">
             {content?.links &&
               content.links.map((link, linkIndex) => (

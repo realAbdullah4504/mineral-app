@@ -1,0 +1,240 @@
+.fiscal-incents {
+  color: white;
+}
+.intro-section {
+  width: 100%;
+
+  background-size: cover;
+  background-position: "center";
+  /* color:white; */
+  font-family: IBM Plex Sans;
+}
+.fiscal-incentivs-intro-bg {
+  width: 100%;
+  height: auto;
+
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-container {
+  background-size: cover;
+  background-position: "center";
+}
+.intro-main-section {
+  margin: auto;
+  align-self: center;
+}
+.bread-crumbs {
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  margin-top: 30px;
+}
+.ant-breadcrumb-link {
+  color: white;
+}
+.ant-breadcrumb a {
+  color: white;
+}
+
+.ant-breadcrumb .ant-breadcrumb-separator {
+  color: white;
+}
+.ant-breadcrumb a:hover {
+  color: white;
+}
+.intro-main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.intro-main-section div h1 {
+  font-size: 64px;
+  line-height: 70px;
+  font-weight: 600;
+  font-family: IBM Plex Sans;
+}
+.intro-main-section div p {
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 400;
+  font-family: IBM Plex Sans;
+  margin-top: 12px;
+}
+.fiscal-incentives-container-cards {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(277px, 1fr)
+  ); /* Minimum width 277px, expand to fill remaining space */
+  gap: 20px; /* Horizontal and vertical gap */
+  width: 85%;
+  margin: 40px auto 30px auto;
+}
+.fiscal-cpec-content {
+  font-family: Helvetica Neue;
+}
+
+.cpec-map {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 75%;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.cpec-map div {
+  margin-top: 20px;
+  width: 70%;
+}
+.show-more-btn {
+  margin-top: 30px;
+  color: green;
+  border-bottom: 5px solid green;
+}
+.cpec-projects {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: IBM Plex Sans;
+}
+.cpec-projects h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+.cpec-project-card {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  column-gap: 50px;
+}
+.cpec-project-card-details {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1.2rem;
+}
+.cpec-project-card-details div span {
+  font-weight: 500;
+}
+.cpec-project-card-details p {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.cpec-project-card-details p span {
+  color: green;
+}
+.cpec-dev-graph img {
+  margin: auto;
+}
+.flip-card-back div {
+  display: flex;
+  flex-direction: column;
+}
+.flip-card-back div h1 {
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-left: 20px;
+  line-height: 1.2;
+}
+.flip-card-back div p {
+  padding: 10px;
+  line-height: 2;
+  font-weight: 300;
+  padding-left: 20px;
+}
+.flip-card-front-business div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  height: 100%;
+}
+.flip-card-front-business div h1 {
+  font-size: 28px;
+  font-weight: 500;
+  padding: 15px;
+  line-height: 1.2;
+}
+
+@media only screen and (max-width: 1400px) {
+  .cpec-project-card {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .intro-main-section div p {
+    font-size: 17px; /* Adjust as needed */
+    line-height: 20px; /* Adjust as needed */
+    margin-top: 8px; /* Adjust as needed */
+  }
+  .intro-main-section div h1 {
+    font-size: 40px; /* Adjust as needed */
+    line-height: 20px; /* Adjust as needed */
+    margin-top: 8px; /* Adjust as needed */
+  }
+  .cpec-project-card {
+    width: 95%;
+  }
+  .cpec-map img {
+    margin-top: 30px;
+  }
+  .cpec-map {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+  .cpec-map div {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .intro-main-section div p {
+    font-size: 13px; /* Adjust as needed */
+    line-height: 20px; /* Adjust as needed */
+    margin-top: 8px; /* Adjust as needed */
+  }
+  .bread-crumbs {
+    display: block;
+    font-size: 15px;
+  }
+  .cpec-project-card {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+  }
+  .cpec-projects h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .cpec-map img {
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .intro-main-section div h1 {
+    font-size: 20px;
+    line-height: 20px;
+    margin-top: 8px;
+  }
+}

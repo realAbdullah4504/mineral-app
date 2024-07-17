@@ -1,43 +1,68 @@
 import React from "react";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 import { FlipCards } from "components/FlipCards";
+import IntroContainer from "components/IntroContainer";
+import BreadCrumbs from "components/Breadcrumbs";
+import { Container } from "components/UI";
 
 function BusinessInvestment() {
   const businessAndInvestmentcards = [
     {
       title: "Mineral Potential of Pakistan",
-      flipContent: "Pakistan has some of the world's largest mineral reserves, offering significant potential for long-term development.",
+      flipContent:
+        "Boasting some of the largest mineral reserve,Pakistan is destined to become the hortspot for mineral and mining activities for years to come",
+      link: "/mineral-potential",
     },
     {
       title: "Investment Opportunities",
-      flipContent: "The diverse mineral resources in Pakistan offer lucrative opportunities for investors with significant potential returns.",
+      flipContent:
+        "The diverse mineral resources in Pakistan offer lucrative opportunities for local and international investors",
+      link: "/investment-opportunities",
     },
     {
       title: "Fiscal Incentives",
-      flipContent: "The Government of Pakistan has introduced financial incentives, such as tax and custom duty relief, to encourage investment. This section explores these benefits in detail.",
+      flipContent:
+        "The Government of Pakistan has introduced financial incentives such as tax and custom-duty relief, to encourage investemnt. This section explores these benefits in details",
+      link: "/fiscal-incentives",
     },
     {
       title: "Mineral Development Strategy",
-      flipContent: "Regional & National level development plans to enhance investment in mining sector.",
-      link:'/mineral-development-strategy'
+      flipContent:
+        "Learn more about initiatives being taken by Government of Pakistan, regarding plans to enhance the minerals and mining sector",
+      link: "/mineral-development-strategy",
     },
     {
-      title: "Special Investment Facilitation Council",
-      flipContent: "SIFC focuses on investment and privatization in defense, agriculture, minerals, IT and telecommunication, and energy.",
+      title: "Special Investment Facilitation Council (SIFC)",
+
+      link: "/special-investment-facilities",
+      flipContent:
+        "SIFC, a special initiative for investment facilitation, with one of its core focuses being the mineral and mining sector of Pakistan",
     },
     {
       title: "Applying for Mineral Title",
-      flipContent: "Understand the process of applying for a mineral title to start mining.",      
+      flipContent:
+        "This section will guide you about the process, types, tenures and provincial procedures for obtaining a mineral title",
+      link: "/applying-for-mineral-title",
     },
     {
       title: "Development Schemes",
-      flipContent: "Government implemented schemes for future planning and development of the mineral sector.",
+      flipContent:
+        "Government initiatives for future planning and enhancement of the mineral and mining sector of Pakistan",
+      link: "/development-schemes",
     },
     {
-      title: "Starting a New Business",
-      flipContent: "Starting a business in Pakistan has never been easier. Now you can set-up just by following a few steps.",
+      title: "Starting New Business",
+
+      flipContent:
+        "Learn more about the different types of business entitles that can operate in the minerals & mining sector of Pakistan and how to get started",
+      link: "/starting-new-business",
     },
   ];
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "#", label: "Business & Investment" },
+  ];
+
   return (
     <div
       style={{
@@ -51,25 +76,42 @@ function BusinessInvestment() {
         alignItems: "center",
       }}
     >
-      <div className="business-investment-container">
-        {" "}
-        <h1 style={{ fontSize: "60px", fontWeight: "600", lineHeight:"70px" }}><span  style={{
-   
-          borderBottom: "5px solid green",
-          display: "inline-block",
-   
-          borderRadius: "5px",
-        }}>Business</span> & Investement</h1>
-        <p style={{fontSize: "20px"}}>
-        The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment. 
+      <Container classes="mt-8 w-[90%]">
+        <div className="business-investment-container">
+          <BreadCrumbs breadcrumbs={breadcrumbs} />
+          <IntroContainer
+            title={
+              <h1>
+                <span
+                  style={{
+                    borderBottom: "5px solid green",
+                    display: "inline-block",
+                    borderRadius: "5px",
+                  }}
+                >
+                  Business
+                </span>{" "}
+                & Investment
+              </h1>
+            }
+            content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment."
+            height="70%"
+            width="100%"
+            introHeight="280px"
+          ></IntroContainer>
 
-        </p>
-        <div className="business-investment-container-cards" style={{ width: "70%", margin: "auto ", padding: "30px",margin:"40px auto 30px auto" }}>
-          {businessAndInvestmentcards.map((item) => (
-            <FlipCards title={item.title} flip={true} flipContent={item.flipContent} link={item.link? item.link :""}></FlipCards>
-          ))}
+          <div className="business-investment-container-cards">
+            {businessAndInvestmentcards.map((item) => (
+              <FlipCards
+                title={item.title}
+                flip={true}
+                flipContent={item.flipContent}
+                link={item.link ? item.link : ""}
+              ></FlipCards>
+            ))}
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

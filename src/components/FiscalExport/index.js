@@ -1,5 +1,5 @@
 import React from 'react'
-import exportPrccess from "assets/images/exportPrccess.png"
+import exportProcess from "assets/images/exportPrccess.png"
 
 export const FiscalExport = () => {
     return (
@@ -14,7 +14,7 @@ export const FiscalExport = () => {
                     </div>
                 </div>
                 <div className=' '>
-                    <img src={exportPrccess} width={'480px'} height={'400px'} />
+                    <img src={exportProcess} width={'480px'} height={'400px'} />
                 </div>
             </div>
 
