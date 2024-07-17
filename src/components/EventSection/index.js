@@ -4,7 +4,7 @@ import arrowRight from '../../assets/images/arrowRight.png'
 
 export const NewsAndEvent = () => {
   return (
-    <Container classes="px-[124.56px]">
+    <Container classes="px-[124.56px] mb-[70px]">
       <SectionTitle heading="News and Events" />
       <div className="w-full flex gap-4">
       <div class="bg-pakistan-image bg-auto bg-no-repeat text-white w-[754px] rounded-md  flex justify-center items-end min-h-[659.78px] gap-[5.77px]">

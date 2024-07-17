@@ -9,16 +9,21 @@ function MineralDevelopmentStrategy() {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/business-investment", label: "Business & Investment" },
-    { path: "#", label: "Mineral Development Strategy" },
+    { path: "/mineral-potential", label: "Mineral Development Strategy" },
   ];
   return (
-    <div>
+    <div className="relative border-t">
+        <div className=" absolute z-10 pl-[150px] pt-[50px] ">
+      <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
+
+      </div>
       <div
         className="mineral-development"
         style={{
           backgroundImage: `url(${BusinessInvestmentBg})`,
         }}
       >
+        
         <div className="mineral-development-title-content">
           <div className="mineral-development-title-wrapper">
             <span className="mineral-development-title-border"></span>
