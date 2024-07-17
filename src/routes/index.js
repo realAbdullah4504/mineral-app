@@ -314,7 +314,7 @@ const AppRouter = () => (
           }
         />
          <Route
-          path="/royalties"
+          path="/royalty-fee"
           element={
             <PublicRoute
               component={Royalties}
