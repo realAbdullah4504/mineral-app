@@ -13,6 +13,7 @@ const InvestmentOpportunity = lazy(() =>
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
 const CSRInitiatives = lazy(() => import("../pages/csr-initiatives"));
 const CSRegulations = lazy(() => import("../pages/csr-regulations"));
+const CSRSuccessStories = lazy(() => import("../pages/csr-success-stories"));
 const CSR = lazy(() => import("../pages/csr"));
 
 const InteractiveGisPortal = lazy(() =>
@@ -297,6 +298,15 @@ const AppRouter = () => (
           path="/csr-regulations"
           element={
             <PublicRoute component={CSRegulations} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/csr-success-stories"
+          element={
+            <PublicRoute
+              component={CSRSuccessStories}
+              layout={DashboardLayout}
+            />
           }
         />
       </Routes>
