@@ -1,9 +1,21 @@
+import BreadCrumbs from 'components/Breadcrumbs'
 import React from 'react'
 
 export const FiscalTaxExemption = () => {
+    const breadcrumbs = [
+        { path: '/', label: 'Home' },
+        { path: '/business-investment', label: 'Business & Investment' },
+        { path: '/fiscal-incentives', label: 'Fiscal Incentives' },
+        { path: '#', label: 'Tax Exemptions' },
+      ];
     return (
         <>
             <div className='max-w-[1170px] relative m-auto px-5 pt-[50px]'>
+                <div className='mb-[50px]'>
+                <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+                </div>
+
                 <div className='title mb-[30px]'> <span className='text-textGreen'>Tax</span> Exemptions</div>
                 <div className='grid grid-cols-2 gap-[15px]'>
                     <div className='grow shadow-md  rounded-lg px-[20px] py-[20px]'>

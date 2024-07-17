@@ -45,6 +45,7 @@ const HealthSafety = lazy(() => import("../pages/health-safety"));
 const ConsessionRules = lazy(() => import("../pages/consession-rules"));
 const LaborWelfare = lazy(() => import("../pages/labor-welfare"));
 const LegalFramework = lazy(() => import("../pages/legal-framework"));
+const ServiceAndSupport = lazy(() => import("../pages/service-and-support"));
 const ApplyingForMineralTitle = lazy(() =>
   import("../pages/ApplyingForMineralTitle")
 );
@@ -210,6 +211,12 @@ const AppRouter = () => (
           path="/labor-welfare"
           element={
             <PublicRoute component={LaborWelfare} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/service-and-support"
+          element={
+            <PublicRoute component={ServiceAndSupport} layout={DashboardLayout} />
           }
         />
         <Route
