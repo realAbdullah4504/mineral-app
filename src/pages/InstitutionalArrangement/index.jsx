@@ -6,7 +6,7 @@ const InstitutionalArrangement = () => {
   const breadcrumbs = [
     { path: '/', label: 'Home' },
     { path: '/legal-framework', label: 'Legal Framework' },
-    { path: '/', label: 'Governance' },
+    { path: '/governance', label: 'Governance' },
     { path: '#', label: 'Institutional Arrangement' },
   ];
 

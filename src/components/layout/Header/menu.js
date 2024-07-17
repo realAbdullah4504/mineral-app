@@ -161,43 +161,39 @@ export const SubMenuIntiatives = [
 export const SubMenuWhoIsWho = [
   {
     name: "Government Organizations",
-    link: "#",
+    link: "/government-organization",
   },
   {
-    name: "Academia and R&D",
-    link: "#",
-  },
-  {
-    name: "Mining Professionals",
-    link: "#",
+    name: "Academia",
+    link: "/academia",
   },
   {
     name: "Drilling & Services",
-    link: "#",
+    link: "/drilling-services",
   },
   {
     name: "Mineral Labs",
-    link: "#",
+    link: "/mineral-labs",
   },
   {
     name: "Downstream Industry",
-    link: "#",
+    link: "/downstream-industries",
   },
   {
     name: "Software & Solutions",
-    link: "#",
+    link: "/software-solution",
   },
   {
     name: "Legal & Tax Services",
-    link: "#",
+    link: "/legal-tax",
   },
   {
     name: "Associations",
-    link: "#",
+    link: "/associations",
   },
   {
-    name: "Other Services",
-    link: "#",
+    name: "HR Pro",
+    link: "/hr-pro",
   },
 ];
 
