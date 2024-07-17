@@ -53,12 +53,22 @@ const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 const InitiativesProjects = lazy(() => import("../pages/initiatives"));
 const MajorMining = lazy(() => import("../pages/major-mining"));
 
-const FiscalTax = lazy(() => import('../pages/fiscalTax'));
-const FiscalTab = lazy(() => import('../pages/FiscalTab'));
-const Royalties = lazy(() => import('../pages/Roylaties'));
-const Cess = lazy(() => import('../pages/cess'));
+const FiscalTax = lazy(() => import("../pages/fiscalTax"));
+const FiscalTab = lazy(() => import("../pages/FiscalTab"));
+const Royalties = lazy(() => import("../pages/Roylaties"));
+const Cess = lazy(() => import("../pages/cess"));
 // const Fiscal = lazy(() => import('../pages/fiscal'));
 const TrainingSkill = lazy(() => import("../pages/training-skill"));
+const WhoIsWho = lazy(() => import("../pages/who-is-who"));
+const GovernmentOrganization = lazy(() => import("../pages/government-organization"));
+const DrillingServices = lazy(() => import("../pages/drilling-service"));
+const MineralLabs = lazy(() => import("../pages/mineral-labs"));
+const DownstreamIndustries = lazy(() => import("../pages/downstream-industries"));
+const SoftwareSolution = lazy(() => import("../pages/software-solution"));
+const LegalTaxServices = lazy(() => import("../pages/legal-tax"));
+const Academia = lazy(() => import("../pages/academia"));
+const Associations = lazy(() => import("../pages/associations"));
+const HRPro = lazy(() => import("../pages/hr-pro"));
 
 const AppRouter = () => (
   <Router>
@@ -296,7 +306,10 @@ const AppRouter = () => (
         <Route
           path="/initiatives-projects"
           element={
-            <PublicRoute component={InitiativesProjects} layout={DashboardLayout} />
+            <PublicRoute
+              component={InitiativesProjects}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
@@ -311,32 +324,88 @@ const AppRouter = () => (
             <PublicRoute component={TrainingSkill} layout={DashboardLayout} />
           }
         />
-          <Route
+        <Route
           path="/fiscal-tab"
           element={
-            <PublicRoute
-              component={FiscalTab}
-              layout={DashboardLayout}
-            />
+            <PublicRoute component={FiscalTab} layout={DashboardLayout} />
           }
         />
-         <Route
+        <Route
           path="/royalty-fee"
           element={
-            <PublicRoute
-              component={Royalties}
-              layout={DashboardLayout}
-            />
+            <PublicRoute component={Royalties} layout={DashboardLayout} />
           }
         />
-          <Route
+        <Route
           path="/cess"
+          element={<PublicRoute component={Cess} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/who-is-who"
           element={
-            <PublicRoute
-              component={Cess}
-              layout={DashboardLayout} />
+            <PublicRoute component={WhoIsWho} layout={DashboardLayout} />
           }
-            />
+        />
+        <Route
+          path="/government-organization"
+          element={
+            <PublicRoute component={GovernmentOrganization} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/drilling-services"
+          element={
+            <PublicRoute component={DrillingServices} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/mineral-labs"
+          element={
+            <PublicRoute component={MineralLabs} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/mineral-labs"
+          element={
+            <PublicRoute component={MineralLabs} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/downstream-industries"
+          element={
+            <PublicRoute component={DownstreamIndustries} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/software-solution"
+          element={
+            <PublicRoute component={SoftwareSolution} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/legal-tax"
+          element={
+            <PublicRoute component={LegalTaxServices} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/academia"
+          element={
+            <PublicRoute component={Academia} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/associations"
+          element={
+            <PublicRoute component={Associations} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/hr-pro"
+          element={
+            <PublicRoute component={HRPro} layout={DashboardLayout} />
+          }
+        />
       </Routes>
     </Suspense>
   </Router>

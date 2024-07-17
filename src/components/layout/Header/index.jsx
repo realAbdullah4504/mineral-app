@@ -202,7 +202,7 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Who is Who
+                <span className="cursor-pointer" onClick={() => handleNavigate('/who-is-who')}>Who is Who</span>
                   <ul className="sub_menu">
                     {SubMenuWhoIsWho?.map((data, i) => (
                       <Link to={data?.link} key={i}>
