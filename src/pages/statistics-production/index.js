@@ -1,7 +1,7 @@
 import React from "react";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import employement from "assets/images/employement.png";
+import production from "assets/images/production.png";
 
 const StatisticsRevenue = () => {
   const breadcrumbs = [
@@ -15,15 +15,13 @@ const StatisticsRevenue = () => {
         <div className="flex mb-[62px] mt-[41px]">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
         </div>
-        <div className="flex text-[64px] font-semibold">
-          Employement Statistics
-        </div>
+        <div className="flex text-[64px] font-semibold">Production Data</div>
         <div className="flex bg-[#009969] w-[100px] h-1 mt-[-10px] mb-[26px]"></div>
         <div className="flex font-normal text-[22px]">
-          Information on provincial Employement Statistics
+          Dashboard on Production Data of Minerals
         </div>
         <div className="flex mb-[120px]">
-          <img src={employement} alt="Revenue Dashboard" />
+          <img src={production} alt="Revenue Dashboard" />
         </div>
       </div>
     </Container>

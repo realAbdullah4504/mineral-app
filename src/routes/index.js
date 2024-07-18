@@ -83,6 +83,9 @@ const StatisticsRevenue = lazy(() => import("../pages/statistics-revenue"));
 const StatisticsEmployement = lazy(() =>
   import("../pages/statistics-employement")
 );
+const StatisticsProduction = lazy(() =>
+  import("../pages/statistics-production")
+);
 
 const AppRouter = () => (
   <Router>
@@ -487,6 +490,15 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={StatisticsEmployement}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/statistics-production"
+          element={
+            <PublicRoute
+              component={StatisticsProduction}
               layout={DashboardLayout}
             />
           }
