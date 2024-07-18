@@ -20,7 +20,7 @@ const StatisticsRevenue = () => {
         <div className="flex font-normal text-[22px]">
           Information on revenue collected by provinces
         </div>
-        <div className="flex mb-[170px]">
+        <div className="flex mb-[170px] justify-center">
           <img src={revenue} alt="Revenue Dashboard" />
         </div>
       </div>
