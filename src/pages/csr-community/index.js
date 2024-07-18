@@ -69,7 +69,7 @@ const CsrCommunity = () => {
                     name=""
                     id=""
                     placeholder="Type your suggestion here"
-                    className="bg-[#F3F3F4] rounded-[8px] w-[1132px] h-[112px] pl-3 placeholder-black"
+                    className="bg-[#F3F3F4] rounded-[8px] w-[1132px] h-[112px] pl-6 pb-14 placeholder-black "
                   />
                 </div>
               </div>
