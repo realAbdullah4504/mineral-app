@@ -11,6 +11,11 @@ const InvestmentOpportunity = lazy(() =>
   import("../pages/investment-opportunities")
 );
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
+const CSRInitiatives = lazy(() => import("../pages/csr-initiatives"));
+const CSRegulations = lazy(() => import("../pages/csr-regulations"));
+const CSRSuccessStories = lazy(() => import("../pages/csr-success-stories"));
+const CSRCommunity = lazy(() => import("../pages/csr-community"));
+const CSR = lazy(() => import("../pages/csr"));
 
 const InteractiveGisPortal = lazy(() =>
   import("../pages/InteractiveGisPortal")
@@ -60,10 +65,14 @@ const Cess = lazy(() => import("../pages/cess"));
 // const Fiscal = lazy(() => import('../pages/fiscal'));
 const TrainingSkill = lazy(() => import("../pages/training-skill"));
 const WhoIsWho = lazy(() => import("../pages/who-is-who"));
-const GovernmentOrganization = lazy(() => import("../pages/government-organization"));
+const GovernmentOrganization = lazy(() =>
+  import("../pages/government-organization")
+);
 const DrillingServices = lazy(() => import("../pages/drilling-service"));
 const MineralLabs = lazy(() => import("../pages/mineral-labs"));
-const DownstreamIndustries = lazy(() => import("../pages/downstream-industries"));
+const DownstreamIndustries = lazy(() =>
+  import("../pages/downstream-industries")
+);
 const SoftwareSolution = lazy(() => import("../pages/software-solution"));
 const LegalTaxServices = lazy(() => import("../pages/legal-tax"));
 const Academia = lazy(() => import("../pages/academia"));
@@ -226,7 +235,10 @@ const AppRouter = () => (
         <Route
           path="/service-and-support"
           element={
-            <PublicRoute component={ServiceAndSupport} layout={DashboardLayout} />
+            <PublicRoute
+              component={ServiceAndSupport}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
@@ -349,13 +361,19 @@ const AppRouter = () => (
         <Route
           path="/government-organization"
           element={
-            <PublicRoute component={GovernmentOrganization} layout={DashboardLayout} />
+            <PublicRoute
+              component={GovernmentOrganization}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
           path="/drilling-services"
           element={
-            <PublicRoute component={DrillingServices} layout={DashboardLayout} />
+            <PublicRoute
+              component={DrillingServices}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
@@ -373,19 +391,28 @@ const AppRouter = () => (
         <Route
           path="/downstream-industries"
           element={
-            <PublicRoute component={DownstreamIndustries} layout={DashboardLayout} />
+            <PublicRoute
+              component={DownstreamIndustries}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
           path="/software-solution"
           element={
-            <PublicRoute component={SoftwareSolution} layout={DashboardLayout} />
+            <PublicRoute
+              component={SoftwareSolution}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
           path="/legal-tax"
           element={
-            <PublicRoute component={LegalTaxServices} layout={DashboardLayout} />
+            <PublicRoute
+              component={LegalTaxServices}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
@@ -402,8 +429,37 @@ const AppRouter = () => (
         />
         <Route
           path="/hr-pro"
+          element={<PublicRoute component={HRPro} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/csr-initiatives"
           element={
-            <PublicRoute component={HRPro} layout={DashboardLayout} />
+            <PublicRoute component={CSRInitiatives} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/csr"
+          element={<PublicRoute component={CSR} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/csr-regulations"
+          element={
+            <PublicRoute component={CSRegulations} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/csr-success-stories"
+          element={
+            <PublicRoute
+              component={CSRSuccessStories}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/csr-community"
+          element={
+            <PublicRoute component={CSRCommunity} layout={DashboardLayout} />
           }
         />
       </Routes>
