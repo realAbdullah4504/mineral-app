@@ -1,7 +1,7 @@
 import React from "react";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import arrow from "assets/images/arrowR.png";
+import whiteArrow from "assets/images/whiteArrow.svg";
 
 const CsrCommunity = () => {
   const breadcrumbs = [
@@ -73,15 +73,17 @@ const CsrCommunity = () => {
                   />
                 </div>
               </div>
-              <div
+              <button
                 type="submit"
                 className="flex bg-[#27AE60] rounded-[28px] items-center justify-center w-[280px] h-[56px] ml-auto mr-4 mb-[593px] cursor-pointer text-white"
               >
-                <div className="flex">Continue</div>
-                <div className="flex rounded-full bg-white bg-opacity-20 w-[32px] h-[32px] ml-[90px]">
-                  <img src={arrow} alt="arrow right" />
+                <div className="flex flex-col w-1/2 items-end">Continue</div>
+                <div className="flex flex-col w-1/2">
+                  <div className="flex rounded-full bg-white bg-opacity-10 justify-center w-[32px] h-[32px] ml-[90px]">
+                    <img src={whiteArrow} alt="arrow right" />
+                  </div>
                 </div>
-              </div>
+              </button>
             </div>
           </form>
         </div>
