@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import arrowR from "../../assets/images/arrowWealthR.png";
 import arrowL from "../../assets/images/arrowWealthL.png";
-import { mineralWealth } from 'utils/constant/common'
+import { mineralWealth } from "utils/constant/common";
 
 export const MineralWealth = () => {
-  const [tab, setTab] = useState(mineralWealth );
+  const [tab, setTab] = useState(mineralWealth);
 
   const rightHandler = () => {
     const cloneData = [...tab];
@@ -35,19 +35,18 @@ export const MineralWealth = () => {
                   } `}
                 >
                   <div className="">
-                  <img
-                    className={`relative m-auto ${
-                      index === 0 ? 'icon-white' : ''
-                    }`}
-                    src={data.iconGreen}
-                  />
-                  <div
-                    className={`${
-                      index === 0 ? 'text-white' : 'text-[#26AF5F]'
-                    } w-[82px] text-center`}
-                  >
-                    {data.title}
-                  </div>
+                    {index == 0 ? (
+                      <img className="relative m-auto" src={data.icon} />
+                    ) : (
+                      <img className="relative m-auto" src={data.iconGreen} />
+                    )}
+                    <div
+                      className={`${
+                        index == 0 ? "text-white" : "text-[#26AF5F]"
+                      } w-[82px] text-center`}
+                    >
+                      {data.title}
+                    </div>
                   </div>
                 </span>
               </div>

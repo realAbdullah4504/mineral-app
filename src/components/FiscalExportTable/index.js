@@ -127,7 +127,7 @@ export const FiscalExportTable = () => {
                 },
                 {
                     title: 'Leased to',
-                    discretion: '30 Years'
+                    discretion: 'Degan Exploration Works (Private) Limited (DEW), Frontier Works Organization (FWO)'
                 }
                 ,
                 {
