@@ -62,7 +62,7 @@ export const SubMenuMineralTestingLabs = [
   },
   {
     name: "Applying for Mineral Test",
-    link: "#",
+    link: "/applying-for-mineral-test",
   },
   {
     name: "View Results",
