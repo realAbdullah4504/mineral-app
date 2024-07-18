@@ -7,19 +7,29 @@ import { Container } from "components/UI";
 
 function MineralDevelopmentStrategy() {
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '/business-investment', label: 'Business & Investment' },
-    { path: '#', label: 'Mineral Development Strategy' },
+    { path: "/", label: "Home" },
+    { path: "/business-investment", label: "Business & Investment" },
+    { path: "/mineral-potential", label: "Mineral Development Strategy" },
   ];
   return (
-    <div>
+    <div className="relative border-t">
+        <div className=" absolute z-10 pl-[150px] pt-[50px] ">
+      <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
+
+      </div>
       <div
         className="mineral-development"
         style={{
           backgroundImage: `url(${BusinessInvestmentBg})`,
         }}
       >
-        <div className="mineral-development-title"> Mineral Development Strategy</div>
+        
+        <div className="mineral-development-title-content">
+          <div className="mineral-development-title-wrapper">
+            <span className="mineral-development-title-border"></span>
+            <h1 className="mineral-development-title">Mineral Development Strategies</h1>
+          </div>
+        </div>
       </div>
       <div className="mineral-developmen-strategy">
         <p>

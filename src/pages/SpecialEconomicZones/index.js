@@ -10,12 +10,7 @@ const SpecialEconomicZones = () => {
   ];
   return (
     <div className='px-10'>
-      <div style={{
-          marginLeft: '30px',
-          marginTop: '30px',
-        }}>
-        <BreadCrumbs breadcrumbs={breadcrumbs} />
-        </div>
+     
       <FiscalEconomicZone/>
       <FiscalEconomicEnclaves/>
       <FiscalDeveloperIncentive/>

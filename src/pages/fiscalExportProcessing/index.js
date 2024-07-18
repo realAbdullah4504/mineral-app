@@ -10,12 +10,7 @@ const FiscalExportProcessing = () => {
   ];
   return (
     <div>
-      <div style={{
-          marginLeft: '70px',
-          marginTop: '30px',
-        }}>
-        <BreadCrumbs breadcrumbs={breadcrumbs} />
-        </div>
+   
       <FiscalExport/>
       <FiscalExportImg/>
       <FiscalExportTable/>

@@ -1,10 +1,24 @@
 import React from 'react'
 import exportProcess from "assets/images/exportPrccess.png"
+import BreadCrumbs from 'components/Breadcrumbs';
 
 export const FiscalExport = () => {
+    const breadcrumbs = [
+        { path: '/', label: 'Home' },
+        { path: '/business-investment', label: 'Business & Investment' },
+        { path: '/fiscal-incentives', label: 'Fiscal Incentives' },
+        { path: '#', label: 'Export Processing Zones' },
+      ];
     return (
         <>
-            <div className='flex max-w-[1170px] relative m-auto gap-8 mt-[150px] px-5 mb-[50px] '>
+        <div className='max-w-[1170px] relative m-auto'>
+            <div className='mt-[50px]'>
+            <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+            </div>
+
+            <div className='flex  gap-8 mt-[100px] px-5 mb-[50px] '>
+
                 <div className='max-w-[652px]'>
                     <div className='text-[64px] leading-[83px] font-ibm-plex-sans font-[700]'>
                         Export Processing <span className='text-[#27AE60]'>Zones</span>
@@ -17,7 +31,7 @@ export const FiscalExport = () => {
                     <img src={exportProcess} width={'480px'} height={'400px'} />
                 </div>
             </div>
-
+            </div>
         </>
     )
 }
