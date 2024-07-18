@@ -86,6 +86,8 @@ const StatisticsEmployement = lazy(() =>
 const StatisticsProduction = lazy(() =>
   import("../pages/statistics-production")
 );
+const Statisticsio = lazy(() => import("../pages/statistics-io"));
+const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 
 const AppRouter = () => (
   <Router>
@@ -499,6 +501,21 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={StatisticsProduction}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/statistics-ie"
+          element={
+            <PublicRoute component={Statisticsio} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/statistics-incidents"
+          element={
+            <PublicRoute
+              component={StatisticsIncidents}
               layout={DashboardLayout}
             />
           }

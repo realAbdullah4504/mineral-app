@@ -23,7 +23,7 @@ const StatisticsRevenue = () => {
           Information on provincial Employement Statistics
         </div>
         <div className="flex mb-[120px]">
-          <img src={employement} alt="Revenue Dashboard" />
+          <img src={employement} alt="Employement Dashboard" />
         </div>
       </div>
     </Container>
