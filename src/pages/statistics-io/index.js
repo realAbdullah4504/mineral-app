@@ -19,7 +19,7 @@ const StatisticsRevenue = () => {
           Import Export Statistics
         </div>
         <div className="flex bg-[#009969] w-[100px] h-1 mt-[-10px] mb-[26px]"></div>
-        <div className="flex mb-[120px]">
+        <div className="flex mb-[120px] justify-center">
           <img src={exportImg} alt="Import Export Dashboard" />
         </div>
       </div>
