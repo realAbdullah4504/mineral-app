@@ -79,6 +79,7 @@ const Academia = lazy(() => import("../pages/academia"));
 const Associations = lazy(() => import("../pages/associations"));
 const HRPro = lazy(() => import("../pages/hr-pro"));
 const DataStatistics = lazy(() => import("../pages/data-statistics"));
+const StatisticsRevenue = lazy(() => import("../pages/statistics-revenue"));
 
 const AppRouter = () => (
   <Router>
@@ -467,6 +468,15 @@ const AppRouter = () => (
           path="/statistics"
           element={
             <PublicRoute component={DataStatistics} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/statistics-revenue"
+          element={
+            <PublicRoute
+              component={StatisticsRevenue}
+              layout={DashboardLayout}
+            />
           }
         />
       </Routes>
