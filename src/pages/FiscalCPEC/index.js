@@ -70,9 +70,8 @@ const FiscalCPEC = () => {
   ];
   return (
     <div className="fiscal-cpec-content relative">
-       <div className=" absolute z-10 pl-[270px] pt-[50px] ">
-      <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
-
+      <div className=" absolute z-10 pl-[270px] pt-[50px] ">
+        <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
       </div>
       <div className="fiscal-incents">
         {" "}
@@ -85,28 +84,42 @@ const FiscalCPEC = () => {
         ></IntroContainer>
       </div>
       <div className="cpec-map">
-        
-        <img src={CPECMap} alt="map not available"></img>
+        <img src={CPECMap} alt="map not available" className="mt-10"></img>
         <div>
           {" "}
-          <p>
-            The China-Pakistan Economic Corridor (CPEC) presents a transformative opportunity to enhance mining
-            opportunities in Pakistan by catalyzing infrastructure development, fostering technological advancement, and
-            attracting foreign investment. Through CPEC, Pakistan can upgrade its transportation networks, such as
-            roads, railways, and ports, facilitating the efficient transport of mining equipment, machinery, and
-            minerals to and from mining sites. Additionally, CPEC projects like energy infrastructure development can
-            address Pakistan's power deficits, ensuring reliable energy supply for mining operations
-            <span id="more-content-fiscal" class="showmore-content" style={{ display: "none" }}>
-              Moreover, collaboration with Chinese companies under CPEC can bring advanced mining technologies and
-              expertise to Pakistan, improving efficiency, safety, and environmental sustainability in mining practices.
-              Furthermore, the creation of Special Economic Zones (SEZs) along the CPEC route can incentivize investment
-              in mining-related industries, such as mineral processing and value-added products manufacturing, driving
-              economic growth and employment opportunities. Overall, CPEC serves as a catalyst for unlocking Pakistan's
-              mining potential, fostering sustainable development, and contributing to the country's economic
+          <p className="mt-10 ml-5">
+            The China-Pakistan Economic Corridor (CPEC) presents a
+            transformative opportunity to enhance mining opportunities in
+            Pakistan by catalyzing infrastructure development, fostering
+            technological advancement, and attracting foreign investment.
+            Through CPEC, Pakistan can upgrade its transportation networks, such
+            as roads, railways, and ports, facilitating the efficient transport
+            of mining equipment, machinery, and minerals to and from mining
+            sites. Additionally, CPEC projects like energy infrastructure
+            development can address Pakistan's power deficits, ensuring reliable
+            energy supply for mining operations
+            <span
+              id="more-content-fiscal"
+              class="showmore-content"
+              style={{ display: "none" }}
+            >
+              Moreover, collaboration with Chinese companies under CPEC can
+              bring advanced mining technologies and expertise to Pakistan,
+              improving efficiency, safety, and environmental sustainability in
+              mining practices. Furthermore, the creation of Special Economic
+              Zones (SEZs) along the CPEC route can incentivize investment in
+              mining-related industries, such as mineral processing and
+              value-added products manufacturing, driving economic growth and
+              employment opportunities. Overall, CPEC serves as a catalyst for
+              unlocking Pakistan's mining potential, fostering sustainable
+              development, and contributing to the country's economic
               prosperity.
             </span>
           </p>
-          <ShowMore idButton="show-more-btn-fiscal" idContent="more-content-fiscal"></ShowMore>
+          <ShowMore
+            idButton="show-more-btn-fiscal"
+            idContent="more-content-fiscal"
+          ></ShowMore>
         </div>
       </div>
       <div className="cpec-projects">
