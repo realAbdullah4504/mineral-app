@@ -22,6 +22,12 @@ const CSRInitiatives = () => {
     "CSR - Boya Muhammad",
     "CSR FWO",
   ];
+  const headings = [
+    "CSR Initiatives",
+    "CSR Initiatives",
+    "CSR - Boya Muhammed",
+    "CSR By FWO",
+  ];
   const [selectedOption, setSelectedOption] = useState(contentData[0]);
 
   return (

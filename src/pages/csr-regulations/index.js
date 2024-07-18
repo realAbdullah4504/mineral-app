@@ -9,7 +9,7 @@ const CsrRegulations = () => {
     { path: "csr-regulations", label: "CSR Regulations" },
   ];
   return (
-    <Container classes="max-w-[90%]">
+    <Container classes="w-[90%]">
       <div className="flex flex-col mb-[465px]">
         <div className="flex mb-[62px] mt-[41px]">
           <BreadCrumbs breadcrumbs={breadcrumbs} />

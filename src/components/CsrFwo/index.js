@@ -41,7 +41,7 @@ const CsrFwo = () => {
             />
           </div>
         </div>
-        <div className="flex flex-row-reverse mt-[80px] h-[377px] mb-[80px]">
+        <div className="flex flex-row-reverse mt-[80px] h-[377px] mb-[80px] justify-around">
           <div className="flex flex-col ">
             <div className="flex font-bold pb-0.5 text-[45px]">WEALTH</div>
             <div className=" flex mb-4">
@@ -52,11 +52,11 @@ const CsrFwo = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-col mx-auto relative h-full w-full">
+          <div className="flex flex-col mx-auto relative h-full w-full justify-center">
             <img
               src={CsrWealth2}
               alt=" 1"
-              className="absolute top-0 left-0 w-[250px] h-[300px] object-cover rounded-lg  "
+              className="absolute top-0 left-0 w-[250px] h-[300px] object-cover rounded-lg"
             />
             <img
               src={CsrWealth1}

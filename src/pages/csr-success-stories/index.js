@@ -15,7 +15,7 @@ const CsrSuccessStories = () => {
     { path: "csr-success-stories", label: "Success Stories" },
   ];
   return (
-    <Container>
+    <Container classes="w-[90%]">
       <div className="flex flex-col">
         <div className="flex mb-[62px] mt-[41px]">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
