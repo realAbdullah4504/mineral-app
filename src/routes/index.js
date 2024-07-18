@@ -78,6 +78,16 @@ const LegalTaxServices = lazy(() => import("../pages/legal-tax"));
 const Academia = lazy(() => import("../pages/academia"));
 const Associations = lazy(() => import("../pages/associations"));
 const HRPro = lazy(() => import("../pages/hr-pro"));
+const DataStatistics = lazy(() => import("../pages/data-statistics"));
+const StatisticsRevenue = lazy(() => import("../pages/statistics-revenue"));
+const StatisticsEmployement = lazy(() =>
+  import("../pages/statistics-employement")
+);
+const StatisticsProduction = lazy(() =>
+  import("../pages/statistics-production")
+);
+const Statisticsio = lazy(() => import("../pages/statistics-io"));
+const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 
 const AppRouter = () => (
   <Router>
@@ -460,6 +470,54 @@ const AppRouter = () => (
           path="/csr-community"
           element={
             <PublicRoute component={CSRCommunity} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/statistics"
+          element={
+            <PublicRoute component={DataStatistics} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/statistics-revenue"
+          element={
+            <PublicRoute
+              component={StatisticsRevenue}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/statistics-employement"
+          element={
+            <PublicRoute
+              component={StatisticsEmployement}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/statistics-production"
+          element={
+            <PublicRoute
+              component={StatisticsProduction}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/statistics-ie"
+          element={
+            <PublicRoute component={Statisticsio} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/statistics-incidents"
+          element={
+            <PublicRoute
+              component={StatisticsIncidents}
+              layout={DashboardLayout}
+            />
           }
         />
       </Routes>
