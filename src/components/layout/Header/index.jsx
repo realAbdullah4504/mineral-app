@@ -82,7 +82,12 @@ const Header = ({ title = "" }) => {
               <Link to="/">Home</Link>
               <ul className="has_sub_menu">
                 <li>
-                <div className="cursor-pointer" onClick={() => handleNavigate("/business-investment")}>Investment</div>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/business-investment")}
+                  >
+                    Investment
+                  </div>
                   <ul className="sub_menu">
                     {SubMenuInvestment?.map((data, i) => (
                       <Link to={data?.link} key={i}>
@@ -130,8 +135,13 @@ const Header = ({ title = "" }) => {
                 </li>
               </ul>
               <ul className="has_sub_menu">
-                <li >
-                  <div className="cursor-pointer" onClick={() => handleNavigate("/legal-framework")}>Legal</div>
+                <li>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/legal-framework")}
+                  >
+                    Legal
+                  </div>
                   <ul className="sub_menu services_sub_menus mega_menu_legal">
                     <div className="services_sub_menu_inner">
                       <div className="services_sub_menu">
@@ -178,7 +188,13 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Statistics
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/statistics")}
+                  >
+                    Statistics
+                  </span>
+
                   <ul className="sub_menu">
                     {SubMenuStatistics?.map((data, i) => (
                       <Link to={data?.link} key={i}>
@@ -190,7 +206,12 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  <span className="cursor-pointer" onClick={() => handleNavigate('/initiatives-projects')}>Initiatives</span>
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/initiatives-projects")}
+                  >
+                    Initiatives
+                  </span>
                   <ul className="sub_menu">
                     {SubMenuIntiatives?.map((data, i) => (
                       <Link to={data?.link} key={i}>
@@ -202,7 +223,12 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                <span className="cursor-pointer" onClick={() => handleNavigate('/who-is-who')}>Who is Who</span>
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/who-is-who")}
+                  >
+                    Who is Who
+                  </span>
                   <ul className="sub_menu">
                     {SubMenuWhoIsWho?.map((data, i) => (
                       <Link to={data?.link} key={i}>
@@ -214,7 +240,12 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  CSR
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/csr")}
+                  >
+                    CSR
+                  </span>
                   <ul className="sub_menu right-0">
                     {SubMenuCSR?.map((data, i) => (
                       <Link to={data?.link} key={i}>
@@ -270,7 +301,6 @@ const Header = ({ title = "" }) => {
           </div>
         </div>
       </header>
-
     </>
   );
 };

@@ -1,41 +1,30 @@
 import React, { useState } from "react";
-import CoalImage from "assets/images/coal.png";
-import CopperImage from "assets/images/copper.png";
-import GoldImage from "assets/images/gold.png";
+import { mineralPotential } from 'utils/constant/common';
+import BreadCrumbs from "components/Breadcrumbs";
 
 export const MineralSlider = () => {
-  const [sliderContent, setSliderContent] = useState({
-    first: {
-      title: "01",
-      description: `Pakistan has world's 5th biggest gold mine, with huge reserves in Balochistan. The Reko Diq field project is a testament to the lucrative gold potential in Pakistan.`,
-      image: GoldImage,
-  
-    },
-    sec: {
-      title: "02",
-      description: `With the world's 5th biggest copper mine, Pakistan has one of the largest under-developed copper deposits in the world. The Reko Diq & Saindak projects make Pakistan a noteworthy player in the global copper market.`,
-      image: CopperImage,
-    },
-    thr: {
-      title: "03",
-      description: `Pakistan has significant coal reserves, primarily found in the Thar Desert region. The Thar coalfield is one of the largest lignite coalfields in the world, offering potential for energy production and industrial development.`,
-      image: CoalImage,
-     
-    },
-  });
   const [active, setActive] = useState(0);
   const [imageActive, setImageActive] = useState(0);
-
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/business-investment", label: "Business & Investment" },
+    { path: "#", label: "Mineral Potential Of Pakistan" },
+  ];
   return (
-    <div className="">
+    <div className="relative ">
+      <div className=" absolute z-10 pl-[150px] pt-[50px] ">
+      <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
+
+      </div>
+      {/* <div className="  mt-7">holla</div> */}
       <div
         style={{
           backgroundImage: `url(${
             active == 0
-              ? sliderContent.first.image
+              ? mineralPotential.first.image
               : active == 1
-              ? sliderContent.sec.image
-              : sliderContent.thr.image
+              ? mineralPotential.sec.image
+              : mineralPotential.thr.image
           })`,
           backgroundSize: imageActive == 0 ? "100%" : "110%",
           transition: imageActive == 1 ? "all 2s ease-in-out" : "",
@@ -51,10 +40,10 @@ export const MineralSlider = () => {
             </div>
             <div className="font-normal text-[16px] leading-[25px] text-white max-w-[535px]">
               {active == 0
-                ? sliderContent.first.description
+                ? mineralPotential.first.description
                 : active == 1
-                ? sliderContent.sec.description
-                : sliderContent.thr.description}
+                ? mineralPotential.sec.description
+                : mineralPotential.thr.description}
             </div>
             <button className="font-bold text-[25px] mt-[25px] text-white">
               Find Out More &gt;
@@ -77,7 +66,7 @@ export const MineralSlider = () => {
                     : "text-[32px] h-[32%]  leading-[36px] "
                 } items-center flex  font-bold justify-end text-right  text-white cursor-pointer`}
               >
-                {sliderContent.first.title}
+                {mineralPotential.first.title}
               </div>
               <div
                 onClick={() => setActive(1)}
@@ -87,7 +76,7 @@ export const MineralSlider = () => {
                     : "text-[32px] h-[32%]  leading-[36px] "
                 } items-center flex  font-bold justify-end text-right  text-white cursor-pointer`}
               >
-                {sliderContent.sec.title}
+                {mineralPotential.sec.title}
               </div>
               <div
                 onClick={() => setActive(2)}
@@ -97,7 +86,7 @@ export const MineralSlider = () => {
                     : "text-[32px] h-[32%]  leading-[36px] "
                 } items-center flex  font-bold justify-end text-right  text-white cursor-pointer`}
               >
-                {sliderContent.thr.title}
+                {mineralPotential.thr.title}
               </div>
             </div>
             <div className="h-full mx-3 w-[2px] bg-white ">

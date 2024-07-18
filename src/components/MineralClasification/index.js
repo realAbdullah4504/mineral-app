@@ -1,53 +1,12 @@
 import React, { useState } from 'react'
-import Energy from "../../assets/images/Energy.png"
-import gypsum from "../../assets/images/gemstoneClassification.png"
-import Dimension from "assets/images/Dimension.png";
-import Industrial from "assets/images/Industrial.png";
-import Metallic from "assets/images/Metallic.png";
-import DimensionIcon from "assets/images/DimensionIcon.png";
-import DiamondIcon from "assets/images/DiamondIcon.png";
-import EnergyIcon from "assets/images/EnergyIcon.png";
-import IndustrialIcon from "assets/images/IndustrialIcon.png";
-import MetallicIcon from "assets/images/MetallicIcon.png";
-import gemIcon from "../../assets/images/gemIcon.png"
 import arrowR from "../../assets/images/arrowR.png"
 import arrowL from "../../assets/images/arrowL.png"
+import {mineralClassification} from 'utils/constant/common';
 
 export const MineralClassification = () => {
     const [tab, setTab] = useState(["Metallic Minerals", "Dimension Stones", "Gemstones", "Industrial Stones", "Energy"])
     const [activeTab, setActiveTab] = useState(1)
-    const [data, setData] = useState([
-        {
-            "title":"Metallic Minerals",
-            "description":"With the 5th biggest copper & gold mine in the world, Pakistan estimates the annual profit from these mines to be $3.64 billion. With belts of chromite deposits in Balochistan & KPK, Pakistan boasts an estimated reserve of 2.5 million tons, while the Chagai Iron Ore deposits are being produced at 24,000 tons per annum.",
-             "avatar":Metallic,
-            "icon": MetallicIcon
-        },
-        {
-            "title":"Dimension Stones",
-            "description":"The country boasts a significant presence of dimension stones such as granite, marble, limestone, sandstone, and slate, with varying colors, textures, and patterns. These dimension stones are found in different regions, including the famous marble quarries in Balochistan, Khyber Pakhtunkhwa, and Punjab provinces. ",
-             "avatar":Dimension,
-            "icon": DimensionIcon
-        },
-        {
-            "title":"Gemstones",
-            "description":"The mines in Pakistan boast world’s finest quality Aquamarine, emeralds and pink topaz. From the rugged peaks of the Gilgit-Baltistan region to the remote valleys of Khyber Pakhtunkhwa, these mining sites have captivated gemstone enthusiasts, collectors, and geologists alike.",
-             "avatar":gypsum,
-            "icon":DiamondIcon
-        },
-        {
-            "title":"Industrial Stones ",
-            "description":"Pakistan is home to a diverse array of industrial stones, including limestone, gypsum, salt, and quartzite, among others. These industrial stones are found in various regions across the country, with significant deposits in areas such as Punjab, Sindh, Khyber Pakhtunkhwa, and Balochistan, making Pakistan a key supplier of raw material for industrial processess. ",
-             "avatar":Industrial,
-            "icon": IndustrialIcon
-        },
-        {
-            "title": "Energy",
-            "description":"With the world’s 5th largest coal mine, Pakistan produces 9 million tons of coal every year. This coal is used for power generation in various industries. Moreover, with extensive reserves of 297 billion tons of marble, there are more than 40 types of natural colored marbles.",
-            "avatar":Energy,
-            "icon":EnergyIcon
-        },
-      ])
+    const [data, setData] = useState(mineralClassification)
     const rightHandler = () => {
         const cloneData = [...data];
         const removedItem = cloneData.shift();

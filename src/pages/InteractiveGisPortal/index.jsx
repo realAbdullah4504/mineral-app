@@ -1,12 +1,19 @@
 import React from "react";
+import BreadCrumbs from 'components/Breadcrumbs'
 import {
   Container,
 } from "components/UI";
 
 const InteractiveGisPortal= () => {
+  const breadcrumbs = [
+    { path: '/', label: 'Home' },
+    { path: '/service-and-support', label: 'Service & Support' },
+    { path: '/gis-portal', label: 'GIS Portal' },
+  ];
   return (
     <div className="max-w-[100%] my-20">
        <Container>
+       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex ml-10 mt-[20px] text-center my-10">
         <div className="max-w">
           <span className="font-ibm-plex-sans font-semibold  text-[64px] p-[0px] mr-5">
