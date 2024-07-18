@@ -37,6 +37,15 @@ import chemical from "assets/images/chamical.png";
 import construction from "assets/images/construction.png";
 import glass from "assets/images/glass.png";
 import oil from "assets/images/oil.png";
+import rockSaltWhite from "assets/images/rockSaltWhite.svg";
+import chromiteWhite from "assets/images/chromiteWhite.svg";
+import dimenstionStoneWhite from "assets/images/dimenstionStoneWhite.svg";
+import copperGoldWhite from "assets/images/copperGoldWhite.svg";
+import gemStoneWhite from "assets/images/gemStoneWhite.svg";
+import coalWhite from "assets/images/coalWhite.svg";
+import ironOreWhite from "assets/images/ironOreWhite.svg";
+import gypsumWhite from "assets/images/gypsumWhite.svg";
+import limestoneWhite from "assets/images/limestoneWhite.svg";
 
 export const homeSlider = {
     first: {
@@ -275,7 +284,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: rockSaltWhite,
       iconGreen: rockSaltIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -295,7 +304,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: chromiteWhite,
       iconGreen: brightGreen,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -315,7 +324,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: dimenstionStoneWhite,
       iconGreen: dimensionStoneIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -335,7 +344,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: copperGoldWhite,
       iconGreen: copperGoldIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -355,7 +364,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: gemStoneWhite,
       iconGreen: gemStoneIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -375,7 +384,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: coalWhite,
       iconGreen: coalIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -395,7 +404,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: ironOreWhite,
       iconGreen: ironOreIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -415,7 +424,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: gypsumWhite,
       iconGreen: gypsumIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
@@ -435,7 +444,7 @@ export const mineralPotential = {
       secTag: "Construction",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
-      icon: brightIcon,
+      icon: limestoneWhite,
       iconGreen: limestoneIcon,
       footerImgFirst: chemical,
       footerImageSec: construction,
