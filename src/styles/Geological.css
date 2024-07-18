@@ -1,0 +1,198 @@
+.geological-map-subheading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 23px;
+}
+.geological-map-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: 2px solid grey;
+  border-top: 3px solid green;
+}
+
+.geological-map-bg {
+  height: 350px;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 70px;
+  font-weight: 600;
+  padding-top: 50px;
+  font-style: IBM Plex Sans;
+}
+.geological-map-bg-img {
+  width: 90%;
+  padding: 70px;
+  padding-bottom: 0px;
+  font-size: 67px;
+  line-height: 88px;
+}
+.geological-map-intro p {
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-style: Helvetica Neue;
+}
+.geological-map-subheading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.geological-map-content {
+  padding: 90px 80px;
+}
+.geological-map-title {
+  font-size: 60px;
+  font-weight: bold;
+  color: black;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.geological-map-subheading div {
+  width: 206px; /* Adjust width as needed */
+  height: 100px; /* Fixed height */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Ensure text is visible */
+  background-repeat: no-repeat;
+  /* border-top: 2px solid green;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
+}
+.geological-moreinfo {
+  width: 250px;
+  height: 40;
+  margin: auto;
+  padding-bottom: 100px;
+  font-size: 20px;
+}
+.geological-moreinfo button {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: white;
+}
+.geological-moreinfo button svg {
+  margin-top: 5px;
+}
+.table-data {
+  width: 80%;
+  margin: auto;
+}
+.table-data .ant-table {
+  font-family: Arial, sans-serif;
+}
+
+.table-data .ant-table-thead > tr > th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.table-data .ant-table-tbody > tr > td {
+  font-size: 19px;
+}
+
+.table-data .ant-badge-status {
+  display: flex;
+  align-items: center;
+}
+
+.size-6 {
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+}
+
+.ant-dropdown-menu-item {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .geological-map-bg {
+    font-size: 50px;
+  }
+  .geological-map-subheading div {
+    width: 150px; /* Adjust width as needed */
+    font-size: 17px;
+    height: 70px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .geological-map-bg-img {
+    width: 100%;
+    padding: 20px;
+  }
+  .geological-map-bg {
+    font-size: 50px;
+  }
+  .geological-map-subheading div {
+    width: 100px; /* Adjust width as needed */
+    font-size: 13px;
+    height: 50px;
+  }
+  .geological-map-content {
+    padding: 30px 20px;
+  }
+  .table-data .ant-table-tbody > tr > td {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .geological-map-bg {
+    font-size: 40px;
+  }
+  .geological-map-subheading div {
+    width: 80px; /* Adjust width as needed */
+    font-size: 11px;
+    height: 50px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .geological-map-bg {
+    font-size: 25px;
+  }
+  .geological-map-subheading div {
+    width: 60px; /* Adjust width as needed */
+    font-size: 9px;
+    height: 50px;
+  }
+}
+.mineral-testing {
+  width: 90%;
+  margin: auto;
+}
+.mineral-testing-title {
+  font-size: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+.mineral-testing-table-header {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+}
