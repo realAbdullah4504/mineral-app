@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
+import OrganicTestInfo from "components/OrganicTestInfo";
+import InorganicTestInfo from "components/InorganicTestInfo";
 
 const TestInformation = () => {
+  const testOptions = ["Organic", "Inorganic"];
+  const [selectedOption, setSelectedOption] = useState(testOptions[0]);
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "#", label: "Services and Support" },
@@ -27,7 +31,39 @@ const TestInformation = () => {
       </Container>
 
       <div className="flex justify-center bg-radioactive-minerals bg-cover bg-center h-[850px] w-full my-[51px]"></div>
+      <div className="flex font-bold text-[64px] w-full justify-center">
+        <span className="text-[#009969] pr-3">Test</span> Services
+      </div>
       <Container classes="w-[90%]">
+        <div className="flex">
+          <div className="flex flex-col ml-[42px] text-black pt-40">
+            <button
+              onClick={() => setSelectedOption(testOptions[0])}
+              className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
+                selectedOption == testOptions[0] &&
+                "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
+              }`}
+            >
+              Organic
+            </button>
+            <button
+              onClick={() => setSelectedOption(testOptions[1])}
+              className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
+                selectedOption == testOptions[1] &&
+                "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
+              }`}
+            >
+              Inorganic
+            </button>
+          </div>
+          <div className="flex flex-col w-full ml-[58px]">
+            {selectedOption == testOptions[0] ? (
+              <OrganicTestInfo />
+            ) : (
+              <InorganicTestInfo />
+            )}
+          </div>
+        </div>
         <div className="mt-[2.5rem]">
           <table className="min-w-full bg-[#009969] bg-opacity-5 border-none font-semibold text-2xl text-center mb-5">
             <tbody>
