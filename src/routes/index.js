@@ -37,6 +37,7 @@ const ConsessionRules = lazy(() => import("../pages/consession-rules"));
 const LaborWelfare = lazy(() => import("../pages/labor-welfare"));
 const LegalFramework = lazy(() => import("../pages/legal-framework"));
 const ServiceAndSupport = lazy(() => import("../pages/service-and-support"));
+const MapsAndReports = lazy(() => import("../pages/maps-and-reports"));
 const ApplyingForMineralTitle = lazy(() => import("../pages/ApplyingForMineralTitle"));
 const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 const InitiativesProjects = lazy(() => import("../pages/initiatives"));
@@ -136,6 +137,10 @@ const AppRouter = () => (
         <Route
           path="/service-and-support"
           element={<PublicRoute component={ServiceAndSupport} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/maps-and-reports"
+          element={<PublicRoute component={MapsAndReports} layout={DashboardLayout} />}
         />
         <Route path="/legal-framework" element={<PublicRoute component={LegalFramework} layout={DashboardLayout} />} />
         <Route path="/fiscal-CPEC" element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />} />

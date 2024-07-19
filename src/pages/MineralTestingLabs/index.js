@@ -25,7 +25,7 @@ function BusinessInvestment() {
   ];
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "#", label: "Services and Support" },
+    { path: "/service-and-support", label: "Services and Support" },
     { path: "/mineral-testing-labs", label: "Minerals Testing Labs" },
   ];
 

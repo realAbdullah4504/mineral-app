@@ -99,7 +99,13 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Services
+                  
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/service-and-support")}
+                  >
+                    Services
+                  </div>
                   <ul className="sub_menu services_sub_menus mega_menu">
                     <div className="services_sub_menu_inner">
                       <div className="services_sub_menu">
