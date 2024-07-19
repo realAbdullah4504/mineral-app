@@ -207,7 +207,7 @@ const MineralForm = () => {
         )}
       </div>
       <div> {steps[state]["component"]}</div>
-      <div className="button-group-mineral-form">
+      <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
         {steps[state].step === 1 ? (
           ""
         ) : (
