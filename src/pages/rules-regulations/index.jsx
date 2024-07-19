@@ -66,7 +66,7 @@ const RulesRegulations = () => {
 
             {/* large gap */}
 
-            <div className="mt-64"></div>
+            <div className="mt-64 "></div>
           </div>
         </div>
       </Container>
