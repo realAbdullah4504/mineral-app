@@ -163,32 +163,35 @@ const TableMap = () => {
           <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
             {" "}
             <button style={{ backgroundImage: `url(${MoreInfo})` }}>
-              <div
-                style={{
-                  padding: "40px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
+              <a href="/applying-for-mineral-form">
                 {" "}
-                <div>Add Application</div>
-                <svg
-                  style={{ opacity: "0.5", paddingBottom: "5px" }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-6"
+                <div
+                  style={{
+                    padding: "40px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-              </div>
+                  {" "}
+                  <div>Add Application</div>
+                  <svg
+                    style={{ opacity: "0.5", paddingBottom: "5px" }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </div>
+              </a>
             </button>
           </div>
         </div>
