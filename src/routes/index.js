@@ -49,7 +49,7 @@ const Cess = lazy(() => import("../pages/cess"));
 // const Fiscal = lazy(() => import('../pages/fiscal'));
 const TrainingSkill = lazy(() => import("../pages/training-skill"));
 const WhoIsWho = lazy(() => import("../pages/who-is-who"));
-const GovernmentOrganization = lazy(() => import("../pages/government-organization"));
+const GovernmentOrganization = lazy(() => import("../pages/government-departments"));
 const DrillingServices = lazy(() => import("../pages/drilling-service"));
 const MineralLabs = lazy(() => import("../pages/mineral-labs"));
 const DownstreamIndustries = lazy(() => import("../pages/downstream-industries"));
@@ -57,7 +57,7 @@ const SoftwareSolution = lazy(() => import("../pages/software-solution"));
 const LegalTaxServices = lazy(() => import("../pages/legal-tax"));
 const Academia = lazy(() => import("../pages/academia"));
 const Associations = lazy(() => import("../pages/associations"));
-const HRPro = lazy(() => import("../pages/hr-pro"));
+const MiningProfessional = lazy(() => import("../pages/mining-professional"));
 const Tablemap = lazy(() => import("../pages/applying-for-mineral-test"));
 const GeologicalMap = lazy(() => import("../pages/geological-map"));
 const DataStatistics = lazy(() => import("../pages/data-statistics"));
@@ -176,7 +176,7 @@ const AppRouter = () => (
         <Route path="/cess" element={<PublicRoute component={Cess} layout={DashboardLayout} />} />
         <Route path="/who-is-who" element={<PublicRoute component={WhoIsWho} layout={DashboardLayout} />} />
         <Route
-          path="/government-organization"
+          path="/government-departments"
           element={<PublicRoute component={GovernmentOrganization} layout={DashboardLayout} />}
         />
         <Route
@@ -201,14 +201,13 @@ const AppRouter = () => (
         <Route path="/legal-tax" element={<PublicRoute component={LegalTaxServices} layout={DashboardLayout} />} />
         <Route path="/academia" element={<PublicRoute component={Academia} layout={DashboardLayout} />} />
         <Route path="/associations" element={<PublicRoute component={Associations} layout={DashboardLayout} />} />
-        <Route path="/hr-pro" element={<PublicRoute component={HRPro} layout={DashboardLayout} />} />
+        <Route path="/mining-professional" element={<PublicRoute component={MiningProfessional} layout={DashboardLayout} />} />
         <Route path="/geological-map" element={<PublicRoute component={GeologicalMap} layout={DashboardLayout} />} />
         <Route
           path="/applying-for-mineral-test"
           element={<PublicRoute component={Tablemap} layout={DashboardLayout} />}
         />
 
-        <Route path="/hr-pro" element={<PublicRoute component={HRPro} layout={DashboardLayout} />} />
         <Route path="/csr-initiatives" element={<PublicRoute component={CSRInitiatives} layout={DashboardLayout} />} />
         <Route path="/csr" element={<PublicRoute component={CSR} layout={DashboardLayout} />} />
         <Route path="/csr-regulations" element={<PublicRoute component={CSRegulations} layout={DashboardLayout} />} />

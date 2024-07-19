@@ -12,10 +12,10 @@ const WhoIsWho = () => {
 
   const whoIsWhoCards = [
     {
-      title: "Government Organization",
+      title: "Government Departments",
       flipContent:
         "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/government-organization",
+      link: "/government-departments",
     },
     {
       title: "Drilling Services",
@@ -60,10 +60,10 @@ const WhoIsWho = () => {
       link: "/associations",
     },
     {
-      title: "HR Pro",
+      title: "Mining Professional",
       flipContent:
         "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/hr-pro",
+      link: "/mining-professional",
     },
   ];
 
