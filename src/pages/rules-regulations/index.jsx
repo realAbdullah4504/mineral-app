@@ -51,7 +51,8 @@ const RulesRegulations = () => {
               Guidelines and procedures set in place for all aspects of mining.
             </div>
 
-            <div className="flex flex-wrap mt-6 space-x-4 justify-center	">
+            <div className="w-full flex justify-center mt-20">
+              <div className="grid grid-cols-2 w-[50%]">
               {rulesAndRegulationsCards.map((item) => (
                 <FlipCards
                   title={item.title}
@@ -60,6 +61,7 @@ const RulesRegulations = () => {
                   changebg={false}
                 />
               ))}
+              </div>
             </div>
 
             {/* large gap */}

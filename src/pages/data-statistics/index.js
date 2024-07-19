@@ -79,7 +79,7 @@ function Csr() {
           ></IntroContainer>
 
           <div className="flex flex-col items-center">
-            <div className="flex w-[960px] mb-[50px]">
+            <div className="flex w-[70%] mb-10">
               {csrCards.slice(0, 3).map((item) => (
                 <FlipCards
                   title={item.title}
@@ -89,7 +89,7 @@ function Csr() {
                 ></FlipCards>
               ))}
             </div>
-            <div className="flex w-[960px] mb-[80px]">
+            <div className="flex w-[50%] mb-16">
               {csrCards.slice(3, 5).map((item) => (
                 <FlipCards
                   title={item.title}
@@ -100,6 +100,7 @@ function Csr() {
               ))}
             </div>
           </div>
+          
         </div>
       </Container>
     </div>
