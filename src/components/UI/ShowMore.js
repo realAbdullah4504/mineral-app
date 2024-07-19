@@ -5,7 +5,10 @@ export const ShowMore = ({ idButton, idContent }) => {
     const moreContent = document.getElementById(idContent);
     const showMoreBtn = document.getElementById(idButton);
 
-    if (moreContent.style.display === "none" || moreContent.style.display === "") {
+    if (
+      moreContent.style.display === "none" ||
+      moreContent.style.display === ""
+    ) {
       moreContent.style.display = "block";
       showMoreBtn.textContent = "Show Less";
     } else {
@@ -15,7 +18,11 @@ export const ShowMore = ({ idButton, idContent }) => {
   };
 
   return (
-    <button id={idButton} className="show-more-btn" onClick={handleButtonClick}>
+    <button
+      id={idButton}
+      className="show-more-btn ml-5"
+      onClick={handleButtonClick}
+    >
       Show More
     </button>
   );

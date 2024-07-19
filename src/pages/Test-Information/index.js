@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
+import OrganicTestInfo from "components/OrganicTestInfo";
+import InorganicTestInfo from "components/InorganicTestInfo";
 
 const TestInformation = () => {
+  const testOptions = ["Organic", "Inorganic"];
+  const [selectedOption, setSelectedOption] = useState(testOptions[0]);
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "#", label: "Services and Support" },
@@ -13,23 +17,51 @@ const TestInformation = () => {
     <div className="mt-[3.4rem]">
       <Container classes="mt-8 w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
-        <div className="flex flex-col max-w-[70rem]">
+        <div className="flex flex-col max-w-[70rem] mt-[80px]">
           <div className="row text-[64px] font-semibold">Test Information</div>
           <div className="row text-lg text-[#40384F]">
-            The Geoscience Advance Research Laboratories (GARL) conducts
-            research on geological phenomena, develops new techniques for
-            mineral exploration, and provides training programs for
-            geoscientists and engineers. Through collaborations with national
-            and international organizations, GARL undertakes various research
-            projects, contributing to the sustainable development of Pakistan's
-            mineral resources by providing accurate geological data to support
-            the mining industry.
+            Mineral tests are simple physical and chemical methods of testing
+            samples, which can help to identify the mineral type. This approach
+            is used widely in mineralogy, ore geology and general geological
+            mapping. Most minerals can be characterized by their unique physical
+            properties which include hardness, luster, color, streak, specific
+            gravity, cleavage, fracture, and tenacity.
           </div>
-          <div className="row text-lg text-[#40384F]">
-            GARL is equipped with state-of-the-art equipment such as X-ray
-            Diffraction (XRD), X-ray Fluorescence (XRF), Scanning Electron
-            Microscope (SEM), and Inductively Coupled Plasma Mass Spectrometry
-            (ICP-MS), enabling detailed chemical and physical analysis.
+        </div>
+      </Container>
+
+      <div className="flex justify-center bg-radioactive-minerals bg-cover bg-center h-[850px] w-full my-[51px]"></div>
+      <div className="flex font-bold text-[64px] w-full justify-center">
+        <span className="text-[#009969] pr-3">Test</span> Services
+      </div>
+      <Container classes="w-[90%]">
+        <div className="flex">
+          <div className="flex flex-col ml-[42px] text-black pt-40">
+            <button
+              onClick={() => setSelectedOption(testOptions[0])}
+              className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
+                selectedOption == testOptions[0] &&
+                "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
+              }`}
+            >
+              Organic
+            </button>
+            <button
+              onClick={() => setSelectedOption(testOptions[1])}
+              className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
+                selectedOption == testOptions[1] &&
+                "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
+              }`}
+            >
+              Inorganic
+            </button>
+          </div>
+          <div className="flex flex-col w-full ml-[58px]">
+            {selectedOption == testOptions[0] ? (
+              <OrganicTestInfo />
+            ) : (
+              <InorganicTestInfo />
+            )}
           </div>
         </div>
         <div className="mt-[2.5rem]">

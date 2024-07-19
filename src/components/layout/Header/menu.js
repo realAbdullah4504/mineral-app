@@ -62,7 +62,7 @@ export const SubMenuMineralTestingLabs = [
   },
   {
     name: "Applying for Mineral Test",
-    link: "#",
+    link: "/applying-for-mineral-test",
   },
   {
     name: "View Results",
@@ -90,27 +90,23 @@ export const SubMenuFiscal = [
 export const SubMenuStatistics = [
   {
     name: "Revenue Collection",
-    link: "#",
+    link: "/statistics-revenue",
   },
   {
     name: "Employement",
-    link: "#",
+    link: "/statistics-employement",
   },
   {
     name: "Producton Data",
-    link: "#",
+    link: "/statistics-production",
   },
   {
     name: "Import & Export Stats",
-    link: "#",
+    link: "/statistics-ie",
   },
   {
     name: "Accident & Rescue",
-    link: "#",
-  },
-  {
-    name: "Safety Trainings",
-    link: "#",
+    link: "/statistics-incidents",
   },
 ];
 
@@ -160,8 +156,8 @@ export const SubMenuIntiatives = [
 
 export const SubMenuWhoIsWho = [
   {
-    name: "Government Organizations",
-    link: "/government-organization",
+    name: "Government Departments",
+    link: "/government-departments",
   },
   {
     name: "Academia",
@@ -192,30 +188,26 @@ export const SubMenuWhoIsWho = [
     link: "/associations",
   },
   {
-    name: "HR Pro",
-    link: "/hr-pro",
+    name: "Mining Professional",
+    link: "/mining-professional",
   },
 ];
 
 export const SubMenuCSR = [
   {
     name: "CSR Regulations",
-    link: "#",
-  },
-  {
-    name: "CSR Contribution",
-    link: "#",
+    link: "/csr-regulations",
   },
   {
     name: "Success Stories",
-    link: "#",
+    link: "/csr-success-stories",
   },
   {
     name: "CSR Initiatives",
-    link: "#",
+    link: "/csr-initiatives",
   },
   {
     name: "Voice of Community",
-    link: "#",
+    link: "/csr-community",
   },
 ];
