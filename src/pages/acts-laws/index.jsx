@@ -13,7 +13,7 @@ const actsAndLawsCards = [
   {
     title: "Health & Safety",
     link: "/health-safety",
-  }
+  },
 ];
 
 const ActsLaws = () => {
@@ -53,15 +53,18 @@ const ActsLaws = () => {
               economic benefits.
             </div>
 
-            <div className="flex flex-wrap mt-6 space-x-4 justify-center	">
-              {actsAndLawsCards.map((item) => (
-                <FlipCards
-                  title={item.title}
-                  flip={false}
-                  link={item?.link}
-                  changebg={false}
-                />
-              ))}
+            <div className="w-full flex justify-center mt-20">
+              <div className="grid grid-cols-2 w-[50%]">
+                {actsAndLawsCards.map((item) => (
+                  <FlipCards
+                    title={item.title}
+                    flip={false}
+                    link={item?.link}
+                    changebg={false}
+                    className="m-0"
+                  />
+                ))}
+              </div>
             </div>
 
             {/* large gap */}

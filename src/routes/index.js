@@ -37,6 +37,7 @@ const ConsessionRules = lazy(() => import("../pages/consession-rules"));
 const LaborWelfare = lazy(() => import("../pages/labor-welfare"));
 const LegalFramework = lazy(() => import("../pages/legal-framework"));
 const ServiceAndSupport = lazy(() => import("../pages/service-and-support"));
+const MapsAndReports = lazy(() => import("../pages/maps-and-reports"));
 const ApplyingForMineralTitle = lazy(() => import("../pages/ApplyingForMineralTitle"));
 const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 const InitiativesProjects = lazy(() => import("../pages/initiatives"));
@@ -66,6 +67,8 @@ const StatisticsEmployement = lazy(() => import("../pages/statistics-employement
 const StatisticsProduction = lazy(() => import("../pages/statistics-production"));
 const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
+const RegisterOrganization = lazy(() => import("../pages/register-organization"));
+const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 
 const AppRouter = () => (
   <Router>
@@ -135,6 +138,10 @@ const AppRouter = () => (
         <Route
           path="/service-and-support"
           element={<PublicRoute component={ServiceAndSupport} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/maps-and-reports"
+          element={<PublicRoute component={MapsAndReports} layout={DashboardLayout} />}
         />
         <Route path="/legal-framework" element={<PublicRoute component={LegalFramework} layout={DashboardLayout} />} />
         <Route path="/fiscal-CPEC" element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />} />
@@ -234,6 +241,14 @@ const AppRouter = () => (
           path="/statistics-incidents"
           element={<PublicRoute component={StatisticsIncidents} layout={DashboardLayout} />}
         />
+        <Route
+          path="/registerorganization"
+          element={<PublicRoute component={RegisterOrganization} layout={DashboardLayout} />}
+        />
+        <Route 
+        path="/applying-for-mineral-form"
+        element={<PublicRoute component={ApplyingForMineralForm} layout={DashboardLayout} />}
+      />
       </Routes>
     </Suspense>
   </Router>
