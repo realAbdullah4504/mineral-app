@@ -16,8 +16,8 @@ const MiningOperations = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/legal-framework", label: "Legal Framework" },
-    { path: "/", label: "Acts & Laws" },
-    { path: "#", label: "Mining Operations" },
+    { path: "/acts-laws", label: "Acts & Laws" },
+    { path: "/mining-operations", label: "Mining Operations" },
   ];
 
   return (

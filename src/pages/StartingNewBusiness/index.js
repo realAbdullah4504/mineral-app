@@ -128,19 +128,19 @@ function StartingNewBusiness() {
         "Open a company bank account in any commercial bank in Pakistan",
     },
     {
-      title: "Register & Obtain Authorization",
+      title: "Permit & Licenses",
       description:
-        "Register & obtain authorization from relevant regulators (federal, provincial & local governments) as per your business activity. Opt for the services from the legal advisor and create a legal contract with your clients.",
+        "Register & obtain authorization from relevant regulators (federal, provincial & local governments) as per your business activity.Opt for the services from the legal advisor and create a legal contract with your clients.",
     },
     {
-      title: "State Bank's Approval",
+      title: "Foreign Exchange Compliance",
       description:
-        "Obtain State Banks Approval for foreign exchange remittance. Register foreign investment & facilitate repatriation of foreign exchange with SBP. Visit sbp.org.pk",
+        "Obtain State Bank’s Approval for foreign exchange remittance Register foreign investment & facilitate respiration of foreign exchange with SBP's Visit sbp.org.pk",
     },
     {
-      title: "Environmental Registration",
+      title: "Environmental Compliance",
       description:
-        "Registration with the Environmental Protection Agency for Environmental Impact Assessment. Register at Federal & Provincial levels. Visit https://environment.gov.pk/",
+        "Registration with the Environmental Protection Agency for Environmental Impact Assessment. Register at Federal & Provincial levels Visit https://environment.gov.pk/",
     },
   ];
   return (

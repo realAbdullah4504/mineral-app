@@ -14,25 +14,25 @@ function FiscalIncentives() {
     {
       title: "Special Economic Zones",
       flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+        " SEZs are promoted around the globe as strategy to industrialize and accelerate the economic growth. They play a pivotal role in boosting the economy & are considered as a tool of national competitiveness.",
       link: "/special-economic-zones",
     },
     {
       title: "Exporting Processing Zones",
       flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+        "EPZs spur economic growth through streamlined processes, tax breaks, and infrastructure support, attracting foreign investment and facilitating exports and encourage goods production for export markets.",
       link: "/export-processing-zones",
     },
     {
       title: "CPEC",
       flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+        "The China-Pakistan Economic Corridor (CPEC) is a major infrastructure project designed to enhance connectivity and economic cooperation between China and Pakistan, promoting growth and strengthening bilateral ties.",
       link: "/fiscal-CPEC",
     },
     {
       title: "Tax Exemptions",
       flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+        "Fiscal Incentives introduced by Government of Pakistan for the development of mining industry",
       link: "/fiscal-tax",
     },
   ];
@@ -56,7 +56,7 @@ function FiscalIncentives() {
             {fiscalIncentivesCards.map((item) => (
               <FlipCards
                 title={item.title}
-                flip={false}
+                flip={true}
                 flipContent={item.flipContent}
                 link={item.link ? item.link : ""}
                 changebg={true}
