@@ -7,7 +7,7 @@ const DrillingServices = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/who-is-who", label: "Who is Who" },
-    { path: "#", label: "Government Organizations" },
+    { path: "#", label: "Government Departments" },
   ];
 
   return (

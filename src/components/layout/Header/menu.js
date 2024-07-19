@@ -156,8 +156,8 @@ export const SubMenuIntiatives = [
 
 export const SubMenuWhoIsWho = [
   {
-    name: "Government Organizations",
-    link: "/government-organization",
+    name: "Government Departments",
+    link: "/government-departments",
   },
   {
     name: "Academia",
@@ -188,8 +188,8 @@ export const SubMenuWhoIsWho = [
     link: "/associations",
   },
   {
-    name: "HR Pro",
-    link: "/hr-pro",
+    name: "Mining Professional",
+    link: "/mining-professional",
   },
 ];
 
