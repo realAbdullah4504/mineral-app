@@ -7,7 +7,7 @@ import BoyaInfrastructure from "assets/images/BoyaInfrastructure.png";
 
 const CsrBoya = () => {
   return (
-    <Container classes="w-[90%]">
+    <Container classes="w-[80%]">
       <div className="flex flex-col">
         <div className="flex justify-center">
           <span className="max-w-[1130px] text-[18px] font-normal">

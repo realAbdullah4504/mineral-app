@@ -20,7 +20,7 @@ const StatisticsRevenue = () => {
         <div className="flex font-normal text-[22px]">
           Dashboard on Production Data of Minerals
         </div>
-        <div className="flex mb-[120px]">
+        <div className="flex mb-[120px] justify-center">
           <img src={production} alt="Production Dashboard" />
         </div>
       </div>

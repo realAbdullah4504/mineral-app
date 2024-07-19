@@ -13,25 +13,21 @@ const TestInformation = () => {
     <div className="mt-[3.4rem]">
       <Container classes="mt-8 w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
-        <div className="flex flex-col max-w-[70rem]">
+        <div className="flex flex-col max-w-[70rem] mt-[80px]">
           <div className="row text-[64px] font-semibold">Test Information</div>
           <div className="row text-lg text-[#40384F]">
-            The Geoscience Advance Research Laboratories (GARL) conducts
-            research on geological phenomena, develops new techniques for
-            mineral exploration, and provides training programs for
-            geoscientists and engineers. Through collaborations with national
-            and international organizations, GARL undertakes various research
-            projects, contributing to the sustainable development of Pakistan's
-            mineral resources by providing accurate geological data to support
-            the mining industry.
-          </div>
-          <div className="row text-lg text-[#40384F]">
-            GARL is equipped with state-of-the-art equipment such as X-ray
-            Diffraction (XRD), X-ray Fluorescence (XRF), Scanning Electron
-            Microscope (SEM), and Inductively Coupled Plasma Mass Spectrometry
-            (ICP-MS), enabling detailed chemical and physical analysis.
+            Mineral tests are simple physical and chemical methods of testing
+            samples, which can help to identify the mineral type. This approach
+            is used widely in mineralogy, ore geology and general geological
+            mapping. Most minerals can be characterized by their unique physical
+            properties which include hardness, luster, color, streak, specific
+            gravity, cleavage, fracture, and tenacity.
           </div>
         </div>
+      </Container>
+
+      <div className="flex justify-center bg-radioactive-minerals bg-cover bg-center h-[850px] w-full my-[51px]"></div>
+      <Container classes="w-[90%]">
         <div className="mt-[2.5rem]">
           <table className="min-w-full bg-[#009969] bg-opacity-5 border-none font-semibold text-2xl text-center mb-5">
             <tbody>

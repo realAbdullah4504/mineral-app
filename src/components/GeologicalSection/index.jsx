@@ -23,7 +23,7 @@ const geologicalData = [
     title: "Deserts & Fertile Plains",
     description:
       " The deserts & fertile plains of Pakistan are rich in minerals essentials of salt in the Khewra mines, coal reserves in the desert of Thar. Fertile plains of Sindh & Punjab boast clay, silica sand and gold",
-    buttonText: "Thar Desert, Tahrparkar",
+    buttonText: "Thar Desert, Tharparkar",
     image: "bg-pexels-dario-fernandez-ruz",
   },
 ];

@@ -11,7 +11,7 @@ import { Container } from "components/UI";
 
 const CsrFwo = () => {
   return (
-    <Container classes="w-[90%]">
+    <Container classes="w-[80%]">
       <div className="flex flex-col">
         <div className="flex  h-[377px] mb-[80px]">
           <div className="flex flex-col w-[1300px] ">
