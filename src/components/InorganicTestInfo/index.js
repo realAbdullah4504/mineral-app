@@ -71,6 +71,24 @@ const InorganicTestInfo = () => {
         <li>X-Ray Fluorescence (XRF)</li>
       </ul>
       <div className="flex text-5xl font-bold mt-[33px]">
+        2. Mineral Identification
+      </div>
+      <div className="flex text-xl mt-8">
+        The Mineral Identification process involves a series of steps and tests
+        to determine the identity of a mineral sample based on its physical and
+        chemical properties including color, streak, luster, hardness and
+        density. These tests consist of the following processes:
+      </div>
+      <div className="flex text-xl">
+        <ul className="pl-8 list-disc">
+          <li>X-Ray Diffraction Analysis</li>
+          <li>Physical parameters</li>
+          <li>Scanning Electron Microscopy (SEM)</li>
+          <li>Differential Thermal Analysis (DTA)</li>
+          <li>Stereoscopy</li>
+        </ul>
+      </div>
+      <div className="flex text-5xl font-bold mt-[33px]">
         3. Petrographic Analysis
       </div>
       <div className="flex text-xl mt-8">
@@ -84,24 +102,6 @@ const InorganicTestInfo = () => {
         <ul className="pl-8 list-disc">
           <li>Physical parameters</li>
           <li>X-Ray Diffraction Analysis</li>
-          <li>Scanning Electron Microscopy (SEM)</li>
-          <li>Differential Thermal Analysis (DTA)</li>
-          <li>Stereoscopy</li>
-        </ul>
-      </div>
-      <div className="flex text-5xl font-bold mt-[33px]">
-        2. Mineral Identification
-      </div>
-      <div className="flex text-xl mt-8">
-        The Mineral Identification process involves a series of steps and tests
-        to determine the identity of a mineral sample based on its physical and
-        chemical properties including color, streak, luster, hardness and
-        density. These tests consist of the following processes:
-      </div>
-      <div className="flex text-xl">
-        <ul className="pl-8 list-disc">
-          <li>X-Ray Diffraction Analysis</li>
-          <li>Physical parameters</li>
           <li>Scanning Electron Microscopy (SEM)</li>
           <li>Differential Thermal Analysis (DTA)</li>
           <li>Stereoscopy</li>

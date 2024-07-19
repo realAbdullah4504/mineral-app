@@ -16,8 +16,8 @@ const ConsessionRules = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/legal-framework", label: "Legal Framework" },
-    { path: "/", label: "Rules & Regulations" },
-    { path: "#", label: "Concession Rules" },
+    { path: "/rules-regulations", label: "Rules & Regulations" },
+    { path: "/consession-rules", label: "Concession Rules" },
   ];
 
   return (
