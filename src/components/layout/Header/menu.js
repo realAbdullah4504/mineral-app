@@ -160,6 +160,10 @@ export const SubMenuWhoIsWho = [
     link: "/government-departments",
   },
   {
+    name: "Mining Professional",
+    link: "/mining-professional",
+  },
+  {
     name: "Academia",
     link: "/academia",
   },
@@ -187,10 +191,7 @@ export const SubMenuWhoIsWho = [
     name: "Associations",
     link: "/associations",
   },
-  {
-    name: "Mining Professional",
-    link: "/mining-professional",
-  },
+  
 ];
 
 export const SubMenuCSR = [

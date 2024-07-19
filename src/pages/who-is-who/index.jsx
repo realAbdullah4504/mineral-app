@@ -18,6 +18,12 @@ const WhoIsWho = () => {
       link: "/government-departments",
     },
     {
+      title: "Mining Professional",
+      flipContent:
+        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+      link: "/mining-professional",
+    },
+    {
       title: "Drilling Services",
       flipContent:
         "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
@@ -59,12 +65,7 @@ const WhoIsWho = () => {
         "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
       link: "/associations",
     },
-    {
-      title: "Mining Professional",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/mining-professional",
-    },
+    
   ];
 
   return (
