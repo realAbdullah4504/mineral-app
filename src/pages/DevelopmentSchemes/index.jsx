@@ -61,12 +61,12 @@ const DevelopmentSchemes = () => {
           <Container classes="text-left flex w-[90%] justify-start inline-block">
             <div className="bg-white xl:text-[64px] text-[30px] font-bold rounded px-10 py-5 flex items-center">
               <span className="mr-2 inline-flex w-1 h-[50px] rounded bg-[#009969]"></span>{" "}
-              <span>Development Schemes</span>
+              <span>Development Initiatives</span>
             </div>
           </Container>
         </div>
       </div>
-      <Container>
+      <Container classes="w-[90%]">
         <div className="page-title-main">
           <p className="intro_parahgraph font-helvetica xl:my-10 my-5">
             Mineral development schemes in Pakistan encompass a range of
@@ -84,7 +84,7 @@ const DevelopmentSchemes = () => {
       </Container>
       <div className="intiatives_main">
         <div className="intiative_title subpage_title font-semibold mb-5 xl:text-[50px] text-[30px] text-center">
-          Schemes
+          Initiatives
         </div>
         <div className="intiatives_Inner">
           <div className="intiatives_left">
@@ -146,7 +146,7 @@ const DevelopmentSchemes = () => {
                   data-id="kpk"
                 >
                   <div className="intiative_right_content_heading mb-5">
-                    KPK Government
+                    KPK
                   </div>
                   <ul>
                     <li>
@@ -175,9 +175,16 @@ const DevelopmentSchemes = () => {
                   data-id="balochistan"
                 >
                   <div className="intiative_right_content_heading mb-5">
-                    Balochistan Government
+                    Balochistan
                   </div>
                   <ul>
+                    <li>
+                      Assessment Study & Establishment of Mines Monitoring and
+                      Surveillance Units in Mineral Bearing Areas of Khyber
+                      Pakhtunkhwa.
+                    </li>
+                    <li>Geological Mapping of Khyber Pakhtunkhwa.</li>
+                    <li>Fencing of Fizzagat Emerald Mine Swat</li>
                     <li>
                       Capacity Building of MinerConstruction of 20 km black top
                       road from PMDC coal mines Shahrag to Nakas via Hazar dum
@@ -217,7 +224,7 @@ const DevelopmentSchemes = () => {
                   data-id="punjab"
                 >
                   <div className="intiative_right_content_heading mb-5">
-                    Punjab Government
+                    Punjab
                   </div>
                   <ul>
                     <li>
@@ -279,7 +286,7 @@ const DevelopmentSchemes = () => {
                   data-id="gilgit"
                 >
                   <div className="intiative_right_content_heading mb-5">
-                    Gilgit Government
+                    Gilgit-Baltistan
                   </div>
                   <ul>
                     <li>
@@ -322,7 +329,7 @@ const DevelopmentSchemes = () => {
                   data-id="ajk"
                 >
                   <div className="intiative_right_content_heading mb-5">
-                    AJK Government
+                    AJK
                   </div>
                   <ul>
                     <li>

@@ -32,7 +32,7 @@ function BusinessInvestment() {
       link: "/mineral-development-strategy",
     },
     {
-      title: "Special Investment Facilitation Council (SIFC)",
+      title: "Special Investment Facilitation Council",
 
       link: "/special-investment-facilities",
       flipContent:
@@ -41,7 +41,7 @@ function BusinessInvestment() {
     {
       title: "Applying for Mineral Title",
       flipContent:
-        "This section will guide you about the process, types, tenures and provincial procedures for obtaining a mineral title",
+        "Understand the process of applying for a mineral title to start mining.",
       link: "/applying-for-mineral-title",
     },
     {
