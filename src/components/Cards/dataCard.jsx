@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import addIcon from "assets/images/addIcon.svg";
 import sampleImage from "assets/images/data-card.png";
+import { useNavigate } from "react-router-dom";
 
 const DataCard = ({ type, data }) => {
-  const [cardType, setCardType] = useState(type);
+  const navigate = useNavigate()
+
+  const handleNavigate = (url) => {
+    navigate(url)
+  }
 
   return (
     <>
       {type == "add" ? (
-        <div className="w-full max-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl ">
+        <div className="w-full max-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer" onClick={() => handleNavigate(data.link)}>
           <div className="flex flex-col items-center space-y-4 ">
             <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
               <img src={addIcon} alt="" />
