@@ -66,6 +66,7 @@ const StatisticsEmployement = lazy(() => import("../pages/statistics-employement
 const StatisticsProduction = lazy(() => import("../pages/statistics-production"));
 const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
+const RegisterOrganization = lazy(() => import("../pages/register-organization"));
 
 const AppRouter = () => (
   <Router>
@@ -233,6 +234,10 @@ const AppRouter = () => (
         <Route
           path="/statistics-incidents"
           element={<PublicRoute component={StatisticsIncidents} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/registerorganization"
+          element={<PublicRoute component={RegisterOrganization} layout={DashboardLayout} />}
         />
       </Routes>
     </Suspense>
