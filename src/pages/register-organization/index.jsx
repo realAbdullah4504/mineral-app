@@ -78,123 +78,123 @@ const RegisterOrganization = () => {
     }
   };
 
-  //   useEffect(() => {
-  //     const queryString = window.location.search;
-  //     const urlParams = new URLSearchParams(queryString);
-  //     const paramValue = urlParams.get("orgtype");
-  //     console.log(paramValue);
-  //     if (renderStop !== "Set") {
-  //       if (paramValue === "go") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'GovernmentOrganizations',
-  //         });*/
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const paramValue = urlParams.get("orgtype");
+    console.log(paramValue);
+    if (renderStop !== "Set") {
+      if (paramValue === "go") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'GovernmentOrganizations',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "GovernmentOrganizations",
-  //         });
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "GovernmentOrganizations",
+        });
 
-  //         setReturnLink("/government-organizations");
-  //       }
-  //       if (paramValue === "das") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'DrillingAndServices',
-  //         });*/
+        setReturnLink("/government-organizations");
+      }
+      if (paramValue === "das") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'DrillingAndServices',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "DrillingAndServices",
-  //         });
-  //         setReturnLink("/drilling-services");
-  //       }
-  //       if (paramValue === "dsi") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'DownstreamIndustries',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "DrillingAndServices",
+        });
+        setReturnLink("/drilling-services");
+      }
+      if (paramValue === "dsi") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'DownstreamIndustries',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "DownstreamIndustries",
-  //         });
-  //         setReturnLink("/downstream-industries");
-  //       }
-  //       if (paramValue === "ml") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'MineralLabs',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "DownstreamIndustries",
+        });
+        setReturnLink("/downstream-industries");
+      }
+      if (paramValue === "ml") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'MineralLabs',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "MineralLabs",
-  //         });
-  //         setReturnLink("/mineral-labs");
-  //       }
-  //       if (paramValue === "sas") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'SoftwareAndSolutions',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "MineralLabs",
+        });
+        setReturnLink("/mineral-labs");
+      }
+      if (paramValue === "sas") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'SoftwareAndSolutions',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "SoftwareAndSolutions",
-  //         });
-  //         setReturnLink("/software-solutions");
-  //       }
-  //       if (paramValue === "lats") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'LegalAndTaxServices',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "SoftwareAndSolutions",
+        });
+        setReturnLink("/software-solutions");
+      }
+      if (paramValue === "lats") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'LegalAndTaxServices',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "LegalAndTaxServices",
-  //         });
-  //         setReturnLink("/legal-tax-services");
-  //       }
-  //       if (paramValue === "ac") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'Academia',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "LegalAndTaxServices",
+        });
+        setReturnLink("/legal-tax-services");
+      }
+      if (paramValue === "ac") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'Academia',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "Academia",
-  //         });
-  //         setReturnLink("/academia");
-  //       }
-  //       if (paramValue === "asso") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'Associations',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "Academia",
+        });
+        setReturnLink("/academia");
+      }
+      if (paramValue === "asso") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'Associations',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "Associations",
-  //         });
-  //         setReturnLink("/Associations");
-  //       }
-  //       if (paramValue === "os") {
-  //         //console.log('yes, paramValue is 1 is it?',paramValue);
-  //         /*form.setFieldsValue({
-  //           'OrganizationType':'OtherServices',
-  //         });*/
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "Associations",
+        });
+        setReturnLink("/Associations");
+      }
+      if (paramValue === "os") {
+        //console.log('yes, paramValue is 1 is it?',paramValue);
+        /*form.setFieldsValue({
+            'OrganizationType':'OtherServices',
+          });*/
 
-  //         setRenderStop("Set");
-  //         setOrgType({
-  //           OrganizationType: "OtherServices",
-  //         });
-  //         setReturnLink("/other-services");
-  //       }
-  //     }
-  //   }, [renderStop]);
+        setRenderStop("Set");
+        setOrgType({
+          OrganizationType: "OtherServices",
+        });
+        setReturnLink("/other-services");
+      }
+    }
+  }, [renderStop]);
 
   const success = () => {
     messageApi
@@ -359,48 +359,50 @@ const RegisterOrganization = () => {
 
   return (
     <>
-      <Container classes="mt-8 w-[95%]">
+      <Container classes="mt-8 w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
 
         {/* <h2>
           Who is Who: <p>{getOrgTypeShow(orgType["OrganizationType"])}</p>
         </h2> */}
         <div className="flex flex-wrap mt-[20px]">
-          <div className="w-full">
-            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
-              Who is Who
-              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
+          <div className="w-full flex">
+            <h1 className="font-ibm-plex-sans font-semibold text-[48px] p-[0px]">
+              Who is Who:{" "}
             </h1>
-            <div
-              className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
-              style={{ whiteSpace: "pre-line" }}
-            >
-              Government Organizations <strong>Apply for Registration</strong>
-            </div>
+            <h1 className="font-ibm-plex-sans font-semibold text-[48px] text-[#009969] p-[0px]">
+              {" "}
+              {getOrgTypeShow(orgType["OrganizationType"])}
+            </h1>
+          </div>
+
+          <div
+            className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
+            style={{ whiteSpace: "pre-line" }}
+          >
+            Government Organizations <strong>Apply for Registration</strong>
           </div>
         </div>
 
         <div className="flex justify-center flex-col space-y-6 py-12 px-16">
           <div className="space-y-2 text-start">
-            <h2 className="text-3xl font-bold">Contact Us</h2>
-            <p className="text-muted-foreground">
-              Fill out the form below and we'll get back to you as soon as
-              possible.
-            </p>
+            <h2 className="text-3xl font-bold text-[#009969] ">
+              Organizational Details
+            </h2>
           </div>
           <form className="space-y-4">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <div>
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="name"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="name"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Organization Name
@@ -411,13 +413,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="email"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="email"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Email
@@ -428,13 +430,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="address"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="address"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Address
@@ -445,13 +447,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="number"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="number"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Mobile Number
@@ -462,13 +464,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="landline"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="landline"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Landline Number
@@ -479,13 +481,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="url"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="url"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Website/URL
@@ -496,13 +498,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="socialLink"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="socialLink"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Social Media Link
@@ -513,13 +515,13 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="password"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    id="logo"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="password"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-blue-600"
+                    for="logo"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
                     Logo/Cover
@@ -529,11 +531,10 @@ const RegisterOrganization = () => {
             </div>
 
             <div className="w-full flex justify-center">
-            <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-              Submit
-            </button>
+              <button class="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+                Submit
+              </button>
             </div>
-           
           </form>
         </div>
       </Container>

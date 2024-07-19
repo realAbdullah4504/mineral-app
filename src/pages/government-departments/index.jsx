@@ -6,7 +6,7 @@
 
   const data = {
     headline: "Apply for Registration",
-    link: '/registerorganization?orgtype=gp'
+    link: '/registerorganization?orgtype=go'
   };
 
   const GovernmentOrganization = () => {
