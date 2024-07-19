@@ -2,121 +2,163 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Upload, Select, Empty, InputNumber } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import Listing from "./Listing";
-const { Option } = Select;
-const { TextArea } = Input;
-
-const formItemLayout = {
-  labelCol: { span: 24 },
-  wrapperCol: { span: 24 },
-};
 
 const Steps = ({ obj, showListing = false, setDisabled = "", step = 1 }) => {
-  const [form] = Form.useForm();
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [listingData, setListingData] = useState([]);
+  const [formValues, setFormValues] = useState({});
 
   useEffect(() => {
-    if (step == 2 && !listingData.length) {
+    if (step === 2 && !listingData.length) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [listingData.length, step, setDisabled]);
+  }, [step, listingData, setDisabled]);
 
   useEffect(() => {
     if (selectedRecord) {
-      form.setFieldsValue(selectedRecord);
+      setFormValues(selectedRecord);
     }
-  }, [selectedRecord, form]);
+  }, [selectedRecord]);
+
+  const handleInputChange = (e) => {
+    const { name, value, type } = e.target;
+    setFormValues({ ...formValues, [name]: type === "file" ? e.target.files[0] : value });
+  };
+
+  const handleSelectChange = (name, value) => {
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleAddForm = () => {
+    setListingData([...listingData, formValues]);
+    setFormValues({});
+  };
 
   const renderFormItems = () => {
     return obj.map((field) => {
       if (field.type === "input") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please input ${field.label.toLowerCase()}!` }]}
-          >
-            <Input />
-          </Form.Item>
+          <div key={field.name} className="relative mt-2 w-full">
+            <input
+              type="text"
+              name={field.name}
+              value={formValues[field.name] || ""}
+              onChange={handleInputChange}
+              id={field.name}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              placeholder=" "
+              required={field.required === "true"}
+            />
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+          </div>
         );
       }
+
       if (field.type === "number") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please input ${field.label.toLowerCase()}!` }]}
-          >
-            <InputNumber style={{ width: "100%" }} />
-          </Form.Item>
+          <div key={field.name} className="relative mt-2 w-full">
+            <input
+              type="number"
+              name={field.name}
+              value={formValues[field.name] || ""}
+              onChange={handleInputChange}
+              id={field.name}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              placeholder=" "
+              required={field.required === "true"}
+            />
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+          </div>
         );
       }
+
       if (field.type === "file") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload" listType="picture" maxCount={1}>
-              <Button icon={<UploadOutlined />}>Upload Image</Button>
+          <div key={field.name} className="relative mt-2 w-full">
+            <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">
+              {field.label}
+            </label>
+            <Upload
+              onChange={({ file }) => handleInputChange({ target: { name: field.name, files: [file] } })}
+              id={field.name}
+              name={field.name}
+              action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+              listType="picture"
+              maxCount={1}
+            >
+              <Button icon={<UploadOutlined />} className="mt-2 w-full bg-green-500 text-white">
+                Upload Image
+              </Button>
             </Upload>
-          </Form.Item>
-        );
-      }
-      if (field.type === "textarea") {
-        return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please input ${field.label.toLowerCase()}!` }]}
-          >
-            <TextArea rows={4} />
-          </Form.Item>
+          </div>
         );
       }
 
       if (field.type === "select") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please select ${field.label.toLowerCase()}!` }]}
-          >
-            <Select placeholder={`Select ${field.label.toLowerCase()}`}>
+          <div key={field.name} className="relative mt-2 w-full">
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+            <select
+              name={field.name}
+              onChange={(e) => handleSelectChange(field.name, e.target.value)}
+              id={field.name}
+              value={formValues[field.name] || ""}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              required={field.required === "true"}
+            >
+              <option value="" disabled style={{ opacity: 0.5 }}>
+                Select {field.label.toLowerCase()}
+              </option>
               {field.options.map((option) => (
-                <Option key={option} value={option}>
+                <option key={option} value={option}>
                   {option}
-                </Option>
+                </option>
               ))}
-            </Select>
-          </Form.Item>
+            </select>
+          </div>
+        );
+      }
+
+      if (field.type === "textarea") {
+        return (
+          <div key={field.name} className="relative mt-2 w-full">
+            <textarea
+              name={field.name}
+              value={formValues[field.name] || ""}
+              onChange={handleInputChange}
+              id={field.name}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              placeholder=" "
+              required={field.required === "true"}
+            />
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+          </div>
         );
       }
 
       return null;
-    });
-  };
-
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
-
-  const handleAddForm = () => {
-    form.validateFields().then((values) => {
-      setListingData([...listingData, values]);
-      form.resetFields();
     });
   };
 
@@ -153,15 +195,9 @@ const Steps = ({ obj, showListing = false, setDisabled = "", step = 1 }) => {
       ) : (
         ""
       )}
-      <Form {...formItemLayout} form={form} layout="vertical">
-        <div className="form-grid"> {renderFormItems()}</div>
-        <Form.Item
-          wrapperCol={{
-            offset: 0,
-            span: 24,
-          }}
-        ></Form.Item>
-      </Form>
+      <form className="space-y-4">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+      </form>
     </div>
   );
 };
