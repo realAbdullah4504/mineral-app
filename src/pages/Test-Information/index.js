@@ -34,36 +34,36 @@ const TestInformation = () => {
       <div className="flex font-bold text-[64px] w-full justify-center">
         <span className="text-[#009969] pr-3">Test</span> Services
       </div>
-      <div className="flex">
-        <div className="flex flex-col ml-[42px] text-black pt-40">
-          <button
-            onClick={() => setSelectedOption(testOptions[0])}
-            className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
-              selectedOption == testOptions[0] &&
-              "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
-            }`}
-          >
-            Organic
-          </button>
-          <button
-            onClick={() => setSelectedOption(testOptions[1])}
-            className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
-              selectedOption == testOptions[1] &&
-              "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
-            }`}
-          >
-            Inorganic
-          </button>
-        </div>
-        <div className="flex flex-col w-full ml-[58px]">
-          {selectedOption == testOptions[0] ? (
-            <OrganicTestInfo />
-          ) : (
-            <InorganicTestInfo />
-          )}
-        </div>
-      </div>
       <Container classes="w-[90%]">
+        <div className="flex">
+          <div className="flex flex-col ml-[42px] text-black pt-40">
+            <button
+              onClick={() => setSelectedOption(testOptions[0])}
+              className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
+                selectedOption == testOptions[0] &&
+                "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
+              }`}
+            >
+              Organic
+            </button>
+            <button
+              onClick={() => setSelectedOption(testOptions[1])}
+              className={`flex pl-[28px] pr-[136px] py-[30px] items-center text-4xl font-normal ${
+                selectedOption == testOptions[1] &&
+                "border-l-8 border-[#009969] bg-[#009969] bg-opacity-5 text-[#009969]"
+              }`}
+            >
+              Inorganic
+            </button>
+          </div>
+          <div className="flex flex-col w-full ml-[58px]">
+            {selectedOption == testOptions[0] ? (
+              <OrganicTestInfo />
+            ) : (
+              <InorganicTestInfo />
+            )}
+          </div>
+        </div>
         <div className="mt-[2.5rem]">
           <table className="min-w-full bg-[#009969] bg-opacity-5 border-none font-semibold text-2xl text-center mb-5">
             <tbody>
