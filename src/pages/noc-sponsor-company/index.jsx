@@ -35,45 +35,45 @@ const items = [
 ];
 
 const TableMap = () => {
-    // const columns = [
-     
-    //     {
-    //         title: 'Action',
-    //         key: 'action',
-    //         render: (_, record) => (
-    //           <Space size="middle">
-    //             <a>Invite {record.name}</a>
-    //             <a>Delete</a>
-    //           </Space>
-    //         ),
-    //       },
-    //   ];
+  // const columns = [
+
+  //     {
+  //         title: 'Action',
+  //         key: 'action',
+  //         render: (_, record) => (
+  //           <Space size="middle">
+  //             <a>Invite {record.name}</a>
+  //             <a>Delete</a>
+  //           </Space>
+  //         ),
+  //       },
+  //   ];
   const columns = [
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        render: (_, record) => (
-          <Space size="middle">
-            <a>Invite {record.name}</a>
-            <a>Delete</a>
-          </Space>
-        ),
-      },
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Invite {record.name}</a>
+          <a>Delete</a>
+        </Space>
+      ),
+    },
   ];
 
   const data = [
