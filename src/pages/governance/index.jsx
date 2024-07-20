@@ -40,30 +40,6 @@ const Governance = () => {
               Regulatory policies & legislation that govern Pakistan’s mining
               operations
             </div>
-
-            {/* <div className="flex justify-center mt-16 space-x-4">
-              <div className="flex flex-wrap justify-center cursor-pointer	">
-                <CardComponent
-                  content={{
-                    text: "Institutional Arrangement",
-                    url: "/institutional-arrangement",
-                    para: "Constitutional structure to legislate mining plans & operations to ensure transparency & regulatory compliance.",
-                    color: "#009969",
-                  }}
-                />
-              </div>
-              <div className="flex flex-wrap justify-center cursor-pointer	">
-                <CardComponent
-                  content={{
-                    text: "Policies",
-                    url: "/legal-policies",
-                    para: "Policies & rules set in place by the Government to guide decision making by industry standards for ensuring sustainable & responsible mining practices.",
-                    color: "#009969",
-                  }}
-                />
-              </div>
-            </div> */}
-
             <div className="w-full flex justify-center mt-20">
               <div className="grid grid-cols-2 w-[50%]">
                 <CardComponent
