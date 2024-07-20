@@ -9,7 +9,7 @@ function BusinessInvestment() {
     {
       title: "Test Information",
       flipContent:
-        "Mineral tests are simple physical & chemical methods of testing samples, which help to identify the mineral type. This approach is used widely in mineralogy, ore geology and general geological mapping",
+        "Mineral tests are physical & chemical methods of testing samples, which identify the mineral. This approach is used widely in mineralogy, ore geology and general geological mapping",
       link: "/test-information",
     },
     {

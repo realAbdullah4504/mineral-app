@@ -14,19 +14,19 @@ function FiscalIncentives() {
     {
       title: "Special Economic Zones",
       flipContent:
-        " SEZs are promoted around the globe as strategy to industrialize and accelerate the economic growth. They play a pivotal role in boosting the economy & are considered as a tool of national competitiveness.",
+        " SEZs are promoted around the globe as strategy to industrialize and accelerate economic growth, Playing a pivotal role in boosting the economy & considered as a tool of national competitiveness.",
       link: "/special-economic-zones",
     },
     {
       title: "Exporting Processing Zones",
       flipContent:
-        "EPZs spur economic growth through streamlined processes, tax breaks, and infrastructure support, attracting foreign investment and facilitating exports and encourage goods production for export markets.",
+        "EPZs spur economic growth through tax breaks, and infrastructure support, attracting foreign investment and facilitating exports and encourage goods production for export.",
       link: "/export-processing-zones",
     },
     {
       title: "CPEC",
       flipContent:
-        "The China-Pakistan Economic Corridor (CPEC) is a major infrastructure project designed to enhance connectivity and economic cooperation between China and Pakistan, promoting growth and strengthening bilateral ties.",
+        "The China-Pakistan Economic Corridor (CPEC) is an infrastructure project designed to enhance economic cooperation between China and Pakistan, strengthening bilateral ties.",
       link: "/fiscal-CPEC",
     },
     {

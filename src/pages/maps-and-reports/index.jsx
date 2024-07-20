@@ -14,9 +14,10 @@ function MapsAndReports() {
     },
     {
       title: "Geological Data",
-      flipContent: "Geological data provides information about the distribution & composition of minerals essential for identifying potential mineral deposits.",
+      flipContent:
+        "Geological data provides information about the distribution & composition of minerals essential for identifying potential mineral deposits.",
       link: "/access-to-geological-data",
-    }
+    },
   ];
   const breadcrumbs = [
     { path: "/", label: "Home" },
@@ -50,13 +51,16 @@ function MapsAndReports() {
           title={
             <h1>
               <span
-                className="lg:w-[125px] w-[95px] lg:mr-[7rem] mr-[3.5rem]"
+                className="lg:w-[125px] w-[95px] lg:mr-[3rem] mr-[1.5rem]"
                 style={{
                   borderBottom: "5px solid green",
                   display: "inline-block",
                   borderRadius: "5px",
                 }}
-              >Maps</span>& <span className="text-[#27AE60]">Reports</span>
+              >
+                Maps
+              </span>
+              & <span className="text-[#27AE60]">Reports</span>
             </h1>
           }
           content="This section provides an interactive display of the minerals and mining sector of Pakistan, including visualization through GIS Portal and access to geological data."
