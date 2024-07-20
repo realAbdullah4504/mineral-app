@@ -99,7 +99,6 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  
                   <div
                     className="cursor-pointer"
                     onClick={() => handleNavigate("/service-and-support")}
@@ -109,7 +108,10 @@ const Header = ({ title = "" }) => {
                   <ul className="sub_menu services_sub_menus mega_menu">
                     <div className="services_sub_menu_inner">
                       <div className="services_sub_menu">
-                        <div className="services_menu_top_left mega_menu_col">
+                        <div
+                          onClick={() => handleNavigate("/maps-and-reports")}
+                          className="services_menu_top_left mega_menu_col cursor-pointer"
+                        >
                           <h3>Maps & Reports</h3>
                           {SubMenuMapsAndReports?.map((data, i) => (
                             <Link to={data?.link} key={i}>
@@ -127,7 +129,12 @@ const Header = ({ title = "" }) => {
                         </div>
                       </div>
                       <div className="services_sub_menu">
-                        <div className="services_menu_bottom_left mega_menu_col">
+                        <div
+                          className="services_menu_bottom_left mega_menu_col cursor-pointer"
+                          onClick={() =>
+                            handleNavigate("/mineral-testing-labs")
+                          }
+                        >
                           <h3>Mineral Testing Labs</h3>
                           {SubMenuMineralTestingLabs?.map((data, i) => (
                             <Link to={data?.link} key={i}>
