@@ -70,7 +70,7 @@ const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 const RegisterOrganization = lazy(() => import("../pages/register-organization"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
-
+const NocSponsorCompanyAddList = lazy(() => import("../pages/noc-company-form"));
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -140,10 +140,7 @@ const AppRouter = () => (
           path="/service-and-support"
           element={<PublicRoute component={ServiceAndSupport} layout={DashboardLayout} />}
         />
-        <Route
-          path="/maps-and-reports"
-          element={<PublicRoute component={MapsAndReports} layout={DashboardLayout} />}
-        />
+        <Route path="/maps-and-reports" element={<PublicRoute component={MapsAndReports} layout={DashboardLayout} />} />
         <Route path="/legal-framework" element={<PublicRoute component={LegalFramework} layout={DashboardLayout} />} />
         <Route path="/fiscal-CPEC" element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />} />
         <Route path="/legal-framework" element={<PublicRoute component={LegalFramework} layout={DashboardLayout} />} />
@@ -209,7 +206,10 @@ const AppRouter = () => (
         <Route path="/legal-tax" element={<PublicRoute component={LegalTaxServices} layout={DashboardLayout} />} />
         <Route path="/academia" element={<PublicRoute component={Academia} layout={DashboardLayout} />} />
         <Route path="/associations" element={<PublicRoute component={Associations} layout={DashboardLayout} />} />
-        <Route path="/mining-professional" element={<PublicRoute component={MiningProfessional} layout={DashboardLayout} />} />
+        <Route
+          path="/mining-professional"
+          element={<PublicRoute component={MiningProfessional} layout={DashboardLayout} />}
+        />
         <Route path="/geological-map" element={<PublicRoute component={GeologicalMap} layout={DashboardLayout} />} />
         <Route
           path="/applying-for-mineral-test"
@@ -246,14 +246,18 @@ const AppRouter = () => (
           path="/registerorganization"
           element={<PublicRoute component={RegisterOrganization} layout={DashboardLayout} />}
         />
-        <Route 
-        path="/applying-for-mineral-form"
-        element={<PublicRoute component={ApplyingForMineralForm} layout={DashboardLayout} />}
-      />
-      <Route 
-        path="/noc-sponsor-company"
-        element={<PublicRoute component={NocSponsorCompany} layout={DashboardLayout} />}
-      />
+        <Route
+          path="/applying-for-mineral-form"
+          element={<PublicRoute component={ApplyingForMineralForm} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/noc-sponsor-company"
+          element={<PublicRoute component={NocSponsorCompany} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/noc-company-form"
+          element={<PublicRoute component={NocSponsorCompanyAddList} layout={DashboardLayout} />}
+        />
       </Routes>
     </Suspense>
   </Router>
