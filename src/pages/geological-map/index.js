@@ -116,6 +116,8 @@ function GeologicalMap() {
                 className="geological-map-tab"
                 style={{
                   backgroundImage: `url(${title === state ? GelogicalMapDarkbg : GelogicalMapLightbg})`,
+                  color: `${title === state ? "white" : "green"}`,
+                  borderRadius:'20px 20px 0px 0px'
                 }}
                 onClick={() => handleTab(title)}
               >

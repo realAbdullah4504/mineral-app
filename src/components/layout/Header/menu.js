@@ -47,7 +47,7 @@ export const SubMenuMapsAndReports = [
 export const SubMenuExpartriateSecurity = [
   {
     name: "NOC Sponsor Company",
-    link: "#",
+    link: "/noc-sponsor-company",
   },
   {
     name: "Expat NOC Application",

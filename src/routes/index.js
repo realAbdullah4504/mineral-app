@@ -69,6 +69,7 @@ const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 const RegisterOrganization = lazy(() => import("../pages/register-organization"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
+const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
 
 const AppRouter = () => (
   <Router>
@@ -248,6 +249,10 @@ const AppRouter = () => (
         <Route 
         path="/applying-for-mineral-form"
         element={<PublicRoute component={ApplyingForMineralForm} layout={DashboardLayout} />}
+      />
+      <Route 
+        path="/noc-sponsor-company"
+        element={<PublicRoute component={NocSponsorCompany} layout={DashboardLayout} />}
       />
       </Routes>
     </Suspense>
