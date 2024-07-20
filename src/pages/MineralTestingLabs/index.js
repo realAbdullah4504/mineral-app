@@ -15,7 +15,7 @@ function BusinessInvestment() {
     {
       title: "Apply",
       flipContent: "Apply for testing for your mineral sample",
-      link: "/minerals-test-apply",
+      link: "/applying-for-mineral-test",
     },
     {
       title: "Results",
