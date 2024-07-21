@@ -8,6 +8,7 @@ const InteractiveGisPortal= () => {
   const breadcrumbs = [
     { path: '/', label: 'Home' },
     { path: '/service-and-support', label: 'Service & Support' },
+    { path: "/maps-and-reports", label: "Maps & Reports" },
     { path: '/gis-portal', label: 'GIS Portal' },
   ];
   return (

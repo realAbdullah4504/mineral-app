@@ -40,6 +40,7 @@ const ServiceAndSupport = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
+      
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -64,7 +65,7 @@ const ServiceAndSupport = () => {
             </div>
 
             <div className="mt-20 flex justify-center">
-              <div className="grid grid-cols-3 w-[60%] gap-4">
+              <div className="service-sport-container-cards ">
                 {serviceSupportCards.map((item) => (
                   <FlipCards
                     title={item.title}

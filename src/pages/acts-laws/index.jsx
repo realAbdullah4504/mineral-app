@@ -54,7 +54,7 @@ const ActsLaws = () => {
             </div>
 
             <div className="w-full flex justify-center mt-20">
-              <div className="grid grid-cols-2 w-[50%]">
+              <div className="mineral-container-cards">
                 {actsAndLawsCards.map((item) => (
                   <FlipCards
                     title={item.title}

@@ -39,8 +39,8 @@ function FiscalIncentives() {
 
   return (
     <div
-      className="fiscal-incentivs-intro-bg"
-      style={{ backgroundImage: `url(${FiscalIncentivesBg})` }}
+      className="fiscal-incentivs-intro-bg "
+      style={{  backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`, }}
     >
       <Container classes="mt-8 w-[90%]">
         <div className="business-investment-container">
@@ -52,7 +52,7 @@ function FiscalIncentives() {
             width="100%"
             introHeight="280px"
           ></IntroContainer>
-          <div className="fiscal-incentives-container-cards">
+          <div className="fiscal-incentives-container-cards ">
             {fiscalIncentivesCards.map((item) => (
               <FlipCards
                 title={item.title}

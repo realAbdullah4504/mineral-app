@@ -8,12 +8,13 @@ const IntroContainer = ({
   content = "",
   backgroundImage = "",
   width = "70%",
+  
   introHeight = "auto",
 }) => {
   return (
     <div className="intro-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="intro-section" style={{ height: introHeight }}>
-        <div className="intro-main-section" style={{ height: height, width: width }}>
+        <div className="intro-main-section max-w-[1170px] " style={{ height: height, width: "100%" }}>
           <Breadcrumb className="bread-crumbs" separator=">" items={breadCRumbItems} />
           <div>
             <h1>{title}</h1>

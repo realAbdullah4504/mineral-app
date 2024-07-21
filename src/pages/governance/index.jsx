@@ -41,7 +41,7 @@ const Governance = () => {
               operations
             </div>
             <div className="w-full flex justify-center mt-20">
-              <div className="grid grid-cols-2 w-[50%]">
+              <div className="mineral-container-cards">
                 {/* <CardComponent
                   content={{
                     text: "Institutional Arrangement",
