@@ -75,7 +75,7 @@ export const SubMenuResearchAndDevelopment = [];
 export const SubMenuFiscal = [
   {
     name: "Taxes Structure",
-    link: "/fiscal-tax",
+    link: "/fiscal-regime-tax",
   },
   {
     name: "Royalty Fee",
@@ -191,7 +191,6 @@ export const SubMenuWhoIsWho = [
     name: "Associations",
     link: "/associations",
   },
-  
 ];
 
 export const SubMenuCSR = [

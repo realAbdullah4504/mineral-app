@@ -181,7 +181,13 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Fiscal
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/fiscal-regime")}
+                  >
+                    Fiscal
+                  </span>
+
                   <ul className="sub_menu">
                     {SubMenuFiscal?.map((data, i) => (
                       <Link to={data?.link} key={i}>
