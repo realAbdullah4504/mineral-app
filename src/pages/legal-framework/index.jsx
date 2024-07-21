@@ -1,43 +1,27 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
-
+import { FlipCards } from "components/FlipCards";
 import React from "react";
-import LinksCard from "components/Cards/linksCard";
 
-const cardContent = [
+const legalFrameworkCards = [
   {
-    text: "Governance",
-    url: "/governance",
-    color: "#009969",
-    links: [
-      { url: "/institutional-arrangement", text: "Institutional Arrangement" },
-      { url: "/legal-policies", text: "Policies" },
-    ],
-    minWidth: 80,
+    title: "Governance",
+    flipContent:
+      "Overarching framework for governing the mineral and mining sector of Pakistan and the policies related to the sector for smooth and effective management and execution.",
+    link: "/governance",
   },
   {
-    text: "Acts & Laws",
-    url: "/acts-laws",
-    color: "#009969",
-    links: [
-      { url: "/mining-operations", text: "Mining Operations" },
-      { url: "/health-safety", text: "Health and Safety" },
-    ],
-    minWidth: 80,
+    title: "Acts & Laws",
+    flipContent:
+      "Federal and Provincial acts and laws ensuring effective mining operations and health and safety considerations.",
+    link: "/acts-laws",
   },
   {
-    text: "Rules & Regulations",
-    color: "#009969",
-    url: "/rules-regulations",
-    links: [
-      {
-        url: "/consession-rules",
-        text: "Concession Rules",
-      },
-      { url: "/labor-welfare", text: "Labour Welfare" },
-    ],
-    minWidth: 80,
+    title: "Rules & Regulations",
+    flipContent:
+      "This section covers the regulations enforced by authorities for protection of labor welfare as well as the concession rules and guidelines.",
+    link: "/rules-regulations",
   },
 ];
 
@@ -79,9 +63,16 @@ const LegalFramework = () => {
               set of rules and regulations related to mining activities.
             </div>
 
-            <div className="mt-20">
-              <div className="flex flex-wrap justify-center mt-6 space-x-4">
-                <LinksCard content={cardContent} />
+            <div className="mt-20 flex justify-center">
+              <div className="grid grid-cols-3 w-[60%] gap-4">
+                {legalFrameworkCards.map((item) => (
+                  <FlipCards
+                    title={item.title}
+                    flip={true}
+                    flipContent={item.flipContent}
+                    link={item.link ? item.link : ""}
+                  ></FlipCards>
+                ))}
               </div>
             </div>
 

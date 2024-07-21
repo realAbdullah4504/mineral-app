@@ -144,31 +144,32 @@ function StartingNewBusiness() {
     },
   ];
   return (
-    <Container classes="mt-8 w-[90%]">
-      <div className="starting-business-intro">
-        <BreadCrumbs breadcrumbs={breadcrumbs} />{" "}
-        <IntroContainer
-          title="Registering your Mining Business in Pakistan"
-          content=" Pakistan has made the process of starting a new business fairly easy and simple through SECP and relevant authorities. There are several options available for interested individuals and/or businesses to set-up their mining or mining related businesses in Pakistan. In order to gain a better understanding of the types of business that can be registered in Pakistan, a brief summary is provided below:"
-          introHeight="300px"
-          width="100%"
-        ></IntroContainer>
-      </div>
-      <div>
-        {" "}
+    <>
+      <Container classes="mt-8 w-[90%]">
+        <div className="starting-business-intro">
+          <BreadCrumbs breadcrumbs={breadcrumbs} />{" "}
+          <IntroContainer
+            title="Registering your Mining Business in Pakistan"
+            content=" Pakistan has made the process of starting a new business fairly easy and simple through SECP and relevant authorities. There are several options available for interested individuals and/or businesses to set-up their mining or mining related businesses in Pakistan. In order to gain a better understanding of the types of business that can be registered in Pakistan, a brief summary is provided below:"
+            introHeight="300px"
+            width="100%"
+          ></IntroContainer>
+        </div>{" "}
         <div className="business-mining-cards">
           {" "}
           {miningPoints.map((item, index) => (
             <BusinessCards item={item} index={index}></BusinessCards>
           ))}
         </div>
-        <div className="image-wrapper">
-          <img
-            src={StartingBusiness}
-            alt="Starting Business"
-            className="cropped-image"
-          />
-        </div>
+      </Container>
+      <div className="w-full">
+        <img
+          src={StartingBusiness}
+          alt="Full Width"
+          className="w-full h-full object-center"
+        />
+      </div>
+      <Container classes="mt-8 w-[90%]">
         <div className="starting-business-investor">
           <IntroContainer
             title={
@@ -239,8 +240,8 @@ function StartingNewBusiness() {
             </ul>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }
 export default StartingNewBusiness;

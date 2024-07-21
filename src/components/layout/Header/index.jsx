@@ -50,9 +50,9 @@ const Header = ({ title = "" }) => {
             <div className="header_top_inner">
               <div className="header_column" id="flexible-width-1">
                 <div className="header_menu_1">
-                  <Link to="#">About Us</Link>
+                  <Link to="/">About Us</Link>
                   <Link to="#">News</Link>
-                  <Link to="#">FAQs</Link>
+                  <Link to="/faqs">FAQs</Link>
                 </div>
               </div>
               <div className="header_column header_logo" id="fixed-width">
@@ -181,7 +181,13 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Fiscal
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/fiscal-regime")}
+                  >
+                    Fiscal
+                  </span>
+
                   <ul className="sub_menu">
                     {SubMenuFiscal?.map((data, i) => (
                       <Link to={data?.link} key={i}>
