@@ -71,6 +71,7 @@ const RegisterOrganization = lazy(() => import("../pages/register-organization")
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
 const NocSponsorCompanyAddList = lazy(() => import("../pages/noc-company-form"));
+const ExpatNocApplication = lazy(() => import("../pages/expact-noc-application"));
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -257,6 +258,10 @@ const AppRouter = () => (
         <Route
           path="/noc-company-form"
           element={<PublicRoute component={NocSponsorCompanyAddList} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/expact-noc-application"
+          element={<PublicRoute component={ExpatNocApplication} layout={DashboardLayout} />}
         />
       </Routes>
     </Suspense>

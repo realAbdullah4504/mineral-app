@@ -3,51 +3,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { Badge, Dropdown, Space, Table } from "antd";
 import MoreInfo from "assets/images/geomapinfo.png";
 
-const items = [
-  {
-    key: "1",
-    label: "Edit",
-  },
-  {
-    key: "2",
-    label: "View Application",
-  },
-  {
-    key: "3",
-    label: "View Sample Details",
-  },
-  {
-    key: "4",
-    label: "Add Shipment Details",
-  },
-  {
-    key: "5",
-    label: "Payment",
-  },
-  {
-    key: "6",
-    label: "View Report",
-  },
-  {
-    key: "7",
-    label: "Request Retest",
-  },
-];
-
 const TableMap = () => {
-  // const columns = [
-
-  //     {
-  //         title: 'Action',
-  //         key: 'action',
-  //         render: (_, record) => (
-  //           <Space size="middle">
-  //             <a>Invite {record.name}</a>
-  //             <a>Delete</a>
-  //           </Space>
-  //         ),
-  //       },
-  //   ];
   const columns = [
     {
       title: "Name",
