@@ -7,6 +7,7 @@ import { DashboardLayout } from "components";
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
+const FAQs = lazy(() => import("../pages/faqs"));
 const InvestmentOpportunity = lazy(() =>
   import("../pages/investment-opportunities")
 );
@@ -647,6 +648,10 @@ const AppRouter = () => (
           element={
             <PublicRoute component={FiscalRegimeTax} layout={DashboardLayout} />
           }
+        />
+        <Route
+          path="/faqs"
+          element={<PublicRoute component={FAQs} layout={DashboardLayout} />}
         />
       </Routes>
     </Suspense>
