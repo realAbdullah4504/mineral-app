@@ -186,7 +186,7 @@ const AppRouter = () => (
           }
         />
         <Route
-          path="/development-schemes"
+          path="/development-initiatives"
           element={
             <PublicRoute
               component={DevelopmentSchemes}

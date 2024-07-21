@@ -24,8 +24,8 @@ export const SubMenuInvestment = [
     link: "/applying-for-mineral-title",
   },
   {
-    name: "Development Schemes",
-    link: "/development-schemes",
+    name: "Development Initiatives",
+    link: "/development-initiatives",
   },
   {
     name: "Starting New Business",
