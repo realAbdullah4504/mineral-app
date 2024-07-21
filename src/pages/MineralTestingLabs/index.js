@@ -34,22 +34,27 @@ function BusinessInvestment() {
       style={{
         width: "100%",
         height: "auto",
-        backgroundImage: `url(${FiscalIncentivesBg})`,
+        backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        paddingBottom:"150px"
       }}
     >
       <div className="business-investment-container">
         <div
           style={{
-            marginLeft: "70px",
+            // marginLeft: "70px",
             marginTop: "30px",
           }}
+          className="px-14"
         >
+          <div className="max-w-[1440px]  relative m-auto">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+          </div>
         </div>
         <IntroContainer
           title={
@@ -72,7 +77,7 @@ function BusinessInvestment() {
           width="80%"
           introHeight="280px"
         ></IntroContainer>
-        <div className="business-investment-container-cards">
+        <div className="mineral-container-cards">
           {businessAndInvestmentcards.map((item) => (
             <FlipCards
               title={item.title}

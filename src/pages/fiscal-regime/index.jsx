@@ -1,34 +1,35 @@
 import BreadCrumbs from "components/Breadcrumbs";
-import { Container } from "components/UI";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
+import { Container } from "components/UI";
 import React from "react";
+import IntroContainer from "components/IntroContainer";
 import { FlipCards } from "components/FlipCards";
 
-const serviceSupportCards = [
-  {
-    title: "Maps and Reports",
-    flipContent:
-      "This section provides an interactive display of the minerals and mining sector of Pakistan, including visualization through GIS Portal and access to geological data.",
-    link: "/maps-and-reports",
-  },
-  {
-    title: "Mineral Testing Labs",
-    flipContent:
-      "This section provides information about the various tests related to minerals to know more about their composition and properties.",
-    link: "/mineral-testing-labs",
-  },
-  {
-    title: "Expatriate Security",
-    flipContent:
-      "Procedures for expat NOC clearance for setting up a mining company in Pakistan",
-    link: "#",
-  },
-];
-
-const ServiceAndSupport = () => {
+const InitiativesProjects = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "#", label: "Services and Support" },
+    { path: "/fiscal-regime", label: "Fiscal Regime" },
+  ];
+
+  const fiscalCards = [
+    {
+      title: "Tax Structure",
+      flipContent:
+        "Info on Different Taxes i.e. Income tax, Withholding tax and other applicable taxes.",
+      link: "/fiscal-regime-tax",
+    },
+    {
+      title: "Royalties",
+      flipContent:
+        "Info on Rate of Royalties for each mineral, as per rules of each provincial government.",
+      link: "/royalty-fee",
+    },
+    {
+      title: "Cess & Levies",
+      flipContent:
+        "Info on different Cess & Levies that companies need to comply by.",
+      link: "/cess",
+    },
   ];
 
   return (
@@ -40,7 +41,6 @@ const ServiceAndSupport = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
-      
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -50,7 +50,7 @@ const ServiceAndSupport = () => {
         <div className="flex flex-wrap mt-[20px]">
           <div className="max-w-[100%]">
             <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
-              Services and Support
+              Fiscal Regime
               <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
             </h1>
             <div
@@ -65,18 +65,22 @@ const ServiceAndSupport = () => {
             </div>
 
             <div className="mt-20 flex justify-center">
-              <div className="service-sport-container-cards ">
-                {serviceSupportCards.map((item) => (
+              <div className="grid grid-cols-3 w-[60%] gap-4">
+                {fiscalCards.map((item) => (
                   <FlipCards
                     title={item.title}
                     flip={true}
                     flipContent={item.flipContent}
                     link={item.link ? item.link : ""}
-                  ></FlipCards>
+                    changebg={true}
+                    className=""
+                  />
                 ))}
               </div>
             </div>
+
             {/* large gap */}
+
             <div className="mt-64"></div>
           </div>
         </div>
@@ -85,4 +89,4 @@ const ServiceAndSupport = () => {
   );
 };
 
-export default ServiceAndSupport;
+export default InitiativesProjects;

@@ -1,27 +1,16 @@
-import BreadCrumbs from "components/Breadcrumbs";
+import React from "react";
 import { Container } from "components/UI";
+import { FlipCards } from "components/FlipCards";
+import BreadCrumbs from "components/Breadcrumbs";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 
-import React from "react";
-import { FlipCards } from "components/FlipCards";
 
-const rulesAndRegulationsCards = [
-  {
-    title: "Concession Rules",
-    link: "/consession-rules",
-  },
-  {
-    title: "Labor Welfare",
-    link: "/labor-welfare",
-  }
-];
-
-const RulesRegulations = () => {
-  const breadcrumbs = [
-    { path: "/", label: "Home" },
-    { path: "/legal-framework", label: "Legal Framework" },
-    { path: "#", label: "Rules & Regulations" },
-  ];
+const ExpatriateSecurity = () => {
+    const breadcrumbs = [
+        { path: '/', label: 'Home' },
+        { path: '/service-and-support', label: 'Service & Support' },
+        { path: "/expatriate-security", label: "Expatriate Security" },
+      ];
 
   return (
     <div
@@ -41,32 +30,39 @@ const RulesRegulations = () => {
         <div className="flex flex-wrap mt-[20px]">
           <div className="w-full">
             <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
-            Rules & Regulations
+            Expatriate Security
               <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
             </h1>
             <div
               className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
               style={{ whiteSpace: "pre-line" }}
             >
-              Guidelines and procedures set in place for all aspects of mining.
+              Procedures for expat NOC clearance for setting up a mining company in Pakistan/
             </div>
-
             <div className="w-full flex justify-center mt-20">
               <div className="mineral-container-cards">
-              {rulesAndRegulationsCards.map((item) => (
                 <FlipCards
-                  title={item.title}
-                  flip={false}
-                  link={item?.link}
-                  changebg={false}
-                />
-              ))}
+                  title={"Expat NOC Application"}
+                  flip={true}
+                  flipContent={
+                    "Security clearance form for expatriates"
+                  }
+                  link={"/noc-sponsor-company"}
+                ></FlipCards>
+                <FlipCards
+                  title={"Company Registration"}
+                  flip={true}
+                  flipContent={
+                    "Register your company for access to Portal features."
+                  }
+                  link={"#"}
+                ></FlipCards>
               </div>
             </div>
 
             {/* large gap */}
 
-            <div className="mt-64 "></div>
+            <div className="mt-64"></div>
           </div>
         </div>
       </Container>
@@ -74,4 +70,4 @@ const RulesRegulations = () => {
   );
 };
 
-export default RulesRegulations;
+export default ExpatriateSecurity;

@@ -7,6 +7,7 @@ import { DashboardLayout } from "components";
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
+const FAQs = lazy(() => import("../pages/faqs"));
 const InvestmentOpportunity = lazy(() => import("../pages/investment-opportunities"));
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
 const CSRInitiatives = lazy(() => import("../pages/csr-initiatives"));
@@ -18,10 +19,12 @@ const CSR = lazy(() => import("../pages/csr"));
 const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"));
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
+const FiscalRegimeTax = lazy(() => import("../pages/fiscal-regime-tax"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
 const SpecialEconomicZones = lazy(() => import("../pages/SpecialEconomicZones"));
 const FiscalExportProcessing = lazy(() => import("../pages/fiscalExportProcessing"));
 const Governance = lazy(() => import("../pages/governance"));
+const ExpatriateSecurity = lazy(() => import("../pages/expatriate-security"));
 const ActsLaws = lazy(() => import("../pages/acts-laws"));
 const RulesRegulations = lazy(() => import("../pages/rules-regulations"));
 const MineralTestingLabs = lazy(() => import("../pages/MineralTestingLabs"));
@@ -47,7 +50,7 @@ const FiscalTax = lazy(() => import("../pages/fiscalTax"));
 const FiscalTab = lazy(() => import("../pages/FiscalTab"));
 const Royalties = lazy(() => import("../pages/Roylaties"));
 const Cess = lazy(() => import("../pages/cess"));
-// const Fiscal = lazy(() => import('../pages/fiscal'));
+const Fiscal = lazy(() => import("../pages/fiscal-regime"));
 const TrainingSkill = lazy(() => import("../pages/training-skill"));
 const WhoIsWho = lazy(() => import("../pages/who-is-who"));
 const GovernmentOrganization = lazy(() => import("../pages/government-departments"));
@@ -110,7 +113,7 @@ const AppRouter = () => (
           element={<PublicRoute component={ApplyingForMineralTitle} layout={DashboardLayout} />}
         />
         <Route
-          path="/development-schemes"
+          path="/development-initiatives"
           element={<PublicRoute component={DevelopmentSchemes} layout={DashboardLayout} />}
         />
 
@@ -258,6 +261,16 @@ const AppRouter = () => (
         <Route
           path="/noc-company-form"
           element={<PublicRoute component={NocSponsorCompanyAddList} layout={DashboardLayout} />}
+        />
+        <Route path="/fiscal-regime" element={<PublicRoute component={Fiscal} layout={DashboardLayout} />} />
+        <Route
+          path="/fiscal-regime-tax"
+          element={<PublicRoute component={FiscalRegimeTax} layout={DashboardLayout} />}
+        />
+        <Route path="/faqs" element={<PublicRoute component={FAQs} layout={DashboardLayout} />} />
+        <Route
+          path="/expatriate-security"
+          element={<PublicRoute component={ExpatriateSecurity} layout={DashboardLayout} />}
         />
         <Route
           path="/expact-noc-application"
