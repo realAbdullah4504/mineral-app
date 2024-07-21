@@ -1,6 +1,7 @@
 import React from "react";
-import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown, Space, Table } from "antd";
+import { Space, Table } from "antd";
+import BreadCrumbs from 'components/Breadcrumbs'
+import {Container} from 'components/UI'
 import MoreInfo from "assets/images/geomapinfo.png";
 
 const items = [
@@ -35,19 +36,12 @@ const items = [
 ];
 
 const TableMap = () => {
-  // const columns = [
-
-  //     {
-  //         title: 'Action',
-  //         key: 'action',
-  //         render: (_, record) => (
-  //           <Space size="middle">
-  //             <a>Invite {record.name}</a>
-  //             <a>Delete</a>
-  //           </Space>
-  //         ),
-  //       },
-  //   ];
+    const breadcrumbs = [
+        { path: '/', label: 'Home' },
+        { path: '/service-and-support', label: 'Service & Support' },
+        { path: "/expatriate-security", label: "Expatriate Security" },
+        { path: '/noc-sponsor-company', label: 'NOC Company' },
+      ];
   const columns = [
     {
       title: "Name",
@@ -86,8 +80,10 @@ const TableMap = () => {
   ];
 
   return (
-    <div className="table-data">
-      <div className="mineral-testing-title">NOC Sponsor Company</div>
+     <div className="table-data">
+   <Container classes="mt-10">
+  <BreadCrumbs breadcrumbs={breadcrumbs} />
+      {/* <div className="mineral-testing-title">NOC Sponsor Company</div> */}
       <div className="mineral-testing-table-header">
         <div></div>
         <div>
@@ -129,6 +125,7 @@ const TableMap = () => {
         </div>
       </div>
       <Table columns={columns} dataSource={data} pagination={false} />
+   </Container>
     </div>
   );
 };

@@ -34,6 +34,7 @@ const FiscalExportProcessing = lazy(() =>
   import("../pages/fiscalExportProcessing")
 );
 const Governance = lazy(() => import("../pages/governance"));
+const ExpatriateSecurity = lazy(() => import("../pages/expatriate-security"));
 const ActsLaws = lazy(() => import("../pages/acts-laws"));
 const RulesRegulations = lazy(() => import("../pages/rules-regulations"));
 const MineralTestingLabs = lazy(() => import("../pages/MineralTestingLabs"));
@@ -653,6 +654,11 @@ const AppRouter = () => (
           path="/faqs"
           element={<PublicRoute component={FAQs} layout={DashboardLayout} />}
         />
+        <Route
+          path="/expatriate-security"
+          element={<PublicRoute component={ExpatriateSecurity} layout={DashboardLayout} />}
+        />
+        
       </Routes>
     </Suspense>
   </Router>
