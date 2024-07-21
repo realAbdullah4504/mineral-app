@@ -17,6 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 150px;
 }
 
 .intro-container {
@@ -49,7 +50,7 @@
 .intro-main-section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .intro-main-section div h1 {
   font-size: 64px;

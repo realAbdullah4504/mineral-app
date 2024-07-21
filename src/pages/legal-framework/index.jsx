@@ -64,7 +64,7 @@ const LegalFramework = () => {
             </div>
 
             <div className="mt-20 flex justify-center">
-              <div className="grid grid-cols-3 w-[60%] gap-4">
+              <div className="service-sport-container-cards">
                 {legalFrameworkCards.map((item) => (
                   <FlipCards
                     title={item.title}
