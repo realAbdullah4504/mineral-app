@@ -4,27 +4,42 @@ import MoreInfo from "assets/images/geomapinfo.png";
 function NocListing({ setState }) {
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Expat Name",
+      dataIndex: "expat-name",
+      key: "expat name",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Nationality",
+      dataIndex: "nationality",
+      key: "nationality",
+    },
+    {
+      title: "Visit Place",
+      dataIndex: "visit-place",
+      key: "visit-place",
+    },
+    {
+      title: "When was it applied",
+      dataIndex: "applied-time",
+      key: "applied-time",
+    },
+    {
+      title: "Application Status",
+      dataIndex: "application-status",
+      key: "application-status",
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <a>View {record.name}</a>
+          <a>Edit</a>
         </Space>
       ),
     },
@@ -32,21 +47,23 @@ function NocListing({ setState }) {
 
   const data = [
     {
-      key: "1",
-      name: "Ali Akbar",
-      age: "29",
-      address: "Faisalabad",
+      id: "1",
+      "expat-name": "Ali Akbar",
+      nationality: "29",
+      "visit-place": "Faisalabad",
+      "applied-time": "Saturday",
+      "application-status": "Pending",
     },
   ];
   return (
-    <div className="table-data">
+    <div>
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Applications</div>
         <div>
           {" "}
           <div className="geological-moreinfo hover:text-black " style={{ paddingBottom: "0px" }}>
             {" "}
-            <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setState("form")}>
+            <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setState("NocForm")}>
               <div
                 style={{
                   padding: "40px",
@@ -55,7 +72,7 @@ function NocListing({ setState }) {
                 }}
               >
                 {" "}
-                <div>Apply NOC Application</div>
+                <div className="mt-1">Apply NOC Application</div>
                 <svg
                   style={{ opacity: "0.5", paddingBottom: "5px" }}
                   xmlns="http://www.w3.org/2000/svg"
