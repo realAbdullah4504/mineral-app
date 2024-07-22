@@ -71,7 +71,7 @@ const Header = ({ title = "" }) => {
                 ) : (
                   <div className="header_menu_2">
                     <Link to="/login">Log in</Link>
-                    <Link to="#">Sign up</Link>
+                    <Link to="/signup">Sign up</Link>
                   </div>
                 )}
               </div>
