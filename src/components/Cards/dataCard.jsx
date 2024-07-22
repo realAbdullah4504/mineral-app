@@ -30,7 +30,7 @@ const DataCard = ({ type, data }) => {
       ) : (
         <div className="w-full max-w-[18rem] border-2 rounded-lg shadow-xl">
           <div className="relative">
-            {data?.logo == "mp" ? (
+            {data?.logo ? (
               <img
                 src={data?.logo || sampleImage}
                 width={200}

@@ -377,7 +377,7 @@ const RegisterOrganization = () => {
             className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
             style={{ whiteSpace: "pre-line" }}
           >
-            Government Organizations <strong>Apply for Registration</strong>
+        <strong>Apply for Registration</strong>
           </div>
         </div>
 
