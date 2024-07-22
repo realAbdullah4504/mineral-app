@@ -70,7 +70,7 @@ const StatisticsEmployement = lazy(() => import("../pages/statistics-employement
 const StatisticsProduction = lazy(() => import("../pages/statistics-production"));
 const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
-const RegisterOrganization = lazy(() => import("../pages/register-organization"));
+const RegisterOrganization = lazy(() => import("../components/register-form"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
 const NocSponsorCompanyAddList = lazy(() => import("../pages/noc-company-form"));
