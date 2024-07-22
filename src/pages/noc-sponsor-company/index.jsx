@@ -52,12 +52,15 @@ const TableMap = () => {
     <div className="table-data">
       <Container classes="mt-10">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
-        {/* <div className="mineral-testing-title">NOC Sponsor Company</div> */}
+        <div className="mineral-testing-title">NOC Sponsor Company</div>
         <div className="mineral-testing-table-header">
           <div></div>
           <div>
             {" "}
-            <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
+            <div
+              className="geological-moreinfo"
+              style={{ paddingBottom: "0px" }}
+            >
               {" "}
               <button style={{ backgroundImage: `url(${MoreInfo})` }}>
                 <a href="/noc-company-form">
