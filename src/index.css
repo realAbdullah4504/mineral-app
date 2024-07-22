@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-.title{
-    font-weight: 600;
-    font-size: 64px;
-    line-height: 84px;
+.title {
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 84px;
 }
-
 
 .service-sport-container-cards {
   display: grid;
@@ -24,12 +20,12 @@
 }
 
 .mineral-container-cards {
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(277px, 1fr)
-    ); /* Minimum width 277px, expand to fill remaining space */
-    gap: 20px; /* Horizontal and vertical gap */
-    width: 50%;
-    margin: 40px auto 30px auto;
-  }
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(277px, 1fr)
+  ); /* Minimum width 277px, expand to fill remaining space */
+  gap: 20px; /* Horizontal and vertical gap */
+  width: 50%;
+  margin: 40px auto 30px auto;
+}

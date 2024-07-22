@@ -21,7 +21,6 @@ import {
 } from "./menu";
 import { getCookie } from "services/session/cookies";
 import { logOut } from "utils/helpers";
-import BreadCrumbs from "components/Breadcrumbs";
 
 const Header = ({ title = "" }) => {
   const [menuMobile, setMobileMenu] = useState(false);

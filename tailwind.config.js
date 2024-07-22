@@ -22,6 +22,8 @@ export default {
           "url('/src/assets/images/InstitutionalArrangement.png')",
         "radioactive-minerals":
           "url('/src/assets/images/RadioActiveMinerals.png')",
+        login2: "url('/src/assets/images/login2.png')",
+        login1: "url('/src/assets/images/login1.png')",
       },
       fontFamily: {
         "roboto-condensed": ['"Roboto Condensed"', "sans-serif"],
