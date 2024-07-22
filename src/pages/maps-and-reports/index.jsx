@@ -74,15 +74,33 @@ function MapsAndReports() {
           introHeight="280px"
         ></IntroContainer>
         <Container classes="w-[90%]">
-          <div className="flex justify-around">
-            {businessAndInvestmentcards.map((item) => (
-              <FlipCards
-                title={item.title}
-                flip={true}
-                flipContent={item.flipContent}
-                link={item.link ? item.link : ""}
-              ></FlipCards>
-            ))}
+          <div className="flex w-full justify-center">
+            <div className="flex w-[650px]">
+              <div className="flex flex-col w-1/2">
+                <FlipCards
+                  title={businessAndInvestmentcards[0].title}
+                  flip={true}
+                  flipContent={businessAndInvestmentcards[0].flipContent}
+                  link={
+                    businessAndInvestmentcards[0].link
+                      ? businessAndInvestmentcards[0].link
+                      : ""
+                  }
+                ></FlipCards>
+              </div>
+              <div className="flex flex-col w-1/2">
+                <FlipCards
+                  title={businessAndInvestmentcards[1].title}
+                  flip={true}
+                  flipContent={businessAndInvestmentcards[1].flipContent}
+                  link={
+                    businessAndInvestmentcards[1].link
+                      ? businessAndInvestmentcards[1].link
+                      : ""
+                  }
+                ></FlipCards>
+              </div>
+            </div>
           </div>
         </Container>
       </div>
