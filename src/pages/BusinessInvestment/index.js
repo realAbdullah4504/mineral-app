@@ -65,8 +65,8 @@ function BusinessInvestment() {
 
   return (
     <div
+      className="w-full"
       style={{
-        width: "100%",
         height: "auto",
         backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
@@ -77,20 +77,24 @@ function BusinessInvestment() {
       }}
     >
       <Container classes="mt-8 w-[90%]">
-        <div className="business-investment-container">
-          <BreadCrumbs breadcrumbs={breadcrumbs} />
-          <IntroContainer
-            title={
-              <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
-                Business & Investment
-                <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
-              </h1>
-            }
-            content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment."
-            height="70%"
-            width="100%"
-            introHeight="280px"
-          ></IntroContainer>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+        <div className="flex flex-wrap mt-[20px]">
+          <div>
+            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+              Business & Investment
+              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
+            </h1>
+            <div
+              className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
+              style={{ whiteSpace: "pre-line" }}
+            >
+              The Minerals and Mining sector of Pakistan has tremendous
+              potential for long term sustainable development. Being a
+              mineral-rich country, Pakistan offers a diverse range of minerals
+              and gemstones, across the country, with massive potential for
+              national and foreign investment.
+            </div>
+          </div>
 
           <div className="business-investment-container-cards">
             {businessAndInvestmentcards.map((item) => (

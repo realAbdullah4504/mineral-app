@@ -7,6 +7,7 @@ import { DashboardLayout } from "components";
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
+const signup = lazy(() => import("../pages/signup"));
 const FAQs = lazy(() => import("../pages/faqs"));
 const InvestmentOpportunity = lazy(() =>
   import("../pages/investment-opportunities")
@@ -119,7 +120,36 @@ const AppRouter = () => (
         />
         <Route
           path="/login"
-          element={<PublicRoute component={Login} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={Login}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute
+              component={signup}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute
+              component={Login}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
         />
         <Route
           path="/mineral-potential"
