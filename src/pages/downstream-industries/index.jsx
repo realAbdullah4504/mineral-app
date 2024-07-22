@@ -2,6 +2,7 @@ import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import DownstreamIndustriesImg from "assets/images/downstream-industries.png";
 import React from "react";
+import DataCard from "components/Cards/dataCard";
 
 const DownstreamIndustries = () => {
   const breadcrumbs = [
@@ -9,6 +10,11 @@ const DownstreamIndustries = () => {
     { path: "/who-is-who", label: "Who is Who" },
     { path: "#", label: "Downstream Industries" },
   ];
+
+  const Adddata = {
+    headline: "Apply for Registration",
+    link: '/registerorganization?orgtype=go'
+  };
 
   return (
     <Container classes="mt-8 w-[90%]">
@@ -20,9 +26,19 @@ const DownstreamIndustries = () => {
             <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
           </h1>
 
-          <div className="rounded-md mt-5 mb-[13.5px] w-full justify-start flex">
-            <img className="w-full object-cover" src={DownstreamIndustriesImg} alt="" />
-          </div>
+          <div className="w-full flex justify-center mt-16">
+              <div className="flex flex-wrap justify-center gap-20 p-4">
+                <DataCard type={"add"} data={Adddata} />
+                <DataCard type={"detail"} data={{headline: "Bolan Mining Enterprises (BME)"}} />
+                <DataCard type={"detail"} data={{headline: "Oil Industries Pakistan Limited"}} />
+                <DataCard type={"detail"} data={{headline: "Lucky Cement Limited"}} />
+                <DataCard type={"detail"} data={{headline: "Askari Cement Limited"}} />
+                <DataCard type={"detail"} data={{headline: "Attock Cement Pakistan Limited"}} />
+                <DataCard type={"detail"} data={{headline: "Pioneer Cement Limited"}} />
+              </div>
+            </div>
+
+            <div className="mt-80"></div>
         </div>
       </div>
     </Container>

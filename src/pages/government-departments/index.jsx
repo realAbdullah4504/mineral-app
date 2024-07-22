@@ -1,6 +1,6 @@
   import BreadCrumbs from "components/Breadcrumbs";
   import { Container } from "components/UI";
-  import addIcon from "assets/images/addIcon.svg";
+  import LogoImg from "assets/images/logo.jpg";
   import React from "react";
   import DataCard from "components/Cards/dataCard";
 
@@ -8,6 +8,10 @@
     headline: "Apply for Registration",
     link: '/registerorganization?orgtype=go'
   };
+
+  const cardData = {
+    headline: "National Mineral Data Cell (NMDC)",
+  }
 
   const GovernmentOrganization = () => {
     const breadcrumbs = [
@@ -32,11 +36,11 @@
             <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={data} />
-                <DataCard type={"detail"} data={data} />
-                <DataCard type={"detail"} data={data} />
-                <DataCard type={"detail"} data={data} />
-                <DataCard type={"detail"} data={data} />
-                <DataCard type={"detail"} data={data} />
+                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)", logo: LogoImg}} />
+                <DataCard type={"detail"} data={{headline: "Ministry of Energy (Petroleum Division)", logo: LogoImg}} />
+                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)"}} />
+                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)"}} />
+                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)"}} />
               </div>
             </div>
 

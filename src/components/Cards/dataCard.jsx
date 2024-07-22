@@ -4,16 +4,19 @@ import sampleImage from "assets/images/data-card.png";
 import { useNavigate } from "react-router-dom";
 
 const DataCard = ({ type, data }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleNavigate = (url) => {
-    navigate(url)
-  }
+    navigate(url);
+  };
 
   return (
     <>
       {type == "add" ? (
-        <div className="w-full max-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer" onClick={() => handleNavigate(data.link)}>
+        <div
+          className="w-full max-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
+          onClick={() => handleNavigate(data.link)}
+        >
           <div className="flex flex-col items-center space-y-4 ">
             <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
               <img src={addIcon} alt="" />
@@ -27,18 +30,23 @@ const DataCard = ({ type, data }) => {
       ) : (
         <div className="w-full max-w-[18rem] border-2 rounded-lg shadow-xl">
           <div className="relative">
-            <img
-              src={sampleImage}
-              width={200}
-              height={100}
-              alt="Logo"
-              className="mx-auto mt-4 aspect-[2/1] overflow-hidden rounded-lg object-contain object-center"
-            />
+            {data?.logo == "mp" ? (
+              <img
+                src={data?.logo || sampleImage}
+                width={200}
+                height={100}
+                alt="Logo"
+                className="mx-auto mt-4 aspect-[2/1] overflow-hidden rounded-lg object-contain object-center"
+              />
+            ) : (
+              <div className="flex items-center justify-center w-[200px] h-[100px] bg-[#fff] rounded-full"></div>
+            )}
+
             <div className="absolute inset-x-0 bottom-0 h-1 bg-[#049e6c]" />
           </div>
           <div className="space-y-4 p-6 bg-[#f5fffc]">
             <h3 className="text-[18px] font-bold text-[#049e6c]">
-              Pakistan Mineral Development Corporation (PMDC)
+              {data.headline}
             </h3>
 
             <h5 className="text-gray-600 ">Rg # 123456</h5>
