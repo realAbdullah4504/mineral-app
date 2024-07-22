@@ -1,94 +1,189 @@
 import React from "react";
+import { Dropdown, Space, Table } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
-import { Container } from "components/UI";
-import whiteArrow from "assets/images/whiteArrow.svg";
+import MoreInfo from "assets/images/geomapinfo.png";
+
+const items = [
+  {
+    key: "1",
+    label: "Edit",
+  },
+  {
+    key: "2",
+    label: "View Suggestion",
+  },
+  {
+    key: "3",
+    label: "View Suggestion Details",
+  },
+  {
+    key: "6",
+    label: "View Report",
+  },
+  {
+    key: "7",
+    label: "Request Re Evaluation",
+  },
+];
 
 const CsrCommunity = () => {
+  const columns = [
+    {
+      title: "Sr. No",
+      dataIndex: "srNo",
+      key: "srNo",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => {
+        return <strong>{text}</strong>;
+      },
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Mobile Number",
+      dataIndex: "mobileNumber",
+      key: "mobileNumber",
+    },
+    {
+      title: "Comment Type",
+      dataIndex: "commentType",
+      key: "commentType",
+    },
+    {
+      title: "Comment",
+      dataIndex: "comment",
+      key: "comment",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => {
+        let color;
+        switch (text) {
+          case "In Progress":
+            color = "green";
+
+            break;
+          case "Approved":
+            color = "yellow";
+            break;
+          case "Rejected":
+            color = "red";
+            break;
+          case "Done":
+            color = "black";
+            break;
+          default:
+            color = "default";
+        }
+        return <span style={{ color, fontWeight: "bold" }}>{text}</span>;
+      },
+    },
+    {
+      title: "Action",
+      key: "operation",
+      render: () => (
+        <Space size="middle">
+          <Dropdown
+            menu={{
+              items,
+            }}
+            trigger={["click"]}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                />
+              </svg>
+            </a>
+          </Dropdown>
+        </Space>
+      ),
+    },
+  ];
+
+  const data = [
+    {
+      key: "1",
+      srNo: 1,
+      name: "Suggestion for waste management",
+      email: "HashaamEjaz@gmail.com",
+      mobileNumber: "+92 311 0000000",
+      commentType: "suggestions",
+      comment: "Please add more trucks for waste disposal to avoid blockages",
+      status: "In Progress",
+    },
+  ];
+
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "csr", label: "CSR" },
-    { path: "csr-community", label: "Community Engagement" },
+    { path: "csr-community", label: "Voice Of Community" },
   ];
+
   return (
-    <Container classes="w-[90%]">
-      <div className="flex flex-col">
-        <div className="flex mb-[62px] mt-[41px]">
-          <BreadCrumbs breadcrumbs={breadcrumbs} />
-        </div>
-        <div className="flex font-semibold text-[64px] mb-[60px]">
-          Community <span className="pl-4 text-[#009969]">Engagement</span>
-        </div>
-        <div className="flex">
-          <form action="">
-            <div className="flex flex-col">
-              <div className="flex mb-[36px]">
-                <div className="flex flex-col mr-6">
-                  <label htmlFor="" className="text-sm font-normal pl-1 pb-1">
-                    Person Name
-                  </label>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Person Name"
-                    className="bg-[#F3F3F4] rounded-[8px] w-[360px] h-[56px] pl-3 placeholder-black"
-                  />
+    <div className="table-data">
+      <div className="mt-[50px] mb-[50px]">
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
+      <div className="mineral-testing-table-header">
+        <div>My Suggestions</div>
+        <div>
+          <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
+            <button style={{ backgroundImage: `url(${MoreInfo})` }}>
+              <a href="/csr-community-form">
+                <div
+                  style={{
+                    padding: "40px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <div>Add Suggestion</div>
+                  <svg
+                    style={{ opacity: "0.5", paddingBottom: "5px" }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
                 </div>
-                <div className="flex flex-col mr-6">
-                  <label htmlFor="" className="text-sm font-normal pl-1 pb-1">
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Enter Email"
-                    className="bg-[#F3F3F4] rounded-[8px] w-[360px] h-[56px] pl-3 placeholder-black"
-                  />
-                </div>
-                <div className="flex flex-col mr-6">
-                  <label htmlFor="" className="text-sm font-normal pl-1 pb-1">
-                    Mobile Number
-                  </label>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Enter Mobile Number"
-                    className="bg-[#F3F3F4] rounded-[8px] w-[360px] h-[56px] pl-3 placeholder-black"
-                  />
-                </div>
-              </div>
-              <div className="flex mb-[60px]">
-                <div className="flex flex-col mr-6">
-                  <label htmlFor="" className="text-sm font-normal pl-1 pb-1">
-                    Add Comment
-                  </label>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    placeholder="Type your suggestion here"
-                    className="bg-[#F3F3F4] rounded-[8px] w-[1132px] h-[112px] pl-6 pb-14 placeholder-black "
-                  />
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="flex bg-[#27AE60] rounded-[28px] items-center justify-center w-[280px] h-[56px] ml-auto mr-4 mb-[593px] cursor-pointer text-white"
-              >
-                <div className="flex flex-col w-1/2 items-end">Continue</div>
-                <div className="flex flex-col w-1/2">
-                  <div className="flex rounded-full bg-white bg-opacity-10 justify-center w-[32px] h-[32px] ml-[90px]">
-                    <img src={whiteArrow} alt="arrow right" />
-                  </div>
-                </div>
-              </button>
-            </div>
-          </form>
+              </a>
+            </button>
+          </div>
         </div>
       </div>
-    </Container>
+      <div className="mb-[150px]">
+        <Table columns={columns} dataSource={data} pagination={false} />
+      </div>
+    </div>
   );
 };
 

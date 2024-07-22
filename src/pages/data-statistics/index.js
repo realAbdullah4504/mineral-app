@@ -46,7 +46,7 @@ function Csr() {
       style={{
         width: "100%",
         height: "auto",
-        backgroundImage: `url(${FiscalIncentivesBg})`,
+        backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",

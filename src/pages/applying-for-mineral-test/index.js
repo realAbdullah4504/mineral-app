@@ -1,6 +1,6 @@
 import React from "react";
-import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown, Space, Table } from "antd";
+import { Dropdown, Space, Table } from "antd";
+import BreadCrumbs from "components/Breadcrumbs";
 import MoreInfo from "assets/images/geomapinfo.png";
 
 const items = [
@@ -153,9 +153,19 @@ const TableMap = () => {
     },
   ];
 
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/service-and-support", label: "Services & Support" },
+    { path: "/mineral-testing-labs", label: "Mineral Testing Labs" },
+    { path: "/applying-for-mineral-test", label: "Apply" },
+  ];
+
   return (
     <div className="table-data">
-      <div className="mineral-testing-title">Mineral Testing Labs</div>
+      <div className="mt-[50px]">
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
+      <div className="mineral-testing-title">Applying for Mineral Tests</div>
       <div className="mineral-testing-table-header">
         <div>My Applications</div>
         <div>

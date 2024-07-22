@@ -1,7 +1,6 @@
 import React from "react";
-import { useState } from "react";
+
 function NocAddListCompany() {
-  const [formValues, setFormValues] = useState({});
   const obj = {
     approved: [
       {
@@ -61,24 +60,20 @@ function NocAddListCompany() {
       { label: "Contact Person Name", name: "person-contact", required: "false", type: "file" },
     ],
   };
-  const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
-    setFormValues({ ...formValues, [name]: type === "file" ? e.target.files[0] : value });
-  };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formValues, "formValues");
+    const formData = new FormData(event.target);
+    const formValuess = Object.fromEntries(formData.entries());
   };
-
   const renderFormItems = (key, obj) => {
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-        onChange: handleInputChange,
+
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
-        required: field.required === "true",
+        // required: true,
       };
 
       const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;

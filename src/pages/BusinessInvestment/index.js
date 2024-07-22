@@ -68,7 +68,7 @@ function BusinessInvestment() {
       style={{
         width: "100%",
         height: "auto",
-        backgroundImage: `url(${FiscalIncentivesBg})`,
+        backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
@@ -81,7 +81,7 @@ function BusinessInvestment() {
           <BreadCrumbs breadcrumbs={breadcrumbs} />
           <IntroContainer
             title={
-              <h1>
+              <h1 className="p-0">
                 <span
                   style={{
                     borderBottom: "5px solid green",
