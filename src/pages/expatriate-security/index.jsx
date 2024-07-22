@@ -55,7 +55,7 @@ const ExpatriateSecurity = () => {
                   flipContent={
                     "Security clearance Application Forms for expatriates."
                   }
-                  link={"#"}
+                  link={"/expact-noc-application"}
                 ></FlipCards>
               </div>
             </div>
