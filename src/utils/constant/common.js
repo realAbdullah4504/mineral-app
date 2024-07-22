@@ -454,3 +454,62 @@ export const mineralPotential = {
         "Pakistan is rich in limestone reserves, with extensive deposits found in regions such as Punjab, Khyber Pakhtunkhwa, Balochistan, and Sindh. These reserves showcase significant mineral potential with diverse applications across industries such as cement, construction, agriculture, industry, environment, and exports.",
     },
 ]
+
+export const registerOrganizationOption = [
+  {
+    value: "1",
+    label: "Government Departments",
+  },
+  {
+    value: "2",
+    label: "Geotechnical, Geophysical & Geological Services",
+  },
+  {
+    value: "3",
+    label: "Drilling Companies",
+  },
+  {
+    value: "4",
+    label: "Mining Companies",
+  },
+  {
+    value: "5",
+    label: "Mineral based industries",
+  },
+  {
+    value: "6",
+    label: "Machinery suppliers",
+  },
+  {
+    value: "7",
+    label: "Mineral Testing Labs",
+  },
+  {
+    value: "8",
+    label: "Explosive Suppliers",
+  },
+  {
+    value: "9",
+    label: "Software and Solutions Entities",
+  },
+  {
+    value: "10",
+    label: "Legal Services",
+  },
+  {
+    value: "11",
+    label: "Audit & Accounts",
+  },
+  {
+    value: "12",
+    label: "Land Surveying",
+  },
+  {
+    value: "13",
+    label: "Academia",
+  },
+  {
+    value: "14",
+    label: "Training Schools",
+  },
+]
