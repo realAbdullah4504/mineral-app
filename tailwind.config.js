@@ -14,7 +14,7 @@ export default {
         "pakistan-image": "url('/src/assets/images/pakistanPic.png')",
         "china-image": "url('/src/assets/images/pmsteps.png')",
         "rectangle-image": "url('/src/assets/images/2ndNews.png')",
-        "president-image": "url('/src/assets/images/ceoimage.png')",
+        "president-image": "url('/src/assets/images/ceoimage.jpeg')",
         "Energy-image": "url('/src/assets/images/Energy.png')",
         "gypsum-image": "url('/src/assets/images/gemstoneClassification.png')",
         "export-bg-image": "url('/src/assets/images/export-bg.png')",
