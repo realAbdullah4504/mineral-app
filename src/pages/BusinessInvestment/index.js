@@ -48,7 +48,7 @@ function BusinessInvestment() {
       title: "Development Schemes",
       flipContent:
         "Government initiatives for future planning and enhancement of the mineral and mining sector of Pakistan",
-      link: "/development-schemes",
+      link: "/development-initiatives",
     },
     {
       title: "Starting New Business",
@@ -81,17 +81,9 @@ function BusinessInvestment() {
           <BreadCrumbs breadcrumbs={breadcrumbs} />
           <IntroContainer
             title={
-              <h1 className="p-0">
-                <span
-                  style={{
-                    borderBottom: "5px solid green",
-                    display: "inline-block",
-                    borderRadius: "5px",
-                  }}
-                >
-                  Business
-                </span>{" "}
-                & Investment
+              <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+                Business & Investment
+                <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
               </h1>
             }
             content="The Minerals and Mining sector of Pakistan has tremendous potential for long term sustainable development. Being a mineral-rich country, Pakistan offers a diverse range of minerals and gemstones, across the country, with massive potential for national and foreign investment."
