@@ -3,6 +3,7 @@ import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 import { FlipCards } from "components/FlipCards";
 import IntroContainer from "components/IntroContainer";
 import BreadCrumbs from "components/Breadcrumbs";
+import { Container } from "components/UI";
 
 function MapsAndReports() {
   const businessAndInvestmentcards = [
@@ -36,7 +37,8 @@ function MapsAndReports() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }} className="pb-[150px]"
+      }}
+      className="pb-[150px]"
     >
       <div className="business-investment-container">
         <div
@@ -47,8 +49,7 @@ function MapsAndReports() {
           className="px-14"
         >
           <div className="max-w-[1440px]  relative m-auto">
-          <BreadCrumbs breadcrumbs={breadcrumbs} />
-
+            <BreadCrumbs breadcrumbs={breadcrumbs} />
           </div>
         </div>
         <IntroContainer
@@ -72,16 +73,36 @@ function MapsAndReports() {
           width="80%"
           introHeight="280px"
         ></IntroContainer>
-        <div className="business-investment-container-cards">
-          {businessAndInvestmentcards.map((item) => (
-            <FlipCards
-              title={item.title}
-              flip={true}
-              flipContent={item.flipContent}
-              link={item.link ? item.link : ""}
-            ></FlipCards>
-          ))}
-        </div>
+        <Container classes="w-[90%]">
+          <div className="flex w-full justify-center">
+            <div className="flex w-[650px]">
+              <div className="flex flex-col w-1/2">
+                <FlipCards
+                  title={businessAndInvestmentcards[0].title}
+                  flip={true}
+                  flipContent={businessAndInvestmentcards[0].flipContent}
+                  link={
+                    businessAndInvestmentcards[0].link
+                      ? businessAndInvestmentcards[0].link
+                      : ""
+                  }
+                ></FlipCards>
+              </div>
+              <div className="flex flex-col w-1/2">
+                <FlipCards
+                  title={businessAndInvestmentcards[1].title}
+                  flip={true}
+                  flipContent={businessAndInvestmentcards[1].flipContent}
+                  link={
+                    businessAndInvestmentcards[1].link
+                      ? businessAndInvestmentcards[1].link
+                      : ""
+                  }
+                ></FlipCards>
+              </div>
+            </div>
+          </div>
+        </Container>
       </div>
     </div>
   );
