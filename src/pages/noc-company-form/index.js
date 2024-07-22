@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState } from "react";
 function NocAddListCompany() {
   const obj = {
     approved: [
@@ -65,15 +65,13 @@ function NocAddListCompany() {
     const formData = new FormData(event.target);
     const formValuess = Object.fromEntries(formData.entries());
   };
+
   const renderFormItems = (key, obj) => {
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
-        className:
-          "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
-        // required: true,
+        className: "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
       };
 
       const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
@@ -117,22 +115,29 @@ function NocAddListCompany() {
 
   return (
     <div className="noc-company-form" style={{ width: "80%", margin: "auto" }}>
-      {" "}
       <div className="noc-company-status mt-10 mb-10">
         <div className="text-sm text-gray-500">Company Status</div>
         <div className="font-bold text-lg">Company Approved</div>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-          {Object.entries(obj).map(([key, value]) => (
-            <div key={key} className="space-y-4">
-              {key === "Contact Details" && <h1 className="text-4xl font-bold text-green-700">{key}</h1>}
-              {renderFormItems(key, value)}
-            </div>
-          ))}
-        </div>
+        {Object.entries(obj).map(([key, value]) => (
+          <div key={key} className="mt-8">
+            {key === "Contact Details" ? (
+              <div>
+                <h1 className="text-4xl font-bold text-green-700 mb-4">{key}</h1>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {renderFormItems(key, value)}
+                </div>
+              </div>
+            ) : (
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 mt-8">
+                {renderFormItems(key, value)}
+              </div>
+            )}
+          </div>
+        ))}
         <div className="w-full flex justify-center">
-          <button type="submit" class="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+          <button type="submit" className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
             Submit
           </button>
         </div>
