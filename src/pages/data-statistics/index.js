@@ -59,17 +59,9 @@ function Csr() {
           <BreadCrumbs breadcrumbs={breadcrumbs} />
           <IntroContainer
             title={
-              <h1>
-                <span
-                  style={{
-                    borderBottom: "5px solid green",
-                    display: "inline-block",
-                    borderRadius: "5px",
-                  }}
-                >
-                  Data
-                </span>{" "}
-                & Statistics
+              <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+                Data & Statistics
+                <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
               </h1>
             }
             content="Statistical data related to mining operations."

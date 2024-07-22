@@ -54,16 +54,9 @@ function Csr() {
           <BreadCrumbs breadcrumbs={breadcrumbs} />
           <IntroContainer
             title={
-              <h1>
-                <span
-                  style={{
-                    borderBottom: "5px solid green",
-                    display: "inline-block",
-                    borderRadius: "5px",
-                  }}
-                >
-                  CSR
-                </span>{" "}
+              <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+                CSR
+                <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
               </h1>
             }
             content="Mining companies in Pakistan are regulated by the Government to fulfill their Corporate Social Responsibility for sustainable environmental & social practices. This includes  voluntarily improve the quality of life for employees, local communities, and society at large while minimizing the negative environmental impact of mining activities."
