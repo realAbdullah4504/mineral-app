@@ -7,6 +7,7 @@ import { DashboardLayout } from "components";
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
+const FAQs = lazy(() => import("../pages/faqs"));
 const InvestmentOpportunity = lazy(() => import("../pages/investment-opportunities"));
 const ATGDBusiness = lazy(() => import("../pages/ATGDBusiness"));
 const CSRInitiatives = lazy(() => import("../pages/csr-initiatives"));
@@ -18,10 +19,12 @@ const CSR = lazy(() => import("../pages/csr"));
 const InteractiveGisPortal = lazy(() => import("../pages/InteractiveGisPortal"));
 const BusinessInvestment = lazy(() => import("../pages/BusinessInvestment"));
 const MineralDevelopmentStrategy = lazy(() => import("../pages/MineralDevelopmentStrategy"));
+const FiscalRegimeTax = lazy(() => import("../pages/fiscal-regime-tax"));
 const FiscalIncentives = lazy(() => import("../pages/FiscalIncentives"));
 const SpecialEconomicZones = lazy(() => import("../pages/SpecialEconomicZones"));
 const FiscalExportProcessing = lazy(() => import("../pages/fiscalExportProcessing"));
 const Governance = lazy(() => import("../pages/governance"));
+const ExpatriateSecurity = lazy(() => import("../pages/expatriate-security"));
 const ActsLaws = lazy(() => import("../pages/acts-laws"));
 const RulesRegulations = lazy(() => import("../pages/rules-regulations"));
 const MineralTestingLabs = lazy(() => import("../pages/MineralTestingLabs"));
@@ -37,6 +40,7 @@ const ConsessionRules = lazy(() => import("../pages/consession-rules"));
 const LaborWelfare = lazy(() => import("../pages/labor-welfare"));
 const LegalFramework = lazy(() => import("../pages/legal-framework"));
 const ServiceAndSupport = lazy(() => import("../pages/service-and-support"));
+const MapsAndReports = lazy(() => import("../pages/maps-and-reports"));
 const ApplyingForMineralTitle = lazy(() => import("../pages/ApplyingForMineralTitle"));
 const DevelopmentSchemes = lazy(() => import("../pages/DevelopmentSchemes"));
 const InitiativesProjects = lazy(() => import("../pages/initiatives"));
@@ -46,7 +50,7 @@ const FiscalTax = lazy(() => import("../pages/fiscalTax"));
 const FiscalTab = lazy(() => import("../pages/FiscalTab"));
 const Royalties = lazy(() => import("../pages/Roylaties"));
 const Cess = lazy(() => import("../pages/cess"));
-// const Fiscal = lazy(() => import('../pages/fiscal'));
+const Fiscal = lazy(() => import("../pages/fiscal-regime"));
 const TrainingSkill = lazy(() => import("../pages/training-skill"));
 const WhoIsWho = lazy(() => import("../pages/who-is-who"));
 const GovernmentOrganization = lazy(() => import("../pages/government-departments"));
@@ -68,7 +72,9 @@ const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 const RegisterOrganization = lazy(() => import("../pages/register-organization"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
-
+const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
+const NocSponsorCompanyAddList = lazy(() => import("../pages/noc-company-form"));
+const ExpatNocApplication = lazy(() => import("../pages/expact-noc-application"));
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -107,7 +113,7 @@ const AppRouter = () => (
           element={<PublicRoute component={ApplyingForMineralTitle} layout={DashboardLayout} />}
         />
         <Route
-          path="/development-schemes"
+          path="/development-initiatives"
           element={<PublicRoute component={DevelopmentSchemes} layout={DashboardLayout} />}
         />
 
@@ -138,6 +144,7 @@ const AppRouter = () => (
           path="/service-and-support"
           element={<PublicRoute component={ServiceAndSupport} layout={DashboardLayout} />}
         />
+        <Route path="/maps-and-reports" element={<PublicRoute component={MapsAndReports} layout={DashboardLayout} />} />
         <Route path="/legal-framework" element={<PublicRoute component={LegalFramework} layout={DashboardLayout} />} />
         <Route path="/fiscal-CPEC" element={<PublicRoute component={FiscalCPEC} layout={DashboardLayout} />} />
         <Route path="/legal-framework" element={<PublicRoute component={LegalFramework} layout={DashboardLayout} />} />
@@ -203,7 +210,10 @@ const AppRouter = () => (
         <Route path="/legal-tax" element={<PublicRoute component={LegalTaxServices} layout={DashboardLayout} />} />
         <Route path="/academia" element={<PublicRoute component={Academia} layout={DashboardLayout} />} />
         <Route path="/associations" element={<PublicRoute component={Associations} layout={DashboardLayout} />} />
-        <Route path="/mining-professional" element={<PublicRoute component={MiningProfessional} layout={DashboardLayout} />} />
+        <Route
+          path="/mining-professional"
+          element={<PublicRoute component={MiningProfessional} layout={DashboardLayout} />}
+        />
         <Route path="/geological-map" element={<PublicRoute component={GeologicalMap} layout={DashboardLayout} />} />
         <Route
           path="/applying-for-mineral-test"
@@ -240,10 +250,32 @@ const AppRouter = () => (
           path="/registerorganization"
           element={<PublicRoute component={RegisterOrganization} layout={DashboardLayout} />}
         />
-        <Route 
-        path="/applying-for-mineral-form"
-        element={<PublicRoute component={ApplyingForMineralForm} layout={DashboardLayout} />}
-      />
+        <Route
+          path="/applying-for-mineral-form"
+          element={<PublicRoute component={ApplyingForMineralForm} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/noc-sponsor-company"
+          element={<PublicRoute component={NocSponsorCompany} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/noc-company-form"
+          element={<PublicRoute component={NocSponsorCompanyAddList} layout={DashboardLayout} />}
+        />
+        <Route path="/fiscal-regime" element={<PublicRoute component={Fiscal} layout={DashboardLayout} />} />
+        <Route
+          path="/fiscal-regime-tax"
+          element={<PublicRoute component={FiscalRegimeTax} layout={DashboardLayout} />}
+        />
+        <Route path="/faqs" element={<PublicRoute component={FAQs} layout={DashboardLayout} />} />
+        <Route
+          path="/expatriate-security"
+          element={<PublicRoute component={ExpatriateSecurity} layout={DashboardLayout} />}
+        />
+        <Route
+          path="/expact-noc-application"
+          element={<PublicRoute component={ExpatNocApplication} layout={DashboardLayout} />}
+        />
       </Routes>
     </Suspense>
   </Router>

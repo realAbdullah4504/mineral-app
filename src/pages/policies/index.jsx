@@ -14,7 +14,7 @@ const LegalPolicies = () => {
     { path: "/", label: "Home" },
     { path: "/legal-framework", label: "Legal Framework" },
     { path: "/governance", label: "Governance" },
-    { path: "#", label: "Policies" },
+    { path: "/legal-policies", label: "Policies" },
   ];
 
   return (
@@ -64,7 +64,6 @@ const LegalPolicies = () => {
               {/* large gap */}
             </div>
             <div className="mt-64"></div>
-
           </div>
         </div>
       </div>

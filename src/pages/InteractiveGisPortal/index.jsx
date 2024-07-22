@@ -8,10 +8,11 @@ const InteractiveGisPortal= () => {
   const breadcrumbs = [
     { path: '/', label: 'Home' },
     { path: '/service-and-support', label: 'Service & Support' },
+    { path: "/maps-and-reports", label: "Maps & Reports" },
     { path: '/gis-portal', label: 'GIS Portal' },
   ];
   return (
-    <div className="max-w-[100%] my-20">
+    <div className="max-w-[100%] my-10">
        <Container>
        <BreadCrumbs breadcrumbs={breadcrumbs} />
       <div className="flex ml-10 mt-[20px] text-center my-10">

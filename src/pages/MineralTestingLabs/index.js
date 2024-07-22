@@ -9,13 +9,13 @@ function BusinessInvestment() {
     {
       title: "Test Information",
       flipContent:
-        "Mineral tests are simple physical & chemical methods of testing samples, which help to identify the mineral type. This approach is used widely in mineralogy, ore geology and general geological mapping",
+        "Mineral tests are physical & chemical methods of testing samples, which identify the mineral. This approach is used widely in mineralogy, ore geology and general geological mapping",
       link: "/test-information",
     },
     {
       title: "Apply",
       flipContent: "Apply for testing for your mineral sample",
-      link: "/minerals-test-apply",
+      link: "/applying-for-mineral-test",
     },
     {
       title: "Results",
@@ -25,7 +25,7 @@ function BusinessInvestment() {
   ];
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "#", label: "Services and Support" },
+    { path: "/service-and-support", label: "Services and Support" },
     { path: "/mineral-testing-labs", label: "Minerals Testing Labs" },
   ];
 
@@ -34,22 +34,27 @@ function BusinessInvestment() {
       style={{
         width: "100%",
         height: "auto",
-        backgroundImage: `url(${FiscalIncentivesBg})`,
+        backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        paddingBottom:"150px"
       }}
     >
       <div className="business-investment-container">
         <div
           style={{
-            marginLeft: "70px",
+            // marginLeft: "70px",
             marginTop: "30px",
           }}
+          className="px-14"
         >
+          <div className="max-w-[1440px]  relative m-auto">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+          </div>
         </div>
         <IntroContainer
           title={
@@ -72,7 +77,7 @@ function BusinessInvestment() {
           width="80%"
           introHeight="280px"
         ></IntroContainer>
-        <div className="business-investment-container-cards">
+        <div className="mineral-container-cards">
           {businessAndInvestmentcards.map((item) => (
             <FlipCards
               title={item.title}

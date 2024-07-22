@@ -16,8 +16,8 @@ const LaborWelfare = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/legal-framework", label: "Legal Framework" },
-    { path: "/", label: "Rules & Regulations" },
-    { path: "#", label: "Labor Welfare" },
+    { path: "/rules-regulations", label: "Rules & Regulations" },
+    { path: "/labor-welfare", label: "Labor Welfare" },
   ];
 
   return (

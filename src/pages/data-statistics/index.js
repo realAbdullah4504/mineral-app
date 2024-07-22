@@ -78,19 +78,9 @@ function Csr() {
             introHeight="280px"
           ></IntroContainer>
 
-          <div className="flex flex-col items-center">
-            <div className="flex w-[960px] mb-[50px]">
-              {csrCards.slice(0, 3).map((item) => (
-                <FlipCards
-                  title={item.title}
-                  flip={true}
-                  flipContent={item.flipContent}
-                  link={item.link ? item.link : ""}
-                ></FlipCards>
-              ))}
-            </div>
-            <div className="flex w-[960px] mb-[80px]">
-              {csrCards.slice(3, 5).map((item) => (
+          <div className="w-full flex justify-center mb-16">
+            <div className="grid grid-cols-3 w-[70%] gap-4 ">
+              {csrCards.map((item) => (
                 <FlipCards
                   title={item.title}
                   flip={true}
