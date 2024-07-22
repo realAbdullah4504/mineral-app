@@ -39,6 +39,7 @@ const Header = ({ title = "" }) => {
   const handleNavigate = (url) => {
     navigate(url);
   };
+
   return (
     <>
       <header className="header_main">
@@ -51,7 +52,7 @@ const Header = ({ title = "" }) => {
               <div className="header_column" id="flexible-width-1">
                 <div className="header_menu_1">
                   <Link to="/">About Us</Link>
-                  <Link to="#">News</Link>
+                  <Link to="/#news-and-event">News</Link>
                   <Link to="/faqs">FAQs</Link>
                 </div>
               </div>
