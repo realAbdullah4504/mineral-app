@@ -66,7 +66,7 @@ export const SubMenuMineralTestingLabs = [
   },
   {
     name: "View Results",
-    link: "#",
+    link: "/minerals-test-results",
   },
 ];
 
