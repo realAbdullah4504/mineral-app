@@ -37,23 +37,23 @@ const ExpatriateSecurity = () => {
               className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
               style={{ whiteSpace: "pre-line" }}
             >
-              Procedures for expat NOC clearance for setting up a mining company in Pakistan/
+              Procedures of Expat NOC Application for expatriate to obtain security clearance certificate.
             </div>
             <div className="w-full flex justify-center mt-20">
               <div className="mineral-container-cards">
                 <FlipCards
-                  title={"Expat NOC Application"}
+                  title={"NOC Sponsor Company"}
                   flip={true}
                   flipContent={
-                    "Security clearance form for expatriates"
+                    "Register your NOC Sponsor Company to get access for Expat NOC Application."
                   }
                   link={"/noc-sponsor-company"}
                 ></FlipCards>
                 <FlipCards
-                  title={"Company Registration"}
+                  title={"Expat NOC Application"}
                   flip={true}
                   flipContent={
-                    "Register your company for access to Portal features."
+                    "Security clearance Application Forms for expatriates."
                   }
                   link={"#"}
                 ></FlipCards>
