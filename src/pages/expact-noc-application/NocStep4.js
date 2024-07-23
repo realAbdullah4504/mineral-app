@@ -21,7 +21,12 @@ const NocStep4 = ({ setState }) => {
       type: "select",
       options: ["PLS PROVIDE LIST"],
     },
-    { label: "Equipment Name", name: "equipment-name", required: "true", type: "input" },
+    {
+      label: "Equipment Name",
+      name: "equipment-name",
+      required: "true",
+      type: "input",
+    },
   ];
   const renderFormItems = () => {
     return obj.map((field) => {
@@ -35,7 +40,12 @@ const NocStep4 = ({ setState }) => {
       };
 
       const renderInput = (type = "text") => (
-        <input type={type} value={record ? record[field.name] : ""} {...commonProps} placeholder=" " />
+        <input
+          type={type}
+          value={record ? record[field.name] : ""}
+          {...commonProps}
+          placeholder=" "
+        />
       );
 
       const renderLabel = () => (
@@ -52,7 +62,13 @@ const NocStep4 = ({ setState }) => {
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" value={record ? record[field.name] : ""} {...commonProps} />}
+          {field.type === "file" && (
+            <input
+              type="file"
+              value={record ? record[field.name] : ""}
+              {...commonProps}
+            />
+          )}
           {field.type === "select" && (
             <>
               {renderLabel()}
@@ -69,7 +85,11 @@ const NocStep4 = ({ setState }) => {
             </>
           )}
           {field.type === "textarea" && (
-            <textarea {...commonProps} value={record ? record[field.name] : ""} placeholder=" " />
+            <textarea
+              {...commonProps}
+              value={record ? record[field.name] : ""}
+              placeholder=" "
+            />
           )}
           {field.type !== "select" && renderLabel()}
         </div>
@@ -109,7 +129,10 @@ const NocStep4 = ({ setState }) => {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <div onClick={() => handleEditClick(record)} style={{ cursor: "pointer", color: "#1677ff" }}>
+        <div
+          onClick={() => handleEditClick(record)}
+          style={{ cursor: "pointer", color: "#1677ff" }}
+        >
           Edit
         </div>
       ),
@@ -120,12 +143,20 @@ const NocStep4 = ({ setState }) => {
     <div className="mineral-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Equipment Listing</div>
-        <ProgressPercentage percent={50} step={4} total={8}></ProgressPercentage>
+        <ProgressPercentage
+          percent={50}
+          step={4}
+          total={8}
+        ></ProgressPercentage>
       </div>
 
       <form className="space-y-4 " onSubmit={handleAddForm}>
         {listing.length ? (
-          <ListingNoc dataSource={listing} setSelectedRecord={setRecord} columns={columns}></ListingNoc>
+          <ListingNoc
+            dataSource={listing}
+            setSelectedRecord={setRecord}
+            columns={columns}
+          ></ListingNoc>
         ) : (
           <Empty />
         )}
@@ -151,23 +182,30 @@ const NocStep4 = ({ setState }) => {
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+          {renderFormItems()}
+        </div>
       </form>
-      <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+      <div
+        className="button-group-mineral-form"
+        style={{ marginTop: "30px", marginBottom: "30px" }}
+      >
         <button type="primary" className="next-button" onClick={handlePrevious}>
           <div>
             {" "}
-            previous
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
+              width="1.2em"
+              height="1.2em"
+              viewBox="0 0 16 16"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+              <path
+                fill="white"
+                fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+              />
             </svg>
+            previous
           </div>
         </button>
         <button type="submit" className="next-button" onClick={handleNext}>
@@ -182,7 +220,11 @@ const NocStep4 = ({ setState }) => {
               stroke="currentColor"
               class="size-6"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+              />
             </svg>
           </div>
         </button>
