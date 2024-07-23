@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom";
 // import styles from "./RegisterOrganization.module.css";
 // import { Breadcrumb } from "react-bootstrap";
 
-import { Form, Select, message, Space } from "antd";
+import { Form, Select, message } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import { registerOrganizationOption } from "utils/constant/common";
+// import Header from "../../Header";
+// import Footer from "../../Footer";
+// import { authService } from "../../../services/authService";
+// import axiosInstance from "../../../axios/axiosInstance";
 const { Option } = Select;
 
-const RegisterOrganization = () => {
+const RegisterProfessional = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const [errorMsg, setErrorMsg] = useState("");
@@ -19,6 +22,32 @@ const RegisterOrganization = () => {
   const [fileList1, setFileList1] = useState([]);
   const [orgType, setOrgType] = useState([]);
   const [form] = Form.useForm();
+  const [value, setValue] = useState("_____ - _____ - __");
+
+  const handleChange = (e) => {
+    let input = e.target.value.replace(/\D/g, ""); // Remove all non-digit characters
+
+    // Format the input to "_____ - _____ - __"
+    let formatted = "_____ - _____ - __";
+    for (let i = 0; i < input.length; i++) {
+      formatted = formatted.replace("_", input[i]);
+    }
+
+    setValue(formatted);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Backspace") {
+      let input = value.replace(/\D/g, ""); // Remove all non-digit characters
+      input = input.slice(0, -1); // Remove the last character
+      let formatted = "_____ - _____ - __";
+      for (let i = 0; i < input.length; i++) {
+        formatted = formatted.replace("_", input[i]);
+      }
+      setValue(formatted);
+      e.preventDefault(); // Prevent the default Backspace behavior
+    }
+  };
 
   const breadcrumbs = [
     { path: "/", label: "Home" },
@@ -377,46 +406,18 @@ const RegisterOrganization = () => {
             className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
             style={{ whiteSpace: "pre-line" }}
           >
-        <strong>Apply for Registration</strong>
+            Mining Professional <strong>Apply for Registration</strong>
           </div>
-        </div>
-
-        <div className="mt-8">
-          <Space
-            style={{
-              width: "70%",
-            }}
-            direction="vertical"
-          >
-            <div className="w-full">
-              <label
-                className="block text-sm font-medium text-gray-900 mb-2"
-                htmlFor="custom-select"
-              >
-                Select Categories
-              </label>
-                <Select
-                  id="custom-select"
-                  mode="multiple"
-                  allowClear
-                  className="w-full"
-                  placeholder="Please select"
-                  options={registerOrganizationOption}
-                  style={{
-                    width: "70%",
-                  }}
-                />
-            </div>
-          </Space>
         </div>
 
         <div className="flex justify-center flex-col space-y-6 py-12">
-          <div className="space-y-2 text-start">
-            <h2 className="text-[26px] font-medium text-[#009969]">
-              Organizational Details
-            </h2>
-          </div>
           <form className="space-y-4">
+            <div className="space-y-2 text-start">
+              <h2 className="text-[26px] font-medium text-[#009969] ">
+                Personal Information
+              </h2>
+            </div>
+
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <div>
                 <div class="relative mt-2 w-full">
@@ -430,8 +431,23 @@ const RegisterOrganization = () => {
                     for="name"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
-                    Organization Name
+                    Name
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="text"
+                    id="contact"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="contact"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Contact No.
                   </label>
                 </div>
               </div>
@@ -447,7 +463,6 @@ const RegisterOrganization = () => {
                     for="email"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
                     Email
                   </label>
                 </div>
@@ -456,16 +471,42 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="address"
+                    id="cnic"
+                    value={value}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  />
+                  <label
+                    for="cnic"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Valid CNIC No.
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-start">
+              <h2 className="text-[26px] font-medium text-[#009969] ">
+                Qualifications
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="text"
+                    id="qualification"
                     class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="address"
+                    for="qualification"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
-                    Address
+                    Qualification
                   </label>
                 </div>
               </div>
@@ -473,16 +514,15 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="number"
+                    id="degree"
                     class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="number"
+                    for="degree"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
-                    Mobile Number
+                    Degree/Diploma/Certification Title
                   </label>
                 </div>
               </div>
@@ -490,16 +530,56 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="landline"
+                    id="institute"
                     class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="landline"
+                    for="institute"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
-                    Landline Number
+                    University/Institute
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="date"
+                    id="completionYear"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="completionYear"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Graduation/Completion Year
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-start">
+              <h2 className="text-[26px] font-medium text-[#009969] ">
+                Professional Information
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="text"
+                    id="sector"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="sector"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Industries/Sector
                   </label>
                 </div>
               </div>
@@ -507,16 +587,15 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="url"
+                    id="role"
                     class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="url"
+                    for="role"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
-                    Website/URL
+                    Professional Role
                   </label>
                 </div>
               </div>
@@ -524,16 +603,77 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="socialLink"
+                    id="registration"
                     class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="socialLink"
+                    for="registration"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Professional Registration
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="text"
+                    id="resume"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="resume"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     {" "}
-                    Social Media Link
+                    Upload Resume
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <div class="relative mt-2 w-full">
+                  <textarea
+                    type="textarea"
+                    row
+                    id="summary"
+                    rows={1}
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="summary"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Professional Summary
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-start">
+              <h2 className="text-[26px] font-medium text-[#009969] ">
+                Current Employment
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="text"
+                    id="organization"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="organization"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Organization
                   </label>
                 </div>
               </div>
@@ -541,16 +681,31 @@ const RegisterOrganization = () => {
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="logo"
+                    id="designation"
                     class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="logo"
+                    for="designation"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    {" "}
-                    Logo/Cover
+                    Title/Designation
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div class="relative mt-2 w-full">
+                  <input
+                    type="date"
+                    id="joiningYear"
+                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                  <label
+                    for="joiningYear"
+                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  >
+                    Joining Year
                   </label>
                 </div>
               </div>
@@ -568,4 +723,4 @@ const RegisterOrganization = () => {
   );
 };
 
-export default RegisterOrganization;
+export default RegisterProfessional;

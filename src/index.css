@@ -29,3 +29,8 @@
   width: 50%;
   margin: 40px auto 30px auto;
 }
+
+.ant-select-selector {
+  border: 1px;
+  border-color: #86efac !important;
+}
