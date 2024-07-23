@@ -22,7 +22,7 @@ const NocStep6 = ({ setState, setAlreadyVisited }) => {
   const obj = [
     { label: "Details of Places to be visited during stay", name: "places-visited", required: "true", type: "input" },
     {
-      label: "Places with Address(foreigner is required to work)",
+      label: "Places with Address",
       name: "place-foreigner-required",
       required: "true",
       type: "input",

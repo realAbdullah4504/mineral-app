@@ -21,49 +21,74 @@ const NocStep5 = ({ setState, equipment }) => {
     { label: "Sponsoring Company Name", name: "sponsor-company-name", required: "true", type: "input" },
     { label: "Pakistan Address", name: "pak-address", required: "true", type: "input" },
     {
-      label: "Name and Address of Visiting Organisations",
+      label: "Visiting Organisations",
       name: "visiting-org-name",
       required: "true",
       type: "input",
     },
     {
-      label: "Name and Designation of Conducting Officials",
+      label: "Visiting Organisations Address",
+      name: "visiting-org-address",
+      required: "true",
+      type: "input",
+    },
+    {
+      label: "Visiting Organisations",
+      name: "visiting-org-name",
+      required: "true",
+      type: "input",
+    },
+    {
+      label: "Visiting Organisations Address",
+      name: "visiting-org-address",
+      required: "true",
+      type: "input",
+    },
+    {
+      label: "Conducting Officials",
       name: "name-conducting-officials",
       required: "true",
       type: "input",
     },
     {
-      label: "Name of Pakistani Official",
+      label: "Conducting Officials Designation",
+      name: "designation-conducting-officials",
+      required: "true",
+      type: "input",
+    },
+    {
+      label: "Pakistani Official Name",
       name: "name-pak-official",
       required: "true",
       type: "input",
     },
     {
-      label: "Contact No. of Pakistani Official(03001234567)",
+      label: "Pakistani Official Contact",
       name: "no-pak-official",
       required: "true",
       type: "number",
     },
     {
-      label: "Address of Pakistani Official",
+      label: "Pakistani Official Address",
       name: "address-pak-official",
       required: "true",
       type: "input",
     },
     {
-      label: "CNIC of Pkistani Official(12345-1234567-8)",
+      label: "CNIC of Pakistani Official",
       name: "CNIC-pak-official",
       required: "true",
       type: "number",
+      placeholder: "12345-1234567-8"
     },
     {
-      label: "CNIC Front Image of Pakistani Official",
+      label: "CNIC Front Image",
       name: "CNIC-front-img",
       required: "true",
       type: "file",
     },
     {
-      label: "CNIC Back Image of Pakistani Official",
+      label: "CNIC Back Image",
       name: "CNIC-back-img",
       required: "true",
       type: "file",
@@ -78,9 +103,10 @@ const NocStep5 = ({ setState, equipment }) => {
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
+        placeholder: field.placeholder || "",
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => <input type={type} {...commonProps} />;
 
       const renderLabel = () => (
         <label
@@ -129,19 +155,21 @@ const NocStep5 = ({ setState, equipment }) => {
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
           <button type="primary" className="next-button" onClick={handlePrevious}>
-            <div>
+          <div>
               {" "}
-              previous
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="size-6"
+                width="1.2em"
+                height="1.2em"
+                viewBox="0 0 16 16"
               >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                <path
+                  fill="white"
+                  fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                />
               </svg>
+              previous
             </div>
           </button>
           <button type="submit" className="next-button">

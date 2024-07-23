@@ -11,6 +11,7 @@ import IntroContainer from "components/IntroContainer";
 import { CpecCards } from "components/CpecProjectCards";
 import { ShowMore } from "components/UI/ShowMore";
 import BreadCrumbs from "components/Breadcrumbs";
+import { Container } from "components/UI";
 
 // const cpecBreadCRumbItems = [{ title: "Home", href: "" }, { title: "Fiscal Incentive", href: "" }, { title: "CPEC" }];
 const FiscalCPEC = () => {
@@ -70,17 +71,18 @@ const FiscalCPEC = () => {
   ];
   return (
     <div className="fiscal-cpec-content relative">
-      <div className=" absolute z-10 pl-[270px] pt-[50px] ">
-        <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
-      </div>
+      <Container classes="w-[90%]">
+        <div className=" absolute z-10 pt-[50px] ">
+          <BreadCrumbs breadcrumbs={breadcrumbs} white={true} />
+        </div>
+      </Container>
       <div className="fiscal-incents">
-        {" "}
         <IntroContainer
-          // breadCRumbItems={cpecBreadCRumbItems}
           title="CPEC"
           content="The China-Pakistan Economic Corridor (CPEC) is a flagship infrastructure development project that aims to enhance connectivity and foster economic cooperation between China and Pakistan. As part of China's Belt and Road Initiative (BRI), CPEC involves the construction of transportation networks, energy infrastructure, industrial zones, and other strategic projects across Pakistan. This ambitious initiative seeks to promote trade, investment, and regional integration, driving economic growth and development in both countries while strengthening their bilateral relations"
           backgroundImage={CPECBg}
           introHeight="602px"
+          breadCRumbItems={breadcrumbs}
         ></IntroContainer>
       </div>
       <div className="cpec-map">

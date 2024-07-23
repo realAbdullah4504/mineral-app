@@ -10,9 +10,9 @@ export const NewsAndEvent = () => {
         <div className="bg-pakistan-image bg-auto bg-no-repeat text-white w-[754px] rounded-md  flex justify-center items-end min-h-[659.78px] gap-[5.77px]">
           <div className="pb-8">
             <div className="font-semibold text-[40px] leading-[45px] w-[600px] uppercase ">
-              Manara Minerals’ team in Pakistan for talks on Reko Diq stake
+            PM invites Chinese firm to invest in Pakistan ...
             </div>
-            <div className="">May 6, 2024</div>
+            <div className="">May 17, 2024</div>
           </div>
         </div>
         <div className="h-full ">
@@ -20,7 +20,7 @@ export const NewsAndEvent = () => {
             <div className="w-[372px] h-full flex items-end relative m-auto text-white">
               <div className="mb-4">
                 <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
-                  China, Pakistan agree to strengthen mining cooperation
+                PM for steps to grant industrial status to gems, precious stones sector
                 </div>
                 <div className="text-[11px] flex gap-2 mt-2 leading-[13px]">
                   <span>READ MORE</span>{" "}
@@ -33,8 +33,7 @@ export const NewsAndEvent = () => {
             <div className="w-[372px] h-full flex items-end relative m-auto text-white">
               <div className="mb-4">
                 <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
-                  SpaceX Launches Mission to Mars in Historic Space Exploration
-                  Effort
+                  Pakistan eyes China Collaboration to revitalize Gemstone Sector
                 </div>
                 <div className="text-[11px] flex gap-2 mt-2 leading-[13px]">
                   <span>READ MORE</span>{" "}
@@ -47,7 +46,7 @@ export const NewsAndEvent = () => {
             <div className="w-[372px] h-full flex items-end relative m-auto text-white">
               <div className="mb-4">
                 <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
-                  Saudi Arabia to invest $1bn in Reko Diq mining project
+                DAEWOO Express signs MOUs with Chinese firms on Thar Coal Gasification 
                 </div>
                 <div className="text-[11px] flex gap-2 mt-2 leading-[13px]">
                   <span>READ MORE</span>{" "}

@@ -15,9 +15,11 @@ const StatisticsRevenue = () => {
         <div className="flex mb-[62px] mt-[41px]">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
         </div>
-        <div className="flex text-[64px] font-semibold">Revenue Collection</div>
-        <div className="flex bg-[#009969] w-[120px] h-1 mt-[-10px] mb-[26px]"></div>
-        <div className="flex font-normal text-[22px]">
+        <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+          Revenue Collection{" "}
+          <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
+        </h1>
+        <div className="flex font-normal text-[22px] mt-[26px]">
           Information on revenue collected by provinces
         </div>
         <div className="flex mb-[170px] justify-center">

@@ -21,7 +21,7 @@ const serviceSupportCards = [
     title: "Expatriate Security",
     flipContent:
       "Procedures for expat NOC clearance for setting up a mining company in Pakistan",
-    link: "#",
+    link: "/expatriate-security",
   },
 ];
 
