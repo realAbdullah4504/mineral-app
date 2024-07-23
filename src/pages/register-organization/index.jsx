@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import styles from "./RegisterOrganization.module.css";
-// import { Breadcrumb } from "react-bootstrap";
-
-import { Form, Select, message, Space } from "antd";
+import axios from 'axios';
+import { Form, Select, message, Space, Button, Input } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
+import { Checkbox, Col, Row } from "antd";
 import { registerOrganizationOption } from "utils/constant/common";
-const { Option } = Select;
+import { getCookie } from "services/session/cookies";
 
 const RegisterOrganization = () => {
   const navigate = useNavigate();
@@ -25,170 +24,40 @@ const RegisterOrganization = () => {
     { path: "#", label: "Who is Who" },
   ];
 
-  const organizationtext = [
-    {
-      status: "GovernmentOrganizations",
-      display_status: "Government Organizations",
-    },
-    {
-      status: "DrillingAndServices",
-      display_status: "Drilling & Services",
-    },
-    {
-      status: "MineralLabs",
-      display_status: "Mineral Labs",
-    },
-    {
-      status: "DownstreamIndustries",
-      display_status: "Downstream Industries",
-    },
-    {
-      status: "SoftwareAndSolutions",
-      display_status: "Software & Solutions",
-    },
-    {
-      status: "LegalAndTaxServices",
-      display_status: "Legal & Tax Services",
-    },
-    {
-      status: "Academia",
-      display_status: "Academia",
-    },
-    {
-      status: "OtherServices",
-      display_status: "Other Services",
-    },
-    {
-      status: "Associations",
-      display_status: "Associations",
-    },
-  ];
-
-  const getOrgTypeShow = (item) => {
-    console.log("getStatus", item);
-    const rarray = organizationtext.filter((value) => value.status === item);
-
-    if (rarray.length > 0) {
-      return rarray[0].display_status;
-    } else {
-      return "-";
-    }
-  };
-
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const paramValue = urlParams.get("orgtype");
     console.log(paramValue);
     if (renderStop !== "Set") {
-      if (paramValue === "go") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'GovernmentOrganizations',
-          });*/
+      const orgTypes = {
+        go: "GovernmentOrganizations",
+        das: "DrillingAndServices",
+        dsi: "DownstreamIndustries",
+        ml: "MineralLabs",
+        sas: "SoftwareAndSolutions",
+        lats: "LegalAndTaxServices",
+        ac: "Academia",
+        asso: "Associations",
+        os: "OtherServices",
+      };
 
+      const links = {
+        go: "/government-organizations",
+        das: "/drilling-services",
+        dsi: "/downstream-industries",
+        ml: "/mineral-labs",
+        sas: "/software-solutions",
+        lats: "/legal-tax-services",
+        ac: "/academia",
+        asso: "/Associations",
+        os: "/other-services",
+      };
+
+      if (orgTypes[paramValue]) {
         setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "GovernmentOrganizations",
-        });
-
-        setReturnLink("/government-organizations");
-      }
-      if (paramValue === "das") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'DrillingAndServices',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "DrillingAndServices",
-        });
-        setReturnLink("/drilling-services");
-      }
-      if (paramValue === "dsi") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'DownstreamIndustries',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "DownstreamIndustries",
-        });
-        setReturnLink("/downstream-industries");
-      }
-      if (paramValue === "ml") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'MineralLabs',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "MineralLabs",
-        });
-        setReturnLink("/mineral-labs");
-      }
-      if (paramValue === "sas") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'SoftwareAndSolutions',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "SoftwareAndSolutions",
-        });
-        setReturnLink("/software-solutions");
-      }
-      if (paramValue === "lats") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'LegalAndTaxServices',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "LegalAndTaxServices",
-        });
-        setReturnLink("/legal-tax-services");
-      }
-      if (paramValue === "ac") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'Academia',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "Academia",
-        });
-        setReturnLink("/academia");
-      }
-      if (paramValue === "asso") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'Associations',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "Associations",
-        });
-        setReturnLink("/Associations");
-      }
-      if (paramValue === "os") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'OtherServices',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "OtherServices",
-        });
-        setReturnLink("/other-services");
+        setOrgType({ OrganizationType: orgTypes[paramValue] });
+        setReturnLink(links[paramValue]);
       }
     }
   }, [renderStop]);
@@ -213,117 +82,52 @@ const RegisterOrganization = () => {
       });
   };
 
-  //   const onFinish = (values) => {
-  //     console.log("Sucessful", values);
-  //     /*if(values.SocialLinks.length > 0){
-  //           console.log('Yes its exsits',values.SocialLinks);
-  //         }*/
+  const handleSubmission = async (values) => {
+    try {
+    const fullurl = process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getCookie('token')}`,
+        'Content-Type': 'multipart/form-data',
+        charset: 'utf-8',
+        Accept: 'application/json, text/plain, */*',
+      },
+    };
 
-  //     handleSubmission(values);
-  //   };
+    const bodyFormData = new FormData();
+    if (values.logo && values.logo?.fileList?.length > 0) {
+      bodyFormData.append('LogoImages', values.logo.fileList[0].originFileObj || values.logo.fileList[0]);
+    }
 
-  //   const handleSubmission = (values) => {
-  //     const fullurl =
-  //       process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
-  //     //const config = authService.getConfig();
-  //     const config = {
-  //       headers: {
-  //         Authorization: authService.getConfig().headers.Authorization,
-  //         "Content-Type": "multipart/form-data",
-  //         charset: "utf-8",
-  //         Accept: "application/json, text/plain, */*",
-  //       },
-  //     };
+    const companyobj = {
+      OrganizationType: orgType.OrganizationType,
+      OrganizationName: values.name,
+      Email: values.email,
+      MobileNumber: values.number,
+      Address: values.address,
+      LandlineNumber: values.landline,
+      WebsiteURL: values.url,
+      OtherLink: values.socialLink,
+    };
 
-  //     var bodyFormData = new FormData();
+    bodyFormData.append('obj', JSON.stringify(companyobj));
 
-  //     if (values.logo) {
-  //       if (values.logo.fileList.length > 0) {
-  //         if (values.logo.fileList[0].originFileObj) {
-  //           console.log("if-logo", values.logo.fileList[0].originFileObj);
-  //           bodyFormData.append(
-  //             "LogoImages",
-  //             values.logo.fileList[0].originFileObj
-  //           );
-  //         } else {
-  //           console.log("else-logo", values.logo.fileList[0]);
-  //           bodyFormData.append("LogoImages", values.logo.fileList[0]);
-  //         }
-  //       }
-  //     }
-
-  //     /*let newarray = [];
-  //       newarray = values.ListSocialLinks;
-  //       if(newarray){
-  //         newarray.push(
-  //           {
-  //             'SocialLinks': values.SocialLinks,
-  //             'URL' : values.URL,
-  //           }
-  //         );
-  //       }
-  //       else{
-  //         newarray = [{
-  //           'SocialLinks': values.SocialLinks,
-  //           'URL' : values.URL,
-  //         }];
-  //       }console.log(newarray);
-  //       */
-
-  //     const companyobj = {
-  //       OrganizationType: orgType["OrganizationType"],
-  //       OrganizationName: values.OrganizationName,
-  //       Email: values.Email,
-  //       MobileNumber: values.MobileNumber,
-  //       Address: values.Address,
-  //       LandlineNumber: values.LandlineNumber,
-  //       WebsiteURL: values.WebsiteURL,
-  //       OtherLink: values.OtherLink,
-  //     };
-
-  //     console.log(companyobj);
-
-  //     const myJSON = JSON.stringify(companyobj);
-  //     console.log(myJSON);
-
-  //     bodyFormData.append("obj", myJSON);
-  //     /*axios
-  //       .post(fullurl, myJSON,
-  //       config)*/
-  //     console.log(bodyFormData);
-  //     axiosInstance
-  //       .post(fullurl, bodyFormData, config)
-  //       .then((res) => {
-  //         //alert('postdata function called');
-  //         if (!res.data.succeeded) {
-  //           console.log("false");
-  //           console.log(res);
-  //           setErrorMsg("Transcation succeeded: false");
-  //           return;
-  //         }
-
-  //         if (res.data.succeeded) {
-  //           setErrorMsg(res.data.message);
-  //           success();
-  //         }
-  //         console.log(res.data);
-  //         console.log("postdata function called");
-  //         console.log(res);
-  //       })
-  //       .catch((error) => {
-  //         setErrorMsg(
-  //           "Error Status: " +
-  //             error.response.status +
-  //             " Message : " +
-  //             error.response.statusText
-  //         );
-  //         console.log(error);
-  //       });
-  //   };
-
-  const onFinishFailed = (values) => {
-    console.log("Failed", values);
+    const { data } = await axios.post(fullurl, bodyFormData, config);
+    if (data.succeeded) {
+      success();
+    } else {
+      setErrorMsg('Transaction succeeded: false');
+    }
+  } catch (error) {
+    setErrorMsg(`Error Status: ${error.response.status} Message : ${error.response.statusText}`);
+  }
   };
+
+  const onFinish = (values) => {
+    console.log('Successful', values);
+    handleSubmission(values);
+  };
+  
 
   const props = {
     onRemove: (file) => {
@@ -348,222 +152,227 @@ const RegisterOrganization = () => {
     },
     beforeUpload: (file) => {
       setFileList1([...fileList1, file]);
-
       return false;
     },
     fileList1,
   };
 
+  const onChange = (checkedValues) => {
+    console.log("checked = ", checkedValues);
+  };
+
   return (
     <>
       <Container classes="mt-8 w-[90%]">
-        <BreadCrumbs breadcrumbs={breadcrumbs} />
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
 
-        {/* <h2>
-          Who is Who: <p>{getOrgTypeShow(orgType["OrganizationType"])}</p>
-        </h2> */}
-        <div className="flex flex-wrap mt-[20px]">
-          {/* <div className="w-full flex">
-            <h1 className="font-ibm-plex-sans font-semibold text-[48px] p-[0px]">
-              Who is Who:{" "}
-            </h1>
-            <h1 className="font-ibm-plex-sans font-semibold text-[48px] text-[#009969] p-[0px]">
-              {" "}
-              {getOrgTypeShow(orgType["OrganizationType"])}
-            </h1>
-          </div> */}
-
-          <div
-            className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
-            style={{ whiteSpace: "pre-line" }}
-          >
-        <strong>Apply for Registration</strong>
-          </div>
+      <div className="flex flex-wrap mt-[20px]">
+        <div
+          className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
+          style={{ whiteSpace: "pre-line" }}
+        >
+          <strong>Apply for Registration</strong>
         </div>
+      </div>
 
-        <div className="mt-8">
-          <Space
-            style={{
-              width: "70%",
-            }}
-            direction="vertical"
-          >
-            <div className="w-full">
-              <label
-                className="block text-sm font-medium text-gray-900 mb-2"
-                htmlFor="custom-select"
-              >
-                Select Categories
-              </label>
-                <Select
-                  id="custom-select"
-                  mode="multiple"
-                  allowClear
-                  className="w-full"
-                  placeholder="Please select"
-                  options={registerOrganizationOption}
-                  style={{
-                    width: "70%",
-                  }}
+      <div className="mt-8">
+        <span className=" text-[20px] text-gray-700">
+          {" "}
+          Select Categories{" "}
+        </span>
+        <Checkbox.Group
+          style={{
+            width: "100%",
+          }}
+          onChange={onChange}
+        >
+          <Row>
+            {registerOrganizationOption.map((option) => (
+              <Col span={8} key={option.value}>
+                <Checkbox value={option.value}>{option.label}</Checkbox>
+              </Col>
+            ))}
+          </Row>
+        </Checkbox.Group>
+      </div>
+
+      <div className="flex justify-center flex-col space-y-6 py-12">
+        <div className="space-y-2 text-start">
+          <h2 className="text-[26px] font-medium text-[#009969]">
+            Organizational Details
+          </h2>
+        </div>
+        <Form form={form} onFinish={onFinish} className="space-y-4">
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+            <Form.Item
+              name="name"
+              rules={[{ required: true, message: 'Please input your Organization Name!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="name"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
                 />
-            </div>
-          </Space>
-        </div>
-
-        <div className="flex justify-center flex-col space-y-6 py-12">
-          <div className="space-y-2 text-start">
-            <h2 className="text-[26px] font-medium text-[#009969]">
-              Organizational Details
-            </h2>
+                <label
+                  htmlFor="name"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Organization Name
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="email"
+              rules={[{ required: true, type: 'email', message: 'Please input a valid Email!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="email"
+                  id="email"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Email
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="address"
+              rules={[{ required: true, message: 'Please input your Address!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="address"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="address"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Address
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="number"
+              rules={[{ required: true, message: 'Please input your Mobile Number!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="number"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="number"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Mobile Number
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="landline"
+              rules={[{ required: true, message: 'Please input your Landline Number!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="landline"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="landline"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Landline Number
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="url"
+              rules={[{ required: true, message: 'Please input your Website URL!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="url"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="url"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Website/URL
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="socialLink"
+              rules={[{ required: true, message: 'Please input your Social Media Link!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="socialLink"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="socialLink"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Social Media Link
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="logo"
+              rules={[{ required: true, message: 'Please upload your Logo!' }]}
+            >
+              <div className="relative mt-2 w-full">
+                <input
+                  type="text"
+                  id="logo"
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="logo"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Logo/Cover
+                </label>
+              </div>
+            </Form.Item>
           </div>
-          <form className="space-y-4">
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="name"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="name"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Organization Name
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="email"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="email"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Email
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="address"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="address"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Address
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="number"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="number"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Mobile Number
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="landline"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="landline"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Landline Number
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="url"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="url"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Website/URL
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="socialLink"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="socialLink"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Social Media Link
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="logo"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="logo"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                  >
-                    {" "}
-                    Logo/Cover
-                  </label>
-                </div>
-              </div>
-            </div>
-
+          <Form.Item>
             <div className="w-full flex justify-center">
-              <button class="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+              >
                 Submit
-              </button>
+              </Button>
             </div>
-          </form>
-        </div>
-      </Container>
+          </Form.Item>
+        </Form>
+        <h4 className="mt-10 text-center text-lg text-red-500">{errorMsg}</h4>
+        {contextHolder}
+      </div>
+    </Container>
     </>
   );
 };
