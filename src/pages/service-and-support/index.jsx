@@ -1,51 +1,34 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
-
 import React from "react";
-import LinksCard from "components/Cards/linksCard";
+import { FlipCards } from "components/FlipCards";
 
-const cardContent = [
+const serviceSupportCards = [
   {
-    text: "Maps and Reports",
-    url: "/governance",
-    color: "#009969",
-    links: [
-      { url: "/gis-portal", text: "GIS Portal" },
-      { url: "/legal-policies", text: "Geological Data" },
-    ],
-    minWidth: 80,
+    title: "Maps and Reports",
+    flipContent:
+      "This section provides an interactive display of the minerals and mining sector of Pakistan, including visualization through GIS Portal and access to geological data.",
+    link: "/maps-and-reports",
   },
   {
-    text: "Mineral Testing Labs",
-    url: "/acts-laws",
-    color: "#009969",
-    links: [
-      { url: "/mining-operations", text: "Test Information" },
-      { url: "/health-safety", text: "Apply" },
-      { url: "/health-safety", text: "Results" },
-    ],
-    minWidth: 80,
+    title: "Mineral Testing Labs",
+    flipContent:
+      "This section provides information about the various tests related to minerals to know more about their composition and properties.",
+    link: "/mineral-testing-labs",
   },
   {
-    text: "Expatriate Security",
-    color: "#009969",
-    url: "/rules-regulations",
-    links: [
-      {
-        url: "/consession-rules",
-        text: "Company Registration",
-      },
-      { url: "/labor-welfare", text: "Expat NOC Application" },
-    ],
-    minWidth: 80,
+    title: "Expatriate Security",
+    flipContent:
+      "Procedures for expat NOC clearance for setting up a mining company in Pakistan",
+    link: "/expatriate-security",
   },
 ];
 
 const ServiceAndSupport = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "#", label: "Legal Framework" },
+    { path: "#", label: "Services and Support" },
   ];
 
   return (
@@ -57,6 +40,7 @@ const ServiceAndSupport = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
+      
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -66,28 +50,33 @@ const ServiceAndSupport = () => {
         <div className="flex flex-wrap mt-[20px]">
           <div className="max-w-[100%]">
             <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
-              Legal Framework
+              Services and Support
               <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
             </h1>
             <div
               className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
               style={{ whiteSpace: "pre-line" }}
             >
-              The legal framework around mining in Pakistan is primarily
-              governed by the Mines and Minerals (Development and Regulation)
-              Act, 1948, and the Mines and Minerals (Development and Regulation)
-              Rules, 1960. Additionally, each province in Pakistan has its own
-              set of rules and regulations related to mining activities.
+              The mining sector of Pakistan has tremendous potential for long
+              term sustainable development. Being a mineral-rich country,
+              Pakistan offers a diverse range of minerals and gemstones over a
+              vast area where prospects of national and foreign investment are
+              endless.
             </div>
 
-            <div className="mt-20">
-              <div className="flex flex-wrap justify-center mt-6 space-x-4">
-                <LinksCard content={cardContent} />
+            <div className="mt-20 flex justify-center">
+              <div className="service-sport-container-cards ">
+                {serviceSupportCards.map((item) => (
+                  <FlipCards
+                    title={item.title}
+                    flip={true}
+                    flipContent={item.flipContent}
+                    link={item.link ? item.link : ""}
+                  ></FlipCards>
+                ))}
               </div>
             </div>
-
             {/* large gap */}
-
             <div className="mt-64"></div>
           </div>
         </div>

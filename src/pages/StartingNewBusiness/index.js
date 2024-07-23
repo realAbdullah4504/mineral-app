@@ -128,47 +128,48 @@ function StartingNewBusiness() {
         "Open a company bank account in any commercial bank in Pakistan",
     },
     {
-      title: "Register & Obtain Authorization",
+      title: "Permit & Licenses",
       description:
-        "Register & obtain authorization from relevant regulators (federal, provincial & local governments) as per your business activity. Opt for the services from the legal advisor and create a legal contract with your clients.",
+        "Register & obtain authorization from relevant regulators (federal, provincial & local governments) as per your business activity.Opt for the services from the legal advisor and create a legal contract with your clients.",
     },
     {
-      title: "State Bank's Approval",
+      title: "Foreign Exchange Compliance",
       description:
-        "Obtain State Banks Approval for foreign exchange remittance. Register foreign investment & facilitate repatriation of foreign exchange with SBP. Visit sbp.org.pk",
+        "Obtain State Bank’s Approval for foreign exchange remittance Register foreign investment & facilitate respiration of foreign exchange with SBP's Visit sbp.org.pk",
     },
     {
-      title: "Environmental Registration",
+      title: "Environmental Compliance",
       description:
-        "Registration with the Environmental Protection Agency for Environmental Impact Assessment. Register at Federal & Provincial levels. Visit https://environment.gov.pk/",
+        "Registration with the Environmental Protection Agency for Environmental Impact Assessment. Register at Federal & Provincial levels Visit https://environment.gov.pk/",
     },
   ];
   return (
-    <Container classes="mt-8 w-[90%]">
-      <div className="starting-business-intro">
-        <BreadCrumbs breadcrumbs={breadcrumbs} />{" "}
-        <IntroContainer
-          title="Registering your Mining Business in Pakistan"
-          content=" Pakistan has made the process of starting a new business fairly easy and simple through SECP and relevant authorities. There are several options available for interested individuals and/or businesses to set-up their mining or mining related businesses in Pakistan. In order to gain a better understanding of the types of business that can be registered in Pakistan, a brief summary is provided below:"
-          introHeight="300px"
-          width="100%"
-        ></IntroContainer>
-      </div>
-      <div>
-        {" "}
+    <>
+      <Container classes="mt-8 w-[90%]">
+        <div className="starting-business-intro">
+          <BreadCrumbs breadcrumbs={breadcrumbs} />{" "}
+          <IntroContainer
+            title="Registering your Mining Business in Pakistan"
+            content=" Pakistan has made the process of starting a new business fairly easy and simple through SECP and relevant authorities. There are several options available for interested individuals and/or businesses to set-up their mining or mining related businesses in Pakistan. In order to gain a better understanding of the types of business that can be registered in Pakistan, a brief summary is provided below:"
+            introHeight="300px"
+            width="100%"
+          ></IntroContainer>
+        </div>{" "}
         <div className="business-mining-cards">
           {" "}
           {miningPoints.map((item, index) => (
             <BusinessCards item={item} index={index}></BusinessCards>
           ))}
         </div>
-        <div className="image-wrapper">
-          <img
-            src={StartingBusiness}
-            alt="Starting Business"
-            className="cropped-image"
-          />
-        </div>
+      </Container>
+      <div className="w-full">
+        <img
+          src={StartingBusiness}
+          alt="Full Width"
+          className="w-full h-full object-center"
+        />
+      </div>
+      <Container classes="mt-8 w-[90%]">
         <div className="starting-business-investor">
           <IntroContainer
             title={
@@ -239,8 +240,8 @@ function StartingNewBusiness() {
             </ul>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }
 export default StartingNewBusiness;

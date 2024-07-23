@@ -12,7 +12,7 @@ export default {
         "pexels-jack-redgate":
           "url('/src/assets/images/pexels-jack-redgate-333633-2929211.png')",
         "pakistan-image": "url('/src/assets/images/pakistanPic.png')",
-        "china-image": "url('/src/assets/images/pmsteps.jpg')",
+        "china-image": "url('/src/assets/images/pmsteps.png')",
         "rectangle-image": "url('/src/assets/images/2ndNews.png')",
         "president-image": "url('/src/assets/images/ceoimage.jpeg')",
         "Energy-image": "url('/src/assets/images/Energy.png')",
@@ -22,6 +22,8 @@ export default {
           "url('/src/assets/images/InstitutionalArrangement.png')",
         "radioactive-minerals":
           "url('/src/assets/images/RadioActiveMinerals.png')",
+        login2: "url('/src/assets/images/login2.png')",
+        login1: "url('/src/assets/images/login1.png')",
       },
       fontFamily: {
         "roboto-condensed": ['"Roboto Condensed"', "sans-serif"],

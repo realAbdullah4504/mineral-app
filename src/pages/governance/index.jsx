@@ -1,9 +1,9 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
+import { FlipCards } from "components/FlipCards";
 
 import React from "react";
-import CardComponent from "components/Cards/simpleCard";
 
 const Governance = () => {
   const breadcrumbs = [
@@ -40,36 +40,12 @@ const Governance = () => {
               Regulatory policies & legislation that govern Pakistan’s mining
               operations
             </div>
-
-            {/* <div className="flex justify-center mt-16 space-x-4">
-              <div className="flex flex-wrap justify-center cursor-pointer	">
-                <CardComponent
-                  content={{
-                    text: "Institutional Arrangement",
-                    url: "/institutional-arrangement",
-                    para: "Constitutional structure to legislate mining plans & operations to ensure transparency & regulatory compliance.",
-                    color: "#009969",
-                  }}
-                />
-              </div>
-              <div className="flex flex-wrap justify-center cursor-pointer	">
-                <CardComponent
-                  content={{
-                    text: "Policies",
-                    url: "/legal-policies",
-                    para: "Policies & rules set in place by the Government to guide decision making by industry standards for ensuring sustainable & responsible mining practices.",
-                    color: "#009969",
-                  }}
-                />
-              </div>
-            </div> */}
-
             <div className="w-full flex justify-center mt-20">
-              <div className="grid grid-cols-2 w-[50%]">
-                <CardComponent
+              <div className="mineral-container-cards">
+                {/* <CardComponent
                   content={{
                     text: "Institutional Arrangement",
-                    url: "/institutional-arrangement",
+                    url: "",
                     para: "Constitutional structure to legislate mining plans & operations to ensure transparency & regulatory compliance.",
                     color: "#009969",
                   }}
@@ -78,10 +54,26 @@ const Governance = () => {
                   content={{
                     text: "Policies",
                     url: "/legal-policies",
-                    para: "Policies & rules set in place by the Government to guide decision making by industry standards for ensuring sustainable & responsible mining practices.",
+                    para: ,
                     color: "#009969",
                   }}
-                />
+                /> */}
+                <FlipCards
+                  title={"Institutional Arrangement"}
+                  flip={true}
+                  flipContent={
+                    "Constitutional structure to legislate mining plans & operations to ensure transparency & regulatory compliance."
+                  }
+                  link={"/institutional-arrangement"}
+                ></FlipCards>
+                <FlipCards
+                  title={"Policies"}
+                  flip={true}
+                  flipContent={
+                    "Policies & rules set in place by the Government to guide decision making by industry standards for ensuring sustainable & responsible mining practices."
+                  }
+                  link={"/legal-policies"}
+                ></FlipCards>
               </div>
             </div>
 

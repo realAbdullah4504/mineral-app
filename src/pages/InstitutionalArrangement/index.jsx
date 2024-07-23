@@ -4,14 +4,13 @@ import { Container } from "components/UI";
 import React from "react";
 const InstitutionalArrangement = () => {
   const breadcrumbs = [
-    { path: '/', label: 'Home' },
-    { path: '/legal-framework', label: 'Legal Framework' },
-    { path: '/governance', label: 'Governance' },
-    { path: '#', label: 'Institutional Arrangement' },
+    { path: "/", label: "Home" },
+    { path: "/legal-framework", label: "Legal Framework" },
+    { path: "/governance", label: "Governance" },
+    { path: "/institutional-arrangement", label: "Institutional Arrangement" },
   ];
 
   return (
-    
     <Container classes="mt-8 w-[90%]">
       <BreadCrumbs breadcrumbs={breadcrumbs} />
       <InstitutionalArrangementSection

@@ -1,20 +1,13 @@
 import React, { useState } from "react";
-import { Form, Select, Input, InputNumber, Button } from "antd";
-
-const { Option } = Select;
+import { Form, InputNumber, Button } from "antd";
 
 const Step1 = ({ obj1, setDisabled }) => {
   const [form] = Form.useForm();
   const [applyAs, setApplyAs] = useState("Individual");
   setDisabled(false);
-  const formItemLayout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
-  };
 
   const handleApplyAsChange = (value) => {
     setApplyAs(value);
-    // form.resetFields();
   };
 
   const renderFormItems = () => {
@@ -25,46 +18,88 @@ const Step1 = ({ obj1, setDisabled }) => {
     return fields.map((field) => {
       if (field.type === "input") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please input ${field.label.toLowerCase()}!` }]}
-          >
-            <Input />
-          </Form.Item>
+          <div>
+            <div key={field.name} className="relative mt-2 w-full">
+              <input
+                type="text"
+                id={field.name}
+                class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                placeholder=" "
+              />
+              <label
+                for="name"
+                class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+              >
+                {" "}
+                {field.label}
+              </label>
+            </div>
+          </div>
         );
       }
 
       if (field.type === "number") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please input ${field.label.toLowerCase()}!` }]}
-          >
-            <InputNumber />
-          </Form.Item>
+          <div key={field.name} className="relative mt-2 w-full">
+            <input
+              type="number"
+              id={field.name}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              placeholder=" "
+              required={field.required === "true"}
+            />
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+          </div>
         );
       }
 
       if (field.type === "select") {
         return (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[{ required: field.required === "true", message: `Please select ${field.label.toLowerCase()}!` }]}
-          >
-            <Select placeholder={`Select ${field.label.toLowerCase()}`}>
+          <div key={field.name} className="relative mt-2 w-full">
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+            <select
+              id={field.name}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              required={field.required === "true"}
+            >
+              <option value="" disabled selected style={{ opacity: 0.5 }}>
+                Select {field.label.toLowerCase()}
+              </option>
               {field.options.map((option) => (
-                <Option key={option} value={option}>
+                <option key={option} value={option}>
                   {option}
-                </Option>
+                </option>
               ))}
-            </Select>
-          </Form.Item>
+            </select>
+          </div>
+        );
+      }
+      if (field.type === "textarea") {
+        return (
+          <div key={field.name} className="relative mt-2 w-full">
+            <textarea
+              id={field.name}
+              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+              placeholder=" "
+              required={field.required === "true"}
+            />
+            <label
+              htmlFor={field.name}
+              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+            >
+              {field.label}
+            </label>
+          </div>
         );
       }
 
@@ -73,32 +108,32 @@ const Step1 = ({ obj1, setDisabled }) => {
   };
 
   return (
-    <Form {...formItemLayout} form={form} variant="filled">
-      <div className="form-grid">
-        <Form.Item
-          label="Apply As"
-          name="ApplyAs"
-          rules={[
-            {
-              required: true,
-              message: "Please input!",
-            },
-          ]}
-        >
-          <Select placeholder="Select an option" onChange={handleApplyAsChange}>
-            <Option value="option1">Individual</Option>
-            <Option value="option2">Company</Option>
-          </Select>
-        </Form.Item>
+    <form className="space-y-4">
+      <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+        <div className="relative mt-2 w-full">
+          <label
+            htmlFor="ApplyAs"
+            className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+          >
+            Apply As
+          </label>
+          <select
+            id="ApplyAs"
+            className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+            required={true}
+            onChange={(e) => handleApplyAsChange(e.target.value)}
+          >
+            <option value="" disabled selected style={{ opacity: 0.5 }}>
+              Select an option
+            </option>
+            <option value="option1">Individual</option>
+            <option value="option2">Company</option>
+          </select>
+        </div>
+
         {renderFormItems()}
       </div>
-      <Form.Item
-        wrapperCol={{
-          offset: 0,
-          span: 24,
-        }}
-      ></Form.Item>
-    </Form>
+    </form>
   );
 };
 

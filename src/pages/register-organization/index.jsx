@@ -3,13 +3,10 @@ import { useNavigate } from "react-router-dom";
 // import styles from "./RegisterOrganization.module.css";
 // import { Breadcrumb } from "react-bootstrap";
 
-import { Form, Select, message } from "antd";
+import { Form, Select, message, Space } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-// import Header from "../../Header";
-// import Footer from "../../Footer";
-// import { authService } from "../../../services/authService";
-// import axiosInstance from "../../../axios/axiosInstance";
+import { registerOrganizationOption } from "utils/constant/common";
 const { Option } = Select;
 
 const RegisterOrganization = () => {
@@ -366,7 +363,7 @@ const RegisterOrganization = () => {
           Who is Who: <p>{getOrgTypeShow(orgType["OrganizationType"])}</p>
         </h2> */}
         <div className="flex flex-wrap mt-[20px]">
-          <div className="w-full flex">
+          {/* <div className="w-full flex">
             <h1 className="font-ibm-plex-sans font-semibold text-[48px] p-[0px]">
               Who is Who:{" "}
             </h1>
@@ -374,19 +371,48 @@ const RegisterOrganization = () => {
               {" "}
               {getOrgTypeShow(orgType["OrganizationType"])}
             </h1>
-          </div>
+          </div> */}
 
           <div
             className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
             style={{ whiteSpace: "pre-line" }}
           >
-            Government Organizations <strong>Apply for Registration</strong>
+        <strong>Apply for Registration</strong>
           </div>
         </div>
 
-        <div className="flex justify-center flex-col space-y-6 py-12 px-16">
+        <div className="mt-8">
+          <Space
+            style={{
+              width: "70%",
+            }}
+            direction="vertical"
+          >
+            <div className="w-full">
+              <label
+                className="block text-sm font-medium text-gray-900 mb-2"
+                htmlFor="custom-select"
+              >
+                Select Categories
+              </label>
+                <Select
+                  id="custom-select"
+                  mode="multiple"
+                  allowClear
+                  className="w-full"
+                  placeholder="Please select"
+                  options={registerOrganizationOption}
+                  style={{
+                    width: "70%",
+                  }}
+                />
+            </div>
+          </Space>
+        </div>
+
+        <div className="flex justify-center flex-col space-y-6 py-12">
           <div className="space-y-2 text-start">
-            <h2 className="text-3xl font-bold text-[#009969] ">
+            <h2 className="text-[26px] font-medium text-[#009969]">
               Organizational Details
             </h2>
           </div>

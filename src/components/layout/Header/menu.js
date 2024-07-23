@@ -24,8 +24,8 @@ export const SubMenuInvestment = [
     link: "/applying-for-mineral-title",
   },
   {
-    name: "Development Schemes",
-    link: "/development-schemes",
+    name: "Development Initiatives",
+    link: "/development-initiatives",
   },
   {
     name: "Starting New Business",
@@ -47,11 +47,11 @@ export const SubMenuMapsAndReports = [
 export const SubMenuExpartriateSecurity = [
   {
     name: "NOC Sponsor Company",
-    link: "#",
+    link: "/noc-sponsor-company",
   },
   {
     name: "Expat NOC Application",
-    link: "#",
+    link: "/expact-noc-application",
   },
 ];
 
@@ -66,7 +66,7 @@ export const SubMenuMineralTestingLabs = [
   },
   {
     name: "View Results",
-    link: "#",
+    link: "/minerals-test-results",
   },
 ];
 
@@ -75,7 +75,7 @@ export const SubMenuResearchAndDevelopment = [];
 export const SubMenuFiscal = [
   {
     name: "Taxes Structure",
-    link: "/fiscal-tax",
+    link: "/fiscal-regime-tax",
   },
   {
     name: "Royalty Fee",
@@ -191,7 +191,6 @@ export const SubMenuWhoIsWho = [
     name: "Associations",
     link: "/associations",
   },
-  
 ];
 
 export const SubMenuCSR = [

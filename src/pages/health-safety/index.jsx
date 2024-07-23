@@ -16,8 +16,8 @@ const HealthSafety = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/legal-framework", label: "Legal Framework" },
-    { path: "/", label: "Acts & Laws" },
-    { path: "#", label: "Health & Safety" },
+    { path: "/acts-laws", label: "Acts & Laws" },
+    { path: "/health-safety", label: "Health & Safety" },
   ];
 
   return (

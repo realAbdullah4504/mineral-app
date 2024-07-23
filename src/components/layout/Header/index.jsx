@@ -21,7 +21,6 @@ import {
 } from "./menu";
 import { getCookie } from "services/session/cookies";
 import { logOut } from "utils/helpers";
-import BreadCrumbs from "components/Breadcrumbs";
 
 const Header = ({ title = "" }) => {
   const [menuMobile, setMobileMenu] = useState(false);
@@ -39,6 +38,7 @@ const Header = ({ title = "" }) => {
   const handleNavigate = (url) => {
     navigate(url);
   };
+
   return (
     <>
       <header className="header_main">
@@ -50,9 +50,9 @@ const Header = ({ title = "" }) => {
             <div className="header_top_inner">
               <div className="header_column" id="flexible-width-1">
                 <div className="header_menu_1">
-                  <Link to="#">About Us</Link>
-                  <Link to="#">News</Link>
-                  <Link to="#">FAQs</Link>
+                  <Link to="/">About Us</Link>
+                  <Link to="/#news-and-event">News</Link>
+                  <Link to="/faqs">FAQs</Link>
                 </div>
               </div>
               <div className="header_column header_logo" id="fixed-width">
@@ -71,7 +71,7 @@ const Header = ({ title = "" }) => {
                 ) : (
                   <div className="header_menu_2">
                     <Link to="/login">Log in</Link>
-                    <Link to="#">Sign up</Link>
+                    <Link to="/signup">Sign up</Link>
                   </div>
                 )}
               </div>
@@ -99,7 +99,12 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Services
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/service-and-support")}
+                  >
+                    Services
+                  </div>
                   <ul className="sub_menu services_sub_menus mega_menu">
                     <div className="services_sub_menu_inner">
                       <div className="services_sub_menu">
@@ -176,7 +181,13 @@ const Header = ({ title = "" }) => {
               </ul>
               <ul className="has_sub_menu">
                 <li>
-                  Fiscal
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handleNavigate("/fiscal-regime")}
+                  >
+                    Fiscal
+                  </span>
+
                   <ul className="sub_menu">
                     {SubMenuFiscal?.map((data, i) => (
                       <Link to={data?.link} key={i}>

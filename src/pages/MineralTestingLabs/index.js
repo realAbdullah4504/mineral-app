@@ -9,13 +9,13 @@ function BusinessInvestment() {
     {
       title: "Test Information",
       flipContent:
-        "Mineral tests are simple physical & chemical methods of testing samples, which help to identify the mineral type. This approach is used widely in mineralogy, ore geology and general geological mapping",
+        "Mineral tests are physical & chemical methods of testing samples, which identify the mineral. This approach is used widely in mineralogy, ore geology and general geological mapping",
       link: "/test-information",
     },
     {
       title: "Apply",
       flipContent: "Apply for testing for your mineral sample",
-      link: "/minerals-test-apply",
+      link: "/applying-for-mineral-test",
     },
     {
       title: "Results",
@@ -25,7 +25,7 @@ function BusinessInvestment() {
   ];
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "#", label: "Services and Support" },
+    { path: "/service-and-support", label: "Services and Support" },
     { path: "/mineral-testing-labs", label: "Minerals Testing Labs" },
   ];
 
@@ -34,37 +34,32 @@ function BusinessInvestment() {
       style={{
         width: "100%",
         height: "auto",
-        backgroundImage: `url(${FiscalIncentivesBg})`,
+        backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        paddingBottom: "150px",
       }}
     >
       <div className="business-investment-container">
         <div
           style={{
-            marginLeft: "70px",
+            // marginLeft: "70px",
             marginTop: "30px",
           }}
+          className="px-14"
         >
-          <BreadCrumbs breadcrumbs={breadcrumbs} />
+          <div className="max-w-[1440px]  relative m-auto">
+            <BreadCrumbs breadcrumbs={breadcrumbs} />
+          </div>
         </div>
         <IntroContainer
           title={
-            <h1>
-              <span
-                className="lg:w-[125px] w-[95px] lg:mr-[7rem] mr-[3.5rem]"
-                style={{
-                  borderBottom: "5px solid green",
-                  display: "inline-block",
-                  borderRadius: "5px",
-                }}
-              >
-                Mineral
-              </span>
-              Testing <span className="text-[#27AE60]">Labs</span>
+            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+              Mineral Testing Labs
+              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
             </h1>
           }
           content="This section provides information about the various tests related to minerals to know more about their composition and properties."
@@ -72,7 +67,7 @@ function BusinessInvestment() {
           width="80%"
           introHeight="280px"
         ></IntroContainer>
-        <div className="business-investment-container-cards">
+        <div className="mineral-container-cards">
           {businessAndInvestmentcards.map((item) => (
             <FlipCards
               title={item.title}

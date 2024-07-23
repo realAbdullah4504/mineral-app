@@ -8,20 +8,20 @@ import { FlipCards } from "components/FlipCards";
 const InitiativesProjects = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
-    { path: "#", label: "Initiatives & Projects" },
+    { path: "/initiatives-projects", label: "Initiatives & Projects" },
   ];
 
   const initiativesCards = [
     {
       title: "Major Mining Projects",
       flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+        "Detailed description of the ongoing mining projects in Pakistan.",
       link: "/major-mining",
     },
     {
       title: "Training & Skills Development",
       flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+        "Training programs, skills development workshops, safety courses, and capacity-building initiatives for mining industry workers.",
       link: "/training-skill",
     },
   ];
@@ -66,7 +66,7 @@ const InitiativesProjects = () => {
                 {initiativesCards.map((item) => (
                   <FlipCards
                     title={item.title}
-                    flip={false}
+                    flip={true}
                     flipContent={item.flipContent}
                     link={item.link ? item.link : ""}
                     changebg={true}

@@ -17,24 +17,6 @@ export const MineralSectorPotential = () => {
           <div className="flex">
             <img src={MineralPotential} alt="Mineral potential" />
           </div>
-          <div className="flex text-[18px] justify-around mx-14 ">
-            <div className="flex flex-col max-w-[140px] text-center">
-              Untapped mineral potential and ideal geological location on the
-              Tethyan Belt
-            </div>
-            <div className="flex flex-col max-w-[140px] text-center">
-              Supportive and robust legal and fiscal framework
-            </div>
-            <div className="flex flex-col max-w-[140px] text-center">
-              Growing economy, with dynamic labor force
-            </div>
-            <div className="flex flex-col max-w-[140px] text-center">
-              Infrastructure supporting mining sector
-            </div>
-            <div className="flex flex-col max-w-[140px] text-center">
-              Engagement of local and international stakeholders
-            </div>
-          </div>
         </div>
       </Container>
     </div>
