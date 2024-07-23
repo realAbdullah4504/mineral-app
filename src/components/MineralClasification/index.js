@@ -4,7 +4,7 @@ import arrowL from "../../assets/images/arrowL.png"
 import {mineralClassification} from 'utils/constant/common';
 
 export const MineralClassification = () => {
-    const [tab, setTab] = useState(["Metallic Minerals", "Dimension Stones", "Gemstones", "Industrial Stones", "Energy"])
+    const [tab, setTab] = useState(["Metallic Minerals", "Dimension Stones", "Gemstones", "Industrial Minerals", "Energy"])
     const [activeTab, setActiveTab] = useState(1)
     const [data, setData] = useState(mineralClassification)
     const rightHandler = () => {
