@@ -29,7 +29,7 @@ const NocStep1 = ({ setState }) => {
     { label: "Passport No.", name: "passport-no", required: "true", type: "input" },
     { label: "Passport Image.", name: "passport-img", required: "true", type: "file" },
     {
-      label: "Colored Passport Size Picture(35mm * 45mm).",
+      label: "Colored Passport Size Picture",
       name: "passport-img-colored",
       required: "true",
       type: "file",

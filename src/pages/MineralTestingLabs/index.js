@@ -40,7 +40,7 @@ function BusinessInvestment() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingBottom:"150px"
+        paddingBottom: "150px",
       }}
     >
       <div className="business-investment-container">
@@ -52,24 +52,14 @@ function BusinessInvestment() {
           className="px-14"
         >
           <div className="max-w-[1440px]  relative m-auto">
-          <BreadCrumbs breadcrumbs={breadcrumbs} />
-
+            <BreadCrumbs breadcrumbs={breadcrumbs} />
           </div>
         </div>
         <IntroContainer
           title={
-            <h1>
-              <span
-                className="lg:w-[125px] w-[95px] lg:mr-[7rem] mr-[3.5rem]"
-                style={{
-                  borderBottom: "5px solid green",
-                  display: "inline-block",
-                  borderRadius: "5px",
-                }}
-              >
-                Mineral
-              </span>
-              Testing <span className="text-[#27AE60]">Labs</span>
+            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+              Mineral Testing Labs
+              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
             </h1>
           }
           content="This section provides information about the various tests related to minerals to know more about their composition and properties."

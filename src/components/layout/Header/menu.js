@@ -51,7 +51,7 @@ export const SubMenuExpartriateSecurity = [
   },
   {
     name: "Expat NOC Application",
-    link: "#",
+    link: "/expact-noc-application",
   },
 ];
 

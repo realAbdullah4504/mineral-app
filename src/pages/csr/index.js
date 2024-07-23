@@ -38,8 +38,8 @@ function Csr() {
 
   return (
     <div
+      className="w-full"
       style={{
-        width: "100%",
         height: "auto",
         backgroundImage: `linear-gradient(to bottom, white, rgba(255,255,255,0)), url(${FiscalIncentivesBg})`,
         backgroundSize: "cover",
@@ -50,29 +50,26 @@ function Csr() {
       }}
     >
       <Container classes="mt-8 w-[90%]">
-        <div className="business-investment-container">
-          <BreadCrumbs breadcrumbs={breadcrumbs} />
-          <IntroContainer
-            title={
-              <h1>
-                <span
-                  style={{
-                    borderBottom: "5px solid green",
-                    display: "inline-block",
-                    borderRadius: "5px",
-                  }}
-                >
-                  CSR
-                </span>{" "}
-              </h1>
-            }
-            content="Mining companies in Pakistan are regulated by the Government to fulfill their Corporate Social Responsibility for sustainable environmental & social practices. This includes  voluntarily improve the quality of life for employees, local communities, and society at large while minimizing the negative environmental impact of mining activities."
-            height="70%"
-            width="100%"
-            introHeight="280px"
-          ></IntroContainer>
-
-          <div className="flex flex-col items-center">
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+        <div className="flex flex-wrap mt-[20px]">
+          <div>
+            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+              CSR
+              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
+            </h1>
+            <div
+              className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
+              style={{ whiteSpace: "pre-line" }}
+            >
+              Mining companies in Pakistan are regulated by the Government to
+              fulfill their Corporate Social Responsibility for sustainable
+              environmental & social practices. This includes  voluntarily
+              improve the quality of life for employees, local communities, and
+              society at large while minimizing the negative environmental
+              impact of mining activities.
+            </div>
+          </div>
+          <div className="mt-20 flex flex-col items-center">
             <div className="flex w-[900px] mb-[50px]">
               {csrCards.slice(0, 2).map((item) => (
                 <FlipCards

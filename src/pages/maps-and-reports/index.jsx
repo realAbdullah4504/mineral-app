@@ -54,18 +54,9 @@ function MapsAndReports() {
         </div>
         <IntroContainer
           title={
-            <h1>
-              <span
-                className="lg:w-[125px] w-[95px] lg:mr-[3rem] mr-[1.5rem]"
-                style={{
-                  borderBottom: "5px solid green",
-                  display: "inline-block",
-                  borderRadius: "5px",
-                }}
-              >
-                Maps
-              </span>
-              & <span className="text-[#27AE60]">Reports</span>
+            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+              Maps & Reports
+              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
             </h1>
           }
           content="This section provides an interactive display of the minerals and mining sector of Pakistan, including visualization through GIS Portal and access to geological data."

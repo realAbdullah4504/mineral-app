@@ -7,6 +7,7 @@ import { DashboardLayout } from "components";
 const Home = lazy(() => import("../pages/home"));
 const MineralPotential = lazy(() => import("../pages/mineral-potential"));
 const Login = lazy(() => import("../pages/login"));
+const signup = lazy(() => import("../pages/signup"));
 const FAQs = lazy(() => import("../pages/faqs"));
 const InvestmentOpportunity = lazy(() =>
   import("../pages/investment-opportunities")
@@ -96,12 +97,8 @@ const StatisticsProduction = lazy(() =>
 );
 const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
-const RegisterOrganization = lazy(() =>
-  import("../pages/register-organization")
-);
-const ApplyingForMineralForm = lazy(() =>
-  import("../pages/applying-for-mineral-form")
-);
+const RegisterOrganization = lazy(() => import("../components/register-form"));
+const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
 const NocSponsorCompanyAddList = lazy(() =>
   import("../pages/noc-company-form")
@@ -119,7 +116,36 @@ const AppRouter = () => (
         />
         <Route
           path="/login"
-          element={<PublicRoute component={Login} layout={DashboardLayout} />}
+          element={
+            <PublicRoute
+              component={Login}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute
+              component={signup}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute
+              component={Login}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
         />
         <Route
           path="/mineral-potential"
