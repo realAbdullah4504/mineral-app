@@ -5,7 +5,7 @@ import { Container } from "components/UI";
 export const InvestmentOpportunitySection = ({title = "", subTitle = "", description = "", avatar=""}) => {
   return (
     <Container>
-      <div className="flex flex-wrap mt-[20px]">
+      <div className="flex flex-wrap mt-[60px]">
         <div className="max-w-[682px]">
           <h1 className="font-ibm-plex-sans font-semibold  text-[64px] p-[0px]">
             {title}
