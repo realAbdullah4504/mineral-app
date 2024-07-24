@@ -240,8 +240,8 @@ export const mineralPotential = {
         "icon":DiamondIcon
     },
     {
-        "title":"Industrial Stones ",
-        "description":"Pakistan is home to a diverse array of industrial stones, including limestone, gypsum, salt, and quartzite, among others. These industrial stones are found in various regions across the country, with significant deposits in areas such as Punjab, Sindh, Khyber Pakhtunkhwa, and Balochistan, making Pakistan a key supplier of raw material for industrial processess. ",
+        "title":"Industrial Minerals ",
+        "description":"Pakistan is home to a diverse array of industrial minerals, including limestone, gypsum, salt, and quartzite, among others. These industrial minerals are found in various regions across the country, with significant deposits in areas such as Punjab, Sindh, Khyber Pakhtunkhwa, and Balochistan, making Pakistan a key supplier of raw material for industrial processess.",
          "avatar":Industrial,
         "icon": IndustrialIcon
     },
@@ -280,8 +280,8 @@ export const mineralPotential = {
       production: " 2022-2023: 2,915,724 tons",
       gml: " $12.65B",
       avatar: goldSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
+      tagFirst: "Food Industry",
+      secTag: "Chemical",
       thrTag: "Ceramics & Glass",
       frTag: "Oil & Gas",
       icon: rockSaltWhite,

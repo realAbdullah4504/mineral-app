@@ -10,8 +10,12 @@ export const FiscalEconomicZone = () => {
   ];
   return (
     <>
-      <div className="w-[1179px] relative m-auto mt-[100px]">
+     <div className=' lg:max-w-[1440px] w-[90%] mt-[50px] relative m-auto '>
         <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+        </div>
+      <div className="w-[1179px] relative m-auto mt-[50px]">
+        {/* <BreadCrumbs breadcrumbs={breadcrumbs} /> */}
 
         <div className="text-[64px] font-[700] leading-[83px] font-ibm-plex-sans my-3">
           Special Economic Zones

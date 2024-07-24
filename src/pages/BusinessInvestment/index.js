@@ -76,10 +76,10 @@ function BusinessInvestment() {
         alignItems: "center",
       }}
     >
-      <Container classes="mt-8 w-[90%]">
+      <Container classes="mt-8 mb-[100px] w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <div className="flex flex-wrap mt-[20px]">
-          <div>
+          <div className="mb-20">
             <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
               Business & Investment
               <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
