@@ -97,8 +97,8 @@ const ApplyingForMineralTitle = () => {
           <div className="flex text-[64px] font-semibold justify-center">
             Types of Mineral <span className="pl-4 text-[#27AE60]">Titles</span>
           </div>
-          <div className="flex text-[28px] justify-evenly">
-            <div className="flex flex-col w-[260px] h-[200px] shadow-sm items-start pl-4">
+          <div className="flex text-[28px] mt-10 justify-evenly">
+            <div className="flex flex-col w-[260px] h-[200px] shadow-lg items-start pl-4">
               <div className="flex h-1/2 justify-end w-full pr-2 pt-2">
                 <div className="flex w-[48px] h-[48px] border-solid bg-black bg-opacity-10 rounded-full items-center justify-center">
                   <img
@@ -113,7 +113,7 @@ const ApplyingForMineralTitle = () => {
               </div>
               <div className="flex h-1/4 items-end">License</div>
             </div>
-            <div className="flex flex-col w-[260px] h-[200px] shadow-sm items-start pl-4">
+            <div className="flex flex-col w-[260px] h-[200px] shadow-lg items-start pl-4">
               <div className="flex h-1/2 justify-end w-full pr-2 pt-2">
                 <div className="flex w-[48px] h-[48px] border-solid bg-black bg-opacity-10 rounded-full items-center justify-center">
                   <img
@@ -126,7 +126,7 @@ const ApplyingForMineralTitle = () => {
               <div className="flex h-1/4 items-end">Prospecting</div>
               <div className="flex h-1/4 items-end">License</div>
             </div>
-            <div className="flex flex-col w-[260px] h-[200px] shadow-sm items-start pl-4">
+            <div className="flex flex-col w-[260px] h-[200px] shadow-lg items-start pl-4">
               <div className="flex h-1/2 justify-end w-full pr-2 pt-2">
                 <div className="flex w-[48px] h-[48px] border-solid bg-black bg-opacity-10 rounded-full items-center justify-center">
                   <img
@@ -139,7 +139,7 @@ const ApplyingForMineralTitle = () => {
               <div className="flex h-1/4 items-end">Reconnaissance</div>
               <div className="flex h-1/4 items-end">License</div>
             </div>
-            <div className="flex flex-col w-[260px] h-[200px] shadow-sm items-start pl-4">
+            <div className="flex flex-col w-[260px] h-[200px] shadow-lg items-start pl-4">
               <div className="flex h-1/2 justify-end w-full pr-2 pt-2">
                 <div className="flex w-[48px] h-[48px] border-solid bg-black bg-opacity-10 rounded-full items-center justify-center">
                   <img

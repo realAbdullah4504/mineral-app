@@ -45,13 +45,25 @@ function FiscalIncentives() {
       <Container classes="mt-8 w-[90%]">
         <div className="business-investment-container">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
-          <IntroContainer
+          {/* <IntroContainer
             title="Fiscal Incentives"
             content="The Government of Pakistan has introduced a number of initiatives and incentives, aimed at facilitating local and foreign investors, collaborators and industrial ventures. Explore how the Government of Pakistan is fostering an enabling environment for the minerals and mining sector of Pakistan"
             // height="90%"
             width="100%"
             introHeight="280px"
-          ></IntroContainer>
+          ></IntroContainer> */}
+             <div className="mb-20">
+            <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
+            Fiscal Incentives
+              <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
+            </h1>
+            <div
+              className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
+              style={{ whiteSpace: "pre-line" }}
+            >
+             The Government of Pakistan has introduced a number of initiatives and incentives, aimed at facilitating local and foreign investors, collaborators and industrial ventures. Explore how the Government of Pakistan is fostering an enabling environment for the minerals and mining sector of Pakistan
+            </div>
+          </div>
           <div className="fiscal-incentives-container-cards ">
             {fiscalIncentivesCards.map((item) => (
               <FlipCards

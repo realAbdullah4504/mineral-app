@@ -6,7 +6,7 @@ export const InvestmentOpportunitySection = ({title = "", subTitle = "", descrip
   return (
     <Container>
       <div className="flex flex-wrap mt-[60px]">
-        <div className="max-w-[682px]">
+        <div className="max-w-[882px]">
           <h1 className="font-ibm-plex-sans font-semibold  text-[64px] p-[0px]">
             {title}
           </h1>
