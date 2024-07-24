@@ -93,7 +93,7 @@ const NocStep6 = ({ setState, setAlreadyVisited }) => {
   };
 
   return (
-    <div className="mineral-form">
+    <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Foreigner Accomodation Details</div>
         <ProgressPercentage percent={75} step={6} total={8}></ProgressPercentage>

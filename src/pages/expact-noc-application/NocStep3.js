@@ -85,7 +85,7 @@ const NocStep3 = ({ setState, setEquipment }) => {
   };
 
   return (
-    <div className="mineral-form">
+    <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Purpose Of Visit</div>
         <ProgressPercentage percent={37} step={3} total={8}></ProgressPercentage>
@@ -94,14 +94,9 @@ const NocStep3 = ({ setState, setEquipment }) => {
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
           <button type="primary" className="next-button" onClick={handlePrevious}>
-          <div>
+            <div>
               {" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.2em"
-                height="1.2em"
-                viewBox="0 0 16 16"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
                 <path
                   fill="white"
                   fill-rule="evenodd"

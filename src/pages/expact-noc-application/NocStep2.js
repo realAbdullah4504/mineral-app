@@ -44,9 +44,7 @@ const NocStep2 = ({ setState }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => (
-        <input type={type} {...commonProps} placeholder=" " />
-      );
+      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
 
       const renderLabel = () => (
         <label
@@ -78,9 +76,7 @@ const NocStep2 = ({ setState }) => {
               </select>
             </>
           )}
-          {field.type === "textarea" && (
-            <textarea {...commonProps} placeholder=" " />
-          )}
+          {field.type === "textarea" && <textarea {...commonProps} placeholder=" " />}
           {field.type !== "select" && renderLabel()}
         </div>
       );
@@ -88,36 +84,18 @@ const NocStep2 = ({ setState }) => {
   };
 
   return (
-    <div className="mineral-form">
+    <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Professional Details</div>
-        <ProgressPercentage
-          percent={24}
-          step={2}
-          total={8}
-        ></ProgressPercentage>
+        <ProgressPercentage percent={24} step={2} total={8}></ProgressPercentage>
       </div>
       <form className="space-y-4 " onSubmit={handleSubmit}>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-          {renderFormItems()}
-        </div>
-        <div
-          className="button-group-mineral-form"
-          style={{ marginTop: "30px", marginBottom: "30px" }}
-        >
-          <button
-            type="primary"
-            className="next-button"
-            onClick={handlePrevious}
-          >
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+          <button type="primary" className="next-button" onClick={handlePrevious}>
             <div>
               {" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.2em"
-                height="1.2em"
-                viewBox="0 0 16 16"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
                 <path
                   fill="white"
                   fill-rule="evenodd"
@@ -139,11 +117,7 @@ const NocStep2 = ({ setState }) => {
                 stroke="currentColor"
                 class="size-6"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
               </svg>
             </div>
           </button>

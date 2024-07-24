@@ -86,7 +86,7 @@ const NocStep1 = ({ setState }) => {
   };
 
   return (
-    <div className="mineral-form">
+    <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Expatriate Personal Details</div>
         <ProgressPercentage percent={12} step={1} total={8}></ProgressPercentage>
