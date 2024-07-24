@@ -39,20 +39,20 @@ function SpecialInvestmentFacilities() {
     },
   ];
   return (
-    <Container classes="mt-8 w-[90%]">
+    <Container classes="mt-8 w-[90%] max-w-[1170px] relative m-auto">
       {" "}
       <div className="special-investment-facilities-intro">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <IntroContainer
           title={
-            <h1>
-              Special Investment <span>Facilitation Council</span>
-            </h1>
+            <div className="font-ibm-plex-sans font-[700] text-[64px] leading-[83px] ">
+              Special Investment <span className="text-[#009969]">Facilitation Council</span>
+            </div>
           }
           content={
-            <div>
+            <div className="" >
               {" "}
-              <p>
+              <p className="font-helvetica  text-[18px] leading-[25px] pb-5 pt-3 ">
                 {" "}
                 SIFC focuses on investment & privatization, initially in five
                 areas; Agriculture, Minerals, Information Technology &
@@ -61,7 +61,7 @@ function SpecialInvestmentFacilities() {
                 in particular and other countries in general, for facilitation
                 of investment and developing an enabling policy environment
               </p>
-              <h6>
+              <h6 className="font-helvetica  text-[18px] leading-[25px] ">
                 SIFC is targeted at a long-term road-map for growth, development
                 and investment in the relevant fields, by aiming to:
               </h6>
@@ -71,16 +71,16 @@ function SpecialInvestmentFacilities() {
           width="100%"
         ></IntroContainer>
         <div
-          className="special-investment-roadmap-graph"
+          className="px-14 py-5 rounded-lg"
           style={{
-            width: "50%",
+            width: "60%",
             backgroundImage: `url(${SpecialInvestentBg})`,
           }}
         >
           {" "}
-          <ul>
+          <ul className="list-disc">
             {investmentGoals.map((item, index) => (
-              <li key={index}>{item.description}</li>
+              <li key={index} className="font-helvetica  text-[18px] leading-[25px]">{item.description}</li>
             ))}
           </ul>
         </div>

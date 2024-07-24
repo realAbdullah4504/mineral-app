@@ -10,9 +10,12 @@ export const FiscalTaxExemption = () => {
       ];
     return (
         <>
-            <div className='max-w-[1170px] relative m-auto px-5 pt-[50px]'>
+        <div className=' lg:max-w-[1440px] w-[90%] mt-[50px] relative m-auto '>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+        </div>
+            <div className='max-w-[1170px] relative m-auto px-5 pt-[0px]'>
                 <div className='mb-[50px]'>
-                <BreadCrumbs breadcrumbs={breadcrumbs} />
 
                 </div>
 

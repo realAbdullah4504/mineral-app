@@ -76,7 +76,7 @@
   height: 5em;
   background-color: green;
   margin-right: -20px;
-  z-index: 100;
+  z-index: 10;
   border-radius: 5px;
 }
 

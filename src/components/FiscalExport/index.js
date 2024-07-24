@@ -11,13 +11,17 @@ export const FiscalExport = () => {
       ];
     return (
         <>
+         <div className=' lg:max-w-[1440px] w-[90%] mt-[50px] relative m-auto '>
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+
+        </div>
         <div className='max-w-[1170px] relative m-auto'>
-            <div className='mt-[50px]'>
+            {/* <div className='mt-[50px]'>
             <BreadCrumbs breadcrumbs={breadcrumbs} />
 
-            </div>
+            </div> */}
 
-            <div className='flex  gap-8 mt-[100px] px-5 mb-[50px] '>
+            <div className='flex  gap-8 mt-[50px] px-5 mb-[50px] '>
 
                 <div className='max-w-[652px]'>
                     <div className='text-[64px] leading-[83px] font-ibm-plex-sans font-[700]'>

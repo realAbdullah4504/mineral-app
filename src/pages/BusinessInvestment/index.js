@@ -76,7 +76,7 @@ function BusinessInvestment() {
         alignItems: "center",
       }}
     >
-      <Container classes="mt-8 w-[90%]">
+      <Container classes="mt-8 mb-[100px] w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <div className="flex flex-wrap mt-[20px]">
           <div className="mb-20">
