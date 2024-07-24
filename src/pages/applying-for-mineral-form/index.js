@@ -22,7 +22,7 @@ const obj1 = {
   company: [
     { label: "Company Name", name: "company-name", required: "false", type: "input" },
     { label: "NTN/FTN Number", name: "NTN/FTN-number", required: "false", type: "input" },
-    { label: "Address", name: "address", required: "true", type: "false" },
+    { label: "Address", name: "address", required: "true", type: "input" },
     { label: "Contact Number", name: "contact-number", required: "false", type: "input" },
     { label: "Email", name: "email", required: "false", type: "input" },
     {

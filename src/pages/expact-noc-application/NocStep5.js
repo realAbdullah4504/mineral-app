@@ -55,7 +55,7 @@ const NocStep5 = ({ setState, equipment }) => {
       name: "CNIC-pak-official",
       required: "true",
       type: "number",
-      placeholder: "12345-1234567-8"
+      placeholder: "12345-1234567-8",
     },
     {
       label: "CNIC Front Image",
@@ -122,7 +122,7 @@ const NocStep5 = ({ setState, equipment }) => {
   };
 
   return (
-    <div className="mineral-form">
+    <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Sponsor Details</div>
         <ProgressPercentage percent={62} step={5} total={8}></ProgressPercentage>
@@ -131,14 +131,9 @@ const NocStep5 = ({ setState, equipment }) => {
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
           <button type="primary" className="next-button" onClick={handlePrevious}>
-          <div>
+            <div>
               {" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.2em"
-                height="1.2em"
-                viewBox="0 0 16 16"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
                 <path
                   fill="white"
                   fill-rule="evenodd"

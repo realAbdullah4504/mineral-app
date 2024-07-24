@@ -27,7 +27,7 @@ const ExpatNocApplication = () => {
     Step8: <NocStep8 setState={setState} alreadyVisited={alreadyVisited}></NocStep8>,
   };
   return (
-    <div className="expact-noc-application-list w-4/5 mx-auto mb-20">
+    <div className="expact-noc-application-list mx-auto mb-20 mineral-form">
       <div className="my-10">
         <h1 className="text-4xl font-bold">
           Service & Support:<span className="text-green-600">Expat NOC Application</span>

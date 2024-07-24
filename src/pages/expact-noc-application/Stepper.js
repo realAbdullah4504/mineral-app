@@ -148,7 +148,7 @@ const Stepper = () => {
   };
 
   return (
-    <div className="mineral-form">
+    <div className="noc-form">
       <div className="mineral-testing-title">Mineral Testing Labs</div>
 
       <div className="mineral-testing-table-header">
