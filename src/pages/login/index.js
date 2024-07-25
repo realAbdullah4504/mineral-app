@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Form, Input, message, ConfigProvider } from "antd";
+import { message, ConfigProvider } from "antd";
 import { useNavigate, Link } from "react-router-dom";
 import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
 import { loginAPI } from "services/api/auth";
@@ -8,15 +8,12 @@ import { getCookie, setCookie } from "services/session/cookies";
 import passwordToggle from "assets/images/passwordToggle.png";
 
 const Login = () => {
+  const [state, setState] = useState({email:"", password:""})
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleNavigate = (url) => {
-    navigate(url);
   };
 
   const [previousURL, setPreviousURL] = useState("");
@@ -42,18 +39,17 @@ const Login = () => {
     messageApi.open({
       type: "loading",
       content: "Processing..",
-      duration: 4.5,
+      duration: 1.5,
       style: {
         marginTop: "40vh",
       },
     });
   };
 
-  const warning = (resMssage) => {
+  const warning = (message ="This is a warning message") => {
     messageApi.open({
-      type: "warning",
-      content: resMssage,
-      duration: 2.5,
+      type: 'warning',
+      content: message,
     });
   };
 
@@ -64,17 +60,19 @@ const Login = () => {
     setPreviousURL(document.referrer);
   }, []);
 
-  const handleSubmission = async (values) => {
+  const handleSubmission = async () => {
     try {
-      if (!values.email || !values.password) {
+      const {email, password} = state;
+      if (!email || !password) {
         setErrorMsg("Fill all fields");
         return;
       }
+     Loading();
       setErrorMsg("");
       const { data, isError, message } = await loginAPI(
         REQUEST_TYPES.POST,
         ENDPOINTS.LOGIN,
-        values
+        {email,password}
       );
       if (isError) {
         warning(message);
@@ -84,22 +82,21 @@ const Login = () => {
         const { token } = data || {};
         setCookie("token", token);
         success();
-        // navigate("/");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const onFinish = (values) => {
-    Loading();
-    handleSubmission(values);
+  const onFinish = (e) => {
+    e.preventDefault();
+    handleSubmission();
   };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
+const changeHandler = (e) =>{
+  const {name, value} = e?.target;
+  setState({...state, [name]:value})
+}
   return (
     <ConfigProvider>
       <div className="flex h-screen">
@@ -110,13 +107,12 @@ const Login = () => {
           <div className="flex text-[19px] text-[#009969] mb-[20px]">
             Pakistan Minerals Information & Services Portal
           </div>
+          {contextHolder}
           <form
             layout="vertical"
             variant="outlined"
             action=""
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+            onSubmit={onFinish}
           >
             <div className="flex flex-col">
               <label htmlFor="email" className="text-[16px]">
@@ -127,6 +123,8 @@ const Login = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={state?.email}
+                onChange={(e)=>changeHandler(e)}
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
               />
               <div className="flex items-center mt-[12px]">
@@ -147,8 +145,11 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
+                value={state?.password}
+                onChange={(e)=>changeHandler(e)}
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
               />
+              <p style={{color:'red'}}>{errorMsg}</p><br/>
               <div className="flex justify-end mt-[8px] mb-[30px]">
                 <Link
                   className="underline text-[12.71px]"
