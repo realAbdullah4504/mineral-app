@@ -27,20 +27,21 @@ function MineralDevelopmentStrategy() {
         <div className="mineral-development-title-content">
           <div className="mineral-development-title-wrapper">
             <span className="mineral-development-title-border"></span>
-            <h1 className="mineral-development-title">Mineral Development Strategies</h1>
+            <h1 className="mineral-development-title">Mineral Development Strategy</h1>
           </div>
         </div>
       </div>
       <div className="mineral-developmen-strategy">
         <p>
-          Pakistan is home to a competitive and extensive mineral wealth. The mineral development strategies takes into
+          Pakistan is home to a competitive and extensive mineral wealth. The mineral development strategy takes into
           account radical and innovative measures for uplifting of the minerals sector with coordinated efforts of all
           stakeholders including provincial authorities. The new initiatives will greatly help exploit Pakistan’s true
           mineral potential.
         </p>
-        <h1>
+        {/* <h1>
           National Mineral Development Programe -<span style={{ color: "#009969" }}>National Strategy</span>
         </h1>
+        */}
       </div>
       <div className="mineral-development-strategy-graph">
         {" "}

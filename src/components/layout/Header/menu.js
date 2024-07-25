@@ -97,7 +97,7 @@ export const SubMenuStatistics = [
     link: "/statistics-employement",
   },
   {
-    name: "Producton Data",
+    name: "Production Data",
     link: "/statistics-production",
   },
   {

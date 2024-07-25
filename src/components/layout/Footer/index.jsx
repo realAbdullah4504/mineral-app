@@ -101,7 +101,7 @@ const Footer = () => {
       <hr className=" border-[#40384F] bg-black h-px" />
       <div className="flex justify-between pt-[3rem] pb-[3rem]">
         <div className="flex flex-col text-[0.8rem]">
-          Copyright © 2023, Ministry of Energy (Petroleum Division)
+          Copyright © 2024, Ministry of Energy (Petroleum Division)
         </div>
         <div className="flex flex-col">
           <div className="flex w-[18rem] text-[0.6rem] justify-between">
