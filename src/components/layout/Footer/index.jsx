@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./../../../assets/images/logo.jpg";
 import logoEmail from "assets/images/logoEmail.svg";
+import logoPhone from "assets/images/phoneIcon.png";
 import Instagram from "assets/images/logoInstagram.svg";
 import FaceBookIcon from "assets/images/logoFacebook.svg";
 import YoutubeIcon from "assets/images/logoYoutube.svg";
@@ -111,18 +112,31 @@ const Footer = () => {
             <label htmlFor="email" className="mb-2 font-medium">
               Email
             </label>
-            <span className="font-bold mb-2">info@minerals.gov.pk</span>
+            <div className="flex">
+              <img src={logoEmail} alt="email" className="pr-2 pb-1" />
+              <span className="font-bold mb-2">info@minerals.gov.pk</span>
+            </div>
+
             <label htmlFor="phone" className="mb-2 font-medium">
               Phone No.
             </label>
-            <span className="font-bold mb-2">+92-51-9203225</span>
+            <div className="flex">
+              <img
+                src={logoPhone}
+                alt="Phone"
+                className="pr-2 pb-1"
+                height={35}
+                width={35}
+              />
+              <span className="font-bold mb-2">+92-51-9203225</span>
+            </div>
           </div>
         </div>
       </div>
       <hr className=" border-[#40384F] bg-black h-px" />
       <div className="flex justify-between pt-[1.5rem] pb-[1.5rem]">
         <div className="flex flex-col text-[0.8rem]">
-          Copyright © 2023, Ministry of Energy (Petroleum Division)
+          Copyright © 2024, Ministry of Energy (Petroleum Division)
         </div>
         <div className="flex flex-col">
           <div className="flex w-[18rem] text-[0.6rem] justify-between">
