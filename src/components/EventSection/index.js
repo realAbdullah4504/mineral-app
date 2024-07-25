@@ -21,7 +21,7 @@ export const NewsAndEvent = () => {
             <div className="w-[372px] h-full flex items-end relative m-auto text-white">
               <div className="mb-4">
                 <div className="font-bold leading-[30px] text-[24px]   flex justify-center line-clamp-1 ">
-                PM for steps to grant industrial status to gems, precious stones sector
+                PM for steps to grant industrial ...
                 </div>
                 <div className="text-[11px] flex gap-2 mt-2 leading-[13px]">
                   <span>READ MORE</span>{" "}
@@ -33,8 +33,8 @@ export const NewsAndEvent = () => {
           <Link to="https://inp.net.pk/news-detail/pak-china/pakistan-eyes-chinese-collaboration-to-revitalize-gemstone-sector" target="_blank" className=" bg-rectangle-image bg-cover bg-no-repeat rounded-md mb-[13.5px]  flex items-end w-[431px]  h-[211px]   ">
             <div className="w-[372px] h-full flex items-end relative m-auto text-white">
               <div className="mb-4">
-                <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
-                  Pakistan eyes China Collaboration to revitalize Gemstone Sector
+                <div className="  font-bold leading-[30px] text-[24px]   flex justify-center   ">
+                  Pakistan eyes China Collaboration ...
                 </div>
                 <div className="text-[11px] flex gap-2 mt-2 leading-[13px]">
                   <span>READ MORE</span>{" "}
@@ -47,7 +47,7 @@ export const NewsAndEvent = () => {
             <div className="w-[372px] h-full flex items-end relative m-auto text-white">
               <div className="mb-4">
                 <div className="font-bold leading-[30px] text-[24px]   flex justify-center   ">
-                DAEWOO Express signs MOUs with Chinese firms on Thar Coal Gasification 
+                DAEWOO Express signs MOUs with ...
                 </div>
                 <div className="text-[11px] flex gap-2 mt-2 leading-[13px]">
                   <span>READ MORE</span>{" "}

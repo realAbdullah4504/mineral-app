@@ -13,12 +13,12 @@ const IntroContainer = ({
 }) => {
   return (
     <div
-      className={`intro-container ${title === "CPEC" ? "pt-20" : ""}`}
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className={`intro-container  ${title === "CPEC" ? "pt-20" : ""}`}
+      style={{ backgroundImage: `url(${backgroundImage})`  }}
     >
-      <div className="intro-section" style={{ height: introHeight }}>
+      <div className="intro-section mb-10 " style={{ height: 'fit-content'}}>
         <div
-          className="intro-main-section max-w-[1170px] "
+          className="intro-main-section max-w-[1440px] "
           style={{ height: height, width: "100%" }}
         >
           <Breadcrumb

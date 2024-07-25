@@ -102,7 +102,7 @@ const FiscalCPEC = () => {
             energy supply for mining operations
             <span
               id="more-content-fiscal"
-              class="showmore-content"
+              className="showmore-content"
               style={{ display: "none" }}
             >
               Moreover, collaboration with Chinese companies under CPEC can

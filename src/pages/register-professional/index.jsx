@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import styles from "./RegisterOrganization.module.css";
-// import { Breadcrumb } from "react-bootstrap";
-
-import { Form, Select, message } from "antd";
+import { Button, Form, Input, Modal, Select, Upload, message } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-// import Header from "../../Header";
-// import Footer from "../../Footer";
-// import { authService } from "../../../services/authService";
-// import axiosInstance from "../../../axios/axiosInstance";
-const { Option } = Select;
+import axios from "axios";
+import { getCookie } from "services/session/cookies";
 
+const CustomUploadIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1.4em"
+    height="1.4em"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill="#86efac"
+      d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+    />
+  </svg>
+);
 const RegisterProfessional = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
@@ -23,6 +30,9 @@ const RegisterProfessional = () => {
   const [orgType, setOrgType] = useState([]);
   const [form] = Form.useForm();
   const [value, setValue] = useState("_____ - _____ - __");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [fileUrl, setFileUrl] = useState("");
+  const [buttonText, setButtonText] = useState("Click to Upload");
 
   const handleChange = (e) => {
     let input = e.target.value.replace(/\D/g, ""); // Remove all non-digit characters
@@ -54,174 +64,6 @@ const RegisterProfessional = () => {
     { path: "#", label: "Who is Who" },
   ];
 
-  const organizationtext = [
-    {
-      status: "GovernmentOrganizations",
-      display_status: "Government Organizations",
-    },
-    {
-      status: "DrillingAndServices",
-      display_status: "Drilling & Services",
-    },
-    {
-      status: "MineralLabs",
-      display_status: "Mineral Labs",
-    },
-    {
-      status: "DownstreamIndustries",
-      display_status: "Downstream Industries",
-    },
-    {
-      status: "SoftwareAndSolutions",
-      display_status: "Software & Solutions",
-    },
-    {
-      status: "LegalAndTaxServices",
-      display_status: "Legal & Tax Services",
-    },
-    {
-      status: "Academia",
-      display_status: "Academia",
-    },
-    {
-      status: "OtherServices",
-      display_status: "Other Services",
-    },
-    {
-      status: "Associations",
-      display_status: "Associations",
-    },
-  ];
-
-  const getOrgTypeShow = (item) => {
-    console.log("getStatus", item);
-    const rarray = organizationtext.filter((value) => value.status === item);
-
-    if (rarray.length > 0) {
-      return rarray[0].display_status;
-    } else {
-      return "-";
-    }
-  };
-
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const paramValue = urlParams.get("orgtype");
-    console.log(paramValue);
-    if (renderStop !== "Set") {
-      if (paramValue === "go") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'GovernmentOrganizations',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "GovernmentOrganizations",
-        });
-
-        setReturnLink("/government-organizations");
-      }
-      if (paramValue === "das") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'DrillingAndServices',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "DrillingAndServices",
-        });
-        setReturnLink("/drilling-services");
-      }
-      if (paramValue === "dsi") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'DownstreamIndustries',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "DownstreamIndustries",
-        });
-        setReturnLink("/downstream-industries");
-      }
-      if (paramValue === "ml") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'MineralLabs',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "MineralLabs",
-        });
-        setReturnLink("/mineral-labs");
-      }
-      if (paramValue === "sas") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'SoftwareAndSolutions',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "SoftwareAndSolutions",
-        });
-        setReturnLink("/software-solutions");
-      }
-      if (paramValue === "lats") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'LegalAndTaxServices',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "LegalAndTaxServices",
-        });
-        setReturnLink("/legal-tax-services");
-      }
-      if (paramValue === "ac") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'Academia',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "Academia",
-        });
-        setReturnLink("/academia");
-      }
-      if (paramValue === "asso") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'Associations',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "Associations",
-        });
-        setReturnLink("/Associations");
-      }
-      if (paramValue === "os") {
-        //console.log('yes, paramValue is 1 is it?',paramValue);
-        /*form.setFieldsValue({
-            'OrganizationType':'OtherServices',
-          });*/
-
-        setRenderStop("Set");
-        setOrgType({
-          OrganizationType: "OtherServices",
-        });
-        setReturnLink("/other-services");
-      }
-    }
-  }, [renderStop]);
-
   const success = () => {
     messageApi
       .open({
@@ -242,166 +84,95 @@ const RegisterProfessional = () => {
       });
   };
 
-  //   const onFinish = (values) => {
-  //     console.log("Sucessful", values);
-  //     /*if(values.SocialLinks.length > 0){
-  //           console.log('Yes its exsits',values.SocialLinks);
-  //         }*/
+  const handleSubmission = async (values) => {
+    try {
+      const fullurl =
+        process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`,
+          "Content-Type": "multipart/form-data",
+          charset: "utf-8",
+          Accept: "application/json, text/plain, */*",
+        },
+      };
 
-  //     handleSubmission(values);
-  //   };
+      const bodyFormData = new FormData();
+      if (values.logo && values.logo?.fileList?.length > 0) {
+        bodyFormData.append(
+          "LogoImages",
+          values.logo.fileList[0].originFileObj || values.logo.fileList[0]
+        );
+      }
 
-  //   const handleSubmission = (values) => {
-  //     const fullurl =
-  //       process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
-  //     //const config = authService.getConfig();
-  //     const config = {
-  //       headers: {
-  //         Authorization: authService.getConfig().headers.Authorization,
-  //         "Content-Type": "multipart/form-data",
-  //         charset: "utf-8",
-  //         Accept: "application/json, text/plain, */*",
-  //       },
-  //     };
+      const companyobj = {
+        OrganizationType: orgType.OrganizationType,
+        OrganizationName: values.OrganizationName,
+        Email: values.Email,
+        MobileNumber: values.MobileNumber,
+        CNIC: values.CNIC,
+        Qualification: values.Qualification,
+        DegreeTitle: values.DegreeTitle,
+        University: values.University,
+        PassingYear: values.PassingYear,
+        IndustriesOrSector: values.IndustriesOrSector,
+        ProfessionalRole: values.ProfessionalRole,
+        ProfessionSummary: values.ProfessionSummary,
+        PECRegistrationNo: values.PECRegistrationNo,
+        Designation: values.Designation,
+        JoiningYear: values.JoiningYear,
+      };
 
-  //     var bodyFormData = new FormData();
+      bodyFormData.append("obj", JSON.stringify(companyobj));
 
-  //     if (values.logo) {
-  //       if (values.logo.fileList.length > 0) {
-  //         if (values.logo.fileList[0].originFileObj) {
-  //           console.log("if-logo", values.logo.fileList[0].originFileObj);
-  //           bodyFormData.append(
-  //             "LogoImages",
-  //             values.logo.fileList[0].originFileObj
-  //           );
-  //         } else {
-  //           console.log("else-logo", values.logo.fileList[0]);
-  //           bodyFormData.append("LogoImages", values.logo.fileList[0]);
-  //         }
-  //       }
-  //     }
-
-  //     /*let newarray = [];
-  //       newarray = values.ListSocialLinks;
-  //       if(newarray){
-  //         newarray.push(
-  //           {
-  //             'SocialLinks': values.SocialLinks,
-  //             'URL' : values.URL,
-  //           }
-  //         );
-  //       }
-  //       else{
-  //         newarray = [{
-  //           'SocialLinks': values.SocialLinks,
-  //           'URL' : values.URL,
-  //         }];
-  //       }console.log(newarray);
-  //       */
-
-  //     const companyobj = {
-  //       OrganizationType: orgType["OrganizationType"],
-  //       OrganizationName: values.OrganizationName,
-  //       Email: values.Email,
-  //       MobileNumber: values.MobileNumber,
-  //       Address: values.Address,
-  //       LandlineNumber: values.LandlineNumber,
-  //       WebsiteURL: values.WebsiteURL,
-  //       OtherLink: values.OtherLink,
-  //     };
-
-  //     console.log(companyobj);
-
-  //     const myJSON = JSON.stringify(companyobj);
-  //     console.log(myJSON);
-
-  //     bodyFormData.append("obj", myJSON);
-  //     /*axios
-  //       .post(fullurl, myJSON,
-  //       config)*/
-  //     console.log(bodyFormData);
-  //     axiosInstance
-  //       .post(fullurl, bodyFormData, config)
-  //       .then((res) => {
-  //         //alert('postdata function called');
-  //         if (!res.data.succeeded) {
-  //           console.log("false");
-  //           console.log(res);
-  //           setErrorMsg("Transcation succeeded: false");
-  //           return;
-  //         }
-
-  //         if (res.data.succeeded) {
-  //           setErrorMsg(res.data.message);
-  //           success();
-  //         }
-  //         console.log(res.data);
-  //         console.log("postdata function called");
-  //         console.log(res);
-  //       })
-  //       .catch((error) => {
-  //         setErrorMsg(
-  //           "Error Status: " +
-  //             error.response.status +
-  //             " Message : " +
-  //             error.response.statusText
-  //         );
-  //         console.log(error);
-  //       });
-  //   };
-
-  const onFinishFailed = (values) => {
-    console.log("Failed", values);
+      const { data } = await axios.post(fullurl, bodyFormData, config);
+      if (data.succeeded) {
+        success();
+      } else {
+        setErrorMsg("Transaction succeeded: false");
+      }
+    } catch (error) {
+      setErrorMsg(
+        `Error Status: ${error.response.status} Message : ${error.response.statusText}`
+      );
+    }
   };
 
-  const props = {
-    onRemove: (file) => {
-      const index = fileList.indexOf(file);
-      const newFileList = fileList.slice();
-      newFileList.splice(index, 1);
-      setFileList(newFileList);
-    },
-    beforeUpload: (file) => {
-      setFileList([...fileList, file]);
-      return false;
-    },
-    fileList,
+  const onFinish = (values) => {
+    console.log("Successful", values);
+    handleSubmission(values);
   };
 
-  const props1 = {
-    onRemove: (file) => {
-      const index = fileList1.indexOf(file);
-      const newFileList = fileList1.slice();
-      newFileList.splice(index, 1);
-      setFileList1(newFileList);
-    },
-    beforeUpload: (file) => {
-      setFileList1([...fileList1, file]);
+  const handlePreview = async (file) => {
+    const url = window.URL.createObjectURL(file.originFileObj);
+    setFileUrl(url);
+    setIsModalVisible(true);
+  };
 
-      return false;
-    },
-    fileList1,
+  const beforeUpload = (file) => {
+    const isAcceptedFileType =
+      file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "application/pdf" ||
+      file.type === "text/csv";
+    if (!isAcceptedFileType) {
+      message.error("You can only upload JPG/PNG/PDF/CSV file!");
+    }
+    return isAcceptedFileType;
+  };
+
+  const handleFileChange = (info) => {
+    if (info.file.status === "done") {
+      setButtonText("View Uploaded File");
+      setFileList(info.fileList);
+    }
   };
 
   return (
     <>
       <Container classes="mt-8 w-[90%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
-
-        {/* <h2>
-          Who is Who: <p>{getOrgTypeShow(orgType["OrganizationType"])}</p>
-        </h2> */}
         <div className="flex flex-wrap mt-[20px]">
-          {/* <div className="w-full flex">
-            <h1 className="font-ibm-plex-sans font-semibold text-[48px] p-[0px]">
-              Who is Who:{" "}
-            </h1>
-            <h1 className="font-ibm-plex-sans font-semibold text-[48px] text-[#009969] p-[0px]">
-              {" "}
-              {getOrgTypeShow(orgType["OrganizationType"])}
-            </h1>
-          </div> */}
-
           <div
             className="font-helvetica font-normal text-[22px] leading-[24px] mt-4"
             style={{ whiteSpace: "pre-line" }}
@@ -411,7 +182,7 @@ const RegisterProfessional = () => {
         </div>
 
         <div className="flex justify-center flex-col space-y-6 py-12">
-          <form className="space-y-4">
+          <Form form={form} onFinish={onFinish} className="space-y-4">
             <div className="space-y-2 text-start">
               <h2 className="text-[26px] font-medium text-[#009969] ">
                 Personal Information
@@ -419,72 +190,105 @@ const RegisterProfessional = () => {
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              <div>
-                <div class="relative mt-2 w-full">
+              <Form.Item
+                name="OrganizationName"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Contact No.!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="name"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="OrganizationName"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="name"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="OrganizationName"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
-                    Name
+                    Organization Name
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="MobileNumber"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Contact No.!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="contact"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="MobileNumber"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="contact"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="MobileNumber"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Contact No.
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="Email"
+                rules={[
+                  {
+                    required: true,
+                    type: "email",
+                    message: "Please input a valid Email!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
-                    type="text"
-                    id="email"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    type="email"
+                    id="Email"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="email"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="Email"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Email
                   </label>
                 </div>
-              </div>
-              <div>
+              </Form.Item>
+              <Form.Item
+                name="CNIC"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Valid CNIC No.!",
+                  },
+                ]}
+              >
                 <div class="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="cnic"
+                    id="CNIC"
                     value={value}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                   />
                   <label
-                    for="cnic"
+                    for="CNIC"
                     class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Valid CNIC No.
                   </label>
                 </div>
-              </div>
+              </Form.Item>
             </div>
 
             <div className="space-y-2 text-start">
@@ -494,70 +298,103 @@ const RegisterProfessional = () => {
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              <div>
-                <div class="relative mt-2 w-full">
+              <Form.Item
+                name="Qualification"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Qualification!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="qualification"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="Qualification"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="qualification"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="Qualification"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Qualification
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="DegreeTitle"
+                rules={[
+                  {
+                    required: true,
+                    message:
+                      "Please input your Degree/Diploma/Certification Title!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="degree"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="DegreeTitle"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="degree"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="DegreeTitle"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Degree/Diploma/Certification Title
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="University"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your University/Institute!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="institute"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="University"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="institute"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="University"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     University/Institute
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="PassingYear"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Graduation/Completion Year!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
-                    type="date"
-                    id="completionYear"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    type="text"
+                    id="PassingYear"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="completionYear"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="PassingYear"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Graduation/Completion Year
                   </label>
                 </div>
-              </div>
+              </Form.Item>
             </div>
 
             <div className="space-y-2 text-start">
@@ -567,91 +404,131 @@ const RegisterProfessional = () => {
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              <div>
-                <div class="relative mt-2 w-full">
+              <Form.Item
+                name="IndustriesOrSector"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Industries/Sector!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="sector"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="IndustriesOrSector"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="sector"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="IndustriesOrSector"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Industries/Sector
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="ProfessionalRole"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Professional Role!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="role"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="ProfessionalRole"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="role"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="ProfessionalRole"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Professional Role
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="PECRegistrationNo"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Professional Registration!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="registration"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="PECRegistrationNo"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="registration"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="PECRegistrationNo"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Professional Registration
                   </label>
                 </div>
-              </div>
+              </Form.Item>
 
-              <div>
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="resume"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
-                  <label
-                    for="resume"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+              <Form.Item
+                name="resume"
+                valuePropName="fileList"
+                className="w-full"
+                getValueFromEvent={(e) =>
+                  Array.isArray(e) ? e : e && e.fileList
+                }
+                // rules={[{ required: true, message: "Please upload a file!" }]}
+              >
+                <div className="relative mt-2 w-full">
+                  <Upload
+                    beforeUpload={beforeUpload}
+                    onPreview={handlePreview}
+                    onChange={handleFileChange}
+                    listType="picture"
+                    className="w-full h-full"
                   >
-                    {" "}
-                    Upload Resume
-                  </label>
+                    <div className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0 cursor-pointer">
+                      <div className="flex items-center space-x-2">
+                        {/* CustomUploadIcon can be replaced with any icon or element */}
+                        {CustomUploadIcon}
+                        <span>{buttonText}</span>
+                      </div>
+                    </div>
+                  </Upload>
                 </div>
-              </div>
+              </Form.Item>
 
-              <div>
-                <div class="relative mt-2 w-full">
-                  <textarea
+              <Form.Item
+                name="ProfessionSummary"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Professional Summary!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
+                  <input
                     type="textarea"
-                    row
-                    id="summary"
-                    rows={1}
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="ProfessionSummary"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="summary"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="ProfessionSummary"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Professional Summary
                   </label>
                 </div>
-              </div>
+              </Form.Item>
             </div>
 
             <div className="space-y-2 text-start">
@@ -661,64 +538,109 @@ const RegisterProfessional = () => {
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              <div>
-                <div class="relative mt-2 w-full">
+              <Form.Item
+                name="organization"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Organization!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
                     id="organization"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="organization"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="organization"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Organization
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="Designation"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Title/Designation!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="designation"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="Designation"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="designation"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="Designation"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Title/Designation
                   </label>
                 </div>
-              </div>
-              <div>
-                <div class="relative mt-2 w-full">
+              </Form.Item>
+              <Form.Item
+                name="JoiningYear"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Joining Year!",
+                  },
+                ]}
+              >
+                <div className="relative mt-2 w-full">
                   <input
                     type="date"
-                    id="joiningYear"
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="JoiningYear"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    for="joiningYear"
-                    class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="JoiningYear"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Joining Year
                   </label>
                 </div>
-              </div>
+              </Form.Item>
             </div>
 
-            <div className="w-full flex justify-center">
-              <button class="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                Submit
-              </button>
-            </div>
-          </form>
+            <Form.Item>
+              <div className="w-full flex justify-center">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+                >
+                  Submit
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
         </div>
       </Container>
+
+
+      <Modal
+        title="Preview File"
+        visible={isModalVisible}
+        width={1000}
+        onCancel={() => setIsModalVisible(false)}
+        footer={[
+          <Button key="close" onClick={() => setIsModalVisible(false)}>
+            Close
+          </Button>
+        ]}
+      >
+        <iframe src={fileUrl} style={{ width: '100%', height: '500px' }} frameBorder="0" />
+      </Modal>
     </>
   );
 };
