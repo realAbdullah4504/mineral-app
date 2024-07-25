@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "assets/images/logoEmail.jpeg";
+import logo from "./../../../assets/images/logo.jpg";
 import logoEmail from "assets/images/logoEmail.svg";
 import Instagram from "assets/images/logoInstagram.svg";
 import FaceBookIcon from "assets/images/logoFacebook.svg";
@@ -7,11 +7,17 @@ import YoutubeIcon from "assets/images/logoYoutube.svg";
 import TwitterIcon from "assets/images/logoTwitter.svg";
 import LinkedInLogo from "assets/images/logoLinkedIn.svg";
 
+import { useNavigate, Link } from "react-router-dom";
+
 const Footer = () => {
+  const navigate = useNavigate();
+  const handleNavigate = (url) => {
+    navigate(url);
+  };
   return (
     <div className="flex flex-col   w-full px-[9.3rem] justify-center text-[#40384F] bg-[#FAFAFB]">
-      <div className=" lg:flex   justify-between pt-[3.8rem]">
-        <div className="flex flex-col pb-[6.688rem]">
+      <div className=" lg:flex justify-between pt-[1.5rem]">
+        <div className="flex flex-col pb-[2rem]">
           <img
             src={logo}
             alt="Logo"
@@ -22,15 +28,10 @@ const Footer = () => {
           <span className="text-[1.139rem] font-semibold mt-[1.741rem]">
             Ministry of Energy
           </span>
-          <span className="text-[1.139rem] font-semibold">
+          <span className="text-[1.139rem] font-semibold mb-2">
             (Petroleum Division)
           </span>
-          <div className="flex pt-[2.4rem] pb-8">
-            <img src={logoEmail} alt="Email" />
-            <span className="ml-3 text-base font-medium">
-              info@minerals.gov.pk
-            </span>
-          </div>
+
           <div className="flex justify-center space-x-2">
             <img src={Instagram} alt="Instagram" className="w-6 h-6" />
             <img src={FaceBookIcon} alt="Facebook" className="w-6 h-6" />
@@ -40,66 +41,86 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <span className="font-semibold text-[1.139rem] text-left w-full mb-7">
-            Company
+          <span className="font-semibold text-[1.139rem] text-left w-full mb-4">
+            Quick Links
           </span>
 
           <div className="flex flex-col items-start w-full font-medium text-[0.792rem]">
             {" "}
             {/* Align buttons to the left */}
-            <button className="text-left mb-4">About Us</button>
-            <button className="text-left mb-4">News</button>
-            <button className="text-left mb-4">Business & Investment</button>
-            <button className="text-left mb-4">Legal Framework</button>
-            <button className="text-left mb-4">Press Release</button>
-            <button className="text-left mb-4">
-              National Mineral Development Plan
+            <button
+              className="text-left mb-4 cursor-pointer"
+              onClick={() => handleNavigate("/")}
+            >
+              Home
+            </button>
+            <button
+              className="text-left mb-4 cursor-pointer"
+              onClick={() => handleNavigate("/mineral-potential")}
+            >
+              Mineral Potential
+            </button>
+            <button
+              className="text-left mb-4 cursor-pointer"
+              onClick={() => handleNavigate("/investment-opportunities")}
+            >
+              Investment Opportunities
+            </button>
+            <button
+              className="text-left mb-4 cursor-pointer"
+              onClick={() => handleNavigate("/major-mining")}
+            >
+              Major Projects
             </button>
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <span className="font-semibold text-[1.139rem] mb-7 text-left w-full">
-            Resources
+          <span className="font-semibold text-[1.139rem] mb-4 text-left w-full">
+            Services
           </span>
 
           <div className="flex flex-col items-start w-full font-medium text-[0.792rem]">
             {" "}
             {/* Align buttons to the left */}
-            <button className="text-left mb-4">Data and Statistics</button>
-            <button className="text-left mb-4">Initiatives & Projects</button>
-            <button className="text-left mb-4">Who is Who</button>
-            <button className="text-left mb-4">CSR</button>
-            <button className="text-left mb-4">FAQs</button>
-            <button className="text-left mb-4">Research & Development</button>
+            <button
+              className="text-left mb-4"
+              onClick={() => handleNavigate("/gis-portal")}
+            >
+              GIS Portal
+            </button>
+            <button
+              className="text-left mb-4"
+              onClick={() => handleNavigate("/noc-sponsor-company")}
+            >
+              NOC Sponsor Company
+            </button>
+            <button
+              className="text-left mb-4"
+              onClick={() => handleNavigate("/test-information")}
+            >
+              Mineral Test Information
+            </button>
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <span className="font-semibold text-[1.139rem] text-left w-full mb-7">
-            Connect with us
+          <span className="font-semibold text-[1.139rem] text-left w-full mb-4">
+            Connect
           </span>
 
           <div className="flex flex-col items-start font-medium text-[0.792rem]">
-            <label htmlFor="name" className="mb-2 font-medium">
-              Name
-            </label>
-            <hr className=" border-[#40384F] bg-black h-px w-[16.25rem] mt-[6.88px] mb-[23.87px]" />
             <label htmlFor="email" className="mb-2 font-medium">
               Email
             </label>
-            <hr className=" border-[#40384F] bg-black h-px w-[16.25rem] mt-[6.88px] mb-[23.87px]" />
+            <span className="font-bold mb-2">info@minerals.gov.pk</span>
             <label htmlFor="phone" className="mb-2 font-medium">
               Phone No.
             </label>
-            <hr className=" border-[#40384F] bg-black h-px w-[16.25rem] mt-[6.88px] mb-[23.87px]" />
-            <label htmlFor="message" className="mb-2 font-medium">
-              Message
-            </label>
-            <hr className=" border-[#40384F] bg-black h-px w-[16.25rem] mt-[6.88px] mb-[23.87px]" />
+            <span className="font-bold mb-2">+92-51-9203225</span>
           </div>
         </div>
       </div>
       <hr className=" border-[#40384F] bg-black h-px" />
-      <div className="flex justify-between pt-[3rem] pb-[3rem]">
+      <div className="flex justify-between pt-[1.5rem] pb-[1.5rem]">
         <div className="flex flex-col text-[0.8rem]">
           Copyright © 2023, Ministry of Energy (Petroleum Division)
         </div>
