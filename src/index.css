@@ -34,3 +34,7 @@
   border: 1px;
   border-color: #86efac !important;
 }
+
+.ant-upload-select {
+  width: 100%;
+}
