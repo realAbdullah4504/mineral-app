@@ -6,9 +6,10 @@ import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
 import { loginAPI } from "services/api/auth";
 import { getCookie, setCookie } from "services/session/cookies";
 import passwordToggle from "assets/images/passwordToggle.png";
+import LogoImg from "assets/images/logo.jpg";
 
 const Login = () => {
-  const [state, setState] = useState({email:"", password:""})
+  const [state, setState] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -46,9 +47,9 @@ const Login = () => {
     });
   };
 
-  const warning = (message ="This is a warning message") => {
+  const warning = (message = "This is a warning message") => {
     messageApi.open({
-      type: 'warning',
+      type: "warning",
       content: message,
     });
   };
@@ -62,17 +63,17 @@ const Login = () => {
 
   const handleSubmission = async () => {
     try {
-      const {email, password} = state;
+      const { email, password } = state;
       if (!email || !password) {
         setErrorMsg("Fill all fields");
         return;
       }
-     Loading();
+      Loading();
       setErrorMsg("");
       const { data, isError, message } = await loginAPI(
         REQUEST_TYPES.POST,
         ENDPOINTS.LOGIN,
-        {email,password}
+        { email, password }
       );
       if (isError) {
         warning(message);
@@ -93,17 +94,21 @@ const Login = () => {
     e.preventDefault();
     handleSubmission();
   };
-const changeHandler = (e) =>{
-  const {name, value} = e?.target;
-  setState({...state, [name]:value})
-}
+  const changeHandler = (e) => {
+    const { name, value } = e?.target;
+    setState({ ...state, [name]: value });
+  };
   return (
     <ConfigProvider>
       <div className="flex h-screen">
         <div className="flex flex-col w-1/2 bg-login1 items-center">
-          <div className="flex font-bold text-[25px] mt-[180px] mb-[10px]">
-            Welcome To
-          </div>
+          <Link
+            className="flex font-bold text-[25px] mt-[180px] mb-[10px]"
+            to={"/"}
+          >
+            <img src={LogoImg} alt="MOE" width={50} height={50} />
+          </Link>
+          <div className="flex font-bold text-[25px] mb-[10px]">Welcome To</div>
           <div className="flex text-[19px] text-[#009969] mb-[20px]">
             Pakistan Minerals Information & Services Portal
           </div>
@@ -124,7 +129,7 @@ const changeHandler = (e) =>{
                 name="email"
                 id="email"
                 value={state?.email}
-                onChange={(e)=>changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
               />
               <div className="flex items-center mt-[12px]">
@@ -146,10 +151,11 @@ const changeHandler = (e) =>{
                 name="password"
                 id="password"
                 value={state?.password}
-                onChange={(e)=>changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
               />
-              <p style={{color:'red'}}>{errorMsg}</p><br/>
+              <p style={{ color: "red" }}>{errorMsg}</p>
+              <br />
               <div className="flex justify-end mt-[8px] mb-[30px]">
                 <Link
                   className="underline text-[12.71px]"
@@ -169,11 +175,14 @@ const changeHandler = (e) =>{
               <div className="flex text-[16px] justify-center cursor-pointer">
                 Don't have an account?
                 <Link to="/signup" className="underline font-bold pl-1">
-                  Sign Up
+                  Sign up
                 </Link>
               </div>
             </div>
           </form>
+          <Link className="flex text-2xl mt-2 font-bold" to={"/"}>
+            Home
+          </Link>
         </div>
         <div className="flex flex-col w-1/2 bg-login2 bg-cover bg-no-repeat bg-green-hue "></div>
       </div>
