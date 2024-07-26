@@ -6,6 +6,7 @@ import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
 import { loginAPI } from "services/api/auth";
 import { getCookie, setCookie } from "services/session/cookies";
 import passwordToggle from "assets/images/passwordToggle.png";
+import LogoImg from "assets/images/logo.jpg";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,9 +18,13 @@ const Login = () => {
     <ConfigProvider>
       <div className="flex h-screen">
         <div className="flex flex-col w-1/2 bg-login1 items-center">
-          <div className="flex font-bold text-[25px] mt-[50px] mb-[10px]">
-            Welcome To
-          </div>
+          <Link
+            className="flex font-bold text-[25px] mt-[50px] mb-[10px]"
+            to={"/"}
+          >
+            <img src={LogoImg} alt="MOE" width={50} height={50} />
+          </Link>
+          <div className="flex font-bold text-[25px] mb-[10px]">Welcome To</div>
           <div className="flex text-[19px] text-[#009969] mb-[20px]">
             Pakistan Minerals Information & Services Portal
           </div>
@@ -33,16 +38,6 @@ const Login = () => {
             autoComplete="off"
           >
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-[16px]">
-                Email
-              </label>
-              <input
-                placeholder="abc@example.com"
-                type="email"
-                name="email"
-                id="email"
-                className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
-              />
               <label htmlFor="name" className="text-[16px] mt-2">
                 Name
               </label>
@@ -51,6 +46,16 @@ const Login = () => {
                 type="name"
                 name="name"
                 id="name"
+                className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
+              />
+              <label htmlFor="email" className="text-[16px] mt-2">
+                Email
+              </label>
+              <input
+                placeholder="abc@example.com"
+                type="email"
+                name="email"
+                id="email"
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
               />
               <label htmlFor="number" className="text-[16px] mt-2">
@@ -64,7 +69,7 @@ const Login = () => {
                 id="number"
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
               />
-              <div className="flex items-center mt-[12px]">
+              {/* <div className="flex items-center mt-[12px]">
                 <label
                   htmlFor="password"
                   className="text-[16px] flex-grow mt-2"
@@ -109,7 +114,7 @@ const Login = () => {
                 name="password"
                 id="password"
                 className="bg-transparent border border-black rounded-[10px] w-[310px] h-[45px] p-2 focus:border-green-600 focus:outline-none focus:ring-0"
-              />
+              /> */}
 
               <div className="flex justify-center mb-[14.5px] mt-8">
                 <button
@@ -127,6 +132,9 @@ const Login = () => {
               </div>
             </div>
           </form>
+          <Link className="flex text-2xl mt-2 font-bold" to={"/"}>
+            Home
+          </Link>
         </div>
         <div className="flex flex-col w-1/2 bg-login2 bg-cover bg-no-repeat bg-green-hue "></div>
       </div>

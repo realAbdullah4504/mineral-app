@@ -2,6 +2,7 @@ import React from "react";
 import linksBG from "assets/images/LinksBG.png";
 import { Container } from "components/UI";
 import greenArrow from "assets/images/greenArrow.svg";
+import { Link } from "react-router-dom";
 
 export const MineralPotentialLinks = () => {
   return (
@@ -17,35 +18,45 @@ export const MineralPotentialLinks = () => {
 
           <div className="relative z-10 bg-white rounded-xl shadow-lg transform translate-y-1/2 mt-[-6.325rem] max-w-[1178px] h-[387px] px-[3.375rem]">
             <div className="flex flex-col pt-[3.377rem]">
-              <div className="flex justify-between items-center">
+              <Link
+                className="flex justify-between items-center"
+                to={"/investment-opportunities"}
+              >
                 <span className="text-2xl font-medium ">
-                  Policy and regulations
+                  Investment opportunities
                 </span>
                 <img className="pb-[1.42rem]" src={greenArrow} alt="Arrow" />
-              </div>
+              </Link>
               <hr className="border-t-2 border-[#D9D9D9]" />
             </div>
             <div className="flex flex-col pt-[1.875rem]">
-              <div className="flex justify-between items-center">
-                <span className="text-2xl font-medium ">
-                  Apply for Mineral Title
-                </span>
+              <Link
+                className="flex justify-between items-center"
+                to={"/gis-portal"}
+              >
+                <span className="text-2xl font-medium ">GIS Portal</span>
                 <img className="pb-[1.42rem]" src={greenArrow} alt="Arrow" />
-              </div>
+              </Link>
               <hr className="border-t-2 border-[#D9D9D9]" />
             </div>
             <div className="flex flex-col pt-[1.875rem]">
-              <div className="flex justify-between items-center">
-                <span className="text-2xl font-medium ">GIS portal</span>
+              <Link
+                className="flex justify-between items-center"
+                to={"/fiscal-incentives"}
+              >
+                <span className="text-2xl font-medium ">Fiscal Incentives</span>
                 <img className="pb-[1.42rem]" src={greenArrow} alt="Arrow" />
-              </div>
+              </Link>
               <hr className="border-t-2 border-[#D9D9D9]" />
             </div>
             <div className="flex flex-col pt-[1.875rem]">
-              <div className="flex justify-between items-center">
+              <Link
+                className="flex justify-between items-center"
+                to={"/legal-framework"}
+              >
                 <span className="text-2xl font-medium ">Register company</span>
                 <img className="pb-[1.42rem]" src={greenArrow} alt="Arrow" />
-              </div>
+              </Link>
               <hr className="border-t-2 border-[#D9D9D9]" />
             </div>
           </div>
