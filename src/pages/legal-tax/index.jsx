@@ -1,6 +1,7 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import LegalTaxServicesImg from "assets/images/legal-tax.png";
+import orrImg from "assets/images/Orr, Dignam & Co.png";
+import kmpgImg from "assets/images/KPMG.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
 
@@ -29,8 +30,8 @@ const LegalTaxServices = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "Orr, Digman & Co. Islamabad"}} />
-                <DataCard type={"detail"} data={{headline: "KPMG Pakistan"}} />
+                <DataCard type={"detail"} data={{headline: "Orr, Digman & Co. Islamabad", logo: orrImg }} />
+                <DataCard type={"detail"} data={{headline: "KPMG Pakistan", logo: kmpgImg }} />
               </div>
             </div>
 

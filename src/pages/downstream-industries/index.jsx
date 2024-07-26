@@ -1,6 +1,11 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import DownstreamIndustriesImg from "assets/images/downstream-industries.png";
+import bmeImg from "assets/images/Bolan Mining Enterprise.png";
+import oilIndustriesImg from "assets/images/Oil Industries Pakistan.png";
+import luckyCementImg from "assets/images/Lucky Cement.png";
+import askariCementImg from "assets/images/Askari Cement.png";
+import attockCementImg from "assets/images/Attock Cement.png";
+import pioneerCementImg from "assets/images/pioneer_cement_logo.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
 
@@ -29,12 +34,12 @@ const DownstreamIndustries = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "Bolan Mining Enterprises (BME)"}} />
-                <DataCard type={"detail"} data={{headline: "Oil Industries Pakistan Limited"}} />
-                <DataCard type={"detail"} data={{headline: "Lucky Cement Limited"}} />
-                <DataCard type={"detail"} data={{headline: "Askari Cement Limited"}} />
-                <DataCard type={"detail"} data={{headline: "Attock Cement Pakistan Limited"}} />
-                <DataCard type={"detail"} data={{headline: "Pioneer Cement Limited"}} />
+                <DataCard type={"detail"} data={{headline: "Bolan Mining Enterprises (BME)", logo: bmeImg}} />
+                <DataCard type={"detail"} data={{headline: "Oil Industries Pakistan Limited", logo: oilIndustriesImg}} />
+                <DataCard type={"detail"} data={{headline: "Lucky Cement Limited", logo: luckyCementImg}} />
+                <DataCard type={"detail"} data={{headline: "Askari Cement Limited", logo: askariCementImg}} />
+                <DataCard type={"detail"} data={{headline: "Attock Cement Pakistan Limited", logo: attockCementImg}} />
+                <DataCard type={"detail"} data={{headline: "Pioneer Cement Limited", logo: pioneerCementImg}} />
               </div>
             </div>
 

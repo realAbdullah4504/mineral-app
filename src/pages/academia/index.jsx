@@ -1,6 +1,11 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import AcademiaImg from "assets/images/academia.png";
+import uetImg from "assets/images/UET Lahore.png";
+import balochistanImg from "assets/images/Balochistan University of Information.png";
+import uopImg from "assets/images/University of Punjab.png";
+import uopeshawarImg from "assets/images/University if Peshawar.png";
+import nustImg from "assets/images/Nust.png";
+import comsatsImg from "assets/images/Comsats.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
 
@@ -29,12 +34,12 @@ const Academia = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "University of Engineering and Technology (UET), Lahore"}} />
-                <DataCard type={"detail"} data={{headline: "Balochistan University of Information Technology"}} />
-                <DataCard type={"detail"} data={{headline: "University of the Punjab, Lahore"}} />
-                <DataCard type={"detail"} data={{headline: "University of Peshawar"}} />
-                <DataCard type={"detail"} data={{headline: "National University of Science and Technology (NUST)"}} />
-                <DataCard type={"detail"} data={{headline: "COMSATS University Islamabad (CUI)"}} />
+                <DataCard type={"detail"} data={{headline: "University of Engineering and Technology (UET), Lahore", logo: uetImg}} />
+                <DataCard type={"detail"} data={{headline: "Balochistan University of Information Technology", logo: balochistanImg}} />
+                <DataCard type={"detail"} data={{headline: "University of the Punjab, Lahore", logo: uopImg}} />
+                <DataCard type={"detail"} data={{headline: "University of Peshawar", logo: uopeshawarImg}} />
+                <DataCard type={"detail"} data={{headline: "National University of Science and Technology (NUST)", logo: nustImg}} />
+                <DataCard type={"detail"} data={{headline: "COMSATS University Islamabad (CUI)", logo: comsatsImg}} />
               </div>
             </div>
 

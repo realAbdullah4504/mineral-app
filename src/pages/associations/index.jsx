@@ -1,6 +1,7 @@
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
-import AssociationsImg from "assets/images/associations.png";
+import pmdcImg from "assets/images/pmdc.png";
+import pminingImg from "assets/images/Pakistan Mining & Exploration Inc.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
 
@@ -33,11 +34,12 @@ const Associations = () => {
                 type={"detail"}
                 data={{
                   headline: "Pakistan Mineral Development Corporation (PMDC)",
+                  logo: pmdcImg
                 }}
               />
               <DataCard
                 type={"detail"}
-                data={{ headline: "Pakistan Mining & Exploration Inc" }}
+                data={{ headline: "Pakistan Mining & Exploration Inc", logo: pminingImg }}
               />
             </div>
           </div>
