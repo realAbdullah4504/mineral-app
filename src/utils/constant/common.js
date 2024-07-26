@@ -33,6 +33,7 @@ import marbelSlider from "assets/images/marbelSlider.png";
 import BriteSlider from "assets/images/BriteSlider.png";
 import gemstonesSlider from "assets/images/gemstonesSlider.png";
 import gypsumSlider from "assets/images/gypsumSlider.png";
+import dimensionSlider from "assets/images/dimensionStone.png"
 import chemical from "assets/images/chamical.png";
 import construction from "assets/images/construction.png";
 import glass from "assets/images/glass.png";
@@ -68,6 +69,10 @@ import automotive from "assets/images/automotive.png"
 import goldjewelry from "assets/images/goldjewelry.png"
 import goldtrade from "assets/images/goldtrade.png"
 import collectibles from "assets/images/collectibles.png"
+import dimensionconstruction from "assets/images/dimensionconstruction.png"
+import monument from "assets/images/monument.png"
+import decor from "assets/images/decor.png"
+import landscaping from "assets/images/landscaping.png"
 import rockSaltWhite from "assets/images/rockSaltWhite.svg";
 import chromiteWhite from "assets/images/chromiteWhite.svg";
 import dimenstionStoneWhite from "assets/images/dimenstionStoneWhite.svg";
@@ -350,17 +355,17 @@ export const mineralPotential = {
       reserve: "297 billion tons",
       production: "2022-2023: 6,347,138 tons",
       gml: "$13.4B",
-      avatar: coalSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: dimensionSlider,
+      tagFirst: "Construction",
+      secTag: "Monument & Sculpture",
+      thrTag: "Interior Design & Decor",
+      frTag: "Landscaping",
       icon: dimenstionStoneWhite,
       iconGreen: dimensionStoneIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: dimensionconstruction,
+      footerImageSec: monument,
+      footerImageThr: decor,
+      footerImageOil: landscaping,
       description:
         "Pakistan has been endowed with extensive reserves of 297 billion tons of marble & granite (TDAP). More than 40 types of natural-colored marbles spread through 4 provinces of Pakistan. Pakistan Stone Development Company (PASDEC) and subsidiary of Pakistan Industrial Development Corporation, has initiated many projects to uplift the existing set up of Marble and granite sector. These projects are setup according to international practices, employ modern technology and focus on detail technical studies .As per plane about 10 model quarries and a number of marble cities are to be created in Pakistan .According to (PESDEC) estimates about 96,000 new jobs are to be created .these projects hold the promise to transform Pakistan’s dimension sector to a great extent.",
     },
