@@ -29,14 +29,14 @@ const DataCard = ({ type, data }) => {
         </div>
       ) : (
         <div className="w-full max-w-[18rem] border-2 rounded-lg shadow-xl">
-          <div className="relative">
+          <div className="relative mt-0">
             {data?.logo ? (
               <img
                 src={data?.logo || sampleImage}
                 width={200}
                 height={100}
                 alt="Logo"
-                className="mx-auto mt-4 aspect-[2/1] overflow-hidden rounded-lg object-contain object-center"
+                className="mx-auto pb-2 pt-0 mt-2 aspect-[2/1] overflow-hidden rounded-lg object-contain object-center"
               />
             ) : (
               <div className="flex items-center justify-center w-[200px] h-[100px] bg-[#fff] rounded-full"></div>

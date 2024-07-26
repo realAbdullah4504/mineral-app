@@ -1,6 +1,9 @@
   import BreadCrumbs from "components/Breadcrumbs";
   import { Container } from "components/UI";
   import LogoImg from "assets/images/logo.jpg";
+  import PMDCImg from "assets/images/pmdc.png";
+  import FWOImg from "assets/images/fwo.png";
+  import PPLImg from "assets/images/ppl.png";
   import React from "react";
   import DataCard from "components/Cards/dataCard";
 
@@ -8,10 +11,6 @@
     headline: "Apply for Registration",
     link: '/registerorganization?orgtype=go'
   };
-
-  const cardData = {
-    headline: "National Mineral Data Cell (NMDC)",
-  }
 
   const GovernmentOrganization = () => {
     const breadcrumbs = [
@@ -38,9 +37,9 @@
                 <DataCard type={"add"} data={data} />
                 <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)", logo: LogoImg}} />
                 <DataCard type={"detail"} data={{headline: "Ministry of Energy (Petroleum Division)", logo: LogoImg}} />
-                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)"}} />
-                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)"}} />
-                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)"}} />
+                <DataCard type={"detail"} data={{headline: "Pakistan Mineral Development Corporation (PMDC)", logo: PMDCImg}} />
+                <DataCard type={"detail"} data={{headline: "Frontier Work Organization (FWO)", logo: FWOImg}} />
+                <DataCard type={"detail"} data={{headline: "Pakistan Petroleum Limited (PPL)", logo: PPLImg}} />
               </div>
             </div>
 
