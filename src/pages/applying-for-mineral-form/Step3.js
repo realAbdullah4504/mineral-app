@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 
-const NocStep5 = ({ setState, equipment }) => {
+const Step3 = ({ setState }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -16,7 +16,7 @@ const NocStep5 = ({ setState, equipment }) => {
       });
 
       if (response.ok) {
-        setState("Step6");
+        setState("step4");
       } else {
         console.error("Error:", response.statusText);
       }
@@ -24,66 +24,37 @@ const NocStep5 = ({ setState, equipment }) => {
       console.error("Error:", error);
     }
   };
-
   const handlePrevious = () => {
-    if (equipment === "yes") {
-      setState("Step4");
-    } else {
-      setState("Step3");
-    }
+    setState("step2");
   };
   const obj = [
-    { label: "Title/License Number", name: "title-license", required: "true", type: "input" },
-    { label: "Sponsoring Company Name", name: "sponsor-company-name", required: "true", type: "input" },
-    { label: "Pakistan Address", name: "pak-address", required: "true", type: "input" },
     {
-      label: "Name and Address of Visiting Organisations",
-      name: "visiting-org-name",
+      label: "Type of Test Required",
+      name: "test-type",
       required: "true",
-      type: "input",
+      type: "select",
+      options: ["All", "Other Types"],
     },
     {
-      label: "Name and Designation of Conducting Officials",
-      name: "name-conducting-officials",
+      label: "Available Mineral labs",
+      name: "mineral-labs",
       required: "true",
-      type: "input",
+      type: "select",
+      options: ["All", "Other Types"],
     },
     {
-      label: "Pakistani Official Name",
-      name: "name-pak-official",
+      label: "Test Price",
+      name: "test-price",
       required: "true",
-      type: "input",
+      type: "select",
+      options: ["no of samples(provide list)"],
     },
     {
-      label: "Pakistani Official Contact",
-      name: "no-pak-official",
+      label: "Purpose of Test",
+      name: "sample-image",
       required: "true",
-      type: "number",
-    },
-    {
-      label: "Pakistani Official Address",
-      name: "address-pak-official",
-      required: "true",
-      type: "input",
-    },
-    {
-      label: "CNIC of Pakistani Official",
-      name: "CNIC-pak-official",
-      required: "true",
-      type: "number",
-      placeholder: "12345-1234567-8",
-    },
-    {
-      label: "CNIC Front Image",
-      name: "CNIC-front-img",
-      required: "true",
-      type: "file",
-    },
-    {
-      label: "CNIC Back Image",
-      name: "CNIC-back-img",
-      required: "true",
-      type: "file",
+      type: "select",
+      options: ["Research", "Commercial", "Academic"],
     },
   ];
   const renderFormItems = () => {
@@ -95,10 +66,9 @@ const NocStep5 = ({ setState, equipment }) => {
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
-        placeholder: field.placeholder || "",
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} />;
+      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
 
       const renderLabel = () => (
         <label
@@ -140,8 +110,8 @@ const NocStep5 = ({ setState, equipment }) => {
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
-        <div className="text-green-600">Sponsor Details</div>
-        <ProgressPercentage percent={62} step={5} total={8}></ProgressPercentage>
+        <div>Mineral Test Information - Mineral Lab</div>
+        <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
       </div>
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
@@ -181,4 +151,4 @@ const NocStep5 = ({ setState, equipment }) => {
   );
 };
 
-export default NocStep5;
+export default Step3;

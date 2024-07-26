@@ -50,7 +50,7 @@ const Steps = ({ obj, showListing = false, setDisabled = "", step = 1 }) => {
               id={field.name}
               className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
               placeholder=" "
-              required={field.required === "true"}
+              required={field.required || false}
             />
             <label
               htmlFor={field.name}
@@ -73,7 +73,7 @@ const Steps = ({ obj, showListing = false, setDisabled = "", step = 1 }) => {
               id={field.name}
               className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
               placeholder=" "
-              required={field.required === "true"}
+              required={field.required || false}
             />
             <label
               htmlFor={field.name}
@@ -98,6 +98,7 @@ const Steps = ({ obj, showListing = false, setDisabled = "", step = 1 }) => {
               action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
               listType="picture"
               maxCount={1}
+              required={field.required || false}
             >
               <Button icon={<UploadOutlined />} className="mt-2 w-full bg-green-500 text-white">
                 Upload Image

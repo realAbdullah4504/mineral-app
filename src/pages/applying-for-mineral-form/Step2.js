@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
-
-const NocStep5 = ({ setState, equipment }) => {
-  const handleSubmit = async (event) => {
+import { Empty } from "antd";
+import Listing from "./Listing";
+import { useState } from "react";
+const Step2 = ({ setState }) => {
+  const [listingData, setListingData] = useState([]);
+  const [selectedRecord, setSelectedRecord] = useState({});
+  const handleAddForm = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
+    setListingData([...listingData, formValues]);
     try {
       const response = await fetch("https://your-api-endpoint.com/submit", {
         method: "POST",
@@ -14,78 +19,33 @@ const NocStep5 = ({ setState, equipment }) => {
         },
         body: JSON.stringify(formValues),
       });
-
-      if (response.ok) {
-        setState("Step6");
-      } else {
-        console.error("Error:", response.statusText);
-      }
     } catch (error) {
       console.error("Error:", error);
     }
+    event.target.reset();
   };
-
   const handlePrevious = () => {
-    if (equipment === "yes") {
-      setState("Step4");
-    } else {
-      setState("Step3");
-    }
+    setState("step1");
   };
   const obj = [
-    { label: "Title/License Number", name: "title-license", required: "true", type: "input" },
-    { label: "Sponsoring Company Name", name: "sponsor-company-name", required: "true", type: "input" },
-    { label: "Pakistan Address", name: "pak-address", required: "true", type: "input" },
     {
-      label: "Name and Address of Visiting Organisations",
-      name: "visiting-org-name",
+      label: "Sample type",
+      name: "sample-type",
       required: "true",
-      type: "input",
+      type: "select",
+      options: ["Solid", "Liquid"],
     },
     {
-      label: "Name and Designation of Conducting Officials",
-      name: "name-conducting-officials",
+      label: "Target Mineral For Testing",
+      name: "target-mineral",
       required: "true",
-      type: "input",
+      type: "select",
+      options: ["All", "Other Types"],
     },
-    {
-      label: "Pakistani Official Name",
-      name: "name-pak-official",
-      required: "true",
-      type: "input",
-    },
-    {
-      label: "Pakistani Official Contact",
-      name: "no-pak-official",
-      required: "true",
-      type: "number",
-    },
-    {
-      label: "Pakistani Official Address",
-      name: "address-pak-official",
-      required: "true",
-      type: "input",
-    },
-    {
-      label: "CNIC of Pakistani Official",
-      name: "CNIC-pak-official",
-      required: "true",
-      type: "number",
-      placeholder: "12345-1234567-8",
-    },
-    {
-      label: "CNIC Front Image",
-      name: "CNIC-front-img",
-      required: "true",
-      type: "file",
-    },
-    {
-      label: "CNIC Back Image",
-      name: "CNIC-back-img",
-      required: "true",
-      type: "file",
-    },
+    { label: "Sample Location", name: "sample-location", required: "true", type: "input" },
+    { label: "Upload Sample Image", name: "sample-image", required: "true", type: "file" },
   ];
+
   const renderFormItems = () => {
     return obj.map((field) => {
       const commonProps = {
@@ -95,10 +55,11 @@ const NocStep5 = ({ setState, equipment }) => {
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
-        placeholder: field.placeholder || "",
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} />;
+      const renderInput = (type = "text") => (
+        <input type={type} value={selectedRecord ? selectedRecord[field.name] : ""} {...commonProps} placeholder=" " />
+      );
 
       const renderLabel = () => (
         <label
@@ -114,11 +75,13 @@ const NocStep5 = ({ setState, equipment }) => {
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
+          {field.type === "file" && (
+            <input type="file" value={selectedRecord ? selectedRecord[field.name] : ""} {...commonProps} />
+          )}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select {...commonProps} value={selectedRecord ? selectedRecord[field.name] : ""}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -130,20 +93,52 @@ const NocStep5 = ({ setState, equipment }) => {
               </select>
             </>
           )}
-          {field.type === "textarea" && <textarea {...commonProps} placeholder=" " />}
+          {field.type === "textarea" && (
+            <textarea {...commonProps} value={selectedRecord ? selectedRecord[field.name] : ""} placeholder=" " />
+          )}
           {field.type !== "select" && renderLabel()}
         </div>
       );
     });
   };
 
+  const handleNext = () => {
+    setState("step3");
+  };
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
-        <div className="text-green-600">Sponsor Details</div>
-        <ProgressPercentage percent={62} step={5} total={8}></ProgressPercentage>
+        <div>Sample Listing</div>
+        <ProgressPercentage percent={50} step={2} total={4}></ProgressPercentage>
       </div>
-      <form className="space-y-4 " onSubmit={handleSubmit}>
+      <form className="space-y-4 " onSubmit={handleAddForm}>
+        <div>
+          {listingData.length ? (
+            <Listing dataSource={listingData} setSelectedRecord={setSelectedRecord}></Listing>
+          ) : (
+            <Empty />
+          )}
+          <div className="mineral-testing-table-header">
+            <div>Sample Details</div>
+            <button type="submit" className="next-button" style={{ padding: "20PX" }}>
+              Add Sample
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
           <button type="primary" className="next-button" onClick={handlePrevious}>
@@ -159,7 +154,7 @@ const NocStep5 = ({ setState, equipment }) => {
               previous
             </div>
           </button>
-          <button type="submit" className="next-button">
+          <button type="submit" className="next-button" disabled={!listingData.length} onClick={handleNext}>
             <div>
               {" "}
               Next
@@ -181,4 +176,4 @@ const NocStep5 = ({ setState, equipment }) => {
   );
 };
 
-export default NocStep5;
+export default Step2;

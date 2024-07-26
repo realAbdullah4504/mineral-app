@@ -57,10 +57,7 @@ const TableMap = () => {
           <div></div>
           <div>
             {" "}
-            <div
-              className="geological-moreinfo"
-              style={{ paddingBottom: "0px" }}
-            >
+            <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
               {" "}
               <button style={{ backgroundImage: `url(${MoreInfo})` }}>
                 <a href="/noc-company-form">
