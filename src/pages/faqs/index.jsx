@@ -196,9 +196,9 @@ const Faqs = () => {
             <div className="text-[22px] leading-[24px] text-[#40384F] font-helvetica ml-8">
               Provincial Departments generally collect following types of
               receipts from mineral sector:
-              <div class="flex flex-wrap mt-4">
-                <div class="w-full md:w-1/2 flex flex-col">
-                  <ul class="list-disc ml-5">
+              <div className="flex flex-wrap mt-4">
+                <div className="w-full md:w-1/2 flex flex-col">
+                  <ul className="list-disc ml-5">
                     <li>Title Application Fee</li>
 
                     <li>Demarcation Fee</li>
@@ -207,8 +207,8 @@ const Faqs = () => {
                     <li>Employees Social Security Contribution</li>
                   </ul>
                 </div>
-                <div class="w-full md:w-1/2 flex flex-col">
-                  <ul class="list-disc ml-5">
+                <div className="w-full md:w-1/2 flex flex-col">
+                  <ul className="list-disc ml-5">
                     <li>Retention Fee</li>
                     <li>Annual Rent</li>
                     <li>Royalty</li>

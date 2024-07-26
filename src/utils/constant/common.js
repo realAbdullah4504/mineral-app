@@ -37,6 +37,37 @@ import chemical from "assets/images/chamical.png";
 import construction from "assets/images/construction.png";
 import glass from "assets/images/glass.png";
 import oil from "assets/images/oil.png";
+import food from "assets/images/foodindustry.png";
+import spa from "assets/images/spa.png";
+import pharma from "assets/images/pharma.png";
+import aerospace from "assets/images/aerospace.png"
+import steel from "assets/images/steel.png"
+import refractory from "assets/images/refractory.png"
+import leather from "assets/images/leather.png"
+import limesteel from "assets/images/limesteel.png"
+import limemachinery from "assets/images/machinery.png"
+import limeinfrastructure from "assets/images/infrastructure.png"
+import limeindustrilization from "assets/images/industrilization.png"
+import cement from "assets/images/cement.png"
+import agriculture from "assets/images/agriculture.png"
+import plaster from "assets/images/plaster.png"
+import fertilizer from "assets/images/fertilizer.png"
+import environment from "assets/images/environment.png"
+import ironagriculture from "assets/images/ironagricultue.png"
+import ironcement from "assets/images/ironcement.png"
+import ironconstruction from "assets/images/ironconstruction.png"
+import electricity from "assets/images/electricity.png"
+import coalcement from "assets/images/coalcement.png"
+import coalchemical from "assets/images/coalchemical.png"
+import brick from "assets/images/brick.png"
+import jewelry from "assets/images/jewelry.png"
+import fashion from "assets/images/fashion.png"
+import healings from "assets/images/healings.png"
+import electrical from "assets/images/electrical.png"
+import automotive from "assets/images/automotive.png"
+import goldjewelry from "assets/images/goldjewelry.png"
+import goldtrade from "assets/images/goldtrade.png"
+import collectibles from "assets/images/collectibles.png"
 import rockSaltWhite from "assets/images/rockSaltWhite.svg";
 import chromiteWhite from "assets/images/chromiteWhite.svg";
 import dimenstionStoneWhite from "assets/images/dimenstionStoneWhite.svg";
@@ -50,7 +81,7 @@ import limestoneWhite from "assets/images/limestoneWhite.svg";
 export const homeSlider = {
     first: {
       title: "About Us",
-      description: `The Pakistan Minerals Information and Services Portal dubbed as PAKISTAN “MINES” is envisioned to be a gateway for investors, professionals, academics and government officials for economic prosperity. 
+      description: `The Pakistan Minerals Information and Services Portal dubbed as PAKISTAN MINES is envisioned to be a gateway for investors, professionals, academics and government officials for economic prosperity. 
               MINES aims to enhance and enrich the potential of Pakistan's mineral and mining industry. With a focus on consolidating critical information for the sector, the objective is to attract investment and foster international interest from companies seeking promising exploration prospects within Pakistan`,
       image: MainImg ,
       location:
@@ -279,17 +310,17 @@ export const mineralPotential = {
       reserve: " 65 Million tons",
       production: " 2022-2023: 2,915,724 tons",
       gml: " $12.65B",
-      avatar: goldSlider,
+      avatar: saltSlider,
       tagFirst: "Food Industry",
       secTag: "Chemical",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      thrTag: "Spa & Beauty",
+      frTag: "Paramaceutical",
       icon: rockSaltWhite,
       iconGreen: rockSaltIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: food,
+      footerImageSec: chemical,
+      footerImageThr: spa,
+      footerImageOil: pharma,
       description:
         "Pakistan boasts the world's 2nd largest reserves of Rock Salt (SIFC). The rock salt deposits are estimated to be over 65 million metric tons (PMDC), including reserves of both pink salt in Salt Range region and grey salt in Kohat Saline Series. Pakistan is one of the few countries that are bestowed with all three sources of rock salt including salt mines, saline lakes and sea salt. Khewra Salt mines are the world’s oldest and 2nd largest, producing 450,000 tons of salt annually (TDAP, 2021). Warcha Salt mines produce white crystalline salt while Bahadur Khel & Jatta Salt mines produce light gray to dark gray salt. There is a growing demand of salt products in the western countries & Pakistan’s salt products are known all over the world for their distinctive composition and craftsmanship. Growing international demand for salt products, availability of cheap and skilled labor, coupled with abundant raw material provides a lucrative offer & promising opportunity to investors to venture into salt products manufacturing. ",
     },
@@ -300,16 +331,16 @@ export const mineralPotential = {
       production: " 2022-2023: 158,874 tons",
       gml: "$7618.4 M",
       avatar: chromiteSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      tagFirst: "Aerospace & Defence",
+      secTag: "Stainless Steel",
+      thrTag: "Refractory",
+      frTag: "Leather",
       icon: chromiteWhite,
       iconGreen: brightGreen,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: aerospace,
+      footerImageSec: steel,
+      footerImageThr: refractory,
+      footerImageOil: leather,
       description:
         "Pakistan possess a significant amount of chromite ore, with estimated reserves of 4.5 million tons. These reserves have a 115,000 metric tons potential to be extracted annually (Finance, 2021). The chromite market has a $2 billion global demand. Bostan & Lasbela Special Economic Zones are effective locations for setting up ferrochrome production plant due to their proximity  to chromite-producing districts of Muslim Bagh, Khanozai, Nasai, Wadh and Khuzdar. This location will also have the advantage of being close to CPEC routes, giving it easy access for transportation to various steel industries in the country, as well as for foreign imports.",
     },
@@ -339,17 +370,17 @@ export const mineralPotential = {
       reserve: "4.5 billion tons",
       production: "2022-2023: 13378 tons",
       gml: "$169B",
-      avatar: saltSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: goldSlider,
+      tagFirst: "Electrical & Electronics",
+      secTag: "Automotive",
+      thrTag: "Jewelry",
+      frTag: "Commodity Trading ",
       icon: copperGoldWhite,
       iconGreen: copperGoldIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: electrical,
+      footerImageSec: automotive,
+      footerImageThr: goldjewelry,
+      footerImageOil: goldtrade,
       description:
         "Pakistan has the world’s 5th largest copper reserves of approximately 4.5 billion tons, mainly concentrated in Balochistan There are opportunities for the private sector and direct foreign investment in the mining, processing, and trading/exports subsectors. Reko Diq is one of the largest undeveloped copper and gold mine globally, having 12.3 million tons of copper & is capable of producing 200,000 tons of copper and 250,000 ounces of gold a year (TDAP). Tethyan Copper Company (TCC) estimates the annual profits from the mines at about $1.14 billion for copper and $2.5 billion for gold, totaling $3.64 billion annually. Copper/Gold production will play a significant part in the global shift to renewable energy and electric vehicles. The International Energy Agency (IEA) has projected that copper demand in the world would double in the coming two decades, i.e., by 2040, while the current demand for copper lies around 28 million tons. Projects like Barrick Reko Diq & Saindak present a compelling opportunity for both domestic and international investors.",
     },
@@ -359,19 +390,19 @@ export const mineralPotential = {
       reserve: "34 known types",
       production: "",
       gml: "$32.38M",
-      avatar: ironSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: gemstonesSlider,
+      tagFirst: "Jewelry",
+      secTag: "Fashion & Accessories",
+      thrTag: "Healing & Wellness",
+      frTag: "Collectibles & Investment",
       icon: gemStoneWhite,
       iconGreen: gemStoneIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: jewelry,
+      footerImageSec: fashion,
+      footerImageThr: healings,
+      footerImageOil: collectibles,
       description:
-        "Pakistan has been endowed with extensive reserves of rare gemstones such as pink topaz. It produces world’s top-quality emeralds, aquamarine, tourmaline, rubies, quartz, topaz, garnet and variety of other gemstones. ",
+        "Pakistan has been endowed with extensive reserves of rare gemstones such as pink topaz. It produces world’s top-quality emeralds, aquamarine, tourmaline, rubies, quartz, topaz, garnet and variety of other gemstones. More than 34 types of gemstones are being produced in Gilgit Baltistan. Swat emerald is famous in world for its top quality, color and luster. Pakistan’s gemstone mining sector hold considerable promise, offering opportunities for exploration, investment and growth. With its rich geological heritage and supportive government policies, Pakistan is well positioned to emerge as a significant player in the global gemstone market in the years to come. The major gemstone and mineral specimen mines of Pakistan are found in five regions of the far north, home to K2, the second tallest mountain in the world. They include NWFP-North West Frontier Province bordering Afghanistan, Gilgit and Skardu bordering China, AJK. The Katlang mine, renowned for its sweet baby pink and purplish pink topaz is in Mardan district between Peshawar and Swat in NWFT. The Nangimali, Batakundi and Basil ruby and sapphire mines are in Azad & Jammu Kashmir. Throughout Skardu, Shigar, Hunza and Gilgit in the Gilgit–Baltistan region in Pakistan’s side of Kashmir, hundreds of small mines produce quartz, topaz, aquamarine, ruby, tourmaline, peridot.",
     },
     {
       title: "Coal",
@@ -379,19 +410,19 @@ export const mineralPotential = {
       reserve: "186 billion tons",
       production: "2022-2023: 9M",
       gml: "2.5T",
-      avatar: limeSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: coalSlider,
+      tagFirst: "Electricity Generation",
+      secTag: "Cement",
+      thrTag: "Brick Knills",
+      frTag: "Chemical",
       icon: coalWhite,
       iconGreen: coalIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: electricity,
+      footerImageSec: coalcement,
+      footerImageThr: brick,
+      footerImageOil: coalchemical,
       description:
-        "Pakistan has 186 billion tons of coal reserves (PIDE), concentrated in Sindh. Thar desert alone contains the world’s 7th largest coal reserves of approximately 175 billion tons. The Thar coalfield with a resource potential of 175 billion tonnes of coal covers an area of over 9,000 sq km, divided into 12 blocks. Out of these blocks, 3 have been allocated to local and international companies for mining, power generation & gasification, while the remaining blocks are available for investment. Pakistan is still in the initial stages of developing Thar coal resources. The costs will be reduced even more with expansion and reaching the optimum level.",
+        "Pakistan is blessed with abundant coal reserves for both energy and fuel, concentrating in the region of Tharparkar, Sindh. The total coal reserves are 185 billion tons, covering an area of 9100 square kilometers, which places Pakistan at the hub of coal investment. If properly exploited, Pakistan’s coal resources may generate more than 100,000 MW of electricity for the next 30 years. ",
     },
     {
       title: "IRON ORE",
@@ -399,19 +430,19 @@ export const mineralPotential = {
       reserve: "267 Million tons",
       production: "2022- 2023: 376,970 tons",
       gml: "",
-      avatar: marbelSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: ironSlider,
+      tagFirst: "Agriculture",
+      secTag: "Cement",
+      thrTag: "Construction",
+      frTag: "Environment",
       icon: ironOreWhite,
       iconGreen: ironOreIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: ironagriculture,
+      footerImageSec: ironcement,
+      footerImageThr: ironconstruction,
+      footerImageOil: environment,
       description:
-        "Pakistan possesses significant potential in the mining of iron ore, offering lucrative investment opportunities. With ore reserves of approximately 267 million tons (Punjab Mineral Company, Government of Punjab) concentrated in the Chiniot region in Punjab, the area is being considered to be a designated ‘Special Economic Zone’ which will allow the investors tax breaks and exemptions of custom duties on machinery & equipment imported for mining purposes  Punjab Mineral Company (PMC) has undertaken the project of first Iron Ore Steel Mill at Chiniot.",
+        "Pakistan possesses significant potential in the mining of iron ore, offering lucrative opportunities for investors seeking to capitalize on this untapped resource. The country's geological surveys and exploratory efforts have revealed substantial reserves of high-quality iron ore across various regions, concentrated mainly in Karak & Dera Ismail Khan, Khyber Pakhtunkhwa. The demand for iron ore globally remains robust, driven by the ongoing industrialization and infrastructure development in emerging economies. Investing in Pakistan's iron ore mining sector aligns with sustainability goals and responsible resource management. The Iron Ore concentration is located at the southern edge of Chiniot Town and 35 Km north of Faisalabad city in central part of Punjab. Work on Chiniot iron resource is being carried out in collaboration with renowned international companies to develop its potential. Moreover, Special Economic Zone in Chiniot is also under consideration. Pakistan's iron ore reserves offer opportunities for establishing downstream industries such as steel production, beneficiation plants, and manufacturing of iron-based products. This integrated approach not only adds value to the raw material but also creates employment, fosters economic diversification, and contributes to the country's industrial growth and self-sufficiency goals.",
     },
     {
       title: "Gypsum",
@@ -419,19 +450,19 @@ export const mineralPotential = {
       reserve: "4.8 billion tons",
       production: "2022- 2023: 1,638,724 tons",
       gml: "",
-      avatar: BriteSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: gypsumSlider,
+      tagFirst: "Cement",
+      secTag: "Agriculture",
+      thrTag: "Plaster",
+      frTag: "Fertilizer",
       icon: gypsumWhite,
       iconGreen: gypsumIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: cement,
+      footerImageSec: agriculture,
+      footerImageThr: plaster,
+      footerImageOil: fertilizer,
       description:
-        "Kyber Pakhtunkhwa province of Pakistan is concentrated with about 92% of the country’s gypsum reserves which approximate to 4.8 billion tons with the extraction capacity of 2.1 million metric tons annually (TDAP, 2021). Currently KP has 158 processing factories including plaster of paris, gypsum powder units and crush plants (SMEDA, Cluster Development Program, 2017). The potential target market for the plaster of paris is general public and corporate customers. With export opportunities to Dubai, Saudi Arabia, Afghanistan, and other GCC countries that are facing an unprecedented construction boom.",
+        "Pakistan boasts significant gypsum reserves, primarily located in Punjab, Balochistan, and Khyber Pakhtunkhwa. Gypsum is a versatile mineral essential in various industries, including construction, cement, and agriculture. Despite its vast reserves, Pakistan has yet to fully capitalize on its gypsum potential, even as global demand continues to rise. Gypsum plays a critical role in the cement industry, which is experiencing robust growth due to the nation’s expanding infrastructure projects. It is also crucial in agriculture, where it improves soil structure and fertility, leading to better crop yields. Additionally, gypsum is used in the production of plaster, drywall, fertilizers, and soil conditioners, further highlighting its economic importance. The global shift towards greener and more sustainable products has propelled gypsum into the spotlight, presenting Pakistan with a prime opportunity to expand its market presence both domestically and internationally. Despite favorable trade relations with countries such as China and Qatar, Pakistan’s gypsum exports remain underdeveloped compared to its potential. To unlock this potential, Pakistan needs to modernize its mining techniques, improve practices, and establish efficient processing units near quarries. These steps will enhance productivity, reduce costs, and minimize environmental impact. Investing in the gypsum sector promises substantial returns, driving economic growth and contributing to industrial diversification and stability. With the right strategies, Pakistan can become a competitive player in the global gypsum market, fostering sustainable development.",
     },
     {
       title: "LIMESTONE",
@@ -439,19 +470,19 @@ export const mineralPotential = {
       reserve: " Sufficient Reserves",
       production: "2022- 2023: 60,590,496 ",
       gml: "",
-      avatar: gemstonesSlider,
-      tagFirst: "Chemical",
-      secTag: "Construction",
-      thrTag: "Ceramics & Glass",
-      frTag: "Oil & Gas",
+      avatar: limeSlider,
+      tagFirst: "Stainless Steel",
+      secTag: "Machinery",
+      thrTag: "Infrastructure",
+      frTag: "Industrilization",
       icon: limestoneWhite,
       iconGreen: limestoneIcon,
-      footerImgFirst: chemical,
-      footerImageSec: construction,
-      footerImageThr: glass,
-      footerImageOil: oil,
+      footerImgFirst: limesteel,
+      footerImageSec: limemachinery,
+      footerImageThr: limeinfrastructure,
+      footerImageOil: limeindustrilization,
       description:
-        "Pakistan is rich in limestone reserves, with extensive deposits found in regions such as Punjab, Khyber Pakhtunkhwa, Balochistan, and Sindh. These reserves showcase significant mineral potential with diverse applications across industries such as cement, construction, agriculture, industry, environment, and exports.",
+        "Pakistan is rich in limestone reserves, with extensive deposits found in regions such as Punjab, Khyber Pakhtunkhwa, Balochistan, and Sindh. These reserves showcase significant mineral potential with diverse applications across industries such as cement, construction, agriculture, industry, environment, and exports. Investing in limestone mining and value-added processing ventures in Pakistan presents opportunities for investors to leverage the country's mineral wealth, contribute to economic development, foster industrial growth, and meet market demands domestically and internationally. Limestone is a primary raw material in the cement industry, and Pakistan's cement sector is a major consumer of limestone. The country's growing construction and infrastructure development projects drive demand for cement, creating a significant market for limestone extraction and processing. Limestone&#39;s chemical and physical properties makes it suitable for various industrial applications, including steel production, sugar refining, glass manufacturing, paper production, water treatment, and chemical processing. Pakistan's industrial sector relies on limestone for diverse processes and products. Pakistan's limestone sector offers export opportunities for limestone-derived products to regional and international markets. The country's strategic location, competitive pricing, and quality standards make Pakistani limestone products attractive for export-oriented businesses.",
     },
 ]
 

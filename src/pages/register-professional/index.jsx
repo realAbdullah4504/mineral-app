@@ -279,7 +279,7 @@ const RegisterProfessional = () => {
                     value={value}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
-                    class="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                   />
                   <label
                     for="CNIC"
