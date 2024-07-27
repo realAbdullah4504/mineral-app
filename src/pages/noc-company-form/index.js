@@ -60,10 +60,26 @@ function NocAddListCompany() {
       { label: "Contact Person Name", name: "person-contact", required: "false", type: "file" },
     ],
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const formValuess = Object.fromEntries(formData.entries());
+    const formValues = Object.fromEntries(formData.entries());
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const renderFormItems = (key, obj) => {
@@ -71,7 +87,8 @@ function NocAddListCompany() {
       const commonProps = {
         name: field.name,
         id: field.name,
-        className: "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
+        className:
+          "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
       };
 
       const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
@@ -125,14 +142,10 @@ function NocAddListCompany() {
             {key === "Contact Details" ? (
               <div>
                 <h1 className="text-4xl font-bold text-green-700 mb-4">{key}</h1>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {renderFormItems(key, value)}
-                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">{renderFormItems(key, value)}</div>
               </div>
             ) : (
-              <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 mt-8">
-                {renderFormItems(key, value)}
-              </div>
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 mt-8">{renderFormItems(key, value)}</div>
             )}
           </div>
         ))}
