@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Input, Modal, Select, Upload, message } from "antd";
+import { Button, Form, Input, Modal, Select, Upload, message, notification } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import axios from "axios";
 import { getCookie } from "services/session/cookies";
+import { getUserData } from "utils/helpers";
 
 const CustomUploadIcon = (
   <svg
@@ -24,25 +25,29 @@ const RegisterProfessional = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [errorMsg, setErrorMsg] = useState("");
   const [returnLink, setReturnLink] = useState("");
-  const [renderStop, setRenderStop] = useState("");
   const [fileList, setFileList] = useState([]);
-  const [fileList1, setFileList1] = useState([]);
-  const [orgType, setOrgType] = useState([]);
   const [form] = Form.useForm();
   const [value, setValue] = useState("_____ - _____ - __");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
   const [buttonText, setButtonText] = useState("Click to Upload");
+  const [user, setUser] = useState(null);
+  const [uploadError, setUploadError] = useState(false);
+
+
+  useEffect(() => {
+    const data = getUserData();
+    if (data) {
+      setUser(data);
+    }
+  }, []);
 
   const handleChange = (e) => {
-    let input = e.target.value.replace(/\D/g, ""); // Remove all non-digit characters
-
-    // Format the input to "_____ - _____ - __"
+    let input = e.target.value.replace(/\D/g, "");
     let formatted = "_____ - _____ - __";
     for (let i = 0; i < input.length; i++) {
       formatted = formatted.replace("_", input[i]);
     }
-
     setValue(formatted);
   };
 
@@ -65,6 +70,7 @@ const RegisterProfessional = () => {
   ];
 
   const success = () => {
+    debugger
     messageApi
       .open({
         type: "loading",
@@ -82,10 +88,24 @@ const RegisterProfessional = () => {
         });
         navigate(returnLink);
       });
+
+    // Show notification
+    notification.success({
+      message: 'Registration Completed',
+      description: 'Your registration has been successfully completed.',
+      placement: 'topRight',
+      style: {
+        backgroundColor: '#f6ffed',
+        border: '1px solid #b7eb8f',
+      },
+      duration: 4.5, // Duration in seconds, change as needed
+      onClose: () => console.log('Notification closed'),
+    });
   };
 
   const handleSubmission = async (values) => {
     try {
+      debugger
       const fullurl =
         process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
       const config = {
@@ -98,17 +118,18 @@ const RegisterProfessional = () => {
       };
 
       const bodyFormData = new FormData();
-      if (values.logo && values.logo?.fileList?.length > 0) {
+      if (fileList.length > 0) {
         bodyFormData.append(
-          "LogoImages",
-          values.logo.fileList[0].originFileObj || values.logo.fileList[0]
+          "UploadResume",
+          fileList[0].originFileObj || fileList[0]
         );
       }
 
       const companyobj = {
-        OrganizationType: orgType.OrganizationType,
+        OrganizationType: "MiningProfessionals",
         OrganizationName: values.OrganizationName,
         Email: values.Email,
+        Name: user?.UserFullName,
         MobileNumber: values.MobileNumber,
         CNIC: values.CNIC,
         Qualification: values.Qualification,
@@ -150,22 +171,29 @@ const RegisterProfessional = () => {
   };
 
   const beforeUpload = (file) => {
-    const isAcceptedFileType =
-      file.type === "image/jpeg" ||
-      file.type === "image/png" ||
-      file.type === "application/pdf" ||
-      file.type === "text/csv";
-    if (!isAcceptedFileType) {
-      message.error("You can only upload JPG/PNG/PDF/CSV file!");
+    const isPdf = file.type === "application/pdf";
+    if (!isPdf) {
+      message.error("You can only upload PDF files!");
+      setUploadError(true);
+    } else {
+      setUploadError(false);
     }
-    return isAcceptedFileType;
+    return false;
   };
 
   const handleFileChange = (info) => {
-    if (info.file.status === "done") {
-      setButtonText("View Uploaded File");
-      setFileList(info.fileList);
+    const { fileList } = info;
+    const filteredFileList = fileList.filter(
+      (file) => file.type === "application/pdf"
+    );
+    setFileList(filteredFileList.slice(-1));
+    if (filteredFileList.length === 0) {
+      setUploadError(true);
+    } else {
+      setUploadError(false);
     }
+    form.setFieldsValue({ UploadResume: filteredFileList });
+    form.validateFields(["UploadResume"]);
   };
 
   return (
@@ -308,15 +336,21 @@ const RegisterProfessional = () => {
                 ]}
               >
                 <div className="relative mt-2 w-full">
-                  <input
-                    type="text"
+                  <select
                     id="Qualification"
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                    placeholder=" "
-                  />
+                    placeholder="Select your qualification"
+                  >
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Certification">Certification</option>
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Masters">Masters</option>
+                    <option value="PhD">PhD</option>
+                  </select>
                   <label
                     htmlFor="Qualification"
-                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300"
                   >
                     Qualification
                   </label>
@@ -382,7 +416,7 @@ const RegisterProfessional = () => {
               >
                 <div className="relative mt-2 w-full">
                   <input
-                    type="text"
+                    type="number"
                     id="PassingYear"
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
@@ -478,21 +512,24 @@ const RegisterProfessional = () => {
               </Form.Item>
 
               <Form.Item
-                name="resume"
+                name="UploadResume"
                 valuePropName="fileList"
                 className="w-full"
                 getValueFromEvent={(e) =>
                   Array.isArray(e) ? e : e && e.fileList
                 }
-                // rules={[{ required: true, message: "Please upload a file!" }]}
+                rules={[{ required: true, message: "Please upload a file!" }]}
               >
                 <div className="relative mt-2 w-full">
                   <Upload
-                    beforeUpload={beforeUpload}
-                    onPreview={handlePreview}
-                    onChange={handleFileChange}
-                    listType="picture"
-                    className="w-full h-full"
+                     beforeUpload={beforeUpload}
+                     onPreview={handlePreview}
+                     onChange={handleFileChange}
+                     listType="picture"
+                     className="w-full h-full"
+                     maxCount={1} // Allow only one file
+                     fileList={fileList}
+                     action={null}
                   >
                     <div className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0 cursor-pointer">
                       <div className="flex items-center space-x-2">
@@ -504,6 +541,7 @@ const RegisterProfessional = () => {
                   </Upload>
                 </div>
               </Form.Item>
+              {contextHolder}
 
               <Form.Item
                 name="ProfessionSummary"
@@ -597,7 +635,7 @@ const RegisterProfessional = () => {
               >
                 <div className="relative mt-2 w-full">
                   <input
-                    type="date"
+                    type="number"
                     id="JoiningYear"
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
@@ -627,19 +665,22 @@ const RegisterProfessional = () => {
         </div>
       </Container>
 
-
       <Modal
         title="Preview File"
         visible={isModalVisible}
-        width={1000}
+        width={1200}
         onCancel={() => setIsModalVisible(false)}
         footer={[
           <Button key="close" onClick={() => setIsModalVisible(false)}>
             Close
-          </Button>
+          </Button>,
         ]}
       >
-        <iframe src={fileUrl} style={{ width: '100%', height: '500px' }} frameBorder="0" />
+        <iframe
+          src={fileUrl}
+          style={{ width: "100%", height: "500px" }}
+          frameBorder="0"
+        />
       </Modal>
     </>
   );
