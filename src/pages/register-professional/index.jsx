@@ -192,6 +192,8 @@ const RegisterProfessional = () => {
     } else {
       setUploadError(false);
     }
+    form.setFieldsValue({ UploadResume: filteredFileList });
+    form.validateFields(["UploadResume"]);
   };
 
   return (
@@ -516,7 +518,7 @@ const RegisterProfessional = () => {
                 getValueFromEvent={(e) =>
                   Array.isArray(e) ? e : e && e.fileList
                 }
-                // rules={[{ required: true, message: "Please upload a file!" }]}
+                rules={[{ required: true, message: "Please upload a file!" }]}
               >
                 <div className="relative mt-2 w-full">
                   <Upload
