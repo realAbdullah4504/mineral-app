@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
+import { saveSampleDetailAPI } from "services/api/common";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
+import { Loader } from "components";
+import { message, ConfigProvider  } from "antd";
 const initialState = {
-  id:"",typeOfWorkRequired:"", labId:"", purposeOfTest:"", testPrice:""
+  id:"",mineralTestId:"", typeOfWorkRequired:"", labId:"", purposeOfTest:"", testPrice:""
 }
 const Step3 = ({ setStep }) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [state, setState] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   useEffect(()=> {
     const applicationDetail = getCookiesByName('testApplication', true);
     if(Object.keys(applicationDetail).length){
       let payload = {};
       const { id, typeOfWorkRequired, labId, testPrice, purposeOfTest} = applicationDetail;
-      payload = {typeOfWorkRequired, labId, testPrice, purposeOfTest}
+      payload = {typeOfWorkRequired, labId, testPrice, purposeOfTest, mineralTestId:id}
       if(id){
         payload = {id, ...payload}
       }
@@ -22,27 +28,39 @@ const Step3 = ({ setStep }) => {
     const {name, value} = e?.target || {};
      setState({...state, [name]:value})
   }
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "error",
+      content: message,
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
+    setLoading(true)
+    const { id, mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest} = state;
+    let payload = {mineralTestId,typeOfWorkRequired, labId, testPrice, purposeOfTest};
+    if(id){
+      payload = {...payload, id};
+    }
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
-        setStep("step4");
-      } else {
-        console.error("Error:", response.statusText);
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_TEST_INFO,
+        payload
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setLoading(false);
+        setStep('step4')
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false)
+      console.log(error.message);
     }
+
   };
   const handlePrevious = () => {
     setStep("step2");
@@ -128,11 +146,13 @@ const Step3 = ({ setStep }) => {
   };
 
   return (
+    <ConfigProvider>
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div>Mineral Test Information - Mineral Lab</div>
         <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
@@ -149,6 +169,9 @@ const Step3 = ({ setStep }) => {
               previous
             </div>
           </button>
+          {
+            loading ? 
+            <Loader/>:
           <button type="submit" className="next-button">
             <div>
               {" "}
@@ -165,9 +188,12 @@ const Step3 = ({ setStep }) => {
               </svg>
             </div>
           </button>
+          }
+          
         </div>
       </form>
     </div>
+    </ConfigProvider>
   );
 };
 

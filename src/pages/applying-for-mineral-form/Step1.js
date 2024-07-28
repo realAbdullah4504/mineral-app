@@ -12,7 +12,6 @@ const Step1 = ({ setStep }) => {
 
   useEffect(()=> {
    const applicationDetail = getCookiesByName('testApplication', true);
-   console.log('=== applicationDetail ===', applicationDetail)
    if(Object.keys(applicationDetail).length){
      let payload = {};
      const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = applicationDetail;
