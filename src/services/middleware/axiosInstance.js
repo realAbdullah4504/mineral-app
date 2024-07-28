@@ -25,7 +25,7 @@ axiosInstance.defaults.timeout = 4200000;
 axiosInstance.interceptors.request.use(
   async (config) => {
     config.headers = {
-      Authorization: `${config?.url === "/auth/refresh" ? getCookie("refreshToken") : getCookie("accessToken")}`,
+      Authorization: `Bearer ${config?.url === "/auth/refresh" ? getCookie("refreshToken") : getCookie("token")}`,
     };
     return config;
   },

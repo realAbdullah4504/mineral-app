@@ -139,7 +139,6 @@ const RegisterProfessional = () => {
   };
 
   const onFinish = (values) => {
-    console.log("Successful", values);
     handleSubmission(values);
   };
 

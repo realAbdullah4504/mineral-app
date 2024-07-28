@@ -12,35 +12,35 @@ const MineralForm = () => {
 
   const steps = {
     step1: {
-      component: <Step1 setState={setState}></Step1>,
+      component: <Step1 setStep={setState}></Step1>,
       breadcrumbs: [
         { path: "/", label: "Add Application" },
         { path: "/", label: "Applicant Details" },
       ],
     },
     step2: {
-      component: <Step2 setState={setState}></Step2>,
+      component: <Step2 setStep={setState}></Step2>,
       breadcrumbs: [
         { path: "/", label: "Applicant Details" },
         { path: "/", label: "Sample Details" },
       ],
     },
     step3: {
-      component: <Step3 setState={setState}></Step3>,
+      component: <Step3 setStep={setState}></Step3>,
       breadcrumbs: [
         { path: "/", label: "Sample Details" },
         { path: "/", label: "Mineral Test Information - Mineral Lab" },
       ],
     },
     step4: {
-      component: <Step4 setState={setState}></Step4>,
+      component: <Step4 setStep={setState}></Step4>,
       breadcrumbs: [
         { path: "/", label: "Mineral Test Information - Mineral Lab" },
         { path: "/", label: "Background Information" },
       ],
     },
     step5: {
-      component: <Step5 setState={setState}></Step5>,
+      component: <Step5 setStep={setState}></Step5>,
       breadcrumbs: [{ path: "/", label: "Background Information" }],
     },
   };

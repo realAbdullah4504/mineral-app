@@ -28,6 +28,7 @@ import {FiscalTaxExemption} from "./FiscalTaxExamption"
 import { TaxesStructure } from "./TaxesStructure";
 import { RoyaltiesComp } from "./RoyaltiesComp";
 import { CessComp } from "./CessComp";
+import { Loader } from "./UI/Loader";
 
 export {
   DashboardLayout,
@@ -59,5 +60,6 @@ export {
   FiscalTaxExemption , 
   TaxesStructure , 
   RoyaltiesComp , 
-  CessComp 
+  CessComp,
+  Loader
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 
-const Step5 = ({ setState }) => {
+const Step5 = ({ setStep }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -16,7 +16,7 @@ const Step5 = ({ setState }) => {
       });
 
       if (response.ok) {
-        setState("step2");
+        setStep("step2");
       } else {
         console.error("Error:", response.statusText);
       }
@@ -25,7 +25,7 @@ const Step5 = ({ setState }) => {
     }
   };
   const handlePrevious = () => {
-    setState("step4");
+    setStep("step4");
   };
   const obj = [
     {

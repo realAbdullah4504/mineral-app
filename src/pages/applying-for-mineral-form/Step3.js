@@ -1,7 +1,27 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
-
-const Step3 = ({ setState }) => {
+import { getCookiesByName, setCookiesByName } from "utils/helpers";
+const initialState = {
+  id:"",typeOfWorkRequired:"", labId:"", purposeOfTest:"", testPrice:""
+}
+const Step3 = ({ setStep }) => {
+  const [state, setState] = useState(initialState);
+  useEffect(()=> {
+    const applicationDetail = getCookiesByName('testApplication', true);
+    if(Object.keys(applicationDetail).length){
+      let payload = {};
+      const { id, typeOfWorkRequired, labId, testPrice, purposeOfTest} = applicationDetail;
+      payload = {typeOfWorkRequired, labId, testPrice, purposeOfTest}
+      if(id){
+        payload = {id, ...payload}
+      }
+     setState({...state, ...payload})
+    }
+   },[]);
+  const changeHandler = (e) => {
+    const {name, value} = e?.target || {};
+     setState({...state, [name]:value})
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -16,7 +36,7 @@ const Step3 = ({ setState }) => {
       });
 
       if (response.ok) {
-        setState("step4");
+        setStep("step4");
       } else {
         console.error("Error:", response.statusText);
       }
@@ -25,33 +45,33 @@ const Step3 = ({ setState }) => {
     }
   };
   const handlePrevious = () => {
-    setState("step2");
+    setStep("step2");
   };
   const obj = [
     {
       label: "Type of Test Required",
-      name: "test-type",
+      name: "typeOfWorkRequired",
       required: "true",
       type: "select",
       options: ["All", "Other Types"],
     },
     {
       label: "Available Mineral labs",
-      name: "mineral-labs",
+      name: "labId",
       required: "true",
       type: "select",
       options: ["All", "Other Types"],
     },
     {
       label: "Test Price",
-      name: "test-price",
+      name: "testPrice",
       required: "true",
       type: "select",
       options: ["no of samples(provide list)"],
     },
     {
       label: "Purpose of Test",
-      name: "sample-image",
+      name: "purposeOfTest",
       required: "true",
       type: "select",
       options: ["Research", "Commercial", "Academic"],
@@ -68,7 +88,7 @@ const Step3 = ({ setState }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => <input type={type} onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps} placeholder=" " />;
 
       const renderLabel = () => (
         <label
@@ -88,7 +108,7 @@ const Step3 = ({ setState }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>

@@ -1,33 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Loader } from "components";
+import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
+import { testApplicationDetailAPI } from "services/api/common";
+import { getCookiesByName, setCookiesByName } from "utils/helpers";
+import { message, ConfigProvider  } from "antd";
 
-const Step1 = ({ setState }) => {
-  const [applyAs, setApplyAs] = useState("Individual");
+const Step1 = ({ setStep }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState({applyAs: 'Individual'});
 
-  const handleApplyAsChange = (value) => {
-    setApplyAs(value);
+  useEffect(()=> {
+   const applicationDetail = getCookiesByName('testApplication', true);
+   console.log('=== applicationDetail ===', applicationDetail)
+   if(Object.keys(applicationDetail).length){
+     let payload = {};
+     const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = applicationDetail;
+    if(applicationDetail?.applyAs === "Individual"){
+      payload = {applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id};
+    } else{
+      payload = {...payload, businessDomain, id};
+    }
+    setState({...state, ...payload})
+   }
+  },[]);
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "error",
+      content: message,
+    });
   };
+  const changeHandler = (e) => {
+    const {name, value} = e?.target || {};
+    setState({...state, [name]: value})
+  }
   const obj1 = {
     Individual: {
       Details: [
         // { label: "Title/License No.", name: "license-no", required: "true", type: "text" },
-        { label: "Name", name: "name", required: "true", type: "input" },
-        { label: "CNIC", name: "cnic", required: "true", type: "number" },
+        {
+          label: "Name",
+          name: "companyNameOrName",
+          required: "true",
+          type: "input",
+        },
+        {
+          label: "CNIC",
+          name: "cnicOrNTNNumber",
+          required: "true",
+          type: "input",
+        },
         { label: "Address", name: "address", required: "true", type: "input" },
-        { label: "Mobile Number", name: "mobile-number", required: "true", type: "number" },
+        {
+          label: "Mobile Number",
+          name: "mobileNumber",
+          required: "true",
+          type: "number",
+        },
         { label: "Email", name: "email", required: "true", type: "input" },
       ],
     },
     Company: {
       Details: [
         // { label: "Title/License No.", name: "license-no", required: "true", type: "text" },
-        { label: "Company Name", name: "company-name", required: "true", type: "input" },
-        { label: "NTN/FTN Number", name: "NTN/FTN-number", required: "true", type: "input" },
+        {
+          label: "Company Name",
+          name: "companyNameOrName",
+          required: "true",
+          type: "input",
+        },
+        {
+          label: "NTN/FTN Number",
+          name: "cnicOrNTNNumber",
+          required: "true",
+          type: "input",
+        },
         { label: "Address", name: "address", required: "true", type: "input" },
-        { label: "Contact Number", name: "contact-number", required: "true", type: "input" },
+        {
+          label: "Contact Number",
+          name: "mobileNumber",
+          required: "true",
+          type: "input",
+        },
         { label: "Email", name: "email", required: "true", type: "input" },
         {
           label: "Business Domain",
-          name: "business-domain",
+          name: "businessDomain",
           required: "true",
           type: "select",
           options: ["Mining", "Services"],
@@ -46,7 +104,9 @@ const Step1 = ({ setState }) => {
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => (
+        <input type={type} onChange={(e)=> changeHandler(e)} value={state[commonProps?.name]} {...commonProps} placeholder=" " />
+      );
 
       const renderLabel = () => (
         <label
@@ -56,7 +116,6 @@ const Step1 = ({ setState }) => {
           {field.label}
         </label>
       );
-
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
@@ -79,7 +138,9 @@ const Step1 = ({ setState }) => {
               </select>
             </>
           )}
-          {field.type === "textarea" && <textarea {...commonProps} placeholder=" " />}
+          {field.type === "textarea" && (
+            <textarea {...commonProps} placeholder=" " />
+          )}
           {field.type !== "select" && renderLabel()}
         </div>
       );
@@ -88,35 +149,49 @@ const Step1 = ({ setState }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
-
+    setLoading(true)
+    const {id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email} = state;
+    let payload = {};
+    if(applyAs === "Individual"){
+      payload = {applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email};
+    } else{
+      payload = {...payload, businessDomain};
+    }
+    if(id){
+      payload = {...payload, id};
+    }
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
-        setState("step2");
-      } else {
-        console.error("Error:", response.statusText);
+      const { data, isError, message } = await testApplicationDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.TEST_APPLICATION_DETAILS,
+        payload
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setLoading(false);
+        setCookiesByName('testApplication', data, true);
+        setStep('step2')
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false)
+      console.log(error.message);
     }
   };
 
   return (
-    <div>
+    <ConfigProvider>
       <div>
-        Expatraite Security Clearance <span className="font-bold">Noc Application</span>
+        Expatraite Security Clearance{" "}
+        <span className="font-bold">Noc Application</span>
       </div>
+      {contextHolder}
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <div className="text-2xl text-green-700 my-10 font-bold">NOC Application Details</div>
+        <div className="text-2xl text-green-700 my-10 font-bold">
+          NOC Application Details
+        </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10 mb-10">
           <div className="relative mt-2 w-full">
             <label
@@ -129,7 +204,9 @@ const Step1 = ({ setState }) => {
               id="ApplyAs"
               className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
               required={true}
-              onChange={(e) => handleApplyAsChange(e.target.value)}
+              name="applyAs"
+              onChange={(e) => changeHandler(e)}
+              value={state?.applyAs}
             >
               <option value="" disabled selected style={{ opacity: 0.5 }}>
                 Select an option
@@ -140,14 +217,26 @@ const Step1 = ({ setState }) => {
           </div>
         </div>
         <div className="">
-          {Object.entries(obj1[applyAs]).map(([key, value]) => (
-            <div key={key} className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              {key === "Deposit Details" && <h1 className="col-span-3 text-4xl font-bold text-green-700">{key}</h1>}
+          {Object.entries(obj1[state?.applyAs]).map(([key, value]) => (
+            <div
+              key={key}
+              className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10"
+            >
+              {key === "Deposit Details" && (
+                <h1 className="col-span-3 text-4xl font-bold text-green-700">
+                  {key}
+                </h1>
+              )}
               {renderFormItems(key, value)}
             </div>
           ))}
         </div>
-        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+        <div
+          className="button-group-mineral-form"
+          style={{ marginTop: "30px", marginBottom: "30px" }}
+        >
+        {loading? 
+            <Loader/> :
           <button type="submit" className="next-button">
             <div>
               Next
@@ -167,9 +256,10 @@ const Step1 = ({ setState }) => {
               </svg>
             </div>
           </button>
+          }
         </div>
       </form>
-    </div>
+    </ConfigProvider>
   );
 };
 

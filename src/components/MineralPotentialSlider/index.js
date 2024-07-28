@@ -6,7 +6,6 @@ import { mineralPotential2 } from 'utils/constant/common'
 export const MineralPotentialSlider = () => {
   const [active, setActive] = useState(2);
   const [data, setData] = useState(mineralPotential2);
-  console.log("active", active);
   const rightHandler = () => {
     const cloneData = [...data];
     const removedItem = cloneData.shift();
