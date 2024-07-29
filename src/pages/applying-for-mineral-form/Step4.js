@@ -1,60 +1,111 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
+import { useState, useEffect } from "react";
+import { message, ConfigProvider } from "antd";
+import { getCookiesByName, setCookiesByName } from "utils/helpers";
+import { saveSampleDetailAPI } from "services/api/common";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+const initialState = {
+  geologicalInformation: "",
+  typeOfWorkRequired: "",
+  requirementRegardingReports: "",
+  additionalInstruction: "",
+};
 
 const Step4 = ({ setStep }) => {
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState(initialState);
+  const [messageApi, contextHolder] = message.useMessage();
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
+    setLoading(true);
+    const { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } = state;
+    let payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_SHIPMENT_INFO,
+        payload
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setCookiesByName("ShipmentApplication", data, true);
+        setLoading(false);
         setStep("step5");
-      } else {
-        console.error("Error:", response.statusText);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
   };
+  useEffect(() => {
+    const applicationDetail = getCookiesByName("ShipmentApplication", true);
+    if (Object.keys(applicationDetail).length) {
+      let payload = {};
+      const { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } =
+        applicationDetail;
+      payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
+
+      setState({ ...state, ...payload });
+    }
+  }, []);
   const handlePrevious = () => {
     setStep("step3");
   };
   const obj = [
     {
       label: "Geological Information",
-      name: "geological-info",
+      name: "geologicalInformation",
       required: "false",
       type: "input",
     },
-    { label: "Type of Work Required", name: "work-type", required: "false", type: "input" },
-    { label: "Special requirement regarding report", name: "special-info", required: "false", type: "textarea" },
+    { label: "Type of Work Required", name: "typeOfWorkRequired", required: "false", type: "input" },
+    {
+      label: "Special requirement regarding report",
+      name: "requirementRegardingReports",
+      required: "false",
+      type: "textarea",
+    },
     {
       label: "Additional Information",
-      name: "additional-info",
+      name: "additionalInstruction",
       required: "false",
       type: "textarea",
     },
   ];
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    console.log(state, "state");
+    setState({ ...state, [name]: value });
+  };
   const renderFormItems = () => {
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
+        require: field.required,
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
-        required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => (
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[commonProps?.name]}
+          {...commonProps}
+          placeholder=" "
+        />
+      );
 
       const renderLabel = () => (
         <label
@@ -64,10 +115,11 @@ const Step4 = ({ setStep }) => {
           {field.label}
         </label>
       );
-
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
+          {field.type === "text" && renderInput()}
+
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
           {field.type === "file" && <input type="file" {...commonProps} />}
@@ -86,13 +138,14 @@ const Step4 = ({ setStep }) => {
               </select>
             </>
           )}
-          {field.type === "textarea" && <textarea {...commonProps} placeholder=" " />}
+          {field.type === "textarea" && (
+            <textarea {...commonProps} placeholder=" " onChange={(e) => changeHandler(e)} />
+          )}
           {field.type !== "select" && renderLabel()}
         </div>
       );
     });
   };
-
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
