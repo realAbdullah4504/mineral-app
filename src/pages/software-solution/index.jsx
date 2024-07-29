@@ -17,7 +17,7 @@ const SoftwareSolution = () => {
 
   const Adddata = {
     headline: "Apply for Registration",
-    link: '/registerorganization?orgtype=go'
+    link: '/registerorganization?orgtype=sse'
   };
 
   return (

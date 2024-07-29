@@ -3,6 +3,7 @@ import FiscalIncentivesBg from "assets/images/fiscalincentives.png";
 import { Container } from "components/UI";
 import React from "react";
 import { FlipCards } from "components/FlipCards";
+import { whoIsWhoCards } from "utils/constant/common";
 
 const WhoIsWho = () => {
   const breadcrumbs = [
@@ -10,63 +11,7 @@ const WhoIsWho = () => {
     { path: "#", label: "Who is Who" },
   ];
 
-  const whoIsWhoCards = [
-    {
-      title: "Government Departments",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/government-departments",
-    },
-    {
-      title: "Mining Professional",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/mining-professional",
-    },
-    {
-      title: "Drilling Services",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/drilling-services",
-    },
-    {
-      title: "Mineral Labs",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/mineral-labs",
-    },
-    {
-      title: "Downstream Industries",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/downstream-industries",
-    },
-    {
-      title: "Software & Solutions",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/software-solution",
-    },
-    {
-      title: "Legal & Tax Services",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/legal-tax",
-    },
-    {
-      title: "Academia",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/academia",
-    },
-    {
-      title: "Associations",
-      flipContent:
-        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
-      link: "/associations",
-    },
-    
-  ];
+  
 
   return (
     <div
