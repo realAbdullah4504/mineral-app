@@ -18,23 +18,23 @@ function Listing({ dataSource, setSelectedRecord }) {
     },
     {
       title: "Sample Type",
-      dataIndex: "sample-type",
-      key: "sample-type",
+      dataIndex: "sampleType",
+      key: "sampleType",
     },
     {
       title: "Target Mineral",
-      dataIndex: "target-mineral",
-      key: "target-mineral",
+      dataIndex: "targetedMineral",
+      key: "targetedMineral",
     },
     {
       title: "Sample Location",
-      dataIndex: "sample-location",
-      key: "sample-location",
+      dataIndex: "sampleLocation",
+      key: "sampleLocation",
     },
     {
       title: "Sample Image",
-      dataIndex: "sample-image",
-      key: "sample-image",
+      dataIndex: "sampleImagePath",
+      key: "sampleImagePath",
       render: (_, record) => (
         <div onClick={() => handleEditClick(record)} style={{ cursor: "pointer", color: "#1677ff" }}>
           View

@@ -1,10 +1,24 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Space, Table } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import MoreInfo from "assets/images/geomapinfo.png";
+import { saveSampleListingAPI } from "services/api/common";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { message } from "antd";
+import { Loader } from "components";
 
 const TableMap = () => {
+  const [listing, setListing] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/service-and-support", label: "Service & Support" },
@@ -47,6 +61,28 @@ const TableMap = () => {
       address: "Faisalabad",
     },
   ];
+  useEffect(() => {
+    (async function () {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          ENDPOINTS.Mineral_Form_Listing
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          setListing(data);
+          setLoading(false);
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
+    })();
+  }, []);
 
   return (
     <div className="table-data">
@@ -57,10 +93,7 @@ const TableMap = () => {
           <div></div>
           <div>
             {" "}
-            <div
-              className="geological-moreinfo"
-              style={{ paddingBottom: "0px" }}
-            >
+            <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
               {" "}
               <button style={{ backgroundImage: `url(${MoreInfo})` }}>
                 <a href="/noc-company-form">
@@ -96,7 +129,7 @@ const TableMap = () => {
             </div>
           </div>
         </div>
-        <Table columns={columns} dataSource={data} pagination={false} />
+        {loading ? <Loader></Loader> : <Table columns={columns} dataSource={data} pagination={false} />}
       </Container>
     </div>
   );

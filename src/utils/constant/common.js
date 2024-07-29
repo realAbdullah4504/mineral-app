@@ -85,7 +85,7 @@ import limestoneWhite from "assets/images/limestoneWhite.svg";
 
 export const homeSlider = {
     first: {
-      title: "About Us",
+      title: "About us",
       description: `The Pakistan Minerals Information and Services Portal dubbed as PAKISTAN MINES is envisioned to be a gateway for investors, professionals, academics and government officials for economic prosperity. 
               MINES aims to enhance and enrich the potential of Pakistan's mineral and mining industry. With a focus on consolidating critical information for the sector, the objective is to attract investment and foster international interest from companies seeking promising exploration prospects within Pakistan`,
       image: MainImg ,

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Form, InputNumber, Button } from "antd";
-import MoreInfo from "assets/images/geomapinfo.png";
 
 const NocForm = ({ setState }) => {
   const [applyAs, setApplyAs] = useState("Normal");
@@ -16,9 +14,24 @@ const NocForm = ({ setState }) => {
         { label: "Title Issue Date", name: "title-issue-date", required: "true", type: "calendar" },
         { label: "Title Expiry Date", name: "title-expiry-date", required: "true", type: "calendar" },
         { label: "Title Grant Letter", name: "title-grant-letter", required: "true", type: "file" },
-        { label: "Sub-Lease Issue Date (If Applicable) (Optional)", name: "sub-lease-date", required: "false", type: "calendar" },
-        { label: "Sub-Lease Expiry Date (If Applicable) (Optional)", name: "sub-lease-date-expiry", required: "false", type: "calendar" },
-        { label: "Mining Sub-Lease Letter (If Applicable) (Optional)", name: "sub-lease-letter", required: "false", type: "file" },
+        {
+          label: "Sub-Lease Issue Date (If Applicable) (Optional)",
+          name: "sub-lease-date",
+          required: "false",
+          type: "calendar",
+        },
+        {
+          label: "Sub-Lease Expiry Date (If Applicable) (Optional)",
+          name: "sub-lease-date-expiry",
+          required: "false",
+          type: "calendar",
+        },
+        {
+          label: "Mining Sub-Lease Letter (If Applicable) (Optional)",
+          name: "sub-lease-letter",
+          required: "false",
+          type: "file",
+        },
       ],
     },
     Urgent: {
@@ -27,9 +40,24 @@ const NocForm = ({ setState }) => {
         { label: "Title Issue Date", name: "title-issue-date", required: "true", type: "calendar" },
         { label: "Title Expiry Date", name: "title-expiry-date", required: "true", type: "calendar" },
         { label: "Title Grant Letter", name: "title-grant-letter", required: "true", type: "file" },
-        { label: "Sub-Lease Issue Date (If Applicable) (Optional)", name: "sub-lease-date", required: "false", type: "calendar" },
-        { label: "Sub-Lease Expiry Date (If Applicable) (Optional)", name: "sub-lease-date-expiry", required: "false", type: "calendar" },
-        { label: "Mining Sub-Lease Letter (If Applicable) (Optional)", name: "sub-lease-letter", required: "false", type: "file" },
+        {
+          label: "Sub-Lease Issue Date (If Applicable) (Optional)",
+          name: "sub-lease-date",
+          required: "false",
+          type: "calendar",
+        },
+        {
+          label: "Sub-Lease Expiry Date (If Applicable) (Optional)",
+          name: "sub-lease-date-expiry",
+          required: "false",
+          type: "calendar",
+        },
+        {
+          label: "Mining Sub-Lease Letter (If Applicable) (Optional)",
+          name: "sub-lease-letter",
+          required: "false",
+          type: "file",
+        },
       ],
       "Deposit Details": [
         { label: "Deposit Slip", name: "deposit-slip", required: "true", type: "file" },
@@ -90,11 +118,27 @@ const NocForm = ({ setState }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    setState("Step1");
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        setState("Step1");
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -124,22 +168,6 @@ const NocForm = ({ setState }) => {
               <option value="Normal">Normal</option>
               <option value="Urgent">Urgent</option>
             </select>
-          </div>
-          <div className="relative mt-2 w-full">
-            <label
-              htmlFor="license-no"
-              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
-            >
-              Title/License No.
-            </label>
-            <input
-              type="text"
-              name="license-no"
-              id="license-no"
-              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-              placeholder=" "
-              required
-            />
           </div>
         </div>
         <div className="">

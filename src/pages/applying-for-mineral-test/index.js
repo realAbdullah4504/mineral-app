@@ -1,8 +1,12 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Dropdown, Space, Table } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import MoreInfo from "assets/images/geomapinfo.png";
-
+import { saveSampleListingAPI } from "services/api/common";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { message } from "antd";
+import { Loader } from "components";
 const items = [
   {
     key: "1",
@@ -35,11 +39,20 @@ const items = [
 ];
 
 const TableMap = () => {
+  const [listing, setListing] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const columns = [
     {
-      title: "Sr. No",
-      dataIndex: "srNo",
-      key: "srNo",
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
     },
     {
       title: "Name",
@@ -51,38 +64,43 @@ const TableMap = () => {
     },
     {
       title: "Type of Test",
-      dataIndex: "typeOfTest",
-      key: "typeOfTest",
+      dataIndex: "category",
+      key: "category",
     },
     {
       title: "Mineral Lab",
-      dataIndex: "mineralLab",
-      key: "mineralLab",
+      dataIndex: "description",
+      key: "description",
     },
     {
       title: "Status",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "isActive",
+      key: "isActive",
       render: (text) => {
         let color;
+        let show;
         switch (text) {
-          case "In Progress":
+          case true:
             color = "green";
-
+            show = "active";
             break;
           case "Approved":
             color = "yellow";
+            show = text;
             break;
-          case "Failed":
+          case false:
             color = "red";
+            show = "inactive";
             break;
           case "Done":
             color = "black";
+            show = text;
             break;
           default:
             color = "default";
+            show = text;
         }
-        return <span style={{ color, fontWeight: "bold" }}>{text}</span>;
+        return <span style={{ color, fontWeight: "bold" }}>{show}</span>;
       },
     },
     {
@@ -118,47 +136,36 @@ const TableMap = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      srNo: 1,
-      name: "Lorem Ipsum name",
-      typeOfTest: "Type of Test",
-      mineralLab: "Mineral Lab",
-      status: "In Progress",
-    },
-    {
-      key: "2",
-      srNo: 2,
-      name: "Lorem Ipsum name",
-      typeOfTest: "Type of Test",
-      mineralLab: "Mineral Lab",
-      status: "Approved",
-    },
-    {
-      key: "3",
-      srNo: 3,
-      name: "Lorem Ipsum name",
-      typeOfTest: "Type of Test",
-      mineralLab: "Mineral Lab",
-      status: "Failed",
-    },
-    {
-      key: "4",
-      srNo: 4,
-      name: "Lorem Ipsum name",
-      typeOfTest: "Type of Test",
-      mineralLab: "Mineral Lab",
-      status: "Done",
-    },
-  ];
-
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/service-and-support", label: "Services & Support" },
     { path: "/mineral-testing-labs", label: "Mineral Testing Labs" },
     { path: "/applying-for-mineral-test", label: "Apply" },
   ];
+
+  useEffect(() => {
+    (async function () {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          ENDPOINTS.Mineral_Form_Listing
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          console.log(data, "data");
+          setListing(data);
+          setLoading(false);
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
+    })();
+  }, []);
 
   return (
     <div className="table-data">
@@ -206,7 +213,7 @@ const TableMap = () => {
           </div>
         </div>
       </div>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      {loading ? <Loader></Loader> : <Table columns={columns} dataSource={listing} pagination={false} />}
     </div>
   );
 };

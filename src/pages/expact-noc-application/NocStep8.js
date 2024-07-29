@@ -3,11 +3,27 @@ import ProgressPercentage from "components/UI/ProgressPercentage";
 import Operation from "antd/es/transfer/operation";
 
 const NocStep8 = ({ setState, alreadyVisited }) => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const formValuess = Object.fromEntries(formData.entries());
-    setState("NocListing");
+    const formValues = Object.fromEntries(formData.entries());
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        setState("NocListing");
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handlePrevious = () => {

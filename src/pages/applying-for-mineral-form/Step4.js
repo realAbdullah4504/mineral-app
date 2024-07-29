@@ -1,104 +1,111 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
+import { useState, useEffect } from "react";
+import { message, ConfigProvider } from "antd";
+import { getCookiesByName, setCookiesByName } from "utils/helpers";
+import { saveSampleDetailAPI } from "services/api/common";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+const initialState = {
+  geologicalInformation: "",
+  typeOfWorkRequired: "",
+  requirementRegardingReports: "",
+  additionalInstruction: "",
+};
 
-const NocStep5 = ({ setState, equipment }) => {
+const Step4 = ({ setStep }) => {
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState(initialState);
+  const [messageApi, contextHolder] = message.useMessage();
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
+    setLoading(true);
+    const { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } = state;
+    let payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
-        setState("Step6");
-      } else {
-        console.error("Error:", response.statusText);
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_SHIPMENT_INFO,
+        payload
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setCookiesByName("ShipmentApplication", data, true);
+        setLoading(false);
+        setStep("step5");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
   };
+  useEffect(() => {
+    const applicationDetail = getCookiesByName("ShipmentApplication", true);
+    if (Object.keys(applicationDetail).length) {
+      let payload = {};
+      const { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } =
+        applicationDetail;
+      payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
 
-  const handlePrevious = () => {
-    if (equipment === "yes") {
-      setState("Step4");
-    } else {
-      setState("Step3");
+      setState({ ...state, ...payload });
     }
+  }, []);
+  const handlePrevious = () => {
+    setStep("step3");
   };
   const obj = [
-    { label: "Title/License Number", name: "title-license", required: "true", type: "input" },
-    { label: "Sponsoring Company Name", name: "sponsor-company-name", required: "true", type: "input" },
-    { label: "Pakistan Address", name: "pak-address", required: "true", type: "input" },
     {
-      label: "Name and Address of Visiting Organisations",
-      name: "visiting-org-name",
-      required: "true",
+      label: "Geological Information",
+      name: "geologicalInformation",
+      required: "false",
       type: "input",
     },
+    { label: "Type of Work Required", name: "typeOfWorkRequired", required: "false", type: "input" },
     {
-      label: "Name and Designation of Conducting Officials",
-      name: "name-conducting-officials",
-      required: "true",
-      type: "input",
+      label: "Special requirement regarding report",
+      name: "requirementRegardingReports",
+      required: "false",
+      type: "textarea",
     },
     {
-      label: "Pakistani Official Name",
-      name: "name-pak-official",
-      required: "true",
-      type: "input",
-    },
-    {
-      label: "Pakistani Official Contact",
-      name: "no-pak-official",
-      required: "true",
-      type: "number",
-    },
-    {
-      label: "Pakistani Official Address",
-      name: "address-pak-official",
-      required: "true",
-      type: "input",
-    },
-    {
-      label: "CNIC of Pakistani Official",
-      name: "CNIC-pak-official",
-      required: "true",
-      type: "number",
-      placeholder: "12345-1234567-8",
-    },
-    {
-      label: "CNIC Front Image",
-      name: "CNIC-front-img",
-      required: "true",
-      type: "file",
-    },
-    {
-      label: "CNIC Back Image",
-      name: "CNIC-back-img",
-      required: "true",
-      type: "file",
+      label: "Additional Information",
+      name: "additionalInstruction",
+      required: "false",
+      type: "textarea",
     },
   ];
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    console.log(state, "state");
+    setState({ ...state, [name]: value });
+  };
   const renderFormItems = () => {
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
+        require: field.required,
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
-        required: field.required,
-        placeholder: field.placeholder || "",
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} />;
+      const renderInput = (type = "text") => (
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[commonProps?.name]}
+          {...commonProps}
+          placeholder=" "
+        />
+      );
 
       const renderLabel = () => (
         <label
@@ -108,10 +115,11 @@ const NocStep5 = ({ setState, equipment }) => {
           {field.label}
         </label>
       );
-
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
+          {field.type === "text" && renderInput()}
+
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
           {field.type === "file" && <input type="file" {...commonProps} />}
@@ -130,18 +138,19 @@ const NocStep5 = ({ setState, equipment }) => {
               </select>
             </>
           )}
-          {field.type === "textarea" && <textarea {...commonProps} placeholder=" " />}
+          {field.type === "textarea" && (
+            <textarea {...commonProps} placeholder=" " onChange={(e) => changeHandler(e)} />
+          )}
           {field.type !== "select" && renderLabel()}
         </div>
       );
     });
   };
-
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
-        <div className="text-green-600">Sponsor Details</div>
-        <ProgressPercentage percent={62} step={5} total={8}></ProgressPercentage>
+        <div>Background Information</div>
+        <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
       </div>
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
@@ -181,4 +190,4 @@ const NocStep5 = ({ setState, equipment }) => {
   );
 };
 
-export default NocStep5;
+export default Step4;

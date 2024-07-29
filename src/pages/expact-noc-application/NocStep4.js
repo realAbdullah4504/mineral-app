@@ -82,12 +82,29 @@ const NocStep4 = ({ setState }) => {
     });
   };
 
-  const handleAddForm = (event) => {
+  const handleAddForm = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const formValuess = Object.fromEntries(formData.entries());
-    setListing([...listing, formValuess]);
-    setRecord([]);
+    const formValues = Object.fromEntries(formData.entries());
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        setListing([...listing, formValues]);
+        setRecord([]);
+        event.target.reset();
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   const handleEditClick = (record) => {
     setRecord(record);

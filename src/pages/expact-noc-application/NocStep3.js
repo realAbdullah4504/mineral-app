@@ -2,16 +2,32 @@ import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 
 const NocStep3 = ({ setState, setEquipment }) => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    if (formValues["equipment-required"] === "yes") {
-      setEquipment("yes");
-      setState("Step4");
-    } else {
-      setEquipment("No");
-      setState("Step5");
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        if (formValues["equipment-required"] === "yes") {
+          setEquipment("yes");
+          setState("Step4");
+        } else {
+          setEquipment("No");
+          setState("Step5");
+        }
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 

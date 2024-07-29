@@ -2,17 +2,32 @@ import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 
 const NocStep6 = ({ setState, setAlreadyVisited }) => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const formValuess = Object.fromEntries(formData.entries());
-    console.log(formValuess["already-visited"], "visit");
-    if (formValuess["already-visited"] === "Yes") {
-      setState("Step7");
-      setAlreadyVisited("Yes");
-    } else {
-      setState("Step8");
-      setAlreadyVisited("No");
+    const formValues = Object.fromEntries(formData.entries());
+    try {
+      const response = await fetch("https://your-api-endpoint.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        if (formValues["already-visited"] === "Yes") {
+          setState("Step7");
+          setAlreadyVisited("Yes");
+        } else {
+          setState("Step8");
+          setAlreadyVisited("No");
+        }
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
