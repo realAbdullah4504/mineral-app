@@ -49,7 +49,7 @@ const Header = ({ title = "" }) => {
           <div className="header_top_inner">
             <div className="header_column" id="flexible-width-1">
               <div className="header_menu_1">
-                <Link to="/">About Us</Link>
+                <Link to="/">About us</Link>
                 <Link to="/#news-and-event">News</Link>
                 <Link to="/faqs">FAQs</Link>
               </div>
@@ -293,7 +293,7 @@ const Header = ({ title = "" }) => {
             </div>
           </div>
           <div className="mobile_menu_inner">
-            <Link to="#">About Us</Link>
+            <Link to="#">About us</Link>
             <Link to="#">News</Link>
             <Link to="#">FAQs</Link>
             <Link to="/login">Log in</Link>

@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Input, Modal, Select, Upload, message, notification } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Upload,
+  message,
+  notification,
+} from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import axios from "axios";
@@ -30,10 +39,9 @@ const RegisterProfessional = () => {
   const [value, setValue] = useState("_____ - _____ - __");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
-  const [buttonText, setButtonText] = useState("Click to Upload");
+  const [buttonText, setButtonText] = useState("Click to Upload Resume");
   const [user, setUser] = useState(null);
   const [uploadError, setUploadError] = useState(false);
-
 
   useEffect(() => {
     const data = getUserData();
@@ -70,7 +78,6 @@ const RegisterProfessional = () => {
   ];
 
   const success = () => {
-    debugger
     messageApi
       .open({
         type: "loading",
@@ -91,21 +98,20 @@ const RegisterProfessional = () => {
 
     // Show notification
     notification.success({
-      message: 'Registration Completed',
-      description: 'Your registration has been successfully completed.',
-      placement: 'topRight',
+      message: "Registration Completed",
+      description: "Your registration has been successfully completed.",
+      placement: "topRight",
       style: {
-        backgroundColor: '#f6ffed',
-        border: '1px solid #b7eb8f',
+        backgroundColor: "#f6ffed",
+        border: "1px solid #b7eb8f",
       },
       duration: 4.5, // Duration in seconds, change as needed
-      onClose: () => console.log('Notification closed'),
+      onClose: () => console.log("Notification closed"),
     });
   };
 
   const handleSubmission = async (values) => {
     try {
-      debugger
       const fullurl =
         process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
       const config = {
@@ -124,7 +130,6 @@ const RegisterProfessional = () => {
           fileList[0].originFileObj || fileList[0]
         );
       }
-
       const companyobj = {
         OrganizationType: "MiningProfessionals",
         OrganizationName: values.OrganizationName,
@@ -211,14 +216,14 @@ const RegisterProfessional = () => {
         <div className="flex justify-center flex-col space-y-6 py-12">
           <Form form={form} onFinish={onFinish} className="space-y-4">
             <div className="space-y-2 text-start">
-              <h2 className="text-[26px] font-medium text-[#009969] ">
+              <h2 className="text-[26px] font-medium text-[#009969]">
                 Personal Information
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
               <Form.Item
-                name="OrganizationName"
+                name="Name"
                 rules={[
                   {
                     required: true,
@@ -229,15 +234,17 @@ const RegisterProfessional = () => {
                 <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="OrganizationName"
-                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    id="Name"
+                    disabled
+                    value={user?.UserFullName}
+                    className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
                     placeholder=" "
                   />
                   <label
-                    htmlFor="OrganizationName"
-                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    htmlFor="Name"
+                    className={`absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white text-gray-500 px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600`}
                   >
-                    Organization Name
+                    Name
                   </label>
                 </div>
               </Form.Item>
@@ -254,14 +261,16 @@ const RegisterProfessional = () => {
                   <input
                     type="text"
                     id="MobileNumber"
-                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    disabled
+                    value={user?.PhoneNumber}
+                    className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
                     placeholder=" "
                   />
                   <label
                     htmlFor="MobileNumber"
-                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    className={`absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white text-gray-500 px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600`}
                   >
-                    Contact No.
+                    Contact No
                   </label>
                 </div>
               </Form.Item>
@@ -279,12 +288,14 @@ const RegisterProfessional = () => {
                   <input
                     type="email"
                     id="Email"
-                    className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                    disabled
+                    value={user?.Email}
+                    className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
                     placeholder=" "
                   />
                   <label
                     htmlFor="Email"
-                    className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                    className={`absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white text-gray-500 px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600`}
                   >
                     Email
                   </label>
@@ -324,7 +335,7 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
               <Form.Item
                 name="Qualification"
                 rules={[
@@ -340,7 +351,9 @@ const RegisterProfessional = () => {
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder="Select your qualification"
                   >
-                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value="" selected disabled hidden>
+                      Choose here
+                    </option>
                     <option value="Diploma">Diploma</option>
                     <option value="Certification">Certification</option>
                     <option value="Bachelors">Bachelors</option>
@@ -436,7 +449,7 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
               <Form.Item
                 name="IndustriesOrSector"
                 rules={[
@@ -521,14 +534,14 @@ const RegisterProfessional = () => {
               >
                 <div className="relative mt-2 w-full">
                   <Upload
-                     beforeUpload={beforeUpload}
-                     onPreview={handlePreview}
-                     onChange={handleFileChange}
-                     listType="picture"
-                     className="w-full h-full"
-                     maxCount={1} // Allow only one file
-                     fileList={fileList}
-                     action={null}
+                    beforeUpload={beforeUpload}
+                    onPreview={handlePreview}
+                    onChange={handleFileChange}
+                    listType="picture"
+                    className="w-full h-full"
+                    maxCount={1} // Allow only one file
+                    fileList={fileList}
+                    action={null}
                   >
                     <div className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0 cursor-pointer">
                       <div className="flex items-center space-x-2">
@@ -550,11 +563,13 @@ const RegisterProfessional = () => {
                     message: "Please input your Professional Summary!",
                   },
                 ]}
+                className="lg:col-span-2"
               >
                 <div className="relative mt-2 w-full">
-                  <input
+                  <textarea
                     type="textarea"
                     id="ProfessionSummary"
+                    rows={1}
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
@@ -574,9 +589,9 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
               <Form.Item
-                name="organization"
+                name="OrganizationName"
                 rules={[
                   {
                     required: true,
@@ -587,12 +602,12 @@ const RegisterProfessional = () => {
                 <div className="relative mt-2 w-full">
                   <input
                     type="text"
-                    id="organization"
+                    id="OrganizationName"
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                     placeholder=" "
                   />
                   <label
-                    htmlFor="organization"
+                    htmlFor="OrganizationName"
                     className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
                   >
                     Organization

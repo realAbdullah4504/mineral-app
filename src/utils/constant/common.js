@@ -85,7 +85,7 @@ import limestoneWhite from "assets/images/limestoneWhite.svg";
 
 export const homeSlider = {
     first: {
-      title: "About Us",
+      title: "About us",
       description: `The Pakistan Minerals Information and Services Portal dubbed as PAKISTAN MINES is envisioned to be a gateway for investors, professionals, academics and government officials for economic prosperity. 
               MINES aims to enhance and enrich the potential of Pakistan's mineral and mining industry. With a focus on consolidating critical information for the sector, the objective is to attract investment and foster international interest from companies seeking promising exploration prospects within Pakistan`,
       image: MainImg ,
@@ -493,59 +493,166 @@ export const mineralPotential = {
 
 export const registerOrganizationOption = [
   {
-    value: "1",
+    value: "GovernmentDepartments",
     label: "Government Departments",
   },
   {
-    value: "2",
+    value: "MiningProfessionals",
+    label: "Mining Professionals",
+  },
+  {
+    value: "GeotechnicalGeophysicalGeologicalServices",
     label: "Geotechnical, Geophysical & Geological Services",
   },
   {
-    value: "3",
+    value: "DrillingCompanies",
     label: "Drilling Companies",
   },
   {
-    value: "4",
+    value: "MiningCompanies",
     label: "Mining Companies",
   },
   {
-    value: "5",
+    value: "MineralBasedIndustries",
     label: "Mineral based industries",
   },
   {
-    value: "6",
+    value: "MachinerySuppliers",
     label: "Machinery suppliers",
   },
   {
-    value: "7",
+    value: "MineralTestingLabs",
     label: "Mineral Testing Labs",
   },
   {
-    value: "8",
+    value: "ExplosiveSuppliers",
     label: "Explosive Suppliers",
   },
   {
-    value: "9",
+    value: "SoftwareandSolutionsEntities",
     label: "Software and Solutions Entities",
   },
   {
-    value: "10",
+    value: "LegalServices",
     label: "Legal Services",
   },
   {
-    value: "11",
+    value: "AuditAccounts",
     label: "Audit & Accounts",
   },
   {
-    value: "12",
+    value: "LandSurveying",
     label: "Land Surveying",
   },
   {
-    value: "13",
+    value: "AcademiaAndRD",
     label: "Academia",
   },
   {
-    value: "14",
+    value: "TrainingSchools",
     label: "Training Schools",
   },
+  {
+    value: "OtherServices",
+    label: "Other Services",
+  },
 ]
+
+export const whoIsWhoCards = [
+  {
+    title: "Government Departments",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/government-departments",
+  },
+  {
+    title: "Mining Professional",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/mining-professional",
+  },
+  {
+    title: "Geotechnical, Geophysical & Geological Services",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/geotechnical-geophysical-services",
+  },
+  {
+    title: "Drilling Companies",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/drilling-companies",
+  },
+  {
+    title: "Mining Companies",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/mining-companies",
+  },
+  {
+    title: "Mineral Based Industries",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/mineral-based-industries",
+  },
+  {
+    title: "Machinery suppliers",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/machinery-suppliers",
+  },
+  {
+    title: "Mineral Testing Labs",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/mineral-labs",
+  },
+  {
+    title: "Explosive Suppliers",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/explosive-suppliers",
+  },
+  {
+    title: "Software and Solutions Entities",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/software-solution-entities",
+  },
+  {
+    title: "Legal Services",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/legal-services",
+  },
+  {
+    title: "Audit & Accounts",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/audit-accounts",
+  },
+  {
+    title: "Land Surveying",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/land-surveying",
+  },
+  {
+    title: "Academia",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/academia",
+  },
+  {
+    title: "Training Schools",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/training-schools",
+  },
+  {
+    title: "Other Services",
+    flipContent:
+      "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
+    link: "/other-services",
+  }
+];

@@ -4,16 +4,16 @@ import DrillingServicesImg from "assets/images/drilling-services.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
 
-const DrillingCompanies = () => {
+const ExplosiveSuppliers = () => {
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/who-is-who", label: "Who is Who" },
-    { path: "#", label: "Drilling Companies" },
+    { path: "#", label: "Explosive Suppliers" },
   ];
 
   const Adddata = {
     headline: "Apply for Registration",
-    link: '/registerorganization?orgtype=dc'
+    link: '/registerorganization?orgtype=es'
   };
 
   return (
@@ -22,7 +22,7 @@ const DrillingCompanies = () => {
       <div className="flex flex-wrap mt-14">
         <div className="w-full">
           <h1 className="font-ibm-plex-sans font-semibold text-[64px] p-[0px]">
-          Drilling Companies
+          Explosive Suppliers
             <hr className="mt-1 w-32 border-4 border-green-500 rounded-full" />
           </h1>
 
@@ -45,4 +45,4 @@ const DrillingCompanies = () => {
   );
 };
 
-export default DrillingCompanies;
+export default ExplosiveSuppliers;

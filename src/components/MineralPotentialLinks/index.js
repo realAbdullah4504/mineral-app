@@ -54,7 +54,7 @@ export const MineralPotentialLinks = () => {
                 className="flex justify-between items-center"
                 to={"/legal-framework"}
               >
-                <span className="text-2xl font-medium ">Register company</span>
+                <span className="text-2xl font-medium ">Legal Framework</span>
                 <img className="pb-[1.42rem]" src={greenArrow} alt="Arrow" />
               </Link>
               <hr className="border-t-2 border-[#D9D9D9]" />

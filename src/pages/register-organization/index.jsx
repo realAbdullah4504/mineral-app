@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { Form, Select, message, Space, Button, Input } from "antd";
+import { Form, Select, message, Space, Button, Input, Upload, Modal } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import { Checkbox, Col, Row } from "antd";
 import { registerOrganizationOption } from "utils/constant/common";
 import { getCookie } from "services/session/cookies";
+
+const CustomUploadIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1.4em"
+    height="1.4em"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill="#86efac"
+      d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+    />
+  </svg>
+);
 
 const RegisterOrganization = () => {
   const navigate = useNavigate();
@@ -15,8 +29,10 @@ const RegisterOrganization = () => {
   const [returnLink, setReturnLink] = useState("");
   const [renderStop, setRenderStop] = useState("");
   const [fileList, setFileList] = useState([]);
-  const [fileList1, setFileList1] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [fileUrl, setFileUrl] = useState("");
   const [orgType, setOrgType] = useState([]);
+  const [buttonText, setButtonText] = useState("Click to Upload Logo");
   const [form] = Form.useForm();
 
   const breadcrumbs = [
@@ -31,26 +47,38 @@ const RegisterOrganization = () => {
     console.log(paramValue);
     if (renderStop !== "Set") {
       const orgTypes = {
-        go: "GovernmentOrganizations",
-        das: "DrillingAndServices",
-        dsi: "DownstreamIndustries",
-        ml: "MineralLabs",
-        sas: "SoftwareAndSolutions",
-        lats: "LegalAndTaxServices",
-        ac: "Academia",
-        asso: "Associations",
+        gd: "GovernmentDepartments",
+        gggs: "GeotechnicalGeophysicalGeologicalServices",
+        dc: "DrillingCompanies",
+        mc: "MiningCompanies",
+        mbi: "MineralBasedIndustries",
+        ms: "MachinerySuppliers",
+        mtl: "MineralTestingLabs",
+        es: "ExplosiveSuppliers",
+        sse: "SoftwareandSolutionsEntities",
+        ls: "LegalServices",
+        aa: "AuditAccounts",
+        lsurv: "LandSurveying",
+        ard: "AcademiaAndRD",
+        ts: "TrainingSchools",
         os: "OtherServices",
       };
 
       const links = {
-        go: "/government-organizations",
-        das: "/drilling-services",
-        dsi: "/downstream-industries",
-        ml: "/mineral-labs",
-        sas: "/software-solutions",
-        lats: "/legal-tax-services",
-        ac: "/academia",
-        asso: "/Associations",
+        gd: "/government-departments",
+        gggs: "/geotechnical-geophysical-services",
+        dc: "/drilling-companies",
+        mc: "/mining-companies",
+        mbi: "/mineral-based-industries",
+        ms: "/machinery-suppliers",
+        mtl: "/mineral-labs",
+        es: "/explosive-suppliers",
+        sse: "/software-solution-entities",
+        ls: "/legal-services",
+        aa: "/audit-accounts",
+        lsurv: "/land-surveying",
+        ard: "/academia",
+        ts: "/training-schools",
         os: "/other-services",
       };
 
@@ -95,8 +123,8 @@ const RegisterOrganization = () => {
     };
 
     const bodyFormData = new FormData();
-    if (values.logo && values.logo?.fileList?.length > 0) {
-      bodyFormData.append('LogoImages', values.logo.fileList[0].originFileObj || values.logo.fileList[0]);
+    if (values.LogoImages && values.LogoImages?.length > 0) {
+      bodyFormData.append('LogoImages', values.LogoImages[0]);
     }
 
     const companyobj = {
@@ -127,33 +155,30 @@ const RegisterOrganization = () => {
     handleSubmission(values);
   };
   
-
-  const props = {
-    onRemove: (file) => {
-      const index = fileList.indexOf(file);
-      const newFileList = fileList.slice();
-      newFileList.splice(index, 1);
-      setFileList(newFileList);
-    },
-    beforeUpload: (file) => {
-      setFileList([...fileList, file]);
-      return false;
-    },
-    fileList,
+  const handlePreview = async (file) => {
+    const url = window.URL.createObjectURL(file.originFileObj);
+    setFileUrl(url);
+    setIsModalVisible(true);
   };
 
-  const props1 = {
-    onRemove: (file) => {
-      const index = fileList1.indexOf(file);
-      const newFileList = fileList1.slice();
-      newFileList.splice(index, 1);
-      setFileList1(newFileList);
-    },
-    beforeUpload: (file) => {
-      setFileList1([...fileList1, file]);
-      return false;
-    },
-    fileList1,
+  const beforeUpload = (file) => {
+    const isAcceptedFormat = ["image/png", "image/jpeg"].includes(file.type);
+    if (!isAcceptedFormat) {
+      message.error("You can only upload PNG, JPEG files!");
+      return Upload.LIST_IGNORE;
+    }
+    return false;
+  };
+
+  const handleFileChange = (info) => {
+    const { fileList } = info;
+    const acceptedFormats = ["image/png", "image/jpeg"];
+    const filteredFileList = fileList.filter(
+      (file) => acceptedFormats.includes(file.type)
+    );
+    setFileList(filteredFileList.slice(-1));
+    form.setFieldsValue({ LogoImages: filteredFileList });
+    form.validateFields(["LogoImages"]);
   };
 
   const onChange = (checkedValues) => {
@@ -202,7 +227,7 @@ const RegisterOrganization = () => {
           </h2>
         </div>
         <Form form={form} onFinish={onFinish} className="space-y-4">
-          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
             <Form.Item
               name="name"
               rules={[{ required: true, message: 'Please input your Organization Name!' }]}
@@ -337,24 +362,36 @@ const RegisterOrganization = () => {
               </div>
             </Form.Item>
             <Form.Item
-              name="logo"
-              rules={[{ required: true, message: 'Please upload your Logo!' }]}
-            >
-              <div className="relative mt-2 w-full">
-                <input
-                  type="text"
-                  id="logo"
-                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                  placeholder=" "
-                />
-                <label
-                  htmlFor="logo"
-                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
-                >
-                  Logo/Cover
-                </label>
-              </div>
-            </Form.Item>
+                name="LogoImages"
+                valuePropName="fileList"
+                className="w-full"
+                getValueFromEvent={(e) =>
+                  Array.isArray(e) ? e : e && e.fileList
+                }
+                rules={[{ required: true, message: "Please upload a file!" }]}
+              >
+                <div className="relative mt-2 w-full">
+                  <Upload
+                     beforeUpload={beforeUpload}
+                     onPreview={handlePreview}
+                     onChange={handleFileChange}
+                     listType="picture"
+                     className="w-full h-full"
+                     maxCount={1} // Allow only one file
+                     fileList={fileList}
+                     action={null}
+                  >
+                    <div className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0 cursor-pointer">
+                      <div className="flex items-center space-x-2">
+                        {/* CustomUploadIcon can be replaced with any icon or element */}
+                        {CustomUploadIcon}
+                        <span>{buttonText}</span>
+                      </div>
+                    </div>
+                  </Upload>
+                </div>
+              </Form.Item>
+              {contextHolder}
           </div>
           <Form.Item>
             <div className="w-full flex justify-center">
@@ -372,6 +409,24 @@ const RegisterOrganization = () => {
         {contextHolder}
       </div>
     </Container>
+
+    <Modal
+        title="Preview File"
+        visible={isModalVisible}
+        width={1200}
+        onCancel={() => setIsModalVisible(false)}
+        footer={[
+          <Button key="close" onClick={() => setIsModalVisible(false)}>
+            Close
+          </Button>,
+        ]}
+      >
+        <iframe
+          src={fileUrl}
+          style={{ width: "100%", height: "500px" }}
+          frameBorder="0"
+        />
+      </Modal>
     </>
   );
 };
