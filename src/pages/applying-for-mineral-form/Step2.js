@@ -13,14 +13,14 @@ const initialState = {
   TargetedMineral: "",
   SampleLocation: "",
   SampleImagePath: "",
-  sampleImage:"",
+  sampleImage: "",
 };
 const Step2 = ({ setStep }) => {
   const [listingData, setListingData] = useState([]);
   const [selectedRecord, setSelectedRecord] = useState({});
   const [listLoading, setListLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState({...initialState});
+  const [state, setState] = useState({ ...initialState });
   const [messageApi, contextHolder] = message.useMessage();
   const warning = (message = "This is a warning message") => {
     messageApi.open({
@@ -42,11 +42,13 @@ const Step2 = ({ setStep }) => {
         }
         if (!isError && data) {
           setListingData(data);
-          setState({ SampleType: "",
-          TargetedMineral: "",
-          SampleLocation: "",
-          SampleImagePath: "",
-          TestApplicationId: id });
+          setState({
+            SampleType: "",
+            TargetedMineral: "",
+            SampleLocation: "",
+            SampleImagePath: "",
+            TestApplicationId: id,
+          });
           setListLoading(false);
         }
       }
@@ -80,10 +82,9 @@ const Step2 = ({ setStep }) => {
     if (name !== "SampleImagePath") {
       setState({ ...state, [name]: value });
     } else {
-      if(state?.id){
-        setState({ ...state, ['sampleImage']: e.target.files[0] });
-      }else
-      setState({ ...state, [name]: e.target.files[0] });
+      if (state?.id) {
+        setState({ ...state, ["sampleImage"]: e.target.files[0] });
+      } else setState({ ...state, [name]: e.target.files[0] });
     }
   };
   const handleAddForm = async (event) => {
@@ -95,7 +96,7 @@ const Step2 = ({ setStep }) => {
       obj = { id, ...obj, SampleImagePath };
     }
     formData.append("obj", JSON.stringify(obj));
-    formData.append("sampleImage", id? sampleImage : SampleImagePath || "");
+    formData.append("sampleImage", id ? sampleImage : SampleImagePath || "");
     try {
       setLoading(true);
       const { data, isError, message } = await saveSampleDetailAPI(
@@ -224,7 +225,7 @@ const Step2 = ({ setStep }) => {
             <div className="mineral-testing-table-header">
               <div>Sample Details</div>
               <button type="submit" className="next-button" style={{ padding: "20PX" }}>
-                {state?.id ? "Update Sample" : "Add Sample"} 
+                {state?.id ? "Update Sample" : "Add Sample"}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -65,10 +65,7 @@ const TableMap = () => {
     (async function () {
       setLoading(true);
       try {
-        const { data, isError, message } = await saveSampleListingAPI(
-          REQUEST_TYPES.GET,
-          ENDPOINTS.Mineral_Form_Listing
-        );
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, ENDPOINTS.NOC_SPONSOR_Listing);
         if (isError) {
           setLoading(false);
           warning(message);

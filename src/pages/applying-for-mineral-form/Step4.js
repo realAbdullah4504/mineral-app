@@ -6,6 +6,7 @@ import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { saveSampleDetailAPI } from "services/api/common";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 const initialState = {
+  id: "",
   geologicalInformation: "",
   typeOfWorkRequired: "",
   requirementRegardingReports: "",
@@ -22,15 +23,28 @@ const Step4 = ({ setStep }) => {
       content: message,
     });
   };
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } = state;
-    let payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
+    const { id, geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } = state;
+    let payload = {
+      geologicalInformation,
+      typeOfWorkRequired,
+      requirementRegardingReports,
+      additionalInstruction,
+    };
+    if (id) {
+      payload = { ...payload, id };
+    }
+
     try {
       const { data, isError, message } = await saveSampleDetailAPI(
         REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_SHIPMENT_INFO,
+        ENDPOINTS.SAVE_BACKGROUND_INFO,
         payload
       );
       if (isError) {
@@ -38,23 +52,27 @@ const Step4 = ({ setStep }) => {
         warning(message);
       }
       if (!isError && data) {
-        setCookiesByName("ShipmentApplication", data, true);
         setLoading(false);
-        setStep("step5");
+        deleteCookie("testApplication");
+        window.location.href = "/applying-for-mineral-test";
       }
     } catch (error) {
       setLoading(false);
       console.log(error.message);
     }
   };
+
   useEffect(() => {
-    const applicationDetail = getCookiesByName("ShipmentApplication", true);
+    const applicationDetail = getCookiesByName("testApplication", true);
+
     if (Object.keys(applicationDetail).length) {
       let payload = {};
-      const { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } =
+      const { id, geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } =
         applicationDetail;
       payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
-
+      if (id) {
+        payload = { id, ...payload };
+      }
       setState({ ...state, ...payload });
     }
   }, []);
@@ -84,7 +102,6 @@ const Step4 = ({ setStep }) => {
   ];
   const changeHandler = (e) => {
     const { name, value } = e?.target || {};
-    console.log(state, "state");
     setState({ ...state, [name]: value });
   };
   const renderFormItems = () => {
@@ -150,7 +167,7 @@ const Step4 = ({ setStep }) => {
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div>Background Information</div>
-        <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
+        <ProgressPercentage percent={100} step={4} total={4}></ProgressPercentage>
       </div>
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
