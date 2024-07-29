@@ -75,7 +75,7 @@ const WhoIsWho = lazy(() => import("../pages/who-is-who"));
 const GovernmentOrganization = lazy(() =>
   import("../pages/government-departments")
 );
-const DrillingServices = lazy(() => import("../pages/drilling-service"));
+const DrillingCompanies = lazy(() => import("../pages/drilling-service"));
 const MineralLabs = lazy(() => import("../pages/mineral-labs"));
 const DownstreamIndustries = lazy(() =>
   import("../pages/downstream-industries")
@@ -105,6 +105,36 @@ const NocSponsorCompanyAddList = lazy(() =>
 );
 const ExpatNocApplication = lazy(() =>
   import("../pages/expact-noc-application")
+);
+const GeoServices = lazy(() =>
+  import("../pages/geo-services")
+);
+const MiningCompanies = lazy(() =>
+  import("../pages/mining-companies")
+);
+const MineralBasedIndustries = lazy(() =>
+  import("../pages/mineral-based-industries")
+);
+const MachinerySuppliers = lazy(() =>
+  import("../pages/machinery-supplier")
+);
+const ExplosiveSuppliers = lazy(() =>
+  import("../pages/explosive-suppliers")
+);
+const LegalServices = lazy(() =>
+  import("../pages/legal-services")
+);
+const AuditAccounts = lazy(() =>
+  import("../pages/audit-accounts")
+);
+const LandSurveying = lazy(() =>
+  import("../pages/land-surveying")
+);
+const TrainingSchools = lazy(() =>
+  import("../pages/training-schools")
+);
+const OtherServices = lazy(() =>
+  import("../pages/other-services")
 );
 const AppRouter = () => (
   <Router>
@@ -442,10 +472,10 @@ const AppRouter = () => (
           }
         />
         <Route
-          path="/drilling-services"
+          path="/drilling-companies"
           element={
             <PublicRoute
-              component={DrillingServices}
+              component={DrillingCompanies}
               layout={DashboardLayout}
             />
           }
@@ -484,7 +514,7 @@ const AppRouter = () => (
           }
         />
         <Route
-          path="/software-solution"
+          path="/software-solution-entities"
           element={
             <PublicRoute
               component={SoftwareSolution}
@@ -716,6 +746,66 @@ const AppRouter = () => (
           path="/minerals-test-results"
           element={
             <PublicRoute component={ViewResults} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/geotechnical-geophysical-services"
+          element={
+            <PublicRoute component={GeoServices} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/mining-companies"
+          element={
+            <PublicRoute component={MiningCompanies} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/mineral-based-industries"
+          element={
+            <PublicRoute component={MineralBasedIndustries} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/machinery-suppliers"
+          element={
+            <PublicRoute component={MachinerySuppliers} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/explosive-suppliers"
+          element={
+            <PublicRoute component={ExplosiveSuppliers} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/legal-services"
+          element={
+            <PublicRoute component={LegalServices} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/audit-accounts"
+          element={
+            <PublicRoute component={AuditAccounts} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/land-surveying"
+          element={
+            <PublicRoute component={LandSurveying} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/training-schools"
+          element={
+            <PublicRoute component={TrainingSchools} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/other-services"
+          element={
+            <PublicRoute component={OtherServices} layout={DashboardLayout} />
           }
         />
       </Routes>

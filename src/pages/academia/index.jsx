@@ -18,7 +18,7 @@ const Academia = () => {
 
   const Adddata = {
     headline: "Apply for Registration",
-    link: '/registerorganization?orgtype=go'
+    link: '/registerorganization?orgtype=ard'
   };
 
   return (
