@@ -16,6 +16,7 @@ const Step5 = ({ setStep }) => {
       });
 
       if (response.ok) {
+        cookiesToDelete.forEach(deleteCookie);
         setStep("step2");
       } else {
         console.error("Error:", response.statusText);
@@ -93,6 +94,10 @@ const Step5 = ({ setStep }) => {
       );
     });
   };
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  };
+  const cookiesToDelete = ["testApplication", "MineralTestInfo", "ShipmentApplication"];
 
   return (
     <div className="noc-form">

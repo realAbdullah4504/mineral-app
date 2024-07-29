@@ -4,30 +4,35 @@ import { saveSampleDetailAPI } from "services/api/common";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { Loader } from "components";
-import { message, ConfigProvider  } from "antd";
+import { message, ConfigProvider } from "antd";
 const initialState = {
-  id:"",mineralTestId:"", typeOfWorkRequired:"", labId:"", purposeOfTest:"", testPrice:""
-}
+  id: "",
+  mineralTestId: "",
+  typeOfWorkRequired: "",
+  labId: "",
+  purposeOfTest: "",
+  testPrice: "",
+};
 const Step3 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [state, setState] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  useEffect(()=> {
-    const applicationDetail = getCookiesByName('testApplication', true);
-    if(Object.keys(applicationDetail).length){
+  useEffect(() => {
+    const applicationDetail = getCookiesByName("MineralTestInfo", true);
+    if (Object.keys(applicationDetail).length) {
       let payload = {};
-      const { id, typeOfWorkRequired, labId, testPrice, purposeOfTest} = applicationDetail;
-      payload = {typeOfWorkRequired, labId, testPrice, purposeOfTest, mineralTestId:id}
-      if(id){
-        payload = {id, ...payload}
+      const { id, typeOfWorkRequired, labId, testPrice, purposeOfTest } = applicationDetail;
+      payload = { typeOfWorkRequired, labId, testPrice, purposeOfTest, mineralTestId: id };
+      if (id) {
+        payload = { id, ...payload };
       }
-     setState({...state, ...payload})
+      setState({ ...state, ...payload });
     }
-   },[]);
+  }, []);
   const changeHandler = (e) => {
-    const {name, value} = e?.target || {};
-     setState({...state, [name]:value})
-  }
+    const { name, value } = e?.target || {};
+    setState({ ...state, [name]: value });
+  };
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "error",
@@ -36,11 +41,11 @@ const Step3 = ({ setStep }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true)
-    const { id, mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest} = state;
-    let payload = {mineralTestId,typeOfWorkRequired, labId, testPrice, purposeOfTest};
-    if(id){
-      payload = {...payload, id};
+    setLoading(true);
+    const { id, mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest } = state;
+    let payload = { mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest };
+    if (id) {
+      payload = { ...payload, id };
     }
     try {
       const { data, isError, message } = await saveSampleDetailAPI(
@@ -53,14 +58,14 @@ const Step3 = ({ setStep }) => {
         warning(message);
       }
       if (!isError && data) {
+        setCookiesByName("MineralTestInfo", data, true);
         setLoading(false);
-        setStep('step4')
+        setStep("step4");
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error.message);
     }
-
   };
   const handlePrevious = () => {
     setStep("step2");
@@ -106,7 +111,15 @@ const Step3 = ({ setStep }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => (
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[field?.name]}
+          {...commonProps}
+          placeholder=" "
+        />
+      );
 
       const renderLabel = () => (
         <label
@@ -126,7 +139,7 @@ const Step3 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps}>
+              <select onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -147,52 +160,51 @@ const Step3 = ({ setStep }) => {
 
   return (
     <ConfigProvider>
-    <div className="noc-form">
-      <div className="mineral-testing-table-header">
-        <div>Mineral Test Information - Mineral Lab</div>
-        <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
-      </div>
-      {contextHolder}
-      <form className="space-y-4 " onSubmit={handleSubmit}>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
-        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
-          <button type="primary" className="next-button" onClick={handlePrevious}>
-            <div>
-              {" "}
-              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
-                <path
-                  fill="white"
-                  fill-rule="evenodd"
-                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
-                />
-              </svg>
-              previous
-            </div>
-          </button>
-          {
-            loading ? 
-            <Loader/>:
-          <button type="submit" className="next-button">
-            <div>
-              {" "}
-              Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
-          </button>
-          }
-          
+      <div className="noc-form">
+        <div className="mineral-testing-table-header">
+          <div>Mineral Test Information - Mineral Lab</div>
+          <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
         </div>
-      </form>
-    </div>
+        {contextHolder}
+        <form className="space-y-4 " onSubmit={handleSubmit}>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+          <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <button type="primary" className="next-button" onClick={handlePrevious}>
+              <div>
+                {" "}
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+                  <path
+                    fill="white"
+                    fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                  />
+                </svg>
+                previous
+              </div>
+            </button>
+            {loading ? (
+              <Loader />
+            ) : (
+              <button type="submit" className="next-button">
+                <div>
+                  {" "}
+                  Next
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                  </svg>
+                </div>
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
     </ConfigProvider>
   );
 };

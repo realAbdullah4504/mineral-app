@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
 import { saveSampleListingAPI, saveSampleDetailAPI } from "services/api/common";
 import { Loader } from "components";
@@ -6,10 +6,14 @@ import ProgressPercentage from "components/UI/ProgressPercentage";
 import { Empty } from "antd";
 import Listing from "./Listing";
 import { getCookiesByName } from "utils/helpers";
-import { message, ConfigProvider} from "antd";
+import { message, ConfigProvider } from "antd";
 const initialState = {
-  TestApplicationId:"", SampleType:"", TargetedMineral:"", SampleLocation:"", SampleImagePath:""
-}
+  TestApplicationId: "",
+  SampleType: "",
+  TargetedMineral: "",
+  SampleLocation: "",
+  SampleImagePath: "",
+};
 const Step2 = ({ setStep }) => {
   const [listingData, setListingData] = useState([]);
   const [selectedRecord, setSelectedRecord] = useState({});
@@ -22,13 +26,13 @@ const Step2 = ({ setStep }) => {
       content: message,
     });
   };
-  const fetchSampleData = async(id = "")=> {
+  const fetchSampleData = async (id = "") => {
     try {
-      if(id){
+      if (id) {
         setLoading(true);
         const { data, isError, message } = await saveSampleListingAPI(
           REQUEST_TYPES.GET,
-          `${ENDPOINTS.GET_SAMPLE_DETAILS}?TestApplicationId=${id}`,
+          `${ENDPOINTS.GET_SAMPLE_DETAILS}?TestApplicationId=${id}`
         );
         if (isError) {
           setLoading(false);
@@ -36,49 +40,53 @@ const Step2 = ({ setStep }) => {
         }
         if (!isError && data) {
           setListingData(data);
-          setState({...state, TestApplicationId:id})
+          setState({ ...state, TestApplicationId: id });
           setLoading(false);
-      }
+        }
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error.message);
     }
-  }
-  useEffect(()=> {
-   const applicationDetail = getCookiesByName('testApplication', true) || {};
-   const {id} = applicationDetail || {};
-   fetchSampleData(id);
-  }, [])
+  };
+  useEffect(() => {
+    const applicationDetail = getCookiesByName("testApplication", true) || {};
+    const { id } = applicationDetail || {};
+    fetchSampleData(id);
+  }, []);
 
-  useEffect(()=> {
-    if(selectedRecord && Object.keys(selectedRecord).length){
-      const {id, sampleImagePath, sampleLocation, sampleType, targetedMineral, testApplicationId} = selectedRecord;
+  useEffect(() => {
+    if (selectedRecord && Object.keys(selectedRecord).length) {
+      const { id, sampleImagePath, sampleLocation, sampleType, targetedMineral, testApplicationId } = selectedRecord;
       setState({
         ...state,
         id,
-        SampleImagePath: sampleImagePath, SampleLocation:sampleLocation, SampleType:sampleType, TargetedMineral:targetedMineral, TestApplicationId:testApplicationId
-      })
+        SampleImagePath: sampleImagePath,
+        SampleLocation: sampleLocation,
+        SampleType: sampleType,
+        TargetedMineral: targetedMineral,
+        TestApplicationId: testApplicationId,
+      });
     }
-   }, [JSON.stringify(selectedRecord)])
+  }, [JSON.stringify(selectedRecord)]);
   const changeHandler = (e) => {
-    const {name, value} = e?.target || {};
-    if(name !== "SampleImagePath"){
-      setState({...state, [name]: value})
-    }else{
-     setState({...state, [name]:e.target.files[0]})
+    const { name, value } = e?.target || {};
+    if (name !== "SampleImagePath") {
+      setState({ ...state, [name]: value });
+    } else {
+      setState({ ...state, [name]: e.target.files[0] });
     }
-  }
+  };
   const handleAddForm = async (event) => {
     event.preventDefault();
     const { id, TestApplicationId, SampleType, TargetedMineral, SampleLocation, SampleImagePath } = state;
     const formData = new FormData();
-    let obj = {TestApplicationId, SampleType, TargetedMineral, SampleLocation };
-    if(id){
-     obj = {id, ...obj, SampleImagePath};
+    let obj = { TestApplicationId, SampleType, TargetedMineral, SampleLocation };
+    if (id) {
+      obj = { id, ...obj, SampleImagePath };
     }
     formData.append("obj", JSON.stringify(obj));
-    formData.append("sampleImage", SampleImagePath || '');
+    formData.append("sampleImage", SampleImagePath || "");
     try {
       setLoading(true);
       const { data, isError, message } = await saveSampleDetailAPI(
@@ -86,7 +94,7 @@ const Step2 = ({ setStep }) => {
         `${ENDPOINTS.SAVE_SAMPLE_DETAILS}`,
         formData
       );
-      
+
       if (isError) {
         setLoading(false);
         warning(message);
@@ -133,7 +141,13 @@ const Step2 = ({ setStep }) => {
       };
 
       const renderInput = (type = "text") => (
-        <input type={type} onChange={(e)=> changeHandler(e)} value={state[field?.name] || ""} {...commonProps} placeholder=" " />
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[field?.name] || ""}
+          {...commonProps}
+          placeholder=" "
+        />
       );
 
       const renderLabel = () => (
@@ -149,13 +163,15 @@ const Step2 = ({ setStep }) => {
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && (
-            <input type="file" onChange={(e)=> changeHandler(e)} {...commonProps} />
-          )}
+          {field.type === "file" && <input type="file" onChange={(e) => changeHandler(e)} {...commonProps} />}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps} onChange={(e)=> changeHandler(e)} value={state[field?.name] ? state[field?.name] : ""}>
+              <select
+                {...commonProps}
+                onChange={(e) => changeHandler(e)}
+                value={state[field?.name] ? state[field?.name] : ""}
+              >
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -177,80 +193,79 @@ const Step2 = ({ setStep }) => {
   };
 
   const handleNext = () => {
-    setStep("step3");
+    setStep("step5");
   };
   return (
     <ConfigProvider>
-    <div className="noc-form">
-      <div className="mineral-testing-table-header">
-        <div>Sample Listing</div>
-        <ProgressPercentage percent={50} step={2} total={4}></ProgressPercentage>
-      </div>
-      <form className="space-y-4 " onSubmit={handleAddForm}>
-        <div>
-          { loading? 
-          <Loader/>
-           :
-          listingData.length ? (
-            <Listing dataSource={listingData} setSelectedRecord={setSelectedRecord}></Listing>
-          ) : (
-            <Empty />
-          )}
-          <div className="mineral-testing-table-header">
-            <div>Sample Details</div>
-            <button type="submit" className="next-button" style={{ padding: "20PX" }}>
-              Add Sample
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                />
-              </svg>
+      <div className="noc-form">
+        <div className="mineral-testing-table-header">
+          <div>Sample Listing</div>
+          <ProgressPercentage percent={50} step={2} total={4}></ProgressPercentage>
+        </div>
+        <form className="space-y-4 " onSubmit={handleAddForm}>
+          <div>
+            {loading ? (
+              <Loader />
+            ) : listingData.length ? (
+              <Listing dataSource={listingData} setSelectedRecord={setSelectedRecord}></Listing>
+            ) : (
+              <Empty />
+            )}
+            <div className="mineral-testing-table-header">
+              <div>Sample Details</div>
+              <button type="submit" className="next-button" style={{ padding: "20PX" }}>
+                Add Sample
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+          <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <button type="primary" className="next-button" onClick={handlePrevious}>
+              <div>
+                {" "}
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+                  <path
+                    fill="white"
+                    fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                  />
+                </svg>
+                previous
+              </div>
+            </button>
+            <button type="submit" className="next-button" disabled={!listingData.length} onClick={handleNext}>
+              <div>
+                {" "}
+                Next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+              </div>
             </button>
           </div>
-        </div>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
-        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
-          <button type="primary" className="next-button" onClick={handlePrevious}>
-            <div>
-              {" "}
-              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
-                <path
-                  fill="white"
-                  fill-rule="evenodd"
-                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
-                />
-              </svg>
-              previous
-            </div>
-          </button>
-          <button type="submit" className="next-button" disabled={!listingData.length} onClick={handleNext}>
-            <div>
-              {" "}
-              Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
     </ConfigProvider>
   );
 };
