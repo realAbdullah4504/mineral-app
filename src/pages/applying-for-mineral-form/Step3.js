@@ -8,7 +8,6 @@ import { message, ConfigProvider } from "antd";
 const initialState = {
   id: "",
   mineralTestId: "",
-  typeOfWorkRequired: "",
   labId: "",
   purposeOfTest: "",
   testPrice: "",
@@ -21,8 +20,8 @@ const Step3 = ({ setStep }) => {
     const applicationDetail = getCookiesByName("MineralTestInfo", true);
     if (Object.keys(applicationDetail).length) {
       let payload = {};
-      const { id, typeOfWorkRequired, labId, testPrice, purposeOfTest } = applicationDetail;
-      payload = { typeOfWorkRequired, labId, testPrice, purposeOfTest, mineralTestId: id };
+      const { id, labId, testPrice, purposeOfTest } = applicationDetail;
+      payload = { labId, testPrice, purposeOfTest, mineralTestId: id };
       if (id) {
         payload = { id, ...payload };
       }
@@ -42,8 +41,8 @@ const Step3 = ({ setStep }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const { id, mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest } = state;
-    let payload = { mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest };
+    const { id, mineralTestId, labId, testPrice, purposeOfTest } = state;
+    let payload = { mineralTestId, labId, testPrice, purposeOfTest };
     if (id) {
       payload = { ...payload, id };
     }
@@ -73,7 +72,7 @@ const Step3 = ({ setStep }) => {
   const obj = [
     {
       label: "Type of Test Required",
-      name: "typeOfWorkRequired",
+      name: "mineralTestId",
       required: "true",
       type: "select",
       options: ["All", "Other Types"],
