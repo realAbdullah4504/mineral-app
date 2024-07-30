@@ -1,21 +1,64 @@
 import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
+import { Loader } from "components";
+import { message, ConfigProvider } from "antd";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { saveSampleDetailAPI } from "services/api/common";
+import { getCookiesByName } from "utils/helpers";
 
 const NocStep3 = ({ setStep, setEquipment }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState("");
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
+    formValues.id = state.id;
+    const {
+      MapMiningTitle,
+      PurposeofVisit,
+      NatureOfJob,
+      ProjectDistrict,
+      ProjectDetails,
+      ProjectName,
+      TentativeExpectedVisitStartDate,
+      TentativeExpectedVisitEndDate,
+    } = formValues;
 
-      if (response.ok) {
+    const formDatas = new FormData();
+    const obj = {
+      PurposeofVisit,
+      NatureOfJob,
+      ProjectDistrict,
+      ProjectDetails,
+      ProjectName,
+      TentativeExpectedVisitStartDate,
+      TentativeExpectedVisitEndDate,
+    };
+    obj.id = state.id;
+    formDatas.append("obj", JSON.stringify(obj));
+    formDatas.append("MapMiningTitle", MapMiningTitle);
+    setLoading(true);
+    try {
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_EXPACT_APPLICATION_PURPOSEVIST_DETAILS,
+        formDatas
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
         if (formValues["equipment-required"] === "yes") {
           setEquipment("yes");
           setStep("Step4");
@@ -23,23 +66,43 @@ const NocStep3 = ({ setStep, setEquipment }) => {
           setEquipment("No");
           setStep("Step5");
         }
-      } else {
-        console.error("Error:", response.statusText);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handlePrevious = () => {
     setStep("Step2");
   };
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    setState({ ...state, [name]: value });
+  };
   const obj = [
-    { label: "Purpose Of Visit", name: "purpose-visit", required: "true", type: "select", options: ["Survey"] },
-    { label: "Nature Of Job", name: "job-nature", required: "true", type: "input" },
-    { label: "Name Of Project", name: "project-name", required: "true", type: "input" },
-    { label: "Project Location/District", name: "project-location", required: "true", type: "input" },
-    { label: "Project Details", name: "project-details", required: "true", type: "input" },
+    {
+      label: "Purpose Of Visit",
+      name: "PurposeofVisit",
+      required: "true",
+      type: "select",
+      options: [
+        "Work Drilling",
+        "Site Visit",
+        "Survey",
+        "Business",
+        "Stay and vigilance of work",
+        "Installation of Project",
+        "Project based- Seismic Activity",
+        "Any other specify",
+      ],
+    },
+    { label: "Nature Of Job", name: "NatureOfJob", required: "true", type: "input" },
+    { label: "Name Of Project", name: "ProjectName", required: "true", type: "input" },
+    { label: "Project Location/District", name: "ProjectDistrict", required: "true", type: "input" },
+    { label: "Project Details", name: "ProjectDetails", required: "true", type: "input" },
     {
       label: "Equipment Required",
       name: "equipment-required",
@@ -47,8 +110,24 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       type: "select",
       options: ["No", "yes"],
     },
-    { label: "Tentative Date expected to Visit Field", name: "date-visit", required: "true", type: "calendar" },
-    { label: "Map of Mining Title(Coordinate)", name: "date-visit", required: "true", type: "file" },
+    {
+      label: "Tentative Date expected to Visit Field",
+      name: "TentativeExpectedVisitStartDate",
+      required: "true",
+      type: "calendar",
+    },
+    {
+      label: "Tentative Date expected to end Field",
+      name: "TentativeExpectedVisitEndDate",
+      required: "true",
+      type: "calendar",
+    },
+    {
+      label: "Map of Mining Title(Coordinate)",
+      name: "MapMiningTitle",
+      required: "true",
+      type: "file",
+    },
   ];
   const renderFormItems = () => {
     return obj.map((field) => {
@@ -61,7 +140,15 @@ const NocStep3 = ({ setStep, setEquipment }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => (
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[commonProps?.name]}
+          {...commonProps}
+          placeholder=" "
+        />
+      );
 
       const renderLabel = () => (
         <label
@@ -81,7 +168,7 @@ const NocStep3 = ({ setStep, setEquipment }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select {...commonProps} defaultValue={state?.nocApplicationEquipments?.length ? "Yes" : "NO"}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -99,7 +186,11 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       );
     });
   };
-
+  useEffect(() => {
+    const formValues = getCookiesByName("expactapplicationformkeys", true);
+    setState(formValues);
+  }, []);
+  console.log(state, "state");
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
