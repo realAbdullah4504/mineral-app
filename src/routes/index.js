@@ -100,6 +100,7 @@ const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 const RegisterOrganization = lazy(() => import("../components/register-form"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
+const ShipmentForm = lazy(() => import("../pages/applying-for-mineral-form/Step5"));
 const NocSponsorCompanyAddList = lazy(() =>
   import("../pages/noc-company-form")
 );
@@ -808,6 +809,13 @@ const AppRouter = () => (
             <PublicRoute component={OtherServices} layout={DashboardLayout} />
           }
         />
+        <Route
+          path="/shipment-detail"
+          element={
+            <PublicRoute component={ShipmentForm} layout={DashboardLayout} />
+          }
+        />
+        
       </Routes>
     </Suspense>
   </Router>

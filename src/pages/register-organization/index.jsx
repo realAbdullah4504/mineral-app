@@ -210,11 +210,8 @@ const RegisterOrganization = () => {
   };
 
   const onChange = (checkedValues) => {
-    console.log("checked = ", checkedValues);
     setCheckedValues(checkedValues);
   };
-
-  console.log("checkedValues", checkedValues);
 
   return (
     <>

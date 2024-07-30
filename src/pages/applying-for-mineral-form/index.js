@@ -4,7 +4,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import Step4 from "./Step4";
-import Step5 from "./Step5";
+import ShipmentForm from "./Step5";
 import { useState } from "react";
 
 const MineralForm = () => {
@@ -40,8 +40,8 @@ const MineralForm = () => {
       ],
     },
     step5: {
-      component: <Step5 setStep={setState}></Step5>,
-      breadcrumbs: [{ path: "/", label: "Background Information" }],
+      component: <ShipmentForm setStep={setState}></ShipmentForm>,
+      breadcrumbs: [{ path: "#", label: "Background Information" }],
     },
   };
 

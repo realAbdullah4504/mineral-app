@@ -34,3 +34,14 @@ export const saveSampleDetailAPI = async (method, url, data) => {
     return { data: [], isError: true, message };
   }
 };
+export const commonAPIs = async (method, url, data) => {
+  const myJson = await apiCaller({ method, url, data });
+  const resp = myJson?.data || myJson?.response?.data || {};
+  if (resp && resp.succeeded) {
+    const data = resp?.data ?? [];
+    return { data, isError: false, message: "" };
+  } else {
+    const message = resp?.message ?? "Something went wrong";
+    return { data: [], isError: true, message };
+  }
+};
