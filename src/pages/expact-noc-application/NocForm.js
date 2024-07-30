@@ -1,7 +1,20 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { Loader } from "components";
+import { message, ConfigProvider } from "antd";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { saveSampleDetailAPI, saveSampleListingAPI, testApplicationDetailAPI } from "services/api/common";
+import { setCookiesByName } from "utils/helpers";
 const NocForm = ({ setState }) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [applyAs, setApplyAs] = useState("Normal");
+  const [loading, setLoading] = useState(false);
+  const [bankListing, setBankListing] = useState([]);
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
 
   const handleApplyAsChange = (value) => {
     setApplyAs(value);
@@ -10,25 +23,25 @@ const NocForm = ({ setState }) => {
   const obj1 = {
     Normal: {
       Details: [
-        // { label: "Title/License No.", name: "license-no", required: "true", type: "text" },
-        { label: "Title Issue Date", name: "title-issue-date", required: "true", type: "calendar" },
-        { label: "Title Expiry Date", name: "title-expiry-date", required: "true", type: "calendar" },
-        { label: "Title Grant Letter", name: "title-grant-letter", required: "true", type: "file" },
+        { label: "Title/License No.", name: "LicenseNumber", required: "true", type: "text" },
+        { label: "Title Issue Date", name: "TitleIssueDate", required: "true", type: "calendar" },
+        { label: "Title Expiry Date", name: "TitleExpireDate", required: "true", type: "calendar" },
+        { label: "Title Grant Letter", name: "TitleGrantLetter", required: "true", type: "file" }, //found
         {
           label: "Sub-Lease Issue Date (If Applicable) (Optional)",
-          name: "sub-lease-date",
+          name: "SubLeaseIssueDate",
           required: "false",
           type: "calendar",
         },
         {
           label: "Sub-Lease Expiry Date (If Applicable) (Optional)",
-          name: "sub-lease-date-expiry",
+          name: "SubLeaseExpireDate",
           required: "false",
           type: "calendar",
         },
         {
-          label: "Mining Sub-Lease Letter (If Applicable) (Optional)",
-          name: "sub-lease-letter",
+          label: "Mining Sub-Lease Letter (If Applicable) (Optional)", //found
+          name: "SubLeaseLetter",
           required: "false",
           type: "file",
         },
@@ -36,36 +49,49 @@ const NocForm = ({ setState }) => {
     },
     Urgent: {
       Details: [
-        // { label: "Title/License No.", name: "license-no", required: "true", type: "text" },
-        { label: "Title Issue Date", name: "title-issue-date", required: "true", type: "calendar" },
-        { label: "Title Expiry Date", name: "title-expiry-date", required: "true", type: "calendar" },
-        { label: "Title Grant Letter", name: "title-grant-letter", required: "true", type: "file" },
+        { label: "Title/License No.", name: "LicenseNumber", required: "true", type: "text" },
+        { label: "Title Issue Date", name: "TitleIssueDate", required: "true", type: "calendar" },
+        { label: "Title Expiry Date", name: "TitleExpireDate", required: "true", type: "calendar" },
+        { label: "Title Grant Letter", name: "TitleGrantLetter", required: "true", type: "file" }, //found
         {
           label: "Sub-Lease Issue Date (If Applicable) (Optional)",
-          name: "sub-lease-date",
+          name: "SubLeaseIssueDate",
           required: "false",
           type: "calendar",
         },
         {
           label: "Sub-Lease Expiry Date (If Applicable) (Optional)",
-          name: "sub-lease-date-expiry",
+          name: "SubLeaseExpireDate",
           required: "false",
           type: "calendar",
         },
         {
-          label: "Mining Sub-Lease Letter (If Applicable) (Optional)",
-          name: "sub-lease-letter",
+          label: "Mining Sub-Lease Letter (If Applicable) (Optional)", //found
+          name: "SubLeaseLetter",
           required: "false",
           type: "file",
         },
       ],
       "Deposit Details": [
-        { label: "Deposit Slip", name: "deposit-slip", required: "true", type: "file" },
-        { label: "Deposit Bank", name: "deposit-bank", required: "true", type: "select", options: ["HBL", "ABL"] },
-        { label: "Branch Name", name: "branch-name", required: "true", type: "select", options: ["HBL", "ABL"] },
-        { label: "Deposit Date", name: "deposit-date", required: "true", type: "calendar" },
-        { label: "Deposit Amount in Number", name: "deposit-amount-numbers", required: "true", type: "number" },
-        { label: "Deposit Amount in Words", name: "deposit-amount-words", required: "true", type: "text" },
+        { label: "Deposit Slip", name: "depositSlip", required: "true", type: "file" },
+        {
+          label: "Deposit Bank",
+          name: "BankId",
+          required: "true",
+          type: "select",
+          options: bankListing.map((item) => {
+            return { name: item.name, value: item.id };
+          }),
+        },
+        {
+          label: "Branch Name",
+          name: "BranchName",
+          required: "true",
+          type: "text",
+        },
+        { label: "Deposit Date", name: "DepositDate", required: "true", type: "calendar" },
+        { label: "Deposit Amount in Number", name: "DepositAmountInNumber", required: "true", type: "number" },
+        { label: "Deposit Amount in Words", name: "DepositAmountInWords", required: "true", type: "text" },
       ],
     },
   };
@@ -104,8 +130,8 @@ const NocForm = ({ setState }) => {
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option.value} value={option.value}>
+                    {option.name}
                   </option>
                 ))}
               </select>
@@ -122,25 +148,93 @@ const NocForm = ({ setState }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
 
-      if (response.ok) {
+    const {
+      LicenseNumber,
+      NOCType,
+      TitleIssueDate,
+      TitleExpireDate,
+      TitleGrantLetter,
+      SubLeaseIssueDate,
+      SubLeaseExpireDate,
+      SubLeaseLetter,
+      depositSlip,
+      BankId,
+      BranchName,
+      DepositDate,
+      DepositAmountInNumber,
+      DepositAmountInWords,
+    } = formValues;
+
+    const formDatas = new FormData();
+    const obj = {};
+    const possibleKeys = {
+      NOCType,
+      LicenseNumber,
+      TitleIssueDate,
+      TitleExpireDate,
+      SubLeaseIssueDate,
+      SubLeaseExpireDate,
+      BankId,
+      BranchName,
+      DepositDate,
+      DepositAmountInNumber,
+      DepositAmountInWords,
+    };
+
+    Object.keys(possibleKeys).forEach((key) => {
+      if (possibleKeys[key] !== undefined && possibleKeys[key] !== null) {
+        obj[key] = possibleKeys[key];
+      }
+    });
+    formDatas.append("obj", JSON.stringify(obj));
+    if (TitleGrantLetter) formDatas.append("TitleGrantLetter", TitleGrantLetter);
+    if (SubLeaseLetter) formDatas.append("SubLeaseLetter", SubLeaseLetter);
+    if (depositSlip) formDatas.append("depositSlip", depositSlip);
+
+    try {
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_EXPACT_CREATE_FORM_APPLICATION,
+        formDatas
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setLoading(false);
+        setCookiesByName("expactapplicationid", data?.id, true);
         setState("Step1");
-      } else {
-        console.error("Error:", response.statusText);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
   };
 
+  useEffect(() => {
+    (async function () {
+      try {
+        setLoading(true);
+        const { data, isError, message } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          `${ENDPOINTS.GET_BANK_LISTING}`
+        );
+
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        } else if (data) {
+          setLoading(false);
+          setBankListing(data);
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
+    })();
+  }, []);
   return (
     <div>
       <div>
@@ -160,6 +254,7 @@ const NocForm = ({ setState }) => {
               id="ApplyAs"
               className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
               required={true}
+              name="NOCType"
               onChange={(e) => handleApplyAsChange(e.target.value)}
             >
               <option value="" disabled selected style={{ opacity: 0.5 }}>
