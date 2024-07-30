@@ -26,6 +26,11 @@ export const ENDPOINTS = {
   SAVE_EXPACT_CREATE_FORM_APPLICATION: `${REACT_APP_BASE_URL}/api/PublicNOCApplication/SaveNOCApplicationDetails`,
   GET_EXPACT_APPLICATION_FORM: `${REACT_APP_BASE_URL}/api/Bank/GetAll`,
   SAVE_EXPACT_APPLICATION_DETAILS: `${REACT_APP_BASE_URL}/api/PublicNOCApplication/SaveExpatriatePersonalDetails`,
+  GET_NOC_APPLICATIONS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetAllNOC`,
+  GET_ALL_NATIONALITY: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetAllNationality`,
+  GET_ALL_BANKS: `${REACT_APP_BASE_URL}api/Bank/GetAll`,
+  GET_NOC_APPLICATION_BY_ID: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetNOCApplicationById`,
+  
 };
 
 export const mineralTestIdDetails = (testId) => {

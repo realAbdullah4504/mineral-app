@@ -137,6 +137,9 @@ const TrainingSchools = lazy(() =>
 const OtherServices = lazy(() =>
   import("../pages/other-services")
 );
+const NOCApplicationView = lazy(() =>
+  import("../pages/expact-noc-application/NOCApplicationView")
+);
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -815,7 +818,12 @@ const AppRouter = () => (
             <PublicRoute component={ShipmentForm} layout={DashboardLayout} />
           }
         />
-        
+         <Route
+          path="/noc-view-application"
+          element={
+            <PublicRoute component={NOCApplicationView} layout={DashboardLayout} />
+          }
+        />
       </Routes>
     </Suspense>
   </Router>
