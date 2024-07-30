@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import Operation from "antd/es/transfer/operation";
 
-const NocStep8 = ({ setState, alreadyVisited }) => {
+const NocStep8 = ({ setStep, alreadyVisited }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -17,7 +17,7 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
       });
 
       if (response.ok) {
-        setState("NocListing");
+        setStep("NocListing");
       } else {
         console.error("Error:", response.statusText);
       }
@@ -28,9 +28,9 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
 
   const handlePrevious = () => {
     if (alreadyVisited === "yes") {
-      setState("Step7");
+      setStep("Step7");
     } else {
-      setState("Step6");
+      setStep("Step6");
     }
   };
   const obj = [

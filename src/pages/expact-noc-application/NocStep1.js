@@ -8,7 +8,7 @@ import { saveSampleDetailAPI, saveSampleListingAPI, testApplicationDetailAPI } f
 import { setCookiesByName, getCookiesByName } from "utils/helpers";
 import { expactApplicationForm } from "utils/constant/url";
 
-const NocStep1 = ({ setState }) => {
+const NocStep1 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [stateForm, setStateForm] = useState("");
@@ -71,6 +71,7 @@ const NocStep1 = ({ setState }) => {
         warning(message);
       }
       if (!isError && data) {
+        
         setLoading(false);
       }
     } catch (error) {
@@ -170,12 +171,15 @@ const NocStep1 = ({ setState }) => {
         const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
 
         if (isError) {
+          setLoading(false);
           warning(message);
         } else if (data) {
+          setLoading(false);
           setStateForm(data);
           setCookiesByName("expactapplicationformkeys", data, true);
         }
       } catch (error) {
+        setLoading(false);
         console.log(error.message);
       }
     })();

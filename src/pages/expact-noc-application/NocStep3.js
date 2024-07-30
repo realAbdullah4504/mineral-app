@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 
-const NocStep3 = ({ setState, setEquipment }) => {
+const NocStep3 = ({ setStep, setEquipment }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -18,10 +18,10 @@ const NocStep3 = ({ setState, setEquipment }) => {
       if (response.ok) {
         if (formValues["equipment-required"] === "yes") {
           setEquipment("yes");
-          setState("Step4");
+          setStep("Step4");
         } else {
           setEquipment("No");
-          setState("Step5");
+          setStep("Step5");
         }
       } else {
         console.error("Error:", response.statusText);
@@ -32,7 +32,7 @@ const NocStep3 = ({ setState, setEquipment }) => {
   };
 
   const handlePrevious = () => {
-    setState("Step2");
+    setStep("Step2");
   };
   const obj = [
     { label: "Purpose Of Visit", name: "purpose-visit", required: "true", type: "select", options: ["Survey"] },

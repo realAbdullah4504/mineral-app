@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 
-const NocStep6 = ({ setState, setAlreadyVisited }) => {
+const NocStep6 = ({ setStep, setAlreadyVisited }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -17,10 +17,10 @@ const NocStep6 = ({ setState, setAlreadyVisited }) => {
 
       if (response.ok) {
         if (formValues["already-visited"] === "Yes") {
-          setState("Step7");
+          setStep("Step7");
           setAlreadyVisited("Yes");
         } else {
-          setState("Step8");
+          setStep("Step8");
           setAlreadyVisited("No");
         }
       } else {
@@ -32,7 +32,7 @@ const NocStep6 = ({ setState, setAlreadyVisited }) => {
   };
 
   const handlePrevious = () => {
-    setState("Step5");
+    setStep("Step5");
   };
   const obj = [
     { label: "Details of Places to be visited during stay", name: "places-visited", required: "true", type: "input" },

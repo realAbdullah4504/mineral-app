@@ -4,14 +4,14 @@ import { useState } from "react";
 import { Form, Input, Button, Upload, Select, Empty, InputNumber } from "antd";
 import Listing from "pages/applying-for-mineral-form/Listing";
 import ListingNoc from "./ListingForms";
-const NocStep4 = ({ setState }) => {
+const NocStep4 = ({ setStep }) => {
   const [listing, setListing] = useState([]);
   const [record, setRecord] = useState({});
   const handleNext = () => {
-    setState("Step5");
+    setStep("Step5");
   };
   const handlePrevious = () => {
-    setState("Step3");
+    setStep("Step3");
   };
   const obj = [
     {

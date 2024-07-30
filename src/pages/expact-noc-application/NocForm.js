@@ -4,7 +4,7 @@ import { message, ConfigProvider } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { saveSampleDetailAPI, saveSampleListingAPI, testApplicationDetailAPI } from "services/api/common";
 import { setCookiesByName } from "utils/helpers";
-const NocForm = ({ setState }) => {
+const NocForm = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [applyAs, setApplyAs] = useState("Normal");
   const [loading, setLoading] = useState(false);
@@ -205,7 +205,7 @@ const NocForm = ({ setState }) => {
       if (!isError && data) {
         setLoading(false);
         setCookiesByName("expactapplicationid", data?.id, true);
-        setState("Step1");
+        setStep("Step1");
       }
     } catch (error) {
       setLoading(false);

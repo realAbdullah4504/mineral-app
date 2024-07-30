@@ -8,7 +8,7 @@ import { Loader } from "components";
 import { Space, Table } from "antd";
 import {applicationStatus} from "utils/constant/noc";
 import MoreInfo from "assets/images/geomapinfo.png";
-function NocListing({ setState }) {
+function NocListing({ setStep }) {
   const [records, setRecords] = useState([]);
   const [loading , setLoading] = useState(false);
   const navigate = useNavigate();
@@ -121,7 +121,7 @@ function NocListing({ setState }) {
           {" "}
           <div className="geological-moreinfo hover:text-black " style={{ paddingBottom: "0px" }}>
             {" "}
-            <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setState("NocForm")}>
+            <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setStep("NocForm")}>
               <div
                 style={{
                   padding: "40px",
