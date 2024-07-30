@@ -57,7 +57,7 @@ const RegisterOrganization = () => {
     console.log(paramValue);
     if (renderStop !== "Set") {
       const orgTypes = {
-        gd: "GovernmentDepartments",
+        // gd: "GovernmentDepartments",
         gggs: "GeotechnicalGeophysicalGeologicalServices",
         dc: "DrillingCompanies",
         mc: "MiningCompanies",
@@ -75,7 +75,7 @@ const RegisterOrganization = () => {
       };
 
       const links = {
-        gd: "/government-departments",
+        // gd: "/government-departments",
         gggs: "/geotechnical-geophysical-services",
         dc: "/drilling-companies",
         mc: "/mining-companies",
@@ -259,9 +259,10 @@ const RegisterOrganization = () => {
             </h2>
           </div>
           <Form form={form} onFinish={onFinish} className="space-y-4">
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <Form.Item
                 name="name"
+                className=""
                 rules={[
                   {
                     required: true,

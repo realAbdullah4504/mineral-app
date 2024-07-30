@@ -38,3 +38,7 @@
 .ant-upload-select {
   width: 100%;
 }
+
+:where(.css-dev-only-do-not-override-98ntnt).ant-form-item{
+  margin-bottom: 0px;
+}

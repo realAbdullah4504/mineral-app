@@ -221,7 +221,7 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <Form.Item
                 name="Name"
                 rules={[
@@ -335,7 +335,7 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <Form.Item
                 name="Qualification"
                 rules={[
@@ -449,7 +449,7 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <Form.Item
                 name="IndustriesOrSector"
                 rules={[
@@ -502,7 +502,7 @@ const RegisterProfessional = () => {
                 name="PECRegistrationNo"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please input your Professional Registration!",
                   },
                 ]}
@@ -559,7 +559,7 @@ const RegisterProfessional = () => {
                 name="ProfessionSummary"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please input your Professional Summary!",
                   },
                 ]}
@@ -589,7 +589,7 @@ const RegisterProfessional = () => {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <Form.Item
                 name="OrganizationName"
                 rules={[
