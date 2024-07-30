@@ -32,6 +32,9 @@ export const ENDPOINTS = {
   GET_NOC_APPLICATION_BY_ID: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetNOCApplicationById`,
   SAVE_EXPACT_APPLICATION_PROFESSION_DETAILS: `${REACT_APP_BASE_URL}/api/PublicNOCApplication/SaveProfessionalDetail`,
   SAVE_EXPACT_APPLICATION_PURPOSEVIST_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SavePurposeOfVisit`,
+  SAVE_EQUIPMENT_DETAIL: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveEquipmentDetail`,
+  
+  
 };
 
 export const mineralTestIdDetails = (testId) => {
