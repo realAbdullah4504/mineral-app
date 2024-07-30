@@ -1,29 +1,70 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
-import { useState } from "react";
-import { Form, Input, Button, Upload, Select, Empty, InputNumber } from "antd";
-import Listing from "pages/applying-for-mineral-form/Listing";
+import { Loader } from "components";
+import { message, ConfigProvider } from "antd";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { Empty } from "antd";
 import ListingNoc from "./ListingForms";
+import { getCookie } from "services/session/cookies";
+import { commonAPIs } from "services/api/common";
 const NocStep4 = ({ setStep }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const [listLoading, setListLoading] = useState(false);
   const [listing, setListing] = useState([]);
-  const [record, setRecord] = useState({});
+  const [record, setRecord] = useState({equipmentType:"", equipmentName:""});
+  const nocApplicationId = getCookie('expactapplicationid') || ""; 
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const handleNext = () => {
     setStep("Step5");
   };
   const handlePrevious = () => {
     setStep("Step3");
   };
+  const fetchData = async() => {
+    setListLoading(true);
+    try {
+      const { data, isError, message } = await commonAPIs(
+        REQUEST_TYPES.GET,
+        `${ENDPOINTS.GET_NOC_APPLICATION_BY_ID}?NocApplicationId=${nocApplicationId}`,
+      );
+      if (isError) {
+        setListLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setListLoading(false);
+        setListing(data?.nocApplicationEquipments || []);
+      }
+    } catch (error) {
+      setListLoading(false);
+      console.log(error.message);
+    }
+  }
+  useEffect(() => {
+    fetchData();
+  },[])
   const obj = [
     {
       label: "Equipment Type",
-      name: "equipment-type",
+      name: "equipmentType",
       required: "true",
       type: "select",
-      options: ["PLS PROVIDE LIST"],
+      options: [
+        {label:"select one", value:""},
+        {label:"Location Equipment", value:"LocationEquipment"},
+        {label:"Communication Equipment", value:"CommunicationEquipment"},
+        {label:"Geophysical Equipment", value:"GeophysicalEquipment"},
+    ],
     },
     {
       label: "Equipment Name",
-      name: "equipment-name",
+      name: "equipmentName",
       required: "true",
       type: "input",
     },
@@ -40,7 +81,7 @@ const NocStep4 = ({ setStep }) => {
       };
 
       const renderInput = (type = "text") => (
-        <input type={type} value={record ? record[field.name] : ""} {...commonProps} placeholder=" " />
+        <input type={type} onChange={(e) => changeHandler(e)} value={record ? record[field.name] : ""} {...commonProps} placeholder=" " />
       );
 
       const renderLabel = () => (
@@ -51,7 +92,13 @@ const NocStep4 = ({ setStep }) => {
           {field.label}
         </label>
       );
-
+    const changeHandler = (e) => {
+      const {name, value} = e?.target || {};
+      setRecord({
+        ...record,
+        [name]:value
+      })
+    }
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
@@ -61,20 +108,20 @@ const NocStep4 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps} value={record ? record[field.name] : ""}>
+              <select onChange={(e) => changeHandler(e)} {...commonProps} value={record ? record[field.name] : ""}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option?.value} value={option?.value}>
+                    {option?.label}
                   </option>
                 ))}
               </select>
             </>
           )}
           {field.type === "textarea" && (
-            <textarea {...commonProps} value={record ? record[field.name] : ""} placeholder=" " />
+            <textarea onChange={(e) => changeHandler(e)} {...commonProps} value={record ? record[field.name] : ""} placeholder=" " />
           )}
           {field.type !== "select" && renderLabel()}
         </div>
@@ -84,26 +131,50 @@ const NocStep4 = ({ setStep }) => {
 
   const handleAddForm = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
+    const {equipmentType, equipmentName} = record;
+    let nocApplicationEquipment = [];
+    const cloneData = [...listing];
+    if(record?.id){
+      const index = cloneData.findIndex(x => x?.id === record?.id);
+      if(index!==-1){
+        cloneData[index] = record;
+      }
+      nocApplicationEquipment = [...cloneData]
+    }else{
+    const newRecord ={
+      nocApplicationId: nocApplicationId,
+      equipmentName,
+      equipmentType
+    }
+    nocApplicationEquipment = [newRecord,  ...cloneData]
+    }
+    const payload = {
+      nocApplicationId: nocApplicationId,
+      equipmentRequired: true,
+      nocApplicationEquipment 
+    }
+    setLoading(true);
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
-        setListing([...listing, formValues]);
-        setRecord([]);
-        event.target.reset();
-      } else {
-        console.error("Error:", response.statusText);
+      const { data, isError, message } = await commonAPIs(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_EQUIPMENT_DETAIL,
+        payload
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setLoading(false);
+        setRecord({
+          equipmentName:"",
+          equipmentType:""
+        })
+        fetchData();
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
   };
   const handleEditClick = (record) => {
@@ -118,13 +189,13 @@ const NocStep4 = ({ setStep }) => {
     },
     {
       title: "Equipment Name",
-      dataIndex: "equipment-name",
-      key: "equipment-name",
+      dataIndex: "equipmentName",
+      key: "equipmentName",
     },
     {
       title: "Equipment Type",
-      dataIndex: "equipment-type",
-      key: "equipment-type",
+      dataIndex: "equipmentType",
+      key: "equipmentType",
     },
 
     {
@@ -139,22 +210,28 @@ const NocStep4 = ({ setStep }) => {
   ];
   console.log(record, "record");
   return (
+    <ConfigProvider>
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Equipment Listing</div>
         <ProgressPercentage percent={50} step={4} total={8}></ProgressPercentage>
       </div>
-
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleAddForm}>
-        {listing.length ? (
+        {listLoading ? 
+        <Loader/> :
+        listing.length ? (
           <ListingNoc dataSource={listing} setSelectedRecord={setRecord} columns={columns}></ListingNoc>
         ) : (
           <Empty />
         )}
         <div className="mineral-testing-table-header">
           <div className="text-green-600">Equipment Details</div>
+          {
+            loading ? 
+            <Loader/> :
           <button type="submit" className="next-button">
-            Add Form
+            {record?.id ? "Update Form" : "Add Form"}
             <svg
               style={{ opacity: "0.5", paddingBottom: "5px" }}
               xmlns="http://www.w3.org/2000/svg"
@@ -171,6 +248,7 @@ const NocStep4 = ({ setStep }) => {
               />
             </svg>
           </button>
+          }
         </div>
 
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
@@ -207,6 +285,7 @@ const NocStep4 = ({ setStep }) => {
         </button>
       </div>
     </div>
+    </ConfigProvider>
   );
 };
 
