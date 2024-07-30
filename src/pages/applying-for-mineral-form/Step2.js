@@ -13,12 +13,14 @@ const initialState = {
   TargetedMineral: "",
   SampleLocation: "",
   SampleImagePath: "",
+  sampleImage: "",
 };
 const Step2 = ({ setStep }) => {
   const [listingData, setListingData] = useState([]);
   const [selectedRecord, setSelectedRecord] = useState({});
+  const [listLoading, setListLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState({ ...initialState });
   const [messageApi, contextHolder] = message.useMessage();
   const warning = (message = "This is a warning message") => {
     messageApi.open({
@@ -29,23 +31,29 @@ const Step2 = ({ setStep }) => {
   const fetchSampleData = async (id = "") => {
     try {
       if (id) {
-        setLoading(true);
+        setListLoading(true);
         const { data, isError, message } = await saveSampleListingAPI(
           REQUEST_TYPES.GET,
           `${ENDPOINTS.GET_SAMPLE_DETAILS}?TestApplicationId=${id}`
         );
         if (isError) {
-          setLoading(false);
+          setListLoading(false);
           warning(message);
         }
         if (!isError && data) {
           setListingData(data);
-          setState({ ...state, TestApplicationId: id });
-          setLoading(false);
+          setState({
+            SampleType: "",
+            TargetedMineral: "",
+            SampleLocation: "",
+            SampleImagePath: "",
+            TestApplicationId: id,
+          });
+          setListLoading(false);
         }
       }
     } catch (error) {
-      setLoading(false);
+      setListLoading(false);
       console.log(error.message);
     }
   };
@@ -74,19 +82,21 @@ const Step2 = ({ setStep }) => {
     if (name !== "SampleImagePath") {
       setState({ ...state, [name]: value });
     } else {
-      setState({ ...state, [name]: e.target.files[0] });
+      if (state?.id) {
+        setState({ ...state, ["sampleImage"]: e.target.files[0] });
+      } else setState({ ...state, [name]: e.target.files[0] });
     }
   };
   const handleAddForm = async (event) => {
     event.preventDefault();
-    const { id, TestApplicationId, SampleType, TargetedMineral, SampleLocation, SampleImagePath } = state;
+    const { id, TestApplicationId, SampleType, TargetedMineral, SampleLocation, SampleImagePath, sampleImage } = state;
     const formData = new FormData();
     let obj = { TestApplicationId, SampleType, TargetedMineral, SampleLocation };
     if (id) {
       obj = { id, ...obj, SampleImagePath };
     }
     formData.append("obj", JSON.stringify(obj));
-    formData.append("sampleImage", SampleImagePath || "");
+    formData.append("sampleImage", id ? sampleImage : SampleImagePath || "");
     try {
       setLoading(true);
       const { data, isError, message } = await saveSampleDetailAPI(
@@ -100,6 +110,7 @@ const Step2 = ({ setStep }) => {
         warning(message);
       } else if (data) {
         setLoading(false);
+        fetchSampleData(TestApplicationId);
         // handle success
       }
     } catch (error) {
@@ -193,7 +204,7 @@ const Step2 = ({ setStep }) => {
   };
 
   const handleNext = () => {
-    setStep("step5");
+    setStep("step3");
   };
   return (
     <ConfigProvider>
@@ -204,7 +215,7 @@ const Step2 = ({ setStep }) => {
         </div>
         <form className="space-y-4 " onSubmit={handleAddForm}>
           <div>
-            {loading ? (
+            {listLoading ? (
               <Loader />
             ) : listingData.length ? (
               <Listing dataSource={listingData} setSelectedRecord={setSelectedRecord}></Listing>
@@ -214,7 +225,7 @@ const Step2 = ({ setStep }) => {
             <div className="mineral-testing-table-header">
               <div>Sample Details</div>
               <button type="submit" className="next-button" style={{ padding: "20PX" }}>
-                Add Sample
+                {state?.id ? "Update Sample" : "Add Sample"}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
-import { saveSampleDetailAPI } from "services/api/common";
+import { ENDPOINTS, REQUEST_TYPES, mineralTestIdDetails } from "utils/constant/url";
+import { saveSampleDetailAPI, testApplicationDetailAPI } from "services/api/common";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { Loader } from "components";
@@ -8,7 +8,6 @@ import { message, ConfigProvider } from "antd";
 const initialState = {
   id: "",
   mineralTestId: "",
-  typeOfWorkRequired: "",
   labId: "",
   purposeOfTest: "",
   testPrice: "",
@@ -16,23 +15,84 @@ const initialState = {
 const Step3 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [state, setState] = useState(initialState);
+  const [mineralTest, setMineralTest] = useState([]);
+  const [labId, setLabId] = useState("");
+  const [labIdDetails, setLabIdDetails] = useState([]);
+  const [testId, setTestId] = useState("");
   const [loading, setLoading] = useState(false);
+
+  console.log(state, "statestep3");
   useEffect(() => {
-    const applicationDetail = getCookiesByName("MineralTestInfo", true);
+    console.log(labId, "labId");
+    if (!labId) {
+      console.log(state, "stateif");
+      setState({ ...state, testPrice: "" });
+    } else {
+      console.log(state, "stateelse");
+      const lab = labIdDetails.find((item) => item.labId == labId);
+      setState({ ...state, testPrice: lab?.testPrice || "" });
+    }
+  }, [labId]);
+  useEffect(() => {
+    const applicationDetail = getCookiesByName("testApplication", true);
     if (Object.keys(applicationDetail).length) {
       let payload = {};
-      const { id, typeOfWorkRequired, labId, testPrice, purposeOfTest } = applicationDetail;
-      payload = { typeOfWorkRequired, labId, testPrice, purposeOfTest, mineralTestId: id };
+      const { id, labId, testPrice, purposeOfTest, mineralTestId } = applicationDetail;
+      payload = { labId, testPrice, purposeOfTest, mineralTestId };
       if (id) {
         payload = { id, ...payload };
       }
       setState({ ...state, ...payload });
     }
+    (async function () {
+      try {
+        const { data, isError, message } = await testApplicationDetailAPI(
+          REQUEST_TYPES.GET,
+          ENDPOINTS.GET_MINERAL_TEST
+        );
+        if (isError) {
+          warning(message);
+        }
+        if (!isError && data) {
+          setMineralTest(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, []);
-  const changeHandler = (e) => {
+
+  useEffect(() => {
+    console.log(labId, "labId2");
+    (async function () {
+      try {
+        const { data, isError, message } = await testApplicationDetailAPI(
+          REQUEST_TYPES.GET,
+          mineralTestIdDetails(testId)
+        );
+        if (isError) {
+          warning(message);
+        }
+        if (!isError && data) {
+          setLabIdDetails(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, [testId]);
+
+  const changeHandler = (e, fieldName) => {
     const { name, value } = e?.target || {};
     setState({ ...state, [name]: value });
+    if (fieldName === "mineralTestId") {
+      setTestId(value);
+    }
+    if (fieldName === "labId") {
+      setLabId(value);
+    }
   };
+
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "error",
@@ -42,11 +102,14 @@ const Step3 = ({ setStep }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const { id, mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest } = state;
-    let payload = { mineralTestId, typeOfWorkRequired, labId, testPrice, purposeOfTest };
+
+    const { id, mineralTestId, labId, testPrice, purposeOfTest } = state;
+    let payload = { mineralTestId, labId, testPrice, purposeOfTest };
     if (id) {
       payload = { ...payload, id };
     }
+
+    console.log(payload, "payload");
     try {
       const { data, isError, message } = await saveSampleDetailAPI(
         REQUEST_TYPES.POST,
@@ -58,7 +121,7 @@ const Step3 = ({ setStep }) => {
         warning(message);
       }
       if (!isError && data) {
-        setCookiesByName("MineralTestInfo", data, true);
+        setCookiesByName("testApplication", data, true);
         setLoading(false);
         setStep("step4");
       }
@@ -70,34 +133,53 @@ const Step3 = ({ setStep }) => {
   const handlePrevious = () => {
     setStep("step2");
   };
+  useEffect(() => {
+    if (!labIdDetails.length) {
+      setLabId("");
+    }
+    if (labIdDetails.length === 1) {
+      setLabId(labIdDetails[0].labId);
+    }
+    if (labIdDetails.length > 1) {
+      setLabId(labIdDetails[0].labId);
+    }
+  }, [labIdDetails]);
   const obj = [
     {
       label: "Type of Test Required",
-      name: "typeOfWorkRequired",
+      name: "mineralTestId",
       required: "true",
       type: "select",
-      options: ["All", "Other Types"],
+      options: mineralTest.map((item) => {
+        return { name: item.name, value: item.id };
+      }),
     },
     {
       label: "Available Mineral labs",
       name: "labId",
       required: "true",
       type: "select",
-      options: ["All", "Other Types"],
+      options: labIdDetails.map((item) => {
+        return { name: item.labName, value: item.labId };
+      }),
     },
     {
       label: "Test Price",
       name: "testPrice",
       required: "true",
-      type: "select",
-      options: ["no of samples(provide list)"],
+      type: "input",
+      disabled: true,
     },
     {
       label: "Purpose of Test",
       name: "purposeOfTest",
       required: "true",
       type: "select",
-      options: ["Research", "Commercial", "Academic"],
+      options: [
+        { name: "Research", value: "Research" },
+        { name: "Commercial", value: "Commercial" },
+        { name: "Academic", value: "Academic" },
+      ],
     },
   ];
   const renderFormItems = () => {
@@ -105,7 +187,7 @@ const Step3 = ({ setStep }) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
+        disabled: field.disabled || false,
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
@@ -139,13 +221,13 @@ const Step3 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps}>
+              <select onChange={(e) => changeHandler(e, field.name)} value={state[field?.name]} {...commonProps}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option.value} value={option.value}>
+                    {option.name}
                   </option>
                 ))}
               </select>
