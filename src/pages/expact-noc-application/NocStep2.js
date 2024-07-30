@@ -1,28 +1,51 @@
 import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
+import { Loader } from "components";
+import { message, ConfigProvider } from "antd";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { saveSampleDetailAPI } from "services/api/common";
+import { getCookiesByName } from "utils/helpers";
 
 const NocStep2 = ({ setStep }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState("");
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
+    formValues.id = state.id;
+    setLoading(true);
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
-        setStep("Step2");
-      } else {
-        console.error("Error:", response.statusText);
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_EXPACT_APPLICATION_PROFESSION_DETAILS,
+        formValues
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setLoading(false);
+        setStep("Step3");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
+  };
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    setState({ ...state, [name]: value });
   };
   const handlePrevious = () => {
     setStep("Step1");
@@ -30,21 +53,21 @@ const NocStep2 = ({ setStep }) => {
   const obj = [
     {
       label: "Profession",
-      name: "profession",
+      name: "Profession",
       required: "true",
       type: "select",
-      options: ["Geologist", "Mining Engineer", "Miner", "Operator"],
+      options: ["Geologist", "Geologist", "Miner", "Operator"],
     },
     {
       label: "Qualification",
-      name: "qualification",
+      name: "Qualification",
       required: "true",
       type: "select",
       options: ["PHD", "Masters", "Graduation", "Diploma", "Certification"],
     },
     {
       label: "Expertise/Job Description",
-      name: "expertise",
+      name: "JobDescription",
       required: "true",
       type: "input",
     },
@@ -60,7 +83,15 @@ const NocStep2 = ({ setStep }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => (
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[commonProps?.name]}
+          {...commonProps}
+          placeholder=" "
+        />
+      );
 
       const renderLabel = () => (
         <label
@@ -98,6 +129,10 @@ const NocStep2 = ({ setStep }) => {
       );
     });
   };
+  useEffect(() => {
+    const formValues = getCookiesByName("expactapplicationformkeys", true);
+    setState(formValues);
+  }, []);
 
   return (
     <div className="noc-form">
@@ -121,22 +156,26 @@ const NocStep2 = ({ setStep }) => {
               previous
             </div>
           </button>
-          <button type="submit" className="next-button">
-            <div>
-              {" "}
-              Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
-          </button>
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <button type="submit" className="next-button">
+              <div>
+                {" "}
+                Next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>
