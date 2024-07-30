@@ -164,33 +164,61 @@ export const SubMenuWhoIsWho = [
     link: "/mining-professional",
   },
   {
-    name: "Academia",
-    link: "/academia",
+    name: "Geotechnical Geophysical Geological Services",
+    link: "/geotechnical-geophysical-services",
   },
   {
-    name: "Drilling & Services",
-    link: "/drilling-services",
+    name:"Drilling Companies",
+    link: "/drilling-companies",
   },
   {
-    name: "Mineral Labs",
+    name:"Mining Companies",
+    link: "/mining-companies",
+  },
+  {
+    name:"Mineral Based Industries",
+    link: "/mineral-based-industries",
+  },
+  {
+    name:"Machinery suppliers",
+    link: "/machinery-suppliers",
+  },
+  {
+    name:"Mineral Testing Labs",
     link: "/mineral-labs",
   },
   {
-    name: "Downstream Industry",
-    link: "/downstream-industries",
+    name:"Explosive Suppliers",
+    link: "/explosive-suppliers",
   },
   {
-    name: "Software & Solutions",
-    link: "/software-solution",
+    name:"Software and Solutions Entities",
+    link: "/software-solution-entities",
   },
   {
-    name: "Legal & Tax Services",
-    link: "/legal-tax",
+    name:"Legal Services",
+    link: "/legal-services",
   },
   {
-    name: "Associations",
-    link: "/associations",
+    name:"Audit & Accounts",
+    link: "/audit-accounts",
   },
+  {
+    name:"Land Surveying",
+    link: "/land-surveying",
+  },
+  {
+    name: "Academia And RD",
+    link: "/academia",
+  },
+  {
+    name: "Training Schools",
+    link: "/training-schools",
+  },
+  {
+    name:"Other Services",
+    link: "/other-services",
+  }
 ];
 
 export const SubMenuCSR = [

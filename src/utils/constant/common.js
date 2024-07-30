@@ -492,10 +492,10 @@ export const mineralPotential = {
 ]
 
 export const registerOrganizationOption = [
-  {
-    value: "GovernmentDepartments",
-    label: "Government Departments",
-  },
+  // {
+  //   value: "GovernmentDepartments",
+  //   label: "Government Departments",
+  // },
   {
     value: "MiningProfessionals",
     label: "Mining Professionals",
@@ -638,7 +638,7 @@ export const whoIsWhoCards = [
     link: "/land-surveying",
   },
   {
-    title: "Academia",
+    title: "Academia And RD",
     flipContent:
       "   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis ut lorem ultricies .",
     link: "/academia",
