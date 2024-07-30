@@ -1,4 +1,5 @@
 import React from "react";
+import BreadCrumbs from "components/Breadcrumbs";
 import { useState } from "react";
 import NocListing from "./NocListing";
 import NocForm from "./NocForm";
@@ -26,17 +27,17 @@ const ExpatNocApplication = () => {
     Step7: <NocStep7 setState={setState}></NocStep7>,
     Step8: <NocStep8 setState={setState} alreadyVisited={alreadyVisited}></NocStep8>,
   };
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/service-and-support", label: "Services & Support" },
+    { path: "/expatriate-security", label: "Expatriate Security" },
+    { path: "/expact-noc-application", label: "NOC Applications" },
+  ];
   return (
     <div className="expact-noc-application-list mx-auto mb-20 mineral-form">
-      <div className="my-10">
-        <h1 className="text-4xl font-bold">
-          Service & Support:<span className="text-green-600">Expat NOC Application</span>
-        </h1>
-        <p>
-          Maps and Reports Fiscal Incentives Mineral Testing Labs Mining conscessions{" "}
-          <span className="font-bold">Expatriate Security Clearance</span>Reseach & development
-        </p>
-      </div>
+      <div className="mt-[50px]">
+    <BreadCrumbs breadcrumbs={breadcrumbs} /><div className="mineral-testing-title">Applying for NOC Applications</div>
+    </div>
       {state !== "NocListing" && state !== "NocForm" ? (
         <div className="my-10">
           Expatriate Security Clearance <span className="font-bold">Add Application</span>
