@@ -94,14 +94,12 @@ const CsrCommunity = () => {
     const myJSON = JSON.stringify(vocieObj);
 
     const { data } = await axios.post(fullurl, myJSON, config);
-    debugger
     if (data.succeeded) {
       success();
     } else {
       setErrorMsg('Transaction succeeded: false');
     }
   } catch (error) {
-    debugger
     setErrorMsg(` Message : ${error.response.message}`);
   }
   };
