@@ -16,7 +16,6 @@ const Step5 = ({ setStep }) => {
       });
 
       if (response.ok) {
-        cookiesToDelete.forEach(deleteCookie);
         setStep("step2");
       } else {
         console.error("Error:", response.statusText);

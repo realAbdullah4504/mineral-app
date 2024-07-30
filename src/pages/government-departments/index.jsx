@@ -34,7 +34,7 @@
             </div> */}
             <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
-                <DataCard type={"add"} data={data} />
+                {/* <DataCard type={"add"} data={data} /> */}
                 <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)", logo: LogoImg}} />
                 <DataCard type={"detail"} data={{headline: "Ministry of Energy (Petroleum Division)", logo: LogoImg}} />
                 <DataCard type={"detail"} data={{headline: "Pakistan Mineral Development Corporation (PMDC)", logo: PMDCImg}} />

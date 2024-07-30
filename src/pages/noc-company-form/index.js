@@ -1,86 +1,175 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { testApplicationDetailAPI } from "services/api/common";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { message, ConfigProvider } from "antd";
+import { saveSampleDetailAPI } from "services/api/common";
+import { Loader } from "components";
 function NocAddListCompany() {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [citylisting, setCitylisting] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const obj = {
     approved: [
       {
         label: "Company Name",
-        name: "company-name",
+        name: "companyName",
         required: "false",
         type: "input",
       },
       {
         label: "Registration Type",
-        name: "registration-type",
+        name: "registrationType",
         required: "false",
         type: "select",
-        options: ["male", "female"],
+        options: [
+          { name: "male", value: "male" },
+          { name: "female", value: "female" },
+        ],
       },
       {
         label: "Registration City",
-        name: "registration-city",
+        name: "cityId",
         required: "false",
         type: "select",
-        options: ["Gilgit Baltistan", "Islamabad"],
+        options: citylisting.map((item) => {
+          return { name: item.cityName, id: item.id };
+        }),
       },
       {
         label: "Registration Year",
-        name: "registration-year",
+        name: "registrationYear",
         required: "false",
         type: "calendar",
       },
       {
         label: "Business Domain",
-        name: "business-domain",
+        name: "businessDomain",
         required: "false",
         type: "select",
-        options: ["Mining", "Services"],
+        options: [
+          { name: "Mining", value: "Mining" },
+          { name: "Services", value: "Services" },
+        ],
       },
-      { label: "NTN/FTN Number", name: "NTN/FTN-number", required: "false", type: "input" },
-      { label: "Company Logo", name: "company-logo", required: "false", type: "file" },
+      { label: "NTN/FTN Number", name: "NTNNumber", required: "false", type: "input" },
+      { label: "Company Logo", name: "logoPath", required: "false", type: "file" },
       {
         label: "Company's Registration Certificate",
-        name: "company-registartion-certificate",
+        name: "companyRegistrationCertificates",
         required: "false",
         type: "file",
       },
       {
         label: "Taxpayer Registration Certificate",
-        name: "taxpayer-registartion-certificate",
+        name: "CompanyTaxRegistrationCertificate",
         required: "false",
         type: "file",
       },
     ],
     "Contact Details": [
-      { label: "Address", name: "address", required: "false", type: "input" },
-      { label: "Phone Number", name: "phone-number", required: "false", type: "number" },
-      { label: "Mobile Number", name: "mobile-number", required: "false", type: "number" },
+      { label: "Address", name: "registrationAddress", required: "false", type: "input" },
+      { label: "Phone Number", name: "phoneNumber", required: "false", type: "number" },
+      { label: "Mobile Number", name: "mobileNumber", required: "false", type: "number" },
       { label: "Email", name: "email", required: "false", type: "input" },
-      { label: "Fax No.", name: "fax-no", required: "false", type: "input" },
-      { label: "Contact Person Name", name: "person-contact", required: "false", type: "file" },
+      { label: "Fax No.", name: "faxNumber", required: "false", type: "input" },
+      { label: "Contact Person Name", name: "contactPersonName", required: "false", type: "input" },
     ],
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
 
-      if (response.ok) {
-      } else {
-        console.error("Error:", response.statusText);
+    const {
+      registrationType,
+      companyName,
+      cityId,
+      registrationYear,
+      businessDomain,
+      registrationAddress,
+      phoneNumber,
+      mobileNumber,
+      RegistrationType,
+      email,
+      faxNumber,
+      contactPersonName,
+      companyRegistrationCertificates,
+      CompanyTaxRegistrationCertificate,
+      logoPath,
+      NTNNumber,
+    } = formValues;
+
+    const formDatas = new FormData();
+
+    const year = registrationYear.split("-")[0];
+    const obj = {
+      registrationType,
+      companyName,
+      cityId,
+      registrationYear: year,
+      businessDomain,
+      registrationAddress,
+      phoneNumber,
+      mobileNumber,
+      RegistrationType,
+      email,
+      faxNumber,
+      contactPersonName,
+      NTNNumber,
+    };
+
+    formDatas.append("obj", JSON.stringify(obj));
+    formDatas.append("companyRegistrationCertificates", companyRegistrationCertificates || "");
+    formDatas.append("CompanyTaxRegistrationCertificate", CompanyTaxRegistrationCertificate || "");
+    formDatas.append("logoPath", logoPath || "");
+
+    try {
+      setLoading(true);
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        `${ENDPOINTS.SAVE_NOC_SPONSOR_FORM}`,
+        formDatas
+      );
+
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      } else if (data) {
+        setLoading(false);
+        setCitylisting([]);
+        event.target.reset();
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data, isError, message } = await testApplicationDetailAPI(
+          REQUEST_TYPES.GET,
+          ENDPOINTS.NOC_SPONSOR_CITY_Listing
+        );
+        if (isError) {
+          warning(message);
+        }
+        if (!isError && data) {
+          setCitylisting(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, []);
 
   const renderFormItems = (key, obj) => {
     return obj.map((field) => {
@@ -116,8 +205,8 @@ function NocAddListCompany() {
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option.id} value={option.id}>
+                    {option.name}
                   </option>
                 ))}
               </select>
@@ -150,9 +239,16 @@ function NocAddListCompany() {
           </div>
         ))}
         <div className="w-full flex justify-center">
-          <button type="submit" className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-            Submit
-          </button>
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <button
+              type="submit"
+              className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+            >
+              Submit
+            </button>
+          )}
         </div>
       </form>
     </div>
