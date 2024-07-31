@@ -4,14 +4,14 @@ import { useState } from "react";
 import { Form, Input, Button, Upload, Select, Empty, InputNumber } from "antd";
 import Listing from "pages/applying-for-mineral-form/Listing";
 import ListingNoc from "./ListingForms";
-const NocStep7 = ({ setState }) => {
+const NocStep7 = ({ setStep }) => {
   const [listing, setListing] = useState([]);
   const [record, setRecord] = useState([]);
   const handleNext = () => {
-    setState("Step8");
+    setStep("Step8");
   };
   const handlePrevious = () => {
-    setState("Step6");
+    setStep("Step6");
   };
   const obj = [
     { label: "Type of Visa Availed", name: "type-visa", required: "true", type: "select", options: ["provide list"] },

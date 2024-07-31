@@ -1,49 +1,81 @@
-import React, { Component } from "react";
-import ProgressPercentage from "components/UI/ProgressPercentage";
+import React, { useState } from "react";
+import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
+import { commonAPIs } from "services/api/common";
+import { Loader } from "components";
+import { message, ConfigProvider } from "antd";
 
-const Step5 = ({ setStep }) => {
+const ShipmentForm = ({ setStep }) => {
+  const [state, setState] = useState({
+    SampleSubmissionMode: "",           
+    ShipmentBy: "",
+    shipmentReceiptImage: "",
+    TrackingNumber: ""
+  });
+  const [loading, setLoading] = useState(false); 
+  const [messageApi, contextHolder] = message.useMessage();
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formValues = Object.fromEntries(formData.entries());
+    const { SampleSubmissionMode, ShipmentBy, shipmentReceiptImage, TrackingNumber} = state;
+    const formData = new FormData();
+    const id = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("id") : "";
+    let obj = {id, SampleSubmissionMode, ShipmentBy, TrackingNumber };
+    formData.append("obj", JSON.stringify(obj));
+    formData.append("shipmentReceiptImage", shipmentReceiptImage || "");
     try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
+      setLoading(true);
+      const { data, isError, message } = await commonAPIs(
+        REQUEST_TYPES.POST,
+        `${ENDPOINTS.SAVE_SHIPMENT_INFO}`,
+        formData
+      );
 
-      if (response.ok) {
-        setStep("step2");
-      } else {
-        console.error("Error:", response.statusText);
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      } else if (data) {
+        setLoading(false);
+        // handle success
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
     }
   };
-  const handlePrevious = () => {
-    setStep("step4");
-  };
+ 
   const obj = [
     {
       label: "Mode of Sample Submission",
-      name: "submission-mode",
+      name: "SampleSubmissionMode",
       required: "false",
       type: "select",
-      options: ["In-person", "Courier"],
-    },
-    { label: "Shipment by", name: "shipment-by", required: "false", type: "input" },
-    { label: "Upload Receipt", name: "receipt", required: "false", type: "file" },
+      options: [
+        { name: "Select one", value: "" },
+        { name: "In-person", value: "InPerson" },
+        { name: "Courier", value: "Courier" },
+    ]},
+    { label: "Shipment by", name: "ShipmentBy", required: "false", type: "input" },
+    { label: "Upload Receipt", name: "shipmentReceiptImage", required: "false", type: "file" },
     {
       label: "Tracking Number",
-      name: "track-id",
+      name: "TrackingNumber",
       required: "false",
       type: "input",
     },
   ];
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    if (name !== "shipmentReceiptImage") {
+      setState({ ...state, [name]: value });
+    } else {
+        setState({ ...state, ["shipmentReceiptImage"]: e.target.files[0] });
+    }
+  };
   const renderFormItems = () => {
     return obj.map((field) => {
       const commonProps = {
@@ -55,7 +87,7 @@ const Step5 = ({ setStep }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => <input type={type} onChange={(e) => changeHandler(e)} value={state[field.name]} {...commonProps} placeholder=" " />;
 
       const renderLabel = () => (
         <label
@@ -71,17 +103,17 @@ const Step5 = ({ setStep }) => {
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
+          {field.type === "file" && <input type="file" onChange={(e) => changeHandler(e)} {...commonProps} />}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
-                <option value="" disabled style={{ opacity: 0.5 }}>
+              <select onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps}>
+                <option  disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option?.value} value={option?.value}>
+                    {option?.name}
                   </option>
                 ))}
               </select>
@@ -93,53 +125,28 @@ const Step5 = ({ setStep }) => {
       );
     });
   };
-  const deleteCookie = (name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
-  };
-  const cookiesToDelete = ["testApplication", "MineralTestInfo", "ShipmentApplication"];
-
   return (
-    <div className="noc-form">
-      <div className="mineral-testing-table-header">
-        <div>Shipment Details</div>
-        <ProgressPercentage percent={75} step={3} total={4}></ProgressPercentage>
-      </div>
+    <ConfigProvider>
+    <div className="mineral-form">
+      <div className="mineral-testing-title">Shipment Details</div>
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
-        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
-          <button type="primary" className="next-button" onClick={handlePrevious}>
-            <div>
-              {" "}
-              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
-                <path
-                  fill="white"
-                  fill-rule="evenodd"
-                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
-                />
-              </svg>
-              previous
-            </div>
-          </button>
-          <button type="submit" className="next-button">
-            <div>
-              {" "}
-              Done
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
-          </button>
+        <div className="w-full flex justify-center">
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <button
+              type="submit"
+              className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+            >
+              Submit
+            </button>
+          )}
         </div>
       </form>
     </div>
+    </ConfigProvider>
   );
 };
 
-export default Step5;
+export default ShipmentForm;

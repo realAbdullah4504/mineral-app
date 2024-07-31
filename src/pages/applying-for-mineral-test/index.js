@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dropdown, Space, Table } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import MoreInfo from "assets/images/geomapinfo.png";
@@ -11,34 +12,42 @@ const items = [
   {
     key: "1",
     label: "Edit",
+    link:"#"
   },
   {
     key: "2",
     label: "View Application",
+    link:"#"
   },
   {
     key: "3",
     label: "View Sample Details",
+    link:"#"
   },
   {
-    key: "4",
+    key: "/shipment-detail",
     label: "Add Shipment Details",
+    link:"/shipment-detail"
   },
   {
     key: "5",
     label: "Payment",
+    link:"#"
   },
   {
     key: "6",
     label: "View Report",
+    link:"#"
   },
   {
     key: "7",
     label: "Request Retest",
+    link:"#"
   },
 ];
 
 const TableMap = () => {
+  const navigate = useNavigate();
   const [listing, setListing] = useState([]);
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -47,6 +56,12 @@ const TableMap = () => {
       type: "warning",
       content: message,
     });
+  };
+  const handleDropdownItemClick = (e, id = "") => {
+    if(e?.key){
+      const url = `${e?.key}?id=${id}`;
+      navigate(url);
+    }
   };
   const columns = [
     {
@@ -106,33 +121,36 @@ const TableMap = () => {
     {
       title: "Action",
       key: "operation",
-      render: () => (
-        <Space size="middle">
-          <Dropdown
-            menu={{
-              items,
-            }}
-            trigger={["click"]}
-          >
-            <a onClick={(e) => e.preventDefault()}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
-                />
-              </svg>
-            </a>
-          </Dropdown>
-        </Space>
-      ),
+      render: (text, record) => {
+        return (
+          <Space size="middle">
+            <Dropdown
+              menu={{
+                onClick: (e)=>handleDropdownItemClick(e,record?.id),
+                items,
+              }}
+              trigger={["click"]}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                  />
+                </svg>
+              </a>
+            </Dropdown>
+          </Space>
+        )
+      },
     },
   ];
 

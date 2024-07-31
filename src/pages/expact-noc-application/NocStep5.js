@@ -1,87 +1,136 @@
 import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
+import { Loader } from "components";
+import { message, ConfigProvider } from "antd";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { saveSampleDetailAPI } from "services/api/common";
+import { getCookiesByName } from "utils/helpers";
 
-const NocStep5 = ({ setState, equipment }) => {
+const NocStep5 = ({ setStep, equipment }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState("");
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
+    formValues.id = state.id;
+    const {
+      SponsorPakistanAddress,
+      SponsorAddressVisitingOrganisation,
+      SponsorPakistaniOfficialDesignationName,
+      SponsorPakistaniOfficialName,
+      SponsorPakistaniOfficialCNIC,
+      SponsorPakistaniOfficialContactNumber,
+      SponsorPakistaniOfficialAddress,
+      cnicImageFront,
+      cnicImageBack,
+    } = formValues;
 
-      if (response.ok) {
-        setState("Step6");
-      } else {
-        console.error("Error:", response.statusText);
+    const formDatas = new FormData();
+    const obj = {
+      SponsorPakistanAddress,
+      SponsorAddressVisitingOrganisation,
+      SponsorPakistaniOfficialDesignationName,
+      SponsorPakistaniOfficialName,
+      SponsorPakistaniOfficialCNIC,
+      SponsorPakistaniOfficialContactNumber,
+      SponsorPakistaniOfficialAddress,
+    };
+    obj.id = state.id;
+    formDatas.append("obj", JSON.stringify(obj));
+    formDatas.append("cnicImageFront", cnicImageFront);
+    formDatas.append("cnicImageBack", cnicImageBack);
+
+    setLoading(true);
+    try {
+      const { data, isError, message } = await saveSampleDetailAPI(
+        REQUEST_TYPES.POST,
+        ENDPOINTS.SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS,
+        formDatas
+      );
+      if (isError) {
+        setLoading(false);
+        warning(message);
+      }
+      if (!isError && data) {
+        setLoading(false);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false);
+      console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
-
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    setState({ ...state, [name]: value });
+  };
   const handlePrevious = () => {
     if (equipment === "yes") {
-      setState("Step4");
+      setStep("Step4");
     } else {
-      setState("Step3");
+      setStep("Step3");
     }
   };
   const obj = [
-    { label: "Title/License Number", name: "title-license", required: "true", type: "input" },
-    { label: "Sponsoring Company Name", name: "sponsor-company-name", required: "true", type: "input" },
-    { label: "Pakistan Address", name: "pak-address", required: "true", type: "input" },
+    { label: "Title/License Number", name: "licenseNumber", disabled: true, required: "true", type: "input" },
+    { label: "Sponsoring Company Name", name: "companyName", disabled: true, required: "true", type: "input" },
+    { label: "Pakistan Address", name: "SponsorPakistanAddress", required: "true", type: "input" },
     {
       label: "Name and Address of Visiting Organisations",
-      name: "visiting-org-name",
+      name: "SponsorAddressVisitingOrganisation",
       required: "true",
       type: "input",
     },
     {
       label: "Name and Designation of Conducting Officials",
-      name: "name-conducting-officials",
+      name: "SponsorPakistaniOfficialDesignationName",
       required: "true",
       type: "input",
     },
     {
       label: "Pakistani Official Name",
-      name: "name-pak-official",
+      name: "SponsorPakistaniOfficialName",
       required: "true",
       type: "input",
     },
     {
       label: "Pakistani Official Contact",
-      name: "no-pak-official",
+      name: "SponsorPakistaniOfficialContactNumber",
       required: "true",
       type: "number",
     },
     {
       label: "Pakistani Official Address",
-      name: "address-pak-official",
+      name: "SponsorPakistaniOfficialAddress",
       required: "true",
       type: "input",
     },
     {
       label: "CNIC of Pakistani Official",
-      name: "CNIC-pak-official",
+      name: "SponsorPakistaniOfficialCNIC",
       required: "true",
       type: "number",
       placeholder: "12345-1234567-8",
     },
     {
       label: "CNIC Front Image",
-      name: "CNIC-front-img",
+      name: "cnicImageFront",
       required: "true",
       type: "file",
     },
     {
       label: "CNIC Back Image",
-      name: "CNIC-back-img",
+      name: "cnicImageBack",
       required: "true",
       type: "file",
     },
@@ -91,14 +140,16 @@ const NocStep5 = ({ setState, equipment }) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
+        disabled: field.disabled || false,
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
         placeholder: field.placeholder || "",
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} />;
+      const renderInput = (type = "text") => (
+        <input onChange={(e) => changeHandler(e)} value={state[commonProps?.name]} type={type} {...commonProps} />
+      );
 
       const renderLabel = () => (
         <label
@@ -136,6 +187,11 @@ const NocStep5 = ({ setState, equipment }) => {
       );
     });
   };
+  useEffect(() => {
+    const formValues = getCookiesByName("expactapplicationformkeys", true);
+    setState(formValues);
+  }, []);
+  console.log(state, "state");
 
   return (
     <div className="noc-form">
@@ -159,22 +215,26 @@ const NocStep5 = ({ setState, equipment }) => {
               previous
             </div>
           </button>
-          <button type="submit" className="next-button">
-            <div>
-              {" "}
-              Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
-          </button>
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <button type="submit" className="next-button">
+              <div>
+                {" "}
+                Next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

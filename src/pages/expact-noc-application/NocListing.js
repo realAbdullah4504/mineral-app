@@ -1,60 +1,118 @@
-import React from "react";
-import { Badge, Dropdown, Space, Table } from "antd";
+import React, {useState, useEffect} from "react";
+import dayjs from 'dayjs';
+import { useNavigate } from "react-router-dom";
+import { commonAPIs } from "services/api/common";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { message, Typography } from "antd";
+import { Loader } from "components";
+import { Space, Table } from "antd";
+import {applicationStatus} from "utils/constant/noc";
 import MoreInfo from "assets/images/geomapinfo.png";
-function NocListing({ setState }) {
+function NocListing({ setStep }) {
+  const [records, setRecords] = useState([]);
+  const [loading , setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
+  const fetchListing = async() => {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await commonAPIs(
+          REQUEST_TYPES.GET,
+          ENDPOINTS.GET_NOC_APPLICATIONS
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          console.log(data, "data");
+          setRecords(data);
+          setLoading(false);
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
+  }
+  useEffect(()=> {
+   fetchListing();
+  }, []);
+  const getStatus = (item) => {
+    const rarray = applicationStatus.filter((value) =>  (value.status === item ));
+        if(rarray.length> 0){
+            return rarray[0].display_status;
+        }
+        else{
+            return "-";
+        }
+  }
+  const onChange = (key) => {
+    navigate(`/noc-view-application?id=${key}`);
+  };
+  const onEdit = (key) => {
+    localStorage.setItem('NOCidEdit',key);
+    localStorage.removeItem('NOCidview');
+    localStorage.removeItem('NOCid');
+    navigate('/pageone');
+};
   const columns = [
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
     },
     {
-      title: "Expat Name",
-      dataIndex: "expat-name",
-      key: "expat name",
+      title: 'Expat Name',
+      dataIndex: 'firstName',
+      key: 'firstName',
+      render: (title,record) => (record.expatTitle +" "+title +" "+ record.middleName +" "+record.lastName),
     },
     {
-      title: "Nationality",
-      dataIndex: "nationality",
-      key: "nationality",
+      title: 'Nationality',
+      dataIndex: 'nationalityName',
+      key: 'nationalityName',
     },
     {
-      title: "Visit Place",
-      dataIndex: "visit-place",
-      key: "visit-place",
+        title: 'Visit place',
+        dataIndex: 'areaToBeVisited',
+        key: 'areaToBeVisited',
     },
     {
-      title: "When was it applied",
-      dataIndex: "applied-time",
-      key: "applied-time",
+        title: 'When was it applied',
+        dataIndex: 'submittedDate',
+        key: 'submittedDate',
+        
+        render: (title) => title? (dayjs(title).format('DD/MM/YYYY')) : "-",
     },
     {
-      title: "Application Status",
-      dataIndex: "application-status",
-      key: "application-status",
+        title: 'Application Status',
+        dataIndex: 'status',
+        key: 'status',
+        render: (key) => (getStatus(key)),
+        
     },
     {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <a>View {record.name}</a>
-          <a>Edit</a>
-        </Space>
-      ),
-    },
-  ];
-
-  const data = [
-    {
-      id: "1",
-      "expat-name": "Ali Akbar",
-      nationality: "29",
-      "visit-place": "Faisalabad",
-      "applied-time": "Saturday",
-      "application-status": "Pending",
-    },
-  ];
+        title: 'Action',
+        key: 'action',
+        render: (_, record) => (
+          <Space size="middle" style={{textAlign: 'left!important',paddingLeft: '0px'}}>
+            <Typography.Link  onClick={() => onChange(record.id)}>View</Typography.Link>
+            {
+                (record.status === 'PublicNewEntry' || record.status === 'SubmissionFailed')? (
+                    <Typography.Link  onClick={() => onEdit(record.id)}>Edit</Typography.Link>
+                ):(<></>)
+                
+            }
+          </Space>
+        ),
+      },
+  ]
   return (
     <div>
       <div className="mineral-testing-table-header">
@@ -63,7 +121,7 @@ function NocListing({ setState }) {
           {" "}
           <div className="geological-moreinfo hover:text-black " style={{ paddingBottom: "0px" }}>
             {" "}
-            <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setState("NocForm")}>
+            <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setStep("NocForm")}>
               <div
                 style={{
                   padding: "40px",
@@ -93,7 +151,7 @@ function NocListing({ setState }) {
           </div>
         </div>
       </div>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      {loading ? <Loader></Loader> : <Table columns={columns} dataSource={records} pagination={false} />}
     </div>
   );
 }

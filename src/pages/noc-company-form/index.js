@@ -29,8 +29,8 @@ function NocAddListCompany() {
         required: "false",
         type: "select",
         options: [
-          { name: "male", value: "male" },
-          { name: "female", value: "female" },
+          { name: "Company", value: "Company" },
+          { name: "Individual", value: "Individual" },
         ],
       },
       {
