@@ -36,6 +36,7 @@ export const ENDPOINTS = {
   SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveSponsorDetails`,
   SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveVisaGrantDetials`,
   SAVE_FOREIGNER_ACCOMMODATION_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveForeignerAccommodationDetails`,
+  SAVE_TRAVEL_HISTORY_DETAIL: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveNocTravelHistory`,
 };
 
 export const mineralTestIdDetails = (testId) => {

@@ -23,8 +23,8 @@ const ShipmentForm = ({ setStep }) => {
     event.preventDefault();
     const { SampleSubmissionMode, ShipmentBy, shipmentReceiptImage, TrackingNumber} = state;
     const formData = new FormData();
-    const id = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("id") : "";
-    let obj = {id, SampleSubmissionMode, ShipmentBy, TrackingNumber };
+    const ID = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("id") : "";
+    let obj = {ID, SampleSubmissionMode, ShipmentBy, TrackingNumber };
     formData.append("obj", JSON.stringify(obj));
     formData.append("shipmentReceiptImage", shipmentReceiptImage || "");
     try {
