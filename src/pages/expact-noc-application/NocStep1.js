@@ -11,7 +11,7 @@ import { expactApplicationForm } from "utils/constant/url";
 const NocStep1 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
-  const [stateForm, setStateForm] = useState("");
+  const [state, setState] = useState("");
   const [nationalityListing, setNationalityListing] = useState([]);
   const warning = (message = "This is a warning message") => {
     messageApi.open({
@@ -55,7 +55,7 @@ const NocStep1 = ({ setStep }) => {
       CountryName,
       NationalityName,
     };
-    obj.id = stateForm.id;
+    obj.id = state.id;
     formDatas.append("obj", JSON.stringify(obj));
     formDatas.append("passportImage", passportImage);
     formDatas.append("colorPassportImage", colorPassportImage);
@@ -71,7 +71,7 @@ const NocStep1 = ({ setStep }) => {
         warning(message);
       }
       if (!isError && data) {
-        
+        setStep("Step2");
         setLoading(false);
       }
     } catch (error) {
@@ -123,7 +123,13 @@ const NocStep1 = ({ setStep }) => {
       };
 
       const renderInput = (type = "text") => (
-        <input type={type} value={stateForm[commonProps?.name]} {...commonProps} placeholder=" " />
+        <input
+          type={type}
+          value={state[commonProps?.name]}
+          onChange={(e) => changeHandler(e)}
+          {...commonProps}
+          placeholder=" "
+        />
       );
 
       const renderLabel = () => (
@@ -162,27 +168,31 @@ const NocStep1 = ({ setStep }) => {
       );
     });
   };
-
+  const changeHandler = (e) => {
+    const { name, value } = e?.target || {};
+    setState({ ...state, [name]: value });
+  };
   useEffect(() => {
     const id = getCookiesByName("expactapplicationid", true);
-    setLoading(true);
-    (async function () {
-      try {
-        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+    const data = getCookiesByName("expactapplicationformkeys", true);
+    if (data) {
+      setState(data);
+    } else {
+      (async function () {
+        try {
+          const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
 
-        if (isError) {
-          setLoading(false);
-          warning(message);
-        } else if (data) {
-          setLoading(false);
-          setStateForm(data);
-          setCookiesByName("expactapplicationformkeys", data, true);
+          if (isError) {
+            warning(message);
+          } else if (data) {
+            setState(data);
+            setCookiesByName("expactapplicationformkeys", data, true);
+          }
+        } catch (error) {
+          console.log(error.message);
         }
-      } catch (error) {
-        setLoading(false);
-        console.log(error.message);
-      }
-    })();
+      })();
+    }
     (async function () {
       try {
         const { data, isError, message } = await saveSampleListingAPI(
