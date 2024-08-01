@@ -590,6 +590,7 @@ const breadcrumbs = [
     { path: "/expatriate-security", label: "Expatriate Security" },
     { path: "#", label: "NOC Application View" },
   ];
+  console.log(data,"datacoming")
   return (
     <Container>
     
