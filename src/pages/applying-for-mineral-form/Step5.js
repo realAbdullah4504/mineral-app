@@ -6,12 +6,12 @@ import { message, ConfigProvider } from "antd";
 
 const ShipmentForm = ({ setStep }) => {
   const [state, setState] = useState({
-    SampleSubmissionMode: "",           
+    SampleSubmissionMode: "",
     ShipmentBy: "",
     shipmentReceiptImage: "",
-    TrackingNumber: ""
+    TrackingNumber: "",
   });
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const warning = (message = "This is a warning message") => {
     messageApi.open({
@@ -21,10 +21,10 @@ const ShipmentForm = ({ setStep }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { SampleSubmissionMode, ShipmentBy, shipmentReceiptImage, TrackingNumber} = state;
+    const { SampleSubmissionMode, ShipmentBy, shipmentReceiptImage, TrackingNumber } = state;
     const formData = new FormData();
     const ID = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("id") : "";
-    let obj = {ID, SampleSubmissionMode, ShipmentBy, TrackingNumber };
+    let obj = { ID, SampleSubmissionMode, ShipmentBy, TrackingNumber };
     formData.append("obj", JSON.stringify(obj));
     formData.append("shipmentReceiptImage", shipmentReceiptImage || "");
     try {
@@ -47,7 +47,7 @@ const ShipmentForm = ({ setStep }) => {
       console.log(error.message);
     }
   };
- 
+
   const obj = [
     {
       label: "Mode of Sample Submission",
@@ -58,7 +58,8 @@ const ShipmentForm = ({ setStep }) => {
         { name: "Select one", value: "" },
         { name: "In-person", value: "InPerson" },
         { name: "Courier", value: "Courier" },
-    ]},
+      ],
+    },
     { label: "Shipment by", name: "ShipmentBy", required: "false", type: "input" },
     { label: "Upload Receipt", name: "shipmentReceiptImage", required: "false", type: "file" },
     {
@@ -73,7 +74,7 @@ const ShipmentForm = ({ setStep }) => {
     if (name !== "shipmentReceiptImage") {
       setState({ ...state, [name]: value });
     } else {
-        setState({ ...state, ["shipmentReceiptImage"]: e.target.files[0] });
+      setState({ ...state, ["shipmentReceiptImage"]: e.target.files[0] });
     }
   };
   const renderFormItems = () => {
@@ -87,7 +88,15 @@ const ShipmentForm = ({ setStep }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} onChange={(e) => changeHandler(e)} value={state[field.name]} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => (
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={state[field.name]}
+          {...commonProps}
+          placeholder=" "
+        />
+      );
 
       const renderLabel = () => (
         <label
@@ -97,7 +106,7 @@ const ShipmentForm = ({ setStep }) => {
           {field.label}
         </label>
       );
-
+      console.group(state, "state");
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
@@ -108,7 +117,7 @@ const ShipmentForm = ({ setStep }) => {
             <>
               {renderLabel()}
               <select onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps}>
-                <option  disabled style={{ opacity: 0.5 }}>
+                <option disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
@@ -127,24 +136,24 @@ const ShipmentForm = ({ setStep }) => {
   };
   return (
     <ConfigProvider>
-    <div className="mineral-form">
-      <div className="mineral-testing-title">Shipment Details</div>
-      <form className="space-y-4 " onSubmit={handleSubmit}>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
-        <div className="w-full flex justify-center">
-          {loading ? (
-            <Loader></Loader>
-          ) : (
-            <button
-              type="submit"
-              className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
-            >
-              Submit
-            </button>
-          )}
-        </div>
-      </form>
-    </div>
+      <div className="mineral-form">
+        <div className="mineral-testing-title">Shipment Details</div>
+        <form className="space-y-4 " onSubmit={handleSubmit}>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+          <div className="w-full flex justify-center">
+            {loading ? (
+              <Loader></Loader>
+            ) : (
+              <button
+                type="submit"
+                className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+              >
+                Submit
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
     </ConfigProvider>
   );
 };

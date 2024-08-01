@@ -54,9 +54,10 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
       TravelCountryName,
       VisaStayFacility,
     };
-    obj.id = state.id;
+    obj.Id = state.id;
+    obj.VisaDurationInDays = state.VisaDurationInDays;
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("VisaGrantCertificate", VisaGrantCertificate);
+    formDatas.append("visaGrantCertificate", VisaGrantCertificate);
 
     setLoading(true);
     try {
@@ -65,14 +66,13 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
         ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
         formDatas
       );
+
       if (isError) {
         setLoading(false);
         warning(message);
       }
       if (!isError && data) {
         setLoading(false);
-
-        setStep("NocListing");
       }
     } catch (error) {
       setLoading(false);

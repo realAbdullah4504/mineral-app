@@ -31,6 +31,7 @@ export const saveSampleDetailAPI = async (method, url, data) => {
     return { data, isError: false, message: "" };
   } else {
     const message = resp?.message ?? "Something went wrong";
+    console.log(resp, "resperror");
     return { data: [], isError: true, message };
   }
 };
