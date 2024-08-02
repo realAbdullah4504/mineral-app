@@ -223,7 +223,8 @@ const Step2 = ({ setStep }) => {
               <Empty />
             )}
             <div className="mineral-testing-table-header">
-              <div>Sample Details</div>
+              <div>Sample Details</div>{
+                loading ? <Loader/> :
               <button type="submit" className="next-button" style={{ padding: "20PX" }}>
                 {state?.id ? "Update Sample" : "Add Sample"}
                 <svg
@@ -241,6 +242,7 @@ const Step2 = ({ setStep }) => {
                   />
                 </svg>
               </button>
+              }
             </div>
           </div>
           <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>

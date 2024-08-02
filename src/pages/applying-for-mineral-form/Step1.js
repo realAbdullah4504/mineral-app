@@ -19,10 +19,9 @@ const Step1 = ({ setStep }) => {
         let payload = {};
         const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } =
           applicationDetail;
-        if (applicationDetail?.applyAs === "Individual") {
           payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
-        } else {
-          payload = { ...payload, businessDomain, id };
+        if (applicationDetail?.applyAs === "Company") {
+          payload = { ...payload, businessDomain };
         }
         setState({ ...state, ...payload });
       } else {
@@ -155,7 +154,7 @@ const Step1 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -179,9 +178,8 @@ const Step1 = ({ setStep }) => {
     setLoading(true);
     const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = state;
     let payload = {};
-    if (applyAs === "Individual") {
-      payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email };
-    } else {
+    payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email };
+    if (applyAs === "Company") {
       payload = { ...payload, businessDomain };
     }
     if (id) {
