@@ -139,7 +139,6 @@ const ViewCsrCommunity = () => {
   };
 
   const handleChange = (e) => {
-    debugger;
     form.setFieldsValue({ [e.target.name]: e.target.value });
   };
 
