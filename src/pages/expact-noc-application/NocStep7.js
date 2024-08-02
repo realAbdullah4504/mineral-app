@@ -17,13 +17,13 @@ const initialState = {
   otherDetails: "",
   alreadyVisitPakistan: "",
   nocApplicationId: "",
-}
+};
 const NocStep7 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [listLoading, setListLoading] = useState(false);
   const [listing, setListing] = useState([]);
-  const [record, setRecord] = useState({...initialState});
+  const [record, setRecord] = useState({ ...initialState });
   const [applicationDetail, setApplicationDetail] = useState({});
   const nocApplicationId = getCookie("expactapplicationid") || "";
   const warning = (message = "This is a warning message") => {
@@ -49,14 +49,15 @@ const NocStep7 = ({ setStep }) => {
         setRecord({ ...record, alreadyVisitPakistan, nocApplicationId: id });
         setListing(nocApplicationTravelHistory || []);
         setApplicationDetail(data);
-        setRecord({typeOfVisaAvailed: "",
-        pastVisitExpatriateStartDate: "",
-        pastVisitExpatriateEndDate: "",
-        pastVisitedPlace: "",
-        otherDetails: "",
-        nocApplicationId:data?.id,
-        alreadyVisitPakistan:data?.alreadyVisitPakistan,
-      });
+        setRecord({
+          typeOfVisaAvailed: "",
+          pastVisitExpatriateStartDate: "",
+          pastVisitExpatriateEndDate: "",
+          pastVisitedPlace: "",
+          otherDetails: "",
+          nocApplicationId: data?.id,
+          alreadyVisitPakistan: data?.alreadyVisitPakistan,
+        });
       }
     } catch (error) {
       setListLoading(false);
@@ -146,21 +147,11 @@ const NocStep7 = ({ setStep }) => {
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && (
-            <input
-              type="file"
-              value={record ? record[field.name] : ""}
-              {...commonProps}
-            />
-          )}
+          {field.type === "file" && <input type="file" value={record ? record[field.name] : ""} {...commonProps} />}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select
-                onChange={(e) => changeHandler(e)}
-                {...commonProps}
-                value={record ? record[field.name] : ""}
-              >
+              <select onChange={(e) => changeHandler(e)} {...commonProps} value={record ? record[field.name] : ""}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -173,11 +164,7 @@ const NocStep7 = ({ setStep }) => {
             </>
           )}
           {field.type === "textarea" && (
-            <textarea
-              {...commonProps}
-              value={record ? record[field.name] : ""}
-              placeholder=" "
-            />
+            <textarea {...commonProps} value={record ? record[field.name] : ""} placeholder=" " />
           )}
           {field.type !== "select" && renderLabel()}
         </div>
@@ -208,16 +195,16 @@ const NocStep7 = ({ setStep }) => {
       const newRecord = {
         nocApplicationId: nocApplicationId,
         typeOfVisaAvailed,
-      pastVisitExpatriateStartDate,
-      pastVisitExpatriateEndDate,
-      pastVisitedPlace,
-      otherDetails,
+        pastVisitExpatriateStartDate,
+        pastVisitExpatriateEndDate,
+        pastVisitedPlace,
+        otherDetails,
       };
       nocApplicationTravelHistories = [newRecord, ...cloneData];
     }
     const payload = {
       nocApplicationId: nocApplicationId,
-      alreadyVisitPakistan:true,
+      alreadyVisitPakistan: true,
       nocApplicationTravelHistories,
     };
     setLoading(true);
@@ -241,9 +228,9 @@ const NocStep7 = ({ setStep }) => {
     }
   };
   const handleEditClick = (record) => {
-    const startDate = dayjs(record?.pastVisitExpatriateStartDate).format('YYYY-MM-DD');
-    const endDate = dayjs(record?.pastVisitExpatriateEndDate).format('YYYY-MM-DD');
-    setRecord({...record, pastVisitExpatriateStartDate:startDate, pastVisitExpatriateEndDate:endDate});
+    const startDate = dayjs(record?.pastVisitExpatriateStartDate).format("YYYY-MM-DD");
+    const endDate = dayjs(record?.pastVisitExpatriateEndDate).format("YYYY-MM-DD");
+    setRecord({ ...record, pastVisitExpatriateStartDate: startDate, pastVisitExpatriateEndDate: endDate });
   };
   const columns = [
     {
@@ -284,78 +271,56 @@ const NocStep7 = ({ setStep }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Typography.Link onClick={() => handleEditClick(record)}>
-            Edit
-          </Typography.Link>
+          <Typography.Link onClick={() => handleEditClick(record)}>Edit</Typography.Link>
         </Space>
       ),
     },
   ];
+
   return (
     <ConfigProvider>
       <div className="noc-form">
         <div className="mineral-testing-table-header">
           <div className="text-green-600">Travel History Listing</div>
-          <ProgressPercentage
-            percent={87}
-            step={7}
-            total={8}
-          ></ProgressPercentage>
+          <ProgressPercentage percent={87} step={7} total={8}></ProgressPercentage>
         </div>
         <form className="space-y-4 " onSubmit={handleAddForm}>
           {listLoading ? (
             <Loader />
           ) : listing.length ? (
-            <ListingNoc
-              dataSource={listing}
-              setSelectedRecord={setRecord}
-              columns={columns}
-            ></ListingNoc>
+            <ListingNoc dataSource={listing} setSelectedRecord={setRecord} columns={columns}></ListingNoc>
           ) : (
             <Empty />
           )}
           <div className="mineral-testing-table-header">
             <div className="text-green-600">Travel History </div>
-            {
-            loading ? 
-            <Loader/> :
-            <button
-              className="next-button"
-              type="submit"
-              style={{ width: "20%" }}
-            >
-              {record?.id ? "Update  Details" : "Add Details"}
-              <svg
-                style={{ opacity: "0.5", paddingBottom: "5px" }}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                />
-              </svg>
-            </button>
-}
+            {loading ? (
+              <Loader />
+            ) : (
+              <button className="next-button" type="submit" style={{ width: "20%" }}>
+                {record?.id ? "Update  Details" : "Add Details"}
+                <svg
+                  style={{ opacity: "0.5", paddingBottom: "5px" }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
-          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-            {renderFormItems()}
-          </div>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         </form>
-        <div
-          className="button-group-mineral-form"
-          style={{ marginTop: "30px", marginBottom: "30px" }}
-        >
-          <button
-            type="primary"
-            className="next-button"
-            onClick={handlePrevious}
-          >
+        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+          <button type="primary" className="next-button" onClick={handlePrevious}>
             <div>
               {" "}
               previous
@@ -367,11 +332,7 @@ const NocStep7 = ({ setStep }) => {
                 stroke="currentColor"
                 className="size-6"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
               </svg>
             </div>
           </button>
@@ -387,11 +348,7 @@ const NocStep7 = ({ setStep }) => {
                 stroke="currentColor"
                 className="size-6"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
               </svg>
             </div>
           </button>

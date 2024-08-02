@@ -12,8 +12,8 @@ const NocStep4 = ({ setStep }) => {
   const [loading, setLoading] = useState(false);
   const [listLoading, setListLoading] = useState(false);
   const [listing, setListing] = useState([]);
-  const [record, setRecord] = useState({equipmentType:"", equipmentName:""});
-  const nocApplicationId = getCookie('expactapplicationid') || ""; 
+  const [record, setRecord] = useState({ equipmentType: "", equipmentName: "" });
+  const nocApplicationId = getCookie("expactapplicationid") || "";
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
@@ -26,12 +26,12 @@ const NocStep4 = ({ setStep }) => {
   const handlePrevious = () => {
     setStep("Step3");
   };
-  const fetchData = async() => {
+  const fetchData = async () => {
     setListLoading(true);
     try {
       const { data, isError, message } = await commonAPIs(
         REQUEST_TYPES.GET,
-        `${ENDPOINTS.GET_NOC_APPLICATION_BY_ID}?NocApplicationId=${nocApplicationId}`,
+        `${ENDPOINTS.GET_NOC_APPLICATION_BY_ID}?NocApplicationId=${nocApplicationId}`
       );
       if (isError) {
         setListLoading(false);
@@ -45,10 +45,11 @@ const NocStep4 = ({ setStep }) => {
       setListLoading(false);
       console.log(error.message);
     }
-  }
+  };
   useEffect(() => {
     fetchData();
-  },[])
+  }, []);
+
   const obj = [
     {
       label: "Equipment Type",
@@ -56,11 +57,11 @@ const NocStep4 = ({ setStep }) => {
       required: "true",
       type: "select",
       options: [
-        {label:"select one", value:""},
-        {label:"Location Equipment", value:"LocationEquipment"},
-        {label:"Communication Equipment", value:"CommunicationEquipment"},
-        {label:"Geophysical Equipment", value:"GeophysicalEquipment"},
-    ],
+        { label: "select one", value: "" },
+        { label: "Location Equipment", value: "LocationEquipment" },
+        { label: "Communication Equipment", value: "CommunicationEquipment" },
+        { label: "Geophysical Equipment", value: "GeophysicalEquipment" },
+      ],
     },
     {
       label: "Equipment Name",
@@ -81,7 +82,13 @@ const NocStep4 = ({ setStep }) => {
       };
 
       const renderInput = (type = "text") => (
-        <input type={type} onChange={(e) => changeHandler(e)} value={record ? record[field.name] : ""} {...commonProps} placeholder=" " />
+        <input
+          type={type}
+          onChange={(e) => changeHandler(e)}
+          value={record ? record[field.name] : ""}
+          {...commonProps}
+          placeholder=" "
+        />
       );
 
       const renderLabel = () => (
@@ -92,13 +99,13 @@ const NocStep4 = ({ setStep }) => {
           {field.label}
         </label>
       );
-    const changeHandler = (e) => {
-      const {name, value} = e?.target || {};
-      setRecord({
-        ...record,
-        [name]:value
-      })
-    }
+      const changeHandler = (e) => {
+        const { name, value } = e?.target || {};
+        setRecord({
+          ...record,
+          [name]: value,
+        });
+      };
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
@@ -121,7 +128,12 @@ const NocStep4 = ({ setStep }) => {
             </>
           )}
           {field.type === "textarea" && (
-            <textarea onChange={(e) => changeHandler(e)} {...commonProps} value={record ? record[field.name] : ""} placeholder=" " />
+            <textarea
+              onChange={(e) => changeHandler(e)}
+              {...commonProps}
+              value={record ? record[field.name] : ""}
+              placeholder=" "
+            />
           )}
           {field.type !== "select" && renderLabel()}
         </div>
@@ -131,35 +143,31 @@ const NocStep4 = ({ setStep }) => {
 
   const handleAddForm = async (event) => {
     event.preventDefault();
-    const {equipmentType, equipmentName} = record;
+    const { equipmentType, equipmentName } = record;
     let nocApplicationEquipment = [];
     const cloneData = [...listing];
-    if(record?.id){
-      const index = cloneData.findIndex(x => x?.id === record?.id);
-      if(index!==-1){
+    if (record?.id) {
+      const index = cloneData.findIndex((x) => x?.id === record?.id);
+      if (index !== -1) {
         cloneData[index] = record;
       }
-      nocApplicationEquipment = [...cloneData]
-    }else{
-    const newRecord ={
-      nocApplicationId: nocApplicationId,
-      equipmentName,
-      equipmentType
-    }
-    nocApplicationEquipment = [newRecord,  ...cloneData]
+      nocApplicationEquipment = [...cloneData];
+    } else {
+      const newRecord = {
+        nocApplicationId: nocApplicationId,
+        equipmentName,
+        equipmentType,
+      };
+      nocApplicationEquipment = [newRecord, ...cloneData];
     }
     const payload = {
       nocApplicationId: nocApplicationId,
       equipmentRequired: true,
-      nocApplicationEquipment 
-    }
+      nocApplicationEquipment,
+    };
     setLoading(true);
     try {
-      const { data, isError, message } = await commonAPIs(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EQUIPMENT_DETAIL,
-        payload
-      );
+      const { data, isError, message } = await commonAPIs(REQUEST_TYPES.POST, ENDPOINTS.SAVE_EQUIPMENT_DETAIL, payload);
       if (isError) {
         setLoading(false);
         warning(message);
@@ -167,9 +175,9 @@ const NocStep4 = ({ setStep }) => {
       if (!isError && data) {
         setLoading(false);
         setRecord({
-          equipmentName:"",
-          equipmentType:""
-        })
+          equipmentName: "",
+          equipmentType: "",
+        });
         fetchData();
       }
     } catch (error) {
@@ -208,82 +216,83 @@ const NocStep4 = ({ setStep }) => {
       ),
     },
   ];
+
   return (
     <ConfigProvider>
-    <div className="noc-form">
-      <div className="mineral-testing-table-header">
-        <div className="text-green-600">Equipment Listing</div>
-        <ProgressPercentage percent={50} step={4} total={8}></ProgressPercentage>
-      </div>
-      {contextHolder}
-      <form className="space-y-4 " onSubmit={handleAddForm}>
-        {listLoading ? 
-        <Loader/> :
-        listing.length ? (
-          <ListingNoc dataSource={listing} setSelectedRecord={setRecord} columns={columns}></ListingNoc>
-        ) : (
-          <Empty />
-        )}
+      <div className="noc-form">
         <div className="mineral-testing-table-header">
-          <div className="text-green-600">Equipment Details</div>
-          {
-            loading ? 
-            <Loader/> :
-          <button type="submit" className="next-button">
-            {record?.id ? "Update Form" : "Add Form"}
-            <svg
-              style={{ opacity: "0.5", paddingBottom: "5px" }}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          </button>
-          }
+          <div className="text-green-600">Equipment Listing</div>
+          <ProgressPercentage percent={50} step={4} total={8}></ProgressPercentage>
         </div>
+        {contextHolder}
+        <form className="space-y-4 " onSubmit={handleAddForm}>
+          {listLoading ? (
+            <Loader />
+          ) : listing.length ? (
+            <ListingNoc dataSource={listing} setSelectedRecord={setRecord} columns={columns}></ListingNoc>
+          ) : (
+            <Empty />
+          )}
+          <div className="mineral-testing-table-header">
+            <div className="text-green-600">Equipment Details</div>
+            {loading ? (
+              <Loader />
+            ) : (
+              <button type="submit" className="next-button">
+                {record?.id ? "Update Form" : "Add Form"}
+                <svg
+                  style={{ opacity: "0.5", paddingBottom: "5px" }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
-      </form>
-      <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
-        <button type="primary" className="next-button" onClick={handlePrevious}>
-          <div>
-            {" "}
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
-              <path
-                fill="white"
-                fill-rule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
-              />
-            </svg>
-            previous
-          </div>
-        </button>
-        <button type="submit" className="next-button" onClick={handleNext}>
-          <div>
-            {" "}
-            Next
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-            </svg>
-          </div>
-        </button>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
+        </form>
+        <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
+          <button type="primary" className="next-button" onClick={handlePrevious}>
+            <div>
+              {" "}
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
+                <path
+                  fill="white"
+                  fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                />
+              </svg>
+              previous
+            </div>
+          </button>
+          <button type="submit" className="next-button" onClick={handleNext}>
+            <div>
+              {" "}
+              Next
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+              </svg>
+            </div>
+          </button>
+        </div>
       </div>
-    </div>
     </ConfigProvider>
   );
 };

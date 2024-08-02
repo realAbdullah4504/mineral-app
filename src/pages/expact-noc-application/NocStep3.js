@@ -2,29 +2,34 @@ import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { Loader } from "components";
-import { message, ConfigProvider } from "antd";
+import { message, ConfigProvider, Upload } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
-import { saveSampleDetailAPI } from "services/api/common";
+import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
+import { expactApplicationForm } from "utils/constant/url";
+import { Button } from "antd";
 
+const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
 const NocStep3 = ({ setStep, setEquipment }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState("");
+  const [toggle, setToggle] = useState({
+    MapMiningTitle: false,
+  });
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
       content: message,
     });
   };
-
+  const isEdit = localStorage.getItem("NOCEditMode");
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
     formValues.id = state.id;
     const {
-      MapMiningTitle,
       PurposeofVisit,
       NatureOfJob,
       ProjectDistrict,
@@ -44,9 +49,12 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       TentativeExpectedVisitStartDate,
       TentativeExpectedVisitEndDate,
     };
+    if (isEdit && state.miningImage !== state.mapOfMiningTitlePath) {
+      obj.MapMiningTitle = state.miningImage;
+    }
     obj.id = state.id;
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("MapMiningTitle", MapMiningTitle);
+    formDatas.append("MapMiningTitle", state.mapOfMiningTitlePath);
     setLoading(true);
     try {
       const { data, isError, message } = await saveSampleDetailAPI(
@@ -59,8 +67,8 @@ const NocStep3 = ({ setStep, setEquipment }) => {
         warning(message);
       }
       if (!isError && data) {
-        if (formValues["equipment-required"] === "yes") {
-          setEquipment("yes");
+        if (formValues["equipment-required"] === "Yes") {
+          setEquipment("Yes");
           setStep("Step4");
         } else {
           setEquipment("No");
@@ -74,13 +82,34 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       setLoading(false);
     }
   };
+  const handleChange = (fieldName, info) => {
+    const newFileList = info.fileList;
+    if (newFileList.length > 0) {
+      const file = newFileList[0].originFileObj;
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        setToggle((prev) => ({ ...prev, [fieldName]: true }));
+        setState((prev) => ({ ...prev, mapOfMiningTitlePath: file || "" }));
+      });
+      reader.readAsDataURL(file);
+    } else {
+      setState((prev) => ({ ...prev, mapOfMiningTitlePath: "" }));
+    }
+  };
 
   const handlePrevious = () => {
     setStep("Step2");
   };
   const changeHandler = (e) => {
     const { name, value } = e?.target || {};
-    setState({ ...state, [name]: value });
+    if (e.target.name == "PurposeofVisit") {
+      setState((prev) => ({ ...prev, purposeofVisit: value }));
+    }
+    if (e.target.name == "equipment-required") {
+      setState((prev) => ({ ...prev, equipment: ["notempty"] }));
+    }
+    setState((prev) => ({ ...prev, [name]: value }));
   };
   const obj = [
     {
@@ -108,7 +137,7 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       name: "equipment-required",
       required: "true",
       type: "select",
-      options: ["No", "yes"],
+      options: ["No", "Yes"],
     },
     {
       label: "Tentative Date expected to Visit Field",
@@ -140,15 +169,20 @@ const NocStep3 = ({ setStep, setEquipment }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => (
-        <input
-          type={type}
-          onChange={(e) => changeHandler(e)}
-          value={state[commonProps?.name]}
-          {...commonProps}
-          placeholder=" "
-        />
-      );
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
+      const name = commonProps?.name || "";
+      const camelCaseName = name ? toCamelCase(name) : "";
+      let value = state[name] || state[camelCaseName] || "";
+
+      const renderInput = (type = "text") => {
+        if (type == "date") {
+          value = value.split("T")[0];
+        }
+        console.log(camelCaseName, "camelCaseName");
+        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+      };
 
       const renderLabel = () => (
         <label
@@ -158,17 +192,63 @@ const NocStep3 = ({ setStep, setEquipment }) => {
           {field.label}
         </label>
       );
+      const imgurl = state[field.name == "MapMiningTitle" ? "mapOfMiningTitlePath" : ""];
 
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
+          {field.type === "file" && (
+            <>
+              <Upload
+                {...commonProps}
+                // action={imgurl}
+
+                onChange={(info) => handleChange(field.name, info)}
+                listType="picture"
+                maxCount={1}
+                fileList={
+                  imgurl
+                    ? [
+                        {
+                          uid: "-1",
+                          name: "image.png",
+                          status: "done",
+                          url: toggle[field.name] ? URL.createObjectURL(imgurl) : baseUrl + imgurl,
+                        },
+                      ]
+                    : []
+                }
+                showUploadList={{ showRemoveIcon: false }}
+              >
+                {" "}
+                <Button>Upload</Button>
+              </Upload>
+            </>
+          )}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps} defaultValue={state?.nocApplicationEquipments?.length ? "Yes" : "NO"}>
+              <select
+                {...commonProps}
+                defaultValue={
+                  field.name == "PurposeofVisit"
+                    ? state["purposeofVisit" || "PurposeofVisit"]
+                    : state?.equipment?.length
+                    ? "Yes"
+                    : "No"
+                }
+                value={
+                  field.name == "PurposeofVisit"
+                    ? state["purposeofVisit" || "PurposeofVisit"]
+                    : state?.equipment?.length
+                    ? "Yes"
+                    : "No"
+                }
+                disabled={field.name == "equipment-required" ? isEdit : false}
+                onChange={(e) => changeHandler(e)}
+              >
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -187,8 +267,25 @@ const NocStep3 = ({ setStep, setEquipment }) => {
     });
   };
   useEffect(() => {
-    const formValues = getCookiesByName("expactapplicationformkeys", true);
-    setState(formValues);
+    const id = getCookiesByName("expactapplicationid", true);
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            miningImage: data.mapOfMiningTitlePath,
+            equipment: data.nocApplicationEquipments,
+          }));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, []);
   console.log(state, "state");
   return (
@@ -213,22 +310,26 @@ const NocStep3 = ({ setStep, setEquipment }) => {
               previous
             </div>
           </button>
-          <button type="submit" className="next-button">
-            <div>
-              {" "}
-              Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
-          </button>
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <button type="submit" className="next-button">
+              <div>
+                {" "}
+                Next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

@@ -7,42 +7,45 @@ import MoreInfo from "assets/images/geomapinfo.png";
 import { saveSampleListingAPI } from "services/api/common";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { message } from "antd";
+
+import { setCookiesByName } from "utils/helpers";
+
 import { Loader } from "components";
 const items = [
   {
     key: "1",
     label: "Edit",
-    link:"#"
+    link: "#",
   },
   {
     key: "2",
     label: "View Application",
-    link:"#"
+    link: "#",
   },
   {
     key: "3",
     label: "View Sample Details",
-    link:"#"
+    link: "#",
   },
   {
     key: "/shipment-detail",
     label: "Add Shipment Details",
-    link:"/shipment-detail"
+    link: "/shipment-detail",
   },
   {
     key: "5",
     label: "Payment",
-    link:"#"
+    link: "#",
   },
   {
     key: "6",
     label: "View Report",
-    link:"#"
+    link: "#",
   },
   {
     key: "7",
     label: "Request Retest",
-    link:"#"
+    link: "#",
   },
 ];
 
@@ -57,8 +60,13 @@ const TableMap = () => {
       content: message,
     });
   };
+  const onEdit = (key) => {
+    setCookiesByName("mineralEditid", key, true);
+    localStorage.setItem("mineralEditMode", true);
+    navigate(`/applying-for-mineral-form`);
+  };
   const handleDropdownItemClick = (e, id = "") => {
-    if(e?.key){
+    if (e?.key) {
       const url = `${e?.key}?id=${id}`;
       navigate(url);
     }
@@ -120,37 +128,13 @@ const TableMap = () => {
     },
     {
       title: "Action",
-      key: "operation",
-      render: (text, record) => {
-        return (
-          <Space size="middle">
-            <Dropdown
-              menu={{
-                onClick: (e)=>handleDropdownItemClick(e,record?.id),
-                items,
-              }}
-              trigger={["click"]}
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
-                  />
-                </svg>
-              </a>
-            </Dropdown>
-          </Space>
-        )
-      },
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle" style={{ textAlign: "left!important", paddingLeft: "0px" }}>
+          {/* <Typography.Link onClick={() => onChange(record.id)}>View</Typography.Link> */}
+          <button onClick={() => onEdit(record.id)}>Edit</button>
+        </Space>
+      ),
     },
   ];
 

@@ -22,6 +22,7 @@ export const ENDPOINTS = {
   NOC_SPONSOR_CITY_Listing: `${REACT_APP_BASE_URL}/api/City/GetAllCities`,
   SAVE_NOC_SPONSOR_FORM: `${REACT_APP_BASE_URL}api/PublicCompany/CreateUpdate`,
   GET_BANK_LISTING: `${REACT_APP_BASE_URL}api/Bank/GetAll`,
+  GET_NOC_SPONSOR_DETAIL_COMPANY: `${REACT_APP_BASE_URL}/api/PublicCompany/GetCompanyDetail`,
   GET_NATIONALITY_LISTING: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetAllNationality`,
   SAVE_EXPACT_CREATE_FORM_APPLICATION: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveNOCApplicationDetails`,
   GET_EXPACT_APPLICATION_FORM: `${REACT_APP_BASE_URL}api/Bank/GetAll`,
