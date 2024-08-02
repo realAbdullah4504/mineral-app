@@ -64,6 +64,8 @@ const CsrCommunity = () => {
   const handleMenuClick = (e, record) => {
     if (e.key === "6") {
       navigate(`/csr-community-form-view/${record.id}`);
+    } else  if (e.key === "1") {
+      navigate(`/csr-community-form-edit/${record.id}`);
     }
     // Handle other menu items here if needed
   };
