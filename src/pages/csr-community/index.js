@@ -1,7 +1,10 @@
-import React from "react";
-import { Dropdown, Space, Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { Dropdown, Menu, notification, Space, Table } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import MoreInfo from "assets/images/geomapinfo.png";
+import axios from "axios";
+import { getCookie } from "services/session/cookies";
+import { useNavigate } from "react-router-dom";
 
 const items = [
   {
@@ -27,6 +30,44 @@ const items = [
 ];
 
 const CsrCommunity = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}api/PublicVoiceCommunity/GetAllVoiceOfCommunity`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("token")}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        setData(response.data);
+      } catch (error) {
+        notification.error({
+          message: "Error",
+          description: "Failed to fetch data.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleMenuClick = (e, record) => {
+    if (e.key === "6") {
+      navigate(`/csr-community-form-view/${record.id}`);
+    }
+    // Handle other menu items here if needed
+  };
+
   const columns = [
     {
       title: "Sr. No",
@@ -35,7 +76,7 @@ const CsrCommunity = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "personName",
       key: "name",
       render: (text) => {
         return <strong>{text}</strong>;
@@ -70,7 +111,6 @@ const CsrCommunity = () => {
         switch (text) {
           case "In Progress":
             color = "green";
-
             break;
           case "Approved":
             color = "yellow";
@@ -90,12 +130,16 @@ const CsrCommunity = () => {
     {
       title: "Action",
       key: "operation",
-      render: () => (
+      render: (text, record) => (
         <Space size="middle">
           <Dropdown
-            menu={{
-              items,
-            }}
+            overlay={
+              <Menu onClick={(e) => handleMenuClick(e, record)}>
+                {items.map((item) => (
+                  <Menu.Item key={item.key}>{item.label}</Menu.Item>
+                ))}
+              </Menu>
+            }
             trigger={["click"]}
           >
             <a onClick={(e) => e.preventDefault()}>
@@ -120,24 +164,13 @@ const CsrCommunity = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      srNo: 1,
-      name: "Suggestion for waste management",
-      email: "HashaamEjaz@gmail.com",
-      mobileNumber: "+92 311 0000000",
-      commentType: "suggestions",
-      comment: "Please add more trucks for waste disposal to avoid blockages",
-      status: "In Progress",
-    },
-  ];
-
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "csr", label: "CSR" },
     { path: "csr-community", label: "Voice Of Community" },
   ];
+
+  console.log("data", data);
 
   return (
     <div className="table-data">
@@ -181,7 +214,18 @@ const CsrCommunity = () => {
         </div>
       </div>
       <div className="mb-[150px]">
-        <Table columns={columns} dataSource={data} pagination={false} />
+        {data?.data?.length > 0 && (
+          <Table
+            columns={columns}
+            dataSource={data?.data.map((item, index) => ({
+              ...item,
+              key: item.id,
+              srNo: index + 1,
+            }))}
+            loading={loading}
+            pagination={false}
+          />
+        )}
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ const CSRegulations = lazy(() => import("../pages/csr-regulations"));
 const CSRSuccessStories = lazy(() => import("../pages/csr-success-stories"));
 const CSRCommunity = lazy(() => import("../pages/csr-community"));
 const CSRCommunityForm = lazy(() => import("../pages/csr-community-form"));
+const CSRCommunityFormView = lazy(() => import("../pages/csr-community-form/view"));
 const CSR = lazy(() => import("../pages/csr"));
 const ViewResults = lazy(() => import("../pages/view-results"));
 
@@ -822,6 +823,15 @@ const AppRouter = () => (
           path="/noc-view-application"
           element={
             <PublicRoute component={NOCApplicationView} layout={DashboardLayout} />
+          }
+        />
+         <Route
+          path="/csr-community-form-view/:id"
+          element={
+            <PublicRoute
+              component={CSRCommunityFormView}
+              layout={DashboardLayout}
+            />
           }
         />
       </Routes>
