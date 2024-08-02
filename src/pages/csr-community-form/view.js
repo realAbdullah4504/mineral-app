@@ -146,7 +146,7 @@ const ViewCsrCommunity = () => {
   console.log("form", form.getFieldsValue());
 
   return (
-    <Container classes="w-[90%]">
+    <Container classes="w-[70%]">
       <div className="flex flex-col">
         <div className="flex mb-[62px] mt-[41px]">
           <BreadCrumbs breadcrumbs={breadcrumbs} />
@@ -155,7 +155,7 @@ const ViewCsrCommunity = () => {
           Voice Of <span className="pl-4 text-[#009969]">Community</span>
         </div>
         <Form form={form} onFinish={onFinish} className="space-y-4">
-          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-2">
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
             <Form.Item
               name="Name"
               rules={[{ required: true, message: "Please input your Name!" }]}
@@ -299,7 +299,7 @@ const ViewCsrCommunity = () => {
             </Form.Item>
           </div>
           <Form.Item>
-            <div className="w-full flex justify-center mb-10">
+            <div className="w-full flex justify-center mb-10 mt-2">
               <Button
                 type="primary"
                 htmlType="submit"
