@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Loader } from "components";
-import { message, ConfigProvider } from "antd";
+import { message, ConfigProvider, Button, Upload } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { saveSampleDetailAPI, saveSampleListingAPI, testApplicationDetailAPI } from "services/api/common";
-import { setCookiesByName } from "utils/helpers";
+import { setCookiesByName, getCookiesByName } from "utils/helpers";
+import { expactApplicationForm } from "utils/constant/url";
 const NocForm = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [toggle, setToggle] = useState({
+    TitleGrantLetter: false,
+    SubLeaseLetter: false,
+    depositSlip: false,
+  });
+  const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
   const [applyAs, setApplyAs] = useState("Normal");
+  const [state, setState] = useState("");
   const [loading, setLoading] = useState(false);
   const [bankListing, setBankListing] = useState([]);
   const warning = (message = "This is a warning message") => {
@@ -17,6 +25,10 @@ const NocForm = ({ setStep }) => {
   };
 
   const handleApplyAsChange = (value) => {
+    setState((prevState) => ({
+      ...prevState,
+      nocType: value,
+    }));
     setApplyAs(value);
   };
 
@@ -104,8 +116,19 @@ const NocForm = ({ setStep }) => {
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
       };
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => {
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        let value = state[name] || state[camelCaseName] || "";
+        if (type == "date") {
+          value = state["dob"]?.split("T")[0] || state["DOB"]?.split("T")[0] || "";
+        }
+        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+      };
 
       const renderLabel = () => (
         <label
@@ -116,12 +139,49 @@ const NocForm = ({ setStep }) => {
         </label>
       );
 
+      const imgurl =
+        state[
+          field.name == "TitleGrantLetter"
+            ? "titleGrantLetterPath"
+            : field.name == "SubLeaseLetter"
+            ? "subLeaseLetterPath"
+            : field.name == "depositSlip"
+            ? "depositSlipPath"
+            : ""
+        ];
+
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "text" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
+          {field.type === "file" && (
+            <>
+              <Upload
+                {...commonProps}
+                // action={imgurl}
+                onChange={(info) => handleChange(field.name, info)}
+                listType="picture"
+                maxCount={1}
+                fileList={
+                  imgurl
+                    ? [
+                        {
+                          uid: "-1",
+                          name: "image.png",
+                          status: "done",
+                          url: toggle[field.name] ? URL.createObjectURL(imgurl) : baseUrl + imgurl,
+                        },
+                      ]
+                    : []
+                }
+              >
+                {" "}
+                <Button>Upload</Button>
+              </Upload>
+              {/* <input type="file" onChange={changeHandler} {...commonProps} accept="image/*,application/pdf,text/*" /> */}
+            </>
+          )}
           {field.type === "select" && (
             <>
               {renderLabel()}
@@ -143,7 +203,7 @@ const NocForm = ({ setStep }) => {
       );
     });
   };
-
+  const isEdit = localStorage.getItem("NOCEditMode");
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -154,11 +214,8 @@ const NocForm = ({ setStep }) => {
       NOCType,
       TitleIssueDate,
       TitleExpireDate,
-      TitleGrantLetter,
       SubLeaseIssueDate,
       SubLeaseExpireDate,
-      SubLeaseLetter,
-      depositSlip,
       BankId,
       BranchName,
       DepositDate,
@@ -187,10 +244,20 @@ const NocForm = ({ setStep }) => {
         obj[key] = possibleKeys[key];
       }
     });
+
+    if (isEdit && state.subleaseImg !== state.subLeaseLetterPath) {
+      obj.SubLeaseLetter = state.SubLeaseLetter;
+    }
+    if (isEdit && state.grantImg !== state.titleGrantLetterPath) {
+      obj.TitleGrantLetter = state.TitleGrantLetter;
+    }
+    if (isEdit && state.depositImg !== state.depositSlipPath) {
+      obj.depositSlip = state.depositSlip;
+    }
     formDatas.append("obj", JSON.stringify(obj));
-    if (TitleGrantLetter) formDatas.append("TitleGrantLetter", TitleGrantLetter);
-    if (SubLeaseLetter) formDatas.append("SubLeaseLetter", SubLeaseLetter);
-    if (depositSlip) formDatas.append("depositSlip", depositSlip);
+    if (state.titleGrantLetterPath) formDatas.append("TitleGrantLetter", state.titleGrantLetterPath);
+    if (state.subLeaseLetterPath) formDatas.append("SubLeaseLetter", state.subLeaseLetterPath);
+    if (state.depositSlipPath) formDatas.append("depositSlip", state.depositSlipPath);
 
     try {
       const { data, isError, message } = await saveSampleDetailAPI(
@@ -212,8 +279,78 @@ const NocForm = ({ setStep }) => {
       console.log(error.message);
     }
   };
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+
+    // if (e.target.files && e.target.files.length > 0) {
+    //   const reader = new FileReader();
+    //   reader.addEventListener("load", () => {
+    //     setSelectedImage(reader.result?.toString() || userAvatar);
+    //     setIsBaseUrl(true);
+    //     setIsEditButton(true);
+    //   });
+    //   reader.readAsDataURL(e.target.files[0]);
+    // }
+
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const handleChange = (fieldName, info) => {
+    const newFileList = info.fileList;
+    if (newFileList.length > 0) {
+      const file = newFileList[0].originFileObj;
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        setToggle((prev) => ({ ...prev, [fieldName]: true }));
+        if (fieldName === "TitleGrantLetter") {
+          setState((prev) => ({ ...prev, titleGrantLetterPath: file || "" }));
+        }
+        if (fieldName === "SubLeaseLetter") {
+          setState((prev) => ({ ...prev, subLeaseLetterPath: file || "" }));
+        }
+        if (fieldName === "depositSlip") {
+          setState((prev) => ({ ...prev, depositSlipPath: file || "" }));
+        }
+      });
+      reader.readAsDataURL(file);
+    } else {
+      if (fieldName === "TitleGrantLetter") {
+        setState((prev) => ({ ...prev, titleGrantLetterPath: "" }));
+      }
+      if (fieldName === "SubLeaseLetter") {
+        setState((prev) => ({ ...prev, subLeaseLetterPath: "" }));
+      }
+      if (fieldName === "depositSlip") {
+        setState((prev) => ({ ...prev, depositSlipPath: "" }));
+      }
+    }
+  };
 
   useEffect(() => {
+    const id = getCookiesByName("expactapplicationid", true);
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            subleaseImg: data.subLeaseLetterPath,
+            grantImg: data.titleGrantLetterPath,
+            depositImg: data.depositSlip,
+          }));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+
     (async function () {
       try {
         setLoading(true);
@@ -235,6 +372,7 @@ const NocForm = ({ setStep }) => {
       }
     })();
   }, []);
+  console.log(state, "state");
   return (
     <div>
       <div>
@@ -255,6 +393,7 @@ const NocForm = ({ setStep }) => {
               className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
               required={true}
               name="NOCType"
+              value={state["nocType"]}
               onChange={(e) => handleApplyAsChange(e.target.value)}
             >
               <option value="" disabled selected style={{ opacity: 0.5 }}>

@@ -10,19 +10,41 @@ const Step1 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState({ applyAs: "Individual" });
-
+  const isEdit = localStorage.getItem("mineralEditMode");
   useEffect(() => {
     const applicationDetail = getCookiesByName("testApplication", true);
-    if (Object.keys(applicationDetail).length) {
-      let payload = {};
-      const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } =
-        applicationDetail;
-      if (applicationDetail?.applyAs === "Individual") {
-        payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
+    const applicationDetailid = getCookiesByName("mineralEditid", true);
+    if (!isEdit) {
+      if (Object.keys(applicationDetail).length) {
+        let payload = {};
+        const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } =
+          applicationDetail;
+        if (applicationDetail?.applyAs === "Individual") {
+          payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
+        } else {
+          payload = { ...payload, businessDomain, id };
+        }
+        setState({ ...state, ...payload });
       } else {
-        payload = { ...payload, businessDomain, id };
       }
-      setState({ ...state, ...payload });
+    } else {
+      (async function () {
+        try {
+          const { data, isError, message } = await testApplicationDetailAPI(
+            REQUEST_TYPES.POST,
+            ENDPOINTS.TEST_APPLICATION_DETAILS,
+            { id: applicationDetailid }
+          );
+
+          if (isError) {
+            warning(message);
+          } else if (data) {
+            console.log(data, "data");
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      })();
     }
   }, []);
   const warning = (message = "This is a warning message") => {
@@ -177,7 +199,6 @@ const Step1 = ({ setStep }) => {
       }
       if (!isError && data) {
         setLoading(false);
-        console.log(data, "data");
         setCookiesByName("testApplication", data, true);
         setStep("step2");
       }

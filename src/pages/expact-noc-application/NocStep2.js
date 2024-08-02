@@ -4,8 +4,9 @@ import ProgressPercentage from "components/UI/ProgressPercentage";
 import { Loader } from "components";
 import { message, ConfigProvider } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
-import { saveSampleDetailAPI } from "services/api/common";
+import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
+import { expactApplicationForm } from "utils/constant/url";
 
 const NocStep2 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -82,16 +83,16 @@ const NocStep2 = ({ setStep }) => {
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
       };
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
+      const renderInput = (type = "text") => {
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        const value = state[name] || state[camelCaseName] || "";
 
-      const renderInput = (type = "text") => (
-        <input
-          type={type}
-          onChange={(e) => changeHandler(e)}
-          value={state[commonProps?.name]}
-          {...commonProps}
-          placeholder=" "
-        />
-      );
+        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+      };
 
       const renderLabel = () => (
         <label
@@ -130,8 +131,20 @@ const NocStep2 = ({ setStep }) => {
     });
   };
   useEffect(() => {
-    const formValues = getCookiesByName("expactapplicationformkeys", true);
-    setState(formValues);
+    const id = getCookiesByName("expactapplicationid", true);
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, []);
 
   return (
