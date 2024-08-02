@@ -208,7 +208,6 @@ const NocStep4 = ({ setStep }) => {
       ),
     },
   ];
-  console.log(record, "record");
   return (
     <ConfigProvider>
     <div className="noc-form">

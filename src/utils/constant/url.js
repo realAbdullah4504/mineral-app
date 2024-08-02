@@ -16,7 +16,7 @@ export const ENDPOINTS = {
   SAVE_TEST_INFO: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveTestInformation`,
   SAVE_BACKGROUND_INFO: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveBackgroundInformation`,
   SAVE_SHIPMENT_INFO: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveShipmentDetails`,
-  Mineral_Form_Listing: `${REACT_APP_BASE_URL}api/MineralTest/GetAll`,
+  Mineral_Form_Listing: `${REACT_APP_BASE_URL}api/PublicTestApplication/GetAllTestApplication`,
   NOC_Form_Listing: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetAllNOC`,
   NOC_SPONSOR_Listing: `${REACT_APP_BASE_URL}api/PublicCompany/GetAllCompanies`,
   NOC_SPONSOR_CITY_Listing: `${REACT_APP_BASE_URL}/api/City/GetAllCities`,
@@ -34,8 +34,9 @@ export const ENDPOINTS = {
   SAVE_EXPACT_APPLICATION_PURPOSEVIST_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SavePurposeOfVisit`,
   SAVE_EQUIPMENT_DETAIL: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveEquipmentDetail`,
   SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveSponsorDetails`,
-  SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveVisaGrantDetials`,
+  SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveVisaGrantDetails`,
   SAVE_FOREIGNER_ACCOMMODATION_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveForeignerAccommodationDetails`,
+  SAVE_TRAVEL_HISTORY_DETAIL: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveNocTravelHistory`,
 };
 
 export const mineralTestIdDetails = (testId) => {

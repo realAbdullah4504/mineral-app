@@ -204,7 +204,7 @@ const NocForm = ({ setStep }) => {
       }
       if (!isError && data) {
         setLoading(false);
-        setCookiesByName("expactapplicationid", data?.id, true);
+        // setCookiesByName("expactapplicationid", data?.id, true);
         setStep("Step1");
       }
     } catch (error) {

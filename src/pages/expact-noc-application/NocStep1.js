@@ -71,6 +71,7 @@ const NocStep1 = ({ setStep }) => {
         warning(message);
       }
       if (!isError && data) {
+        setCookiesByName("expactapplicationformkeys", data, true);
         setStep("Step2");
         setLoading(false);
       }
@@ -122,15 +123,16 @@ const NocStep1 = ({ setStep }) => {
         required: field.required,
       };
 
-      const renderInput = (type = "text") => (
-        <input
-          type={type}
-          value={state[commonProps?.name]}
-          onChange={(e) => changeHandler(e)}
-          {...commonProps}
-          placeholder=" "
-        />
-      );
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
+      const renderInput = (type = "text") => {
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        const value = state[name] || state[camelCaseName] || "";
+
+        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+      };
 
       const renderLabel = () => (
         <label

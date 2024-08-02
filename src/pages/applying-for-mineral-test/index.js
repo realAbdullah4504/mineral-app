@@ -71,26 +71,26 @@ const TableMap = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "testName",
+      key: "testName",
       render: (text) => {
         return <strong>{text}</strong>;
       },
     },
     {
       title: "Type of Test",
-      dataIndex: "category",
-      key: "category",
+      dataIndex: "mineralTestId",
+      key: "mineralTestId",
     },
     {
       title: "Mineral Lab",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "labName",
+      key: "labName",
     },
     {
       title: "Status",
-      dataIndex: "isActive",
-      key: "isActive",
+      dataIndex: "status",
+      key: "status",
       render: (text) => {
         let color;
         let show;
@@ -175,6 +175,7 @@ const TableMap = () => {
         }
         if (!isError && data) {
           console.log(data, "data");
+          console.log(data,"Shujahat");
           setListing(data);
           setLoading(false);
         }

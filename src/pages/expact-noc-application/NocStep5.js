@@ -62,6 +62,7 @@ const NocStep5 = ({ setStep, equipment }) => {
       }
       if (!isError && data) {
         setLoading(false);
+        setStep("Step6");
       }
     } catch (error) {
       setLoading(false);
