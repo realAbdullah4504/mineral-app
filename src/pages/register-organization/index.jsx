@@ -215,7 +215,7 @@ const RegisterOrganization = () => {
 
   return (
     <>
-      <Container classes="mt-8 w-[90%]">
+      <Container classes="mt-8 w-[70%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
 
         <div className="flex flex-wrap mt-[20px]">
