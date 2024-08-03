@@ -135,7 +135,7 @@ const TableMap = () => {
           {!!(record.status == "PublicNewEntry" || record.status == "SubmissionFailed") && (
             <button onClick={() => onEdit(record.id)}>Edit</button>
           )}
-          {<button onClick={() => onEdit(record.id)}>view</button>}
+          {<button>view</button>}
         </Space>
       ),
     },
