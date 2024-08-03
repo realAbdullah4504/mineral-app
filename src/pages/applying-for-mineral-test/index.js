@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, Space, Table } from "antd";
+import { Dropdown, Space, Table, Typography } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import MoreInfo from "assets/images/geomapinfo.png";
 import { saveSampleListingAPI } from "services/api/common";
@@ -61,6 +61,11 @@ const TableMap = () => {
     });
   };
   const onEdit = (key) => {
+    setCookiesByName("mineralEditid", key, true);
+    localStorage.setItem("mineralEditMode", true);
+    navigate(`/applying-for-mineral-form`);
+  };
+  const onChange = (key) => {
     setCookiesByName("mineralEditid", key, true);
     localStorage.setItem("mineralEditMode", true);
     navigate(`/applying-for-mineral-form`);
@@ -131,8 +136,11 @@ const TableMap = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle" style={{ textAlign: "left!important", paddingLeft: "0px" }}>
-          {/* <Typography.Link onClick={() => onChange(record.id)}>View</Typography.Link> */}
-          <button onClick={() => onEdit(record.id)}>Edit</button>
+          <Typography.Link onClick={() => onChange(record.id)}>View</Typography.Link>
+          {
+            record?.status === "Draft" ? 
+            <button onClick={() => onEdit(record.id)}>Edit</button> : ""
+          }
         </Space>
       ),
     },

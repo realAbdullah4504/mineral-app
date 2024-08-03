@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ENDPOINTS, REQUEST_TYPES, mineralTestIdDetails } from "utils/constant/url";
-import { saveSampleDetailAPI, testApplicationDetailAPI } from "services/api/common";
+import { saveSampleDetailAPI, testApplicationDetailAPI, commonAPIs } from "services/api/common";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { Loader } from "components";
@@ -21,40 +21,45 @@ const Step3 = ({ setStep }) => {
   const [testId, setTestId] = useState("");
   const [loading, setLoading] = useState(false);
 
-  console.log(state, "statestep3");
+
   useEffect(() => {
-    console.log(labId, "labId");
     if (!labId) {
-      console.log(state, "stateif");
       setState({ ...state, testPrice: "" });
     } else {
-      console.log(state, "stateelse");
       const lab = labIdDetails.find((item) => item.labId == labId);
       setState({ ...state, testPrice: lab?.testPrice || "" });
     }
   }, [labId]);
   useEffect(() => {
     const applicationDetail = getCookiesByName("testApplication", true);
-    if (Object.keys(applicationDetail).length) {
-      let payload = {};
-      const { id, labId, testPrice, purposeOfTest, mineralTestId } = applicationDetail;
-      payload = { labId, testPrice, purposeOfTest, mineralTestId };
-      if (id) {
-        payload = { id, ...payload };
-      }
-      setState({ ...state, ...payload });
-    }
+    const TestApplicationId = getCookiesByName("mineralEditid", true) || applicationDetail?.id  || "";
     (async function () {
       try {
         const { data, isError, message } = await testApplicationDetailAPI(
           REQUEST_TYPES.GET,
           ENDPOINTS.GET_MINERAL_TEST
         );
-        if (isError) {
+        const { data:applicationDetail, isError1, message1 } = await commonAPIs(
+          REQUEST_TYPES.GET,
+          `${ENDPOINTS.GET_TEST_APPLICATION_BY_ID}?TestApplicationId=${TestApplicationId}`,
+        );
+        if (isError || isError1) {
           warning(message);
         }
         if (!isError && data) {
           setMineralTest(data);
+        }
+        if(!isError1 && applicationDetail){
+          if (Object.keys(applicationDetail).length) {
+            let payload = {};
+            const { id, labId, testPrice, purposeOfTest, mineralTestId } = applicationDetail;
+            payload = { labId, testPrice, purposeOfTest, mineralTestId };
+            if (id) {
+              payload = { id, ...payload };
+            }
+            setState({ ...state, ...payload });
+            setTestId(mineralTestId);
+          }
         }
       } catch (error) {
         console.log(error.message);
@@ -63,7 +68,6 @@ const Step3 = ({ setStep }) => {
   }, []);
 
   useEffect(() => {
-    console.log(labId, "labId2");
     (async function () {
       try {
         const { data, isError, message } = await testApplicationDetailAPI(
@@ -108,8 +112,6 @@ const Step3 = ({ setStep }) => {
     if (id) {
       payload = { ...payload, id };
     }
-
-    console.log(payload, "payload");
     try {
       const { data, isError, message } = await saveSampleDetailAPI(
         REQUEST_TYPES.POST,

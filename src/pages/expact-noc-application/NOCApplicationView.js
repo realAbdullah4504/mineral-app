@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {REACT_APP_FILE_URL} from 'utils/constant/url'
 import { Container } from "components/UI/Container";
 import styles from "./NOCApplication.module.css";
 import { UploadOutlined } from "@ant-design/icons";
@@ -275,7 +276,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Title Grant Letter",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.titleGrantLetterPath,
+            url: REACT_APP_FILE_URL + data?.titleGrantLetterPath,
           };
           setFileList([...fileList, file]);
         }
@@ -288,7 +289,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Sub Lease Letter",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.subLeaseLetterPath,
+            url: REACT_APP_FILE_URL + data?.subLeaseLetterPath,
           };
           setFileList1([...fileList1, file]);
         }
@@ -301,7 +302,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Deposit Slip",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.depositSlip,
+            url: REACT_APP_FILE_URL + data?.depositSlip,
           };
           setFileList2([...fileList2, file]);
         }
@@ -314,7 +315,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Expatriate Personal Picture",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.expatriatePersonalDetailImage,
+            url: REACT_APP_FILE_URL + data?.expatriatePersonalDetailImage,
           };
           setFileList3([...fileList3, file]);
         }
@@ -327,7 +328,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Passport Image",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.passportImagePath,
+            url: REACT_APP_FILE_URL + data?.passportImagePath,
           };
           setFileList4([...fileList4, file]);
         }
@@ -340,7 +341,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Map of Mining Title",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.mapOfMiningTitlePath,
+            url: REACT_APP_FILE_URL + data?.mapOfMiningTitlePath,
           };
           setFileList5([...fileList5, file]);
         }
@@ -353,7 +354,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Sponor CINC Front Image",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.sponsorPakistaniOfficialCNICFrontImagePath,
+            url: REACT_APP_FILE_URL + data?.sponsorPakistaniOfficialCNICFrontImagePath,
           };
           setFileList6([...fileList6, file]);
         }
@@ -366,7 +367,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Sponor CINC Back Image",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.sponsorPakistaniOfficialCNICBackImagePath,
+            url: REACT_APP_FILE_URL + data?.sponsorPakistaniOfficialCNICBackImagePath,
           };
           setFileList8([...fileList8, file]);
         }
@@ -379,7 +380,7 @@ function NOCApplicationView() {
             uid: "-1",
             name: "Visa Grant Certificate",
             status: "done",
-            url: process.env.REACT_APP_FILE_URL + data?.visaGrantCertificate,
+            url: REACT_APP_FILE_URL + data?.visaGrantCertificate,
           };
           setFileList7([...fileList7, file]);
         }
@@ -744,7 +745,7 @@ function NOCApplicationView() {
 
                   {showNOCType ? (
                     <>
-                      <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                      <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                         Deposit Details
                       </h3>
                       <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
@@ -860,7 +861,7 @@ function NOCApplicationView() {
                      Second Page Start
                     */}
 
-                  <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                     Expatriate Personal Details
                   </h3>
                   <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
@@ -1094,7 +1095,7 @@ function NOCApplicationView() {
                   {/*
                         Third Page Start
                     */}
-                  <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                     Professional Details
                   </h3>
                   <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
@@ -1161,7 +1162,7 @@ function NOCApplicationView() {
                         Fourth Page Start
                     */}
 
-                  <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                     Purpose of Visit
                   </h3>
                   <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
@@ -1334,7 +1335,7 @@ function NOCApplicationView() {
                         sixth page start
                     */}
 
-                  <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                     Sponsor Details
                   </h3>
                   <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
@@ -1517,7 +1518,7 @@ function NOCApplicationView() {
                         seventh page start
                     */}
 
-                  <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                     Foreigner's Accommodation Details
                   </h3>
                   <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
@@ -1632,7 +1633,7 @@ function NOCApplicationView() {
                         ninth page start
                     */}
 
-                  <h3 style={{ marginTop: "10px", marginLeft: "130px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                     Visa Grant Details
                   </h3>
                   <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
