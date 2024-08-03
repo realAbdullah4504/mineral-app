@@ -1,7 +1,6 @@
 import { Table, Button } from "antd";
 
 function ListingNoc({ dataSource, columns }) {
-  // Add Sr No to the data source
   const dataSourceWithSrNo = dataSource.map((item, index) => ({
     ...item,
     "sr.no": index + 1,

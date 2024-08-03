@@ -17,6 +17,7 @@ const NocStep5 = ({ setStep, equipment }) => {
     sponsorPakistaniOfficialCNICFrontImagePath: false,
     sponsorPakistaniOfficialCNICBackImagePath: false,
   });
+  const creationId = getCookiesByName("expactapplicationid");
   const isEdit = localStorage.getItem("NOCEditMode");
   const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
   const warning = (message = "This is a warning message") => {
@@ -29,7 +30,7 @@ const NocStep5 = ({ setStep, equipment }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    formValues.id = state.id;
+    formValues.id = state.id || creationId;
     const {
       SponsorPakistanAddress,
       SponsorAddressVisitingOrganisation,
@@ -50,40 +51,73 @@ const NocStep5 = ({ setStep, equipment }) => {
       SponsorPakistaniOfficialContactNumber,
       SponsorPakistaniOfficialAddress,
     };
+    if (isEdit) {
+      if (state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        obj.cnicImageFront = state.frontImage;
+      } else {
+        obj.cnicImageFront = state.sponsorPakistaniOfficialCNICFrontImagePath;
+      }
+      if (state.backImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        obj.cnicImageBack = state.backImage;
+      } else {
+        obj.cnicImageBack = state.sponsorPakistaniOfficialCNICBackImagePath;
+      }
+    } else {
+      if (state.frontImage) {
+        obj.cnicImageFront = state.frontImage;
+      }
+      if (state.backImage) {
+        obj.cnicImageBack = state.backImage;
+      }
+    }
 
-    if (isEdit && state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
-      obj.cnicImageFront = state.frontImage;
-    }
-    if (isEdit && state.backImage !== state.sponsorPakistaniOfficialCNICBackImagePath) {
-      obj.cnicImageBack = state.backImage;
-    }
     obj.id = state.id;
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("cnicImageFront", state.sponsorPakistaniOfficialCNICFrontImagePath);
-    formDatas.append("cnicImageBack", state.sponsorPakistaniOfficialCNICBackImagePath);
-
-    setLoading(true);
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS,
-        formDatas
-      );
-      if (isError) {
-        setLoading(false);
-        warning(message);
+    if (isEdit) {
+      if (state.backImage !== state.sponsorPakistaniOfficialCNICBackImagePath) {
+        formDatas.append("cnicImageBack", state.sponsorPakistaniOfficialCNICBackImagePath);
       }
-      if (!isError && data) {
-        setLoading(false);
-        setStep("Step6");
+    } else {
+      if (state.sponsorPakistaniOfficialCNICBackImagePath !== state.backImage) {
+        formDatas.append("cnicImageBack", state.sponsorPakistaniOfficialCNICBackImagePath);
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
-    } finally {
-      setLoading(false);
+    }
+    if (isEdit) {
+      if (state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        formDatas.append("cnicImageFront", state.sponsorPakistaniOfficialCNICFrontImagePath);
+      }
+    } else {
+      if (state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        formDatas.append("cnicImageFront", state.sponsorPakistaniOfficialCNICFrontImagePath);
+      }
+    }
+    if (!state.sponsorPakistaniOfficialCNICBackImagePath || !state.sponsorPakistaniOfficialCNICFrontImagePath) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await saveSampleDetailAPI(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS,
+          formDatas
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          setLoading(false);
+          setStep("Step6");
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
+
   const handleChange = (fieldName, info) => {
     const newFileList = info.fileList;
     if (newFileList.length > 0) {
@@ -114,7 +148,7 @@ const NocStep5 = ({ setStep, equipment }) => {
     setState({ ...state, [name]: value });
   };
   const handlePrevious = () => {
-    if (equipment === "yes") {
+    if (equipment === "Yes") {
       setStep("Step4");
     } else {
       setStep("Step3");
@@ -270,13 +304,14 @@ const NocStep5 = ({ setStep, equipment }) => {
       }
     })();
   }, []);
-  console.log(state, "state");
+
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Sponsor Details</div>
         <ProgressPercentage percent={62} step={5} total={8}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>

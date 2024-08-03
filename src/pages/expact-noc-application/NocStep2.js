@@ -18,12 +18,12 @@ const NocStep2 = ({ setStep }) => {
       content: message,
     });
   };
-
+  const creationId = getCookiesByName("expactapplicationid");
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    formValues.id = state.id;
+    formValues.id = state.id || creationId;
     setLoading(true);
     try {
       const { data, isError, message } = await saveSampleDetailAPI(

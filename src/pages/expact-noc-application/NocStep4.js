@@ -7,6 +7,7 @@ import { Empty } from "antd";
 import ListingNoc from "./ListingForms";
 import { getCookie } from "services/session/cookies";
 import { commonAPIs } from "services/api/common";
+import { getCookiesByName } from "utils/helpers";
 const NocStep4 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ const NocStep4 = ({ setStep }) => {
   const [listing, setListing] = useState([]);
   const [record, setRecord] = useState({ equipmentType: "", equipmentName: "" });
   const nocApplicationId = getCookie("expactapplicationid") || "";
+
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",

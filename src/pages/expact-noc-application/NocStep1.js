@@ -21,6 +21,7 @@ const NocStep1 = ({ setStep }) => {
   const [state, setState] = useState("");
   const [nationalityListing, setNationalityListing] = useState([]);
   const isEdit = localStorage.getItem("NOCEditMode");
+  const creationId = getCookiesByName("expactapplicationid");
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
@@ -30,6 +31,7 @@ const NocStep1 = ({ setStep }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
     const {
@@ -59,35 +61,60 @@ const NocStep1 = ({ setStep }) => {
       CountryName,
       NationalityName,
     };
-    if (isEdit && state.passportImage !== state.passportImagePath) {
-      obj.passportImage = state.passportImage;
-    }
-    if (isEdit && state.colorPassportImage !== state.expatriatePersonalDetailImage) {
-      obj.colorPassportImage = state.colorPassportImage;
-    }
-    obj.id = state.id;
+
+    obj.id = state.id || creationId;
     obj.DOB = state.dob;
+
+    if (isEdit) {
+      if (state.passportImagePrev !== state.passportImagePath) {
+        obj.passportImage = state.passportImagePrev;
+      } else {
+        obj.passportImage = state.passportImagePath;
+      }
+      if (state.colorPassportImagePrev !== state.expatriatePersonalDetailImage) {
+        obj.colorPassportImage = state.colorPassportImagePrev;
+      } else {
+        obj.colorPassportImage = state.expatriatePersonalDetailImage;
+      }
+    }
+    if (!isEdit && state.passportImagePrev) {
+      obj.passportImage = state.passportImagePrev;
+    }
+
+    if (!isEdit && state.colorPassportImagePrev) {
+      obj.colorPassportImage = state.colorPassportImagePrev;
+    }
+
+    if (state.passportImagePrev !== state.passportImagePath) {
+      formDatas.append("passportImage", state.passportImagePath);
+    }
+    if (state.colorPassportImagePrev !== state.expatriatePersonalDetailImage) {
+      formDatas.append("colorPassportImage", state.expatriatePersonalDetailImage);
+    }
+
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("passportImage", state.passportImagePath);
-    formDatas.append("colorPassportImage", state.expatriatePersonalDetailImage);
-    setLoading(true);
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_APPLICATION_DETAILS,
-        formDatas
-      );
-      if (isError) {
+    if (!state.passportImagePath || !state.expatriatePersonalDetailImage) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await saveSampleDetailAPI(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_DETAILS,
+          formDatas
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          setStep("Step2");
+          setLoading(false);
+        }
+      } catch (error) {
         setLoading(false);
-        warning(message);
+        console.log(error.message);
       }
-      if (!isError && data) {
-        setStep("Step2");
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
     }
   };
 
@@ -143,9 +170,18 @@ const NocStep1 = ({ setStep }) => {
         const camelCaseName = name ? toCamelCase(name) : "";
         let value = state[name] || state[camelCaseName] || "";
         if (type == "date") {
-          value = state["dob"]?.split("T")[0] || state["DOB"]?.split("T")[0] || "";
+          value = state["dob"]?.split("T")[0] || "";
         }
-        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+        return (
+          <input
+            type={type}
+            value={value}
+            onChange={(e) => changeHandler(e)}
+            required={true}
+            {...commonProps}
+            placeholder=" "
+          />
+        );
       };
 
       const renderLabel = () => (
@@ -183,6 +219,7 @@ const NocStep1 = ({ setStep }) => {
                       ]
                     : []
                 }
+                showUploadList={{ showRemoveIcon: false }}
               >
                 {" "}
                 <Button>Upload</Button>
@@ -239,7 +276,17 @@ const NocStep1 = ({ setStep }) => {
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
-
+    if (e.target.name == "DOB") {
+      setState((prevState) => ({
+        ...prevState,
+        dob: value,
+      }));
+    } else {
+      setState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
     // if (e.target.files && e.target.files.length > 0) {
     //   const reader = new FileReader();
     //   reader.addEventListener("load", () => {
@@ -249,11 +296,6 @@ const NocStep1 = ({ setStep }) => {
     //   });
     //   reader.readAsDataURL(e.target.files[0]);
     // }
-
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
   };
 
   useEffect(() => {
@@ -268,8 +310,8 @@ const NocStep1 = ({ setStep }) => {
           setState(data);
           setState((prev) => ({
             ...prev,
-            passportImage: data.passportImagePath,
-            colorPassportImage: data.expatriatePersonalDetailImage,
+            passportImagePrev: data.passportImagePath,
+            colorPassportImagePrev: data.expatriatePersonalDetailImage,
           }));
         }
       } catch (error) {
@@ -303,7 +345,7 @@ const NocStep1 = ({ setStep }) => {
           <div className="text-green-600">Expatriate Personal Details</div>
           <ProgressPercentage percent={12} step={1} total={8}></ProgressPercentage>
         </div>
-
+        {contextHolder}
         <form className="space-y-4 " onSubmit={handleSubmit}>
           <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
           <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>

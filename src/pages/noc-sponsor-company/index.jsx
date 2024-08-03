@@ -21,6 +21,9 @@ const TableMap = () => {
       content: message,
     });
   };
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  };
   const breadcrumbs = [
     { path: "/", label: "Home" },
     { path: "/service-and-support", label: "Service & Support" },
@@ -32,6 +35,55 @@ const TableMap = () => {
     localStorage.setItem("SponsorEditMode", true);
     navigate(`/noc-company-form`);
   };
+  const applicationStatus = [
+    {
+      status: "PublicNewEntry",
+      display_status: "Pending Submission",
+    },
+    {
+      status: "PublicEntrySubmitted",
+      display_status: "Submitted for Approval",
+    },
+    {
+      status: "SubmissionFailed",
+      display_status: "Re-Submit Application",
+    },
+    {
+      status: "EntrySubmitted",
+      display_status: "Submitted for Approval",
+    },
+    {
+      status: "ReviewerChanges",
+      display_status: "Awaiting Approval",
+    },
+    {
+      status: "ReviewFailed",
+      display_status: "Awaiting Approval",
+    },
+    {
+      status: "ReviewPassed",
+      display_status: "Awaiting Approval",
+    },
+    {
+      status: "ApprovalFailed",
+      display_status: "Awaiting Approval",
+    },
+    {
+      status: "ApprovalPassed",
+      display_status: "Application Approved",
+    },
+  ];
+
+  const getStatus = (item) => {
+    const rarray = applicationStatus.filter((value) => value.status === item);
+
+    if (rarray.length > 0) {
+      return rarray[0].display_status;
+    } else {
+      return "-";
+    }
+  };
+
   const columns = [
     {
       title: "ID",
@@ -40,75 +92,9 @@ const TableMap = () => {
       render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
-      title: "Business Domain",
-      dataIndex: "businessDomain",
-      key: "businessDomain",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "City Id",
-      dataIndex: "cityId",
-      key: "cityId",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "City Name",
-      dataIndex: "cityName",
-      key: "cityName",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Company Name",
+      title: "Name",
       dataIndex: "companyName",
       key: "companyName",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Contact Person Name",
-      dataIndex: "contactPersonName",
-      key: "contactPersonName",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Fax Number",
-      dataIndex: "faxNumber",
-      key: "faxNumber",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Logo Path",
-      dataIndex: "logoPath",
-      key: "logoPath",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Mobile Number",
-      dataIndex: "mobileNumber",
-      key: "mobileNumber",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Phone Number",
-      dataIndex: "phoneNumber",
-      key: "phoneNumber",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "NTN Number",
-      dataIndex: "ntnNumber",
-      key: "ntnNumber",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
-    },
-    {
-      title: "Registration Address",
-      dataIndex: "registrationAddress",
-      key: "registrationAddress",
       render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
@@ -118,36 +104,43 @@ const TableMap = () => {
       render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
-      title: "Registration Year",
+      title: "Registration City",
+      dataIndex: "cityName",
+      key: "cityName",
+    },
+    {
+      title: "Business Domain",
+      dataIndex: "businessDomain",
+      key: "businessDomain",
+      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
+    },
+    {
+      title: "Year of Registration",
       dataIndex: "registrationYear",
       key: "registrationYear",
       render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
+
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
+      render: (text) => <div style={{ fontSize: "15px" }}>{getStatus(text)}</div>,
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle" style={{ textAlign: "left!important", paddingLeft: "0px" }}>
-          {<button onClick={() => onEdit(record.id)}>Edit</button>}
+          {!!(record.status == "PublicNewEntry" || record.status == "SubmissionFailed") && (
+            <button onClick={() => onEdit(record.id)}>Edit</button>
+          )}
+          {<button onClick={() => onEdit(record.id)}>view</button>}
         </Space>
       ),
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "Ali Akbar",
-      age: "29",
-      address: "Faisalabad",
-    },
-  ];
   useEffect(() => {
     (async function () {
       setLoading(true);
@@ -166,6 +159,8 @@ const TableMap = () => {
         console.log(error.message);
       }
     })();
+    localStorage.removeItem("SponsorEditMode");
+    deleteCookie("companyEditRecordId");
   }, []);
 
   return (
@@ -179,37 +174,39 @@ const TableMap = () => {
             {" "}
             <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
               {" "}
-              <button style={{ backgroundImage: `url(${MoreInfo})` }}>
-                <a href="/noc-company-form">
-                  {" "}
-                  <div
-                    style={{
-                      padding: "40px",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
+              {!listing && (
+                <button style={{ backgroundImage: `url(${MoreInfo})` }}>
+                  <a href="/noc-company-form">
                     {" "}
-                    <div>Add Company</div>
-                    <svg
-                      style={{ opacity: "0.5", paddingBottom: "5px" }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      className="size-6"
+                    <div
+                      style={{
+                        padding: "40px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </svg>
-                  </div>
-                </a>
-              </button>
+                      {" "}
+                      <div>Add Company</div>
+                      <svg
+                        style={{ opacity: "0.5", paddingBottom: "5px" }}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        className="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                </button>
+              )}
             </div>
           </div>
         </div>
