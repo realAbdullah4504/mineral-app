@@ -5,6 +5,7 @@ import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { saveSampleDetailAPI, saveSampleListingAPI, testApplicationDetailAPI } from "services/api/common";
 import { setCookiesByName, getCookiesByName } from "utils/helpers";
 import { expactApplicationForm } from "utils/constant/url";
+
 const NocForm = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [toggle, setToggle] = useState({
@@ -13,7 +14,7 @@ const NocForm = ({ setStep }) => {
     depositSlip: false,
   });
   const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
-  const [applyAs, setApplyAs] = useState("Normal");
+  const [applyAs, setApplyAs] = useState("");
   const [state, setState] = useState("");
   const [loading, setLoading] = useState(false);
   const [bankListing, setBankListing] = useState([]);
@@ -24,12 +25,9 @@ const NocForm = ({ setStep }) => {
     });
   };
 
-  const handleApplyAsChange = (value) => {
-    setState((prevState) => ({
-      ...prevState,
-      nocType: value,
-    }));
-    setApplyAs(value);
+  const handleApplyAsChange = (e) => {
+    setState((prev) => ({ ...prev, nocType: e.target.value }));
+    setApplyAs(e.target.value);
   };
 
   const obj1 = {
@@ -109,10 +107,11 @@ const NocForm = ({ setStep }) => {
   };
 
   const renderFormItems = (key, obj) => {
-    return obj.map((field) => {
+    return obj?.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
+        required: field.required,
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
       };
@@ -124,8 +123,9 @@ const NocForm = ({ setStep }) => {
         const name = commonProps?.name || "";
         const camelCaseName = name ? toCamelCase(name) : "";
         let value = state[name] || state[camelCaseName] || "";
+
         if (type == "date") {
-          value = state["dob"]?.split("T")[0] || state["DOB"]?.split("T")[0] || "";
+          value = value.split("T")[0] || "";
         }
         return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
       };
@@ -146,7 +146,7 @@ const NocForm = ({ setStep }) => {
             : field.name == "SubLeaseLetter"
             ? "subLeaseLetterPath"
             : field.name == "depositSlip"
-            ? "depositSlipPath"
+            ? "depositSlip"
             : ""
         ];
 
@@ -175,6 +175,7 @@ const NocForm = ({ setStep }) => {
                       ]
                     : []
                 }
+                showUploadList={{ showRemoveIcon: false }}
               >
                 {" "}
                 <Button>Upload</Button>
@@ -182,6 +183,7 @@ const NocForm = ({ setStep }) => {
               {/* <input type="file" onChange={changeHandler} {...commonProps} accept="image/*,application/pdf,text/*" /> */}
             </>
           )}
+          {!!contextHolder && contextHolder}
           {field.type === "select" && (
             <>
               {renderLabel()}
@@ -206,6 +208,7 @@ const NocForm = ({ setStep }) => {
   const isEdit = localStorage.getItem("NOCEditMode");
   const handleSubmit = async (event) => {
     event.preventDefault();
+    let isMissing = false;
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
 
@@ -244,39 +247,98 @@ const NocForm = ({ setStep }) => {
         obj[key] = possibleKeys[key];
       }
     });
+    obj.id = state.id;
+    if (isEdit) {
+      if (state.subleaseImg !== state.subLeaseLetterPath) {
+        obj.SubLeaseLetter = state.subleaseImg;
+      } else {
+        obj.SubLeaseLetter = state.subLeaseLetterPath;
+      }
+      if (state.grantImg !== state.titleGrantLetterPath) {
+        obj.TitleGrantLetter = state.grantImg;
+      } else {
+        obj.TitleGrantLetter = state.titleGrantLetterPath;
+      }
+      if (state.nocType == "Urgent") {
+        if (state.depositImg !== state.depositSlip) {
+          obj.depositSlip = state.depositImg;
+        } else {
+          obj.depositSlip = state.depositSlip;
+        }
+      }
+    } else {
+      if (state.subleaseImg) {
+        obj.SubLeaseLetter = state.subleaseImg;
+      }
+      if (state.grantImg) {
+        obj.TitleGrantLetter = state.grantImg;
+      }
+      if (state.depositImg) {
+        obj.depositSlip = state.depositImg;
+      }
+    }
 
-    if (isEdit && state.subleaseImg !== state.subLeaseLetterPath) {
-      obj.SubLeaseLetter = state.SubLeaseLetter;
-    }
-    if (isEdit && state.grantImg !== state.titleGrantLetterPath) {
-      obj.TitleGrantLetter = state.TitleGrantLetter;
-    }
-    if (isEdit && state.depositImg !== state.depositSlipPath) {
-      obj.depositSlip = state.depositSlip;
-    }
     formDatas.append("obj", JSON.stringify(obj));
-    if (state.titleGrantLetterPath) formDatas.append("TitleGrantLetter", state.titleGrantLetterPath);
-    if (state.subLeaseLetterPath) formDatas.append("SubLeaseLetter", state.subLeaseLetterPath);
-    if (state.depositSlipPath) formDatas.append("depositSlip", state.depositSlipPath);
+    if (isEdit) {
+      if (state.subleaseImg !== state.subLeaseLetterPath) {
+        formDatas.append("SubLeaseLetter", state.subLeaseLetterPath);
+      }
+    } else {
+      if (state.subLeaseLetterPath) {
+        formDatas.append("SubLeaseLetter", state.subLeaseLetterPath);
+      }
+    }
 
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_CREATE_FORM_APPLICATION,
-        formDatas
-      );
-      if (isError) {
-        setLoading(false);
-        warning(message);
+    if (isEdit) {
+      if (state.grantImg !== state.titleGrantLetterPath) {
+        formDatas.append("TitleGrantLetter", state.titleGrantLetterPath);
       }
-      if (!isError && data) {
-        setLoading(false);
-        // setCookiesByName("expactapplicationid", data?.id, true);
-        setStep("Step1");
+    } else {
+      formDatas.append("TitleGrantLetter", state.titleGrantLetterPath);
+    }
+    if (state.nocType === "Urgent") {
+      if (isEdit) {
+        if (state.depositImg !== state.depositSlip) {
+          formDatas.append("depositSlip", state.depositSlip);
+        }
+      } else {
+        formDatas.append("depositSlip", state.depositSlip);
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
+    }
+    if (state.nocType == "Urgent") {
+      if (!state.depositSlip || !state.titleGrantLetterPath) {
+        isMissing = true;
+      }
+    } else {
+      if (!state.titleGrantLetterPath) {
+        isMissing = true;
+      }
+    }
+
+    if (isMissing) {
+      warning("Upload all images");
+    } else {
+      try {
+        const { data, isError, message } = await saveSampleDetailAPI(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_CREATE_FORM_APPLICATION,
+          formDatas
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          setLoading(false);
+          if (!isEdit) {
+            setCookiesByName("expactapplicationid", data?.id, true);
+          }
+          setStep("Step1");
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
     }
   };
   const changeHandler = (e) => {
@@ -312,7 +374,7 @@ const NocForm = ({ setStep }) => {
           setState((prev) => ({ ...prev, subLeaseLetterPath: file || "" }));
         }
         if (fieldName === "depositSlip") {
-          setState((prev) => ({ ...prev, depositSlipPath: file || "" }));
+          setState((prev) => ({ ...prev, depositSlip: file || "" }));
         }
       });
       reader.readAsDataURL(file);
@@ -324,10 +386,18 @@ const NocForm = ({ setStep }) => {
         setState((prev) => ({ ...prev, subLeaseLetterPath: "" }));
       }
       if (fieldName === "depositSlip") {
-        setState((prev) => ({ ...prev, depositSlipPath: "" }));
+        setState((prev) => ({ ...prev, depositSlip: "" }));
       }
     }
   };
+
+  useEffect(() => {
+    if (isEdit) {
+      setApplyAs(state.nocType);
+    } else {
+      setApplyAs("Normal");
+    }
+  }, [state.nocType]);
 
   useEffect(() => {
     const id = getCookiesByName("expactapplicationid", true);
@@ -338,9 +408,8 @@ const NocForm = ({ setStep }) => {
         if (isError) {
           warning(message);
         } else if (data) {
-          setState(data);
           setState((prev) => ({
-            ...prev,
+            ...data,
             subleaseImg: data.subLeaseLetterPath,
             grantImg: data.titleGrantLetterPath,
             depositImg: data.depositSlip,
@@ -372,7 +441,14 @@ const NocForm = ({ setStep }) => {
       }
     })();
   }, []);
-  console.log(state, "state");
+  useEffect(() => {
+    if (state.nocType) {
+      setApplyAs(state.nocType);
+    } else {
+      setApplyAs("Normal");
+    }
+  }, [state.nocType]);
+
   return (
     <div>
       <div>
@@ -380,37 +456,40 @@ const NocForm = ({ setStep }) => {
       </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="text-2xl text-green-700 my-10 font-bold">NOC Application Details</div>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10 mb-10">
-          <div className="relative mt-2 w-full">
-            <label
-              htmlFor="ApplyAs"
-              className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
-            >
-              NOC Type
-            </label>
-            <select
-              id="ApplyAs"
-              className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-              required={true}
-              name="NOCType"
-              value={state["nocType"]}
-              onChange={(e) => handleApplyAsChange(e.target.value)}
-            >
-              <option value="" disabled selected style={{ opacity: 0.5 }}>
-                Select an option
-              </option>
-              <option value="Normal">Normal</option>
-              <option value="Urgent">Urgent</option>
-            </select>
-          </div>
-        </div>
+
         <div className="">
-          {Object.entries(obj1[applyAs]).map(([key, value]) => (
-            <div key={key} className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-              {key === "Deposit Details" && <h1 className="col-span-3 text-4xl font-bold text-green-700">{key}</h1>}
-              {renderFormItems(key, value)}
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10 mb-10">
+            <div className="relative mt-2 w-full">
+              <label
+                htmlFor="ApplyAs"
+                className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2"
+              >
+                NOC Type
+              </label>
+              <select
+                id="ApplyAs"
+                className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                required={true}
+                name="NOCType"
+                value={state["nocType"]}
+                onChange={(e) => handleApplyAsChange(e)}
+              >
+                <option value="" disabled selected style={{ opacity: 0.5 }}>
+                  Select an option
+                </option>
+                <option value="Normal">Normal</option>
+                <option value="Urgent">Urgent</option>
+              </select>
             </div>
-          ))}
+          </div>
+
+          {!!state.nocType &&
+            Object.entries(obj1[applyAs ? applyAs : "Normal"]).map(([key, value]) => (
+              <div key={key} className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+                {key === "Deposit Details" && <h1 className="col-span-3 text-4xl font-bold text-green-700">{key}</h1>}
+                {renderFormItems(key, value)}
+              </div>
+            ))}
         </div>
         <div>
           {applyAs === "Normal" ? (

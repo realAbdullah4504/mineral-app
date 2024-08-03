@@ -44,6 +44,7 @@ export const ENDPOINTS = {
   GET_ALL_CITIES: `${REACT_APP_BASE_URL}api/City/GetAllCities`,
   GET_SPONSOR_COMPANY_BY_ID: `${REACT_APP_BASE_URL}api/PublicCompany/GetCompanyById`,
   
+  SAVE_CITIES_LISTING: `${REACT_APP_BASE_URL}/api/City/GetAllCities`,
 };
 
 export const mineralTestIdDetails = (testId) => {
@@ -51,4 +52,7 @@ export const mineralTestIdDetails = (testId) => {
 };
 export const expactApplicationForm = (testId) => {
   return `${REACT_APP_BASE_URL}/api/PublicNOCApplication/GetNOCApplicationById?NocApplicationId=${testId}`;
+};
+export const sponsorCompanyEditId = (testId) => {
+  return `${REACT_APP_BASE_URL}/api/PublicCompany/GetCompanyById?CompanyId=${testId}`;
 };

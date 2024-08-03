@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import ListingNoc from "./ListingForms";
 import { getCookie } from "services/session/cookies";
 import { commonAPIs } from "services/api/common";
-
+import { getCookiesByName } from "utils/helpers";
 const initialState = {
   typeOfVisaAvailed: "",
   pastVisitExpatriateStartDate: "",
@@ -26,6 +26,7 @@ const NocStep7 = ({ setStep }) => {
   const [record, setRecord] = useState({ ...initialState });
   const [applicationDetail, setApplicationDetail] = useState({});
   const nocApplicationId = getCookie("expactapplicationid") || "";
+
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",

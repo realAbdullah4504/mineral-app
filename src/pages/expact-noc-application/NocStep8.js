@@ -8,7 +8,7 @@ import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
 import { expactApplicationForm } from "utils/constant/url";
 import { Button } from "antd";
-
+import { commonAPIs } from "services/api/common";
 const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
 const NocStep8 = ({ setStep, alreadyVisited }) => {
   const [toggle, setToggle] = useState({
@@ -21,7 +21,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
   const [countryListing, setCountryListing] = useState([]);
   const isEdit = localStorage.getItem("NOCEditMode");
   const [days, setDays] = useState({ startDate: "", endDate: "" });
-
+  const creationId = getCookiesByName("expactapplicationid");
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
@@ -35,7 +35,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    formValues.id = state.id;
+    formValues.id = state.id || creationId;
     const {
       DateOfVisaApplication,
       VisaReferenceNumber,
@@ -65,37 +65,57 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     };
     obj.Id = state.id;
     obj.VisaDurationInDays = state.VisaDurationInDays;
-    if (isEdit && state.visaGrantCertificate !== state.visaPrevImg) {
-      obj.visaGrantCertificate = state.visaPrevImg;
+
+    if (isEdit) {
+      if (state.visaPrevImg !== state.visaGrantCertificate) {
+        obj.visaGrantCertificate = state.visaPrevImg;
+      } else {
+        obj.visaGrantCertificate = state.visaGrantCertificate;
+      }
+    } else {
+      if (state.visaPrevImg) {
+        obj.visaGrantCertificate = state.visaPrevImg;
+      }
     }
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
-
-    setLoading(true);
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
-        formDatas
-      );
-
-      if (isError) {
-        setLoading(false);
-        warning(message);
+    if (isEdit) {
+      if (state.visaPrevImg !== state.visaGrantCertificate) {
+        formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
       }
-      if (!isError && data) {
-        localStorage.removeItem("NOCEditMode");
-        deleteCookie("expactapplicationid");
-        localStorage.removeItem("NOCidview");
-        localStorage.removeItem("NOCid");
-        setLoading(false);
-        setStep("NocListing");
+    } else {
+      if (state.visaGrantCertificate !== state.visaPrevImg) {
+        formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
-    } finally {
-      setLoading(false);
+    }
+    if (!state.visaGrantCertificate) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await commonAPIs(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
+          formDatas
+        );
+
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          localStorage.removeItem("NOCEditMode");
+          deleteCookie("expactapplicationid");
+          localStorage.removeItem("NOCidview");
+          localStorage.removeItem("NOCid");
+          setLoading(false);
+          setStep("NocListing");
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -129,7 +149,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
   };
 
   const handlePrevious = () => {
-    if (alreadyVisited === "yes") {
+    if (alreadyVisited === "Yes") {
       setStep("Step7");
     } else {
       setStep("Step6");
@@ -246,6 +266,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
                       ]
                     : []
                 }
+                showUploadList={{ showRemoveIcon: false }}
               >
                 {" "}
                 <Button>Upload</Button>
@@ -339,6 +360,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
         <div className="text-green-600">Visa Grant Details</div>
         <ProgressPercentage percent={100} step={8} total={8}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
