@@ -142,6 +142,9 @@ const OtherServices = lazy(() =>
 const NOCApplicationView = lazy(() =>
   import("../pages/expact-noc-application/NOCApplicationView")
 );
+const SponsorCompanyView = lazy(() =>
+  import("../pages/noc-sponsor-company/ViewSponsorCompany")
+);
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -840,6 +843,15 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={CSRCommunityFormEdit}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/view-sponsor-company"
+          element={
+            <PublicRoute
+              component={SponsorCompanyView}
               layout={DashboardLayout}
             />
           }

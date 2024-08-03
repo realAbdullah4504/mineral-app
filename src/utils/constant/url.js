@@ -1,4 +1,5 @@
 export const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
+export const REACT_APP_FILE_URL = process.env.REACT_APP_FILE_URL;
 export const REQUEST_TYPES = {
   DELETE: "DELETE",
   GET: "GET",
@@ -38,6 +39,11 @@ export const ENDPOINTS = {
   SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveVisaGrantDetails`,
   SAVE_FOREIGNER_ACCOMMODATION_DETAILS: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveForeignerAccommodationDetails`,
   SAVE_TRAVEL_HISTORY_DETAIL: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveNocTravelHistory`,
+  GET_TEST_APPLICATION_BY_ID: `${REACT_APP_BASE_URL}api/PublicTestApplication/GetTestApplicationById`,
+  GET_ALL_APPROVED_MINERAL: `${REACT_APP_BASE_URL}api/PublicApprovedData/GetAllMinerls`,
+  GET_ALL_CITIES: `${REACT_APP_BASE_URL}api/City/GetAllCities`,
+  GET_SPONSOR_COMPANY_BY_ID: `${REACT_APP_BASE_URL}api/PublicCompany/GetCompanyById`,
+  
 };
 
 export const mineralTestIdDetails = (testId) => {

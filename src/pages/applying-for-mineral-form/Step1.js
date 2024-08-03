@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Loader } from "components";
 import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
-import { testApplicationDetailAPI } from "services/api/common";
+import { commonAPIs, testApplicationDetailAPI } from "services/api/common";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { message, ConfigProvider } from "antd";
 import ProgressPercentage from "components/UI/ProgressPercentage";
@@ -10,35 +10,26 @@ const Step1 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState({ applyAs: "Individual" });
-  const isEdit = localStorage.getItem("mineralEditMode");
   useEffect(() => {
     const applicationDetail = getCookiesByName("testApplication", true);
-    const applicationDetailid = getCookiesByName("mineralEditid", true);
-    if (!isEdit) {
-      if (Object.keys(applicationDetail).length) {
-        let payload = {};
-        const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } =
-          applicationDetail;
-          payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
-        if (applicationDetail?.applyAs === "Company") {
-          payload = { ...payload, businessDomain };
-        }
-        setState({ ...state, ...payload });
-      } else {
-      }
-    } else {
+    const TestApplicationId = getCookiesByName("mineralEditid", true) || applicationDetail?.id  || "";
+    if(TestApplicationId) {
       (async function () {
         try {
-          const { data, isError, message } = await testApplicationDetailAPI(
-            REQUEST_TYPES.POST,
-            ENDPOINTS.TEST_APPLICATION_DETAILS,
-            { id: applicationDetailid }
+          const { data, isError, message } = await commonAPIs(
+            REQUEST_TYPES.GET,
+            `${ENDPOINTS.GET_TEST_APPLICATION_BY_ID}?TestApplicationId=${TestApplicationId}`,
           );
-
           if (isError) {
             warning(message);
           } else if (data) {
-            console.log(data, "data");
+            const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = data;
+            let payload = {};
+          payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
+        if (applyAs === "Company") {
+          payload = { ...payload, businessDomain };
+        }
+        setState({ ...state, ...payload });
           }
         } catch (error) {
           console.log(error.message);
