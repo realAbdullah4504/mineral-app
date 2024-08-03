@@ -11,18 +11,11 @@ import { saveSampleListingAPI } from "services/api/common";
 import { data } from "autoprefixer";
 const NocStep6 = ({ setStep, setAlreadyVisited }) => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [state, setState] = useState({
-    ForeignerPlacesOFvisitDetail: "",
-    ForeignerWorkPlacesWithAddress: "",
-    ForeignerPlacesWhereStay: "",
-    ForeignerVisitDurationStartDate: "",
-    ForeignerVisitDurationEndDate: "",
-    alreadyVisited: "No",
-  });
+  const [state, setState] = useState({});
   const [loading, setLoading] = useState(false);
   const isEdit = localStorage.getItem("NOCEditMode");
   const nocApplicationId = getCookie("expactapplicationid") || "";
-
+  const creationId = getCookiesByName("expactapplicationid");
   useEffect(() => {
     (async function () {
       try {
@@ -34,19 +27,11 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
         if (isError) {
           warning(message);
         } else if (data) {
-          const datasaved = {
-            ForeignerVisitDurationStartDate: data.foreignerVisitDurationStartDate
-              ? data.foreignerVisitDurationStartDate.split("T")[0]
-              : "",
-            ForeignerVisitDurationEndDate: data.foreignerVisitDurationEndDate
-              ? data.foreignerVisitDurationEndDate.split("T")[0]
-              : "",
-            ...data,
-            // ForeignerPlacesOFvisitDetail: data.ForeignerPlacesOFvisitDetail,
-            // ForeignerPlacesWhereStay: data.ForeignerPlacesWhereStay,
-            // ForeignerWorkPlacesWithAddress: data.ForeignerWorkPlacesWithAddress,
-          };
-          setState(datasaved);
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            travelHistory: data.nocApplicationTravelHistory,
+          }));
         }
       } catch (error) {
         console.log(error.message);
@@ -62,33 +47,29 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const formData = new FormData(event.target);
+    const formValues = Object.fromEntries(formData.entries());
     setLoading(true);
 
     try {
       const {
-        foreignerPlacesOFvisitDetail,
-        foreignerWorkPlacesWithAddress,
-        foreignerPlacesWhereStay,
+        ForeignerPlacesOFvisitDetail,
+        ForeignerWorkPlacesWithAddress,
+        ForeignerPlacesWhereStay,
         ForeignerVisitDurationStartDate,
         ForeignerVisitDurationEndDate,
-        alreadyVisitPakistan,
-      } = state;
-      console.log(state, "state");
+      } = formValues;
+
       const payload = {
-        foreignerPlacesOFvisitDetail,
-        foreignerWorkPlacesWithAddress,
-        foreignerPlacesWhereStay,
+        ForeignerPlacesOFvisitDetail,
+        ForeignerWorkPlacesWithAddress,
+        ForeignerPlacesWhereStay,
         ForeignerVisitDurationStartDate,
         ForeignerVisitDurationEndDate,
-        alreadyVisitPakistan,
       };
-      if (!payload.alreadyVisitPakistan) {
-        payload.alreadyVisitPakistan = alreadyVisitPakistan;
-      }
-      if (nocApplicationId) {
-        payload.id = nocApplicationId;
-      }
+
+      payload.id = state.id || creationId;
+
       const { data, isError, message } = await commonAPIs(
         REQUEST_TYPES.POST,
         `${ENDPOINTS.SAVE_FOREIGNER_ACCOMMODATION_DETAILS}`,
@@ -100,8 +81,8 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
       }
       if (!isError && data) {
         setLoading(false);
-        console.log(data, "data");
-        if (state["alreadyVisitPakistan"] == true) {
+
+        if (state["alreadyVisitPakistanCountry"] == "Yes") {
           setStep("Step7");
           setAlreadyVisited("Yes");
         } else {
@@ -141,32 +122,28 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
     { label: "End of Visit", name: "ForeignerVisitDurationEndDate", required: "true", type: "calendar" },
     {
       label: "Already Visited to Pakistan",
-      name: "alreadyVisitPakistan",
+      name: "alreadyVisitPakistanCountry",
       required: "true",
       type: "select",
-      options: [
-        { label: "Yes", value: true },
-        { label: "No", value: false },
-      ],
+      options: ["Yes", "No"],
     },
   ];
   const changeHandler = (e) => {
     const { name, value } = e?.target || {};
-    if (e.target.type == "select") {
-      setState((prev) => ({ ...prev, alreadyVisitPakistan: e.target.value }));
-      setAlreadyVisited(e.target.value);
+    if (name == "alreadyVisitPakistanCountry") {
+      if (value == "Yes") {
+        setState((prev) => ({ ...prev, travelHistory: ["notEmpty"] }));
+      } else {
+        setState((prev) => ({ ...prev, travelHistory: [] }));
+      }
     }
-    setState({
-      ...state,
-      [name]: value,
-    });
+    setState((prev) => ({ ...prev, [name]: value }));
   };
   const renderFormItems = () => {
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
@@ -174,10 +151,14 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
       const toCamelCase = (str) => {
         return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
       };
+
       const renderInput = (type = "text") => {
         const name = commonProps?.name || "";
         const camelCaseName = name ? toCamelCase(name) : "";
-        const value = state[name] || state[camelCaseName] || "";
+        let value = state[name] || state[camelCaseName] || "";
+        if (type == "date") {
+          value = value.split("T")[0];
+        }
 
         return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
       };
@@ -202,8 +183,9 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
               {renderLabel()}
               <select
                 // disabled={isEdit}
-
-                value={state["alreadyVisitPakistan"]}
+                {...commonProps}
+                defaultValue={state?.travelHistory?.length ? "Yes" : "No"}
+                value={state.travelHistory?.length ? "Yes" : "No"}
                 onChange={(e) => changeHandler(e)}
                 {...commonProps}
               >
@@ -211,8 +193,8 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+                  <option key={option} value={option}>
+                    {option}
                   </option>
                 ))}
               </select>
@@ -224,7 +206,7 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
       );
     });
   };
-
+  console.log(state, "state");
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">

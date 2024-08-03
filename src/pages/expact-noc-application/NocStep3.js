@@ -24,8 +24,10 @@ const NocStep3 = ({ setStep, setEquipment }) => {
     });
   };
   const isEdit = localStorage.getItem("NOCEditMode");
+  const creationId = getCookiesByName("expactapplicationid");
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
     formValues.id = state.id;
@@ -49,37 +51,59 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       TentativeExpectedVisitStartDate,
       TentativeExpectedVisitEndDate,
     };
-    if (isEdit && state.miningImage !== state.mapOfMiningTitlePath) {
-      obj.MapMiningTitle = state.miningImage;
+
+    if (isEdit) {
+      if (state.miningImage !== state.mapOfMiningTitlePath) {
+        obj.MapMiningTitle = state.miningImage;
+      } else {
+        obj.MapMiningTitle = state.mapOfMiningTitlePath;
+      }
+    } else {
+      if (state.miningImage) {
+        obj.MapMiningTitle = state.miningImage;
+      }
     }
-    obj.id = state.id;
+
+    obj.id = state.id || creationId;
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("MapMiningTitle", state.mapOfMiningTitlePath);
-    setLoading(true);
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_APPLICATION_PURPOSEVIST_DETAILS,
-        formDatas
-      );
-      if (isError) {
-        setLoading(false);
-        warning(message);
+    if (isEdit) {
+      if (state.miningImage !== state.mapOfMiningTitlePath) {
+        formDatas.append("MapMiningTitle", state.mapOfMiningTitlePath);
       }
-      if (!isError && data) {
-        if (formValues["equipment-required"] === "Yes") {
-          setEquipment("Yes");
-          setStep("Step4");
-        } else {
-          setEquipment("No");
-          setStep("Step5");
+    } else {
+      if (state.miningImage !== state.mapOfMiningTitlePath) {
+        formDatas.append("MapMiningTitle", state.mapOfMiningTitlePath);
+      }
+    }
+    if (!state.mapOfMiningTitlePath) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await saveSampleDetailAPI(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_PURPOSEVIST_DETAILS,
+          formDatas
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
         }
+        if (!isError && data) {
+          if (formValues["equipment-required"] == "Yes") {
+            setEquipment("Yes");
+            setStep("Step4");
+          } else {
+            setEquipment("No");
+            setStep("Step5");
+          }
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
-    } finally {
-      setLoading(false);
     }
   };
   const handleChange = (fieldName, info) => {
@@ -107,7 +131,11 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       setState((prev) => ({ ...prev, purposeofVisit: value }));
     }
     if (e.target.name == "equipment-required") {
-      setState((prev) => ({ ...prev, equipment: ["notempty"] }));
+      if (value == "Yes") {
+        setState((prev) => ({ ...prev, equipment: ["notempty"] }));
+      } else {
+        setState((prev) => ({ ...prev, equipment: [] }));
+      }
     }
     setState((prev) => ({ ...prev, [name]: value }));
   };
@@ -118,14 +146,14 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       required: "true",
       type: "select",
       options: [
-        "Work Drilling",
-        "Site Visit",
-        "Survey",
-        "Business",
-        "Stay and vigilance of work",
-        "Installation of Project",
-        "Project based- Seismic Activity",
-        "Any other specify",
+        { label: "Work-Drilling", value: "WorkDrilling" },
+        { label: "Site-Visit", value: "SiteVisit" },
+        { label: "Survey", value: "Survey" },
+        { label: "Business", value: "Business" },
+        { label: "Stay and vigilance of work", value: "Stayandvigilanceofwork" },
+        { label: "nstallation of Project", value: "InstallationofProject" },
+        { label: "Project based- Seismic Activity", value: "ProjectbasedSeismicActivity" },
+        { label: "Any other specify", value: "AnyOtherSpecify" },
       ],
     },
     { label: "Nature Of Job", name: "NatureOfJob", required: "true", type: "input" },
@@ -137,7 +165,7 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       name: "equipment-required",
       required: "true",
       type: "select",
-      options: ["No", "Yes"],
+      options: [{ label: "Yes", value: "Yes" }, , { label: "No", value: "No" }],
     },
     {
       label: "Tentative Date expected to Visit Field",
@@ -180,7 +208,7 @@ const NocStep3 = ({ setStep, setEquipment }) => {
         if (type == "date") {
           value = value.split("T")[0];
         }
-        console.log(camelCaseName, "camelCaseName");
+
         return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
       };
 
@@ -246,15 +274,15 @@ const NocStep3 = ({ setStep, setEquipment }) => {
                     ? "Yes"
                     : "No"
                 }
-                disabled={field.name == "equipment-required" ? isEdit : false}
+                // disabled={field.name == "equipment-required" ? isEdit : false}
                 onChange={(e) => changeHandler(e)}
               >
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option.label} value={option.value}>
+                    {option.label}
                   </option>
                 ))}
               </select>
@@ -287,13 +315,14 @@ const NocStep3 = ({ setStep, setEquipment }) => {
       }
     })();
   }, []);
-  console.log(state, "state");
+
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Purpose Of Visit</div>
         <ProgressPercentage percent={37} step={3} total={8}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>

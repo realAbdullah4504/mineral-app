@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { testApplicationDetailAPI } from "services/api/common";
+import { commonAPIs, testApplicationDetailAPI } from "services/api/common";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { message, ConfigProvider, Upload } from "antd";
 import { saveSampleDetailAPI } from "services/api/common";
@@ -8,6 +8,8 @@ import { Loader } from "components";
 import { saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
+import { sponsorCompanyEditId } from "utils/constant/url";
 
 function NocAddListCompany() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -20,6 +22,10 @@ function NocAddListCompany() {
     CompanyTaxRegistrationCertificate: false,
     logoPath: false,
   });
+  const navigate = useNavigate();
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  };
   const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
   const warning = (message = "This is a warning message") => {
     messageApi.open({
@@ -33,13 +39,13 @@ function NocAddListCompany() {
       {
         label: "Company Name",
         name: "companyName",
-        required: "false",
+        required: "true",
         type: "input",
       },
       {
         label: "Registration Type",
         name: "registrationType",
-        required: "false",
+        required: "true",
         type: "select",
         options: [
           { name: "Company", value: "Company" },
@@ -49,7 +55,7 @@ function NocAddListCompany() {
       {
         label: "Registration City",
         name: "cityId",
-        required: "false",
+        required: "true",
         type: "select",
         options: citylisting.map((item) => {
           return { name: item.cityName, id: item.id };
@@ -58,41 +64,41 @@ function NocAddListCompany() {
       {
         label: "Registration Year",
         name: "registrationYear",
-        required: "false",
+        required: "true",
         type: "calendar",
       },
       {
         label: "Business Domain",
         name: "businessDomain",
-        required: "false",
+        required: "true",
         type: "select",
         options: [
           { name: "Mining", value: "Mining" },
           { name: "Services", value: "Services" },
         ],
       },
-      { label: "NTN/FTN Number", name: "ntnNumber", required: "false", type: "input" },
-      { label: "Company Logo", name: "logoPath", required: "false", type: "file" },
+      { label: "NTN/FTN Number", name: "ntnNumber", required: "true", type: "input" },
+      { label: "Company Logo", name: "logoPath", required: "true", type: "file" },
       {
         label: "Company's Registration Certificate",
         name: "companyRegistrationCertificates",
-        required: "false",
+        required: "true",
         type: "file",
       },
       {
         label: "Taxpayer Registration Certificate",
-        name: "CompanyTaxRegistrationCertificate",
-        required: "false",
+        name: "companyTaxRegistrationCertificate",
+        required: "true",
         type: "file",
       },
     ],
     "Contact Details": [
-      { label: "Address", name: "registrationAddress", required: "false", type: "input" },
-      { label: "Phone Number", name: "phoneNumber", required: "false", type: "number" },
-      { label: "Mobile Number", name: "mobileNumber", required: "false", type: "number" },
-      { label: "Email", name: "email", required: "false", type: "input" },
-      { label: "Fax No.", name: "faxNumber", required: "false", type: "input" },
-      { label: "Contact Person Name", name: "contactPersonName", required: "false", type: "input" },
+      { label: "Address", name: "registrationAddress", required: "true", type: "input" },
+      { label: "Phone Number", name: "phoneNumber", required: "true", type: "number" },
+      { label: "Mobile Number", name: "mobileNumber", required: "true", type: "number" },
+      { label: "Email", name: "email", required: "true", type: "input" },
+      { label: "Fax No.", name: "faxNumber", required: "true", type: "input" },
+      { label: "Contact Person Name", name: "contactPersonName", required: "true", type: "input" },
     ],
   };
   const changeHandler = (e) => {
@@ -144,61 +150,101 @@ function NocAddListCompany() {
       contactPersonName,
       ntnNumber,
     };
-    if (isEdit && state.companyPrevReg !== state.companyRegistrationCertificates) {
-      obj.companyRegistrationCertificates = state.companyPrevReg;
+    if (isEdit) {
+      obj.companyRegistrationCertificates = [
+        {
+          ...state.companyRegistrationCertificates[0],
+          deleted: state.companyRegistrationCertificatesNew ? true : false,
+        },
+      ];
+      obj.companyTaxRegistrationCertificates = [
+        {
+          ...state.companyTaxRegistrationCertificates[0],
+          deleted: state.companyTaxRegistrationCertificateNew ? true : false,
+        },
+      ];
+      obj.logoPath = state.logoPathPrev;
+      obj.id = state.id;
     }
-    if (isEdit && state.companyTaxPrevReg !== state.CompanyTaxRegistrationCertificate) {
-      obj.CompanyTaxRegistrationCertificate = state.companyTaxPrevReg;
-    }
-    if (isEdit && state.logoPrev !== state.logoPath) {
-      obj.logoPath = state.logoPrev;
-    }
+
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("companyRegistrationCertificates", state.companyRegistrationCertificates || "");
-    formDatas.append("CompanyTaxRegistrationCertificate", state.CompanyTaxRegistrationCertificate || "");
-    formDatas.append("logoPath", state.logoPath || "");
-
-    try {
-      setLoading(true);
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        `${ENDPOINTS.SAVE_NOC_SPONSOR_FORM}`,
-        formDatas
-      );
-
-      if (isError) {
-        setLoading(false);
-        warning(message);
-      } else if (data) {
-        setLoading(false);
-        setCitylisting([]);
-        event.target.reset();
+    if (isEdit) {
+      if (state.logoPathNew) {
+        formDatas.append("logoPath", state.logoPathNew);
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
+      if (state.companyRegistrationCertificatesNew) {
+        formDatas.append("companyRegistrationCertificates", state.companyRegistrationCertificatesNew);
+      }
+      if (state.companyTaxRegistrationCertificateNew) {
+        formDatas.append("companyTaxRegistrationCertificate", state.companyTaxRegistrationCertificateNew);
+      }
+    } else {
+      formDatas.append("companyRegistrationCertificates", state.companyRegistrationCertificatesNew || "");
+      formDatas.append("companyTaxRegistrationCertificate", state.companyTaxRegistrationCertificateNew || "");
+      formDatas.append("logoPath", state.logoPathNew || "");
+    }
+
+    if (
+      !isEdit &&
+      (!state.companyRegistrationCertificatesNew || !state.companyTaxRegistrationCertificateNew || !state.logoPathNew)
+    ) {
+      warning("Upload all images");
+    } else {
+      try {
+        setLoading(true);
+        const { data, isError, message } = await testApplicationDetailAPI(
+          REQUEST_TYPES.POST,
+          `${ENDPOINTS.SAVE_NOC_SPONSOR_FORM}`,
+          formDatas
+        );
+
+        if (isError) {
+          setLoading(false);
+          // warning(message);
+        }
+        if (!isError && data) {
+          setLoading(false);
+          localStorage.removeItem("SponsorEditMode");
+          deleteCookie("companyEditRecordId");
+          navigate(`/noc-company-form`);
+        } else {
+          setLoading(false);
+          localStorage.removeItem("SponsorEditMode");
+          deleteCookie("companyEditRecordId");
+          navigate(`/noc-sponsor-company`);
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
     }
   };
   useEffect(() => {
     const recordId = getCookiesByName("companyEditRecordId");
+
     async function fetchData() {
       setLoading(true);
       try {
-        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, ENDPOINTS.NOC_SPONSOR_Listing);
+        const { data, isError, message } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          sponsorCompanyEditId(recordId)
+        );
         if (isError) {
           setLoading(false);
           warning(message);
         }
         if (!isError && data) {
-          const matchingRecord = data.find((record) => record.id == recordId);
-          console.log(matchingRecord, "matchingRecord");
-          setState(matchingRecord || {});
-          setState((prev) => ({
-            ...prev,
-            companyPrevReg: state.companyRegistrationCertificates,
-            companyTaxPrevReg: state.CompanyTaxRegistrationCertificate,
-            logoPrev: state.logoPath,
-          }));
+          setState({
+            ...data,
+            companyRegistrationCertificateprev: isEdit
+              ? data.companyRegistrationCertificates[0]["path"]
+              : data.companyRegistrationCertificates,
+            companyTaxRegistrationCertificateprev: isEdit
+              ? data.companyTaxRegistrationCertificates[0]["path"]
+              : data.companyTaxRegistrationCertificates,
+            logoPathPrev: data.logoPath,
+          });
+
           setLoading(false);
         }
       } catch (error) {
@@ -207,30 +253,45 @@ function NocAddListCompany() {
       }
     }
 
-    fetchData();
+    async function fetchCities() {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, ENDPOINTS.SAVE_CITIES_LISTING);
+        if (isError) {
+          warning(message);
+        }
+        if (!isError && data) {
+          setCitylisting(data);
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      }
+    }
+    if (isEdit) {
+      fetchData();
+    }
+    fetchCities();
   }, []);
 
   const renderFormItems = (key, obj) => {
-    console.log(obj, "object");
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
+
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
+        required: field.required,
       };
 
       const name = commonProps?.name || "";
-      console.log(name, "namecommon");
-      console.log(state, "statecoming");
       let value = state[name] || "";
 
-      console.log(value, "valuecoming");
-      console.log(state[name], "statename");
       const renderInput = (type = "text") => {
-        console.log(value, "valuesdate");
-        if (type == "date") {
-          value = `${value}-01-01`;
+        if (isEdit) {
+          if (type == "date") {
+            value = `${value}-01-01`;
+          }
         }
 
         return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
@@ -244,16 +305,16 @@ function NocAddListCompany() {
           {field.label}
         </label>
       );
-      const imgurl =
-        state[
-          field.name == "companyRegistrationCertificates"
-            ? "companyRegistrationCertificates"
-            : field.name == "CompanyTaxRegistrationCertificate"
-            ? "CompanyTaxRegistrationCertificate"
-            : field.name == "logoPath"
-            ? "logoPath"
-            : ""
-        ];
+      const obj = {
+        companyRegistrationCertificates:
+          state["companyRegistrationCertificatesNew"] || state["companyRegistrationCertificates"]?.[0]["path"] || "",
+        companyTaxRegistrationCertificate:
+          state["companyTaxRegistrationCertificateNew"] ||
+          state["companyTaxRegistrationCertificates"]?.[0]["path"] ||
+          "",
+        logoPath: state["logoPathNew"] || state["logoPath"] || "",
+      };
+      const imgurl = obj.hasOwnProperty(field.name) ? obj[field.name] : "";
 
       return (
         <div key={field.name} className="relative mt-2 w-full">
@@ -280,6 +341,7 @@ function NocAddListCompany() {
                       ]
                     : []
                 }
+                showUploadList={{ showRemoveIcon: false }}
               >
                 {" "}
                 <Button>Upload</Button>
@@ -317,29 +379,28 @@ function NocAddListCompany() {
       reader.addEventListener("load", () => {
         setToggle((prev) => ({ ...prev, [fieldName]: true }));
         if (fieldName === "logoPath") {
-          setState((prev) => ({ ...prev, logoPath: file || "" }));
+          setState((prev) => ({ ...prev, logoPathNew: file || "" }));
         }
         if (fieldName === "companyRegistrationCertificates") {
-          setState((prev) => ({ ...prev, companyRegistrationCertificates: file || "" }));
+          setState((prev) => ({ ...prev, companyRegistrationCertificatesNew: file || "" }));
         }
-        if (fieldName === "CompanyTaxRegistrationCertificate") {
-          setState((prev) => ({ ...prev, CompanyTaxRegistrationCertificate: file || "" }));
+        if (fieldName === "companyTaxRegistrationCertificate") {
+          setState((prev) => ({ ...prev, companyTaxRegistrationCertificateNew: file || "" }));
         }
       });
       reader.readAsDataURL(file);
     } else {
       if (fieldName === "logoPath") {
-        setState((prev) => ({ ...prev, logoPath: "" }));
+        setState((prev) => ({ ...prev, logoPathNew: "" }));
       }
       if (fieldName === "companyRegistrationCertificates") {
-        setState((prev) => ({ ...prev, companyRegistrationCertificates: "" }));
+        setState((prev) => ({ ...prev, companyRegistrationCertificatesNew: "" }));
       }
-      if (fieldName === "CompanyTaxRegistrationCertificate") {
-        setState((prev) => ({ ...prev, CompanyTaxRegistrationCertificate: "" }));
+      if (fieldName === "companyTaxRegistrationCertificate") {
+        setState((prev) => ({ ...prev, companyTaxRegistrationCertificateNew: "" }));
       }
     }
   };
-  console.log(state, "staterecord");
 
   return (
     <div className="noc-company-form" style={{ width: "80%", margin: "auto" }}>
@@ -347,6 +408,7 @@ function NocAddListCompany() {
         <div className="text-sm text-gray-500">Company Status</div>
         <div className="font-bold text-lg">Company Approved</div>
       </div>
+      {contextHolder}
       <form onSubmit={handleSubmit} className="space-y-4">
         {Object.entries(obj).map(([key, value]) => (
           <div key={key} className="mt-8">
