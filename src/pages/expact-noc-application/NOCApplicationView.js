@@ -1594,7 +1594,7 @@ function NOCApplicationView() {
                     */}
                   {Array.isArray(data?.nocApplicationTravelHistory) && data?.nocApplicationTravelHistory.length ? (
                     <>
-                      <div style={{ width: "78%", marginLeft: "130px" }}>
+                      <div style={{ width: "78%" }}>
                         <h3 style={{ marginTop: "10px", marginLeft: "5px", paddingBottom: "10px", color: "#27ae60" }}>
                           Travel History Listing
                         </h3>
