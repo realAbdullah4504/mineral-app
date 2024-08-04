@@ -57,7 +57,7 @@ export const mineralTestIdDetails = (testId) => {
   return `${REACT_APP_BASE_URL}/api/MineralTest/GetLabByMineralTestId?MineralTestId=${testId}`;
 };
 export const expactApplicationForm = (testId) => {
-  return `${REACT_APP_BASE_URL}/api/PublicNOCApplication/GetNOCApplicationById?NocApplicationId=${testId}`;
+  return `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetNOCApplicationById?NocApplicationId=${testId}`;
 };
 export const sponsorCompanyEditId = (testId) => {
   return `${REACT_APP_BASE_URL}/api/PublicCompany/GetCompanyById?CompanyId=${testId}`;

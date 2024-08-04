@@ -57,7 +57,7 @@ const NocStep2 = ({ setStep }) => {
       name: "Profession",
       required: "true",
       type: "select",
-      options: ["Geologist", "Geologist", "Miner", "Operator"],
+      options: ["Geologist", "MiningEngineer", "Miner", "Operator"],
     },
     {
       label: "Qualification",

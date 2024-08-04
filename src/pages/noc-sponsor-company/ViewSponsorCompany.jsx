@@ -514,7 +514,7 @@ function SponsorCompanyView() {
                           ></h3>
                         </div>
                         <div className="expatview_button_cover">
-                          <div>
+                          {/* <div>
                             <div style={{ width: "100%", textAlign: "right" }}>
                               <button
                                 type="primary"
@@ -530,7 +530,7 @@ function SponsorCompanyView() {
                                 />
                               </button>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </>
