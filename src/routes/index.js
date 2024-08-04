@@ -99,7 +99,7 @@ const StatisticsProduction = lazy(() =>
 );
 const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
-const RegisterOrganization = lazy(() => import("../components/register-form"));
+const RegisterOrganization = lazy(() => import("../components/RegisterForm"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
 const ShipmentForm = lazy(() => import("../pages/applying-for-mineral-form/Step5"));
@@ -145,6 +145,8 @@ const NOCApplicationView = lazy(() =>
 const SponsorCompanyView = lazy(() =>
   import("../pages/noc-sponsor-company/ViewSponsorCompany")
 );
+const RegisterOrganizationEdit = lazy(() => import("../pages/register-professional/edit"));
+
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -852,6 +854,15 @@ const AppRouter = () => (
           element={
             <PublicRoute
               component={SponsorCompanyView}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/registerorganization/edit"
+          element={
+            <PublicRoute
+              component={RegisterOrganizationEdit}
               layout={DashboardLayout}
             />
           }
