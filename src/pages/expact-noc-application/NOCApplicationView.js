@@ -423,7 +423,6 @@ function NOCApplicationView() {
   };
 
   const onChange = (date, datestring) => {
-    console.log(datestring);
     date.value = datestring;
   };
 

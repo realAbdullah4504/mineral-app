@@ -172,7 +172,6 @@ const CsrCommunity = () => {
     { path: "csr-community", label: "Voice Of Community" },
   ];
 
-  console.log("data", data);
 
   return (
     <div className="table-data">

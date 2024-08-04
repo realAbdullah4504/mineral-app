@@ -159,7 +159,6 @@ function SponsorCompanyView() {
       setLoading(false);
     } catch (error) {
         setLoading(false);
-        console.log(error.message);
     }
   };
   useEffect(() => {
@@ -177,7 +176,6 @@ function SponsorCompanyView() {
   const onFinish = (values) => {
     console.log("Success:", values);
 
-    console.log(dayjs(values.registrationyear).year());
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -185,8 +183,6 @@ function SponsorCompanyView() {
   };
 
   const onChange = (date, datestring) => {
-    console.log("datestring : " + datestring);
-    console.log("Date : " + date);
     date.value = datestring;
   };
 
@@ -230,7 +226,6 @@ function SponsorCompanyView() {
   ];
 
   const getStatus = (item) => {
-    console.log("getStatus", item);
     const rarray = companyStatusList.filter((value) => value.status === item);
 
     if (rarray.length > 0) {
@@ -249,9 +244,6 @@ function SponsorCompanyView() {
     },
     beforeUpload: (file) => {
       setFileList([...fileList, file]);
-      console.log("File List 1");
-      console.log(fileList);
-      console.log("File");
       return false;
     },
     fileList,

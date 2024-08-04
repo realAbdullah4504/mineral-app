@@ -9,6 +9,12 @@ export const REQUEST_TYPES = {
 };
 export const ENDPOINTS = {
   LOGIN: `${REACT_APP_BASE_URL}api/PublicUser/Login`,
+  SIGNUP: `${REACT_APP_BASE_URL}api/PublicUser/SignUp`,
+  FORGOT_PASSWORD: `${REACT_APP_BASE_URL}api/PublicUser/ForgotPassword`,
+  SET_PASSWORD: `${REACT_APP_BASE_URL}api/PublicUser/SetPassword`,
+  RESET_PASSWORD: `${REACT_APP_BASE_URL}api/PublicUser/ResetPassword`,
+  RESEND_OTP: `${REACT_APP_BASE_URL}api/PublicUser/ResendOTPCode`,
+  PHONE_NUMBER_VERIFICATION: `${REACT_APP_BASE_URL}api/PublicUser/PhoneVerification`,
   TEST_APPLICATION_DETAILS: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveTestApplicationDetails`,
   GET_SAMPLE_DETAILS: `${REACT_APP_BASE_URL}api/PublicTestApplication/GetSampleDetailList`,
   SAVE_SAMPLE_DETAILS: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveSampleDetail`,

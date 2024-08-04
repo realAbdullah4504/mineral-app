@@ -145,6 +145,21 @@ const NOCApplicationView = lazy(() =>
 const SponsorCompanyView = lazy(() =>
   import("../pages/noc-sponsor-company/ViewSponsorCompany")
 );
+const MineralTestingCompanyView = lazy(() =>
+  import("../pages/applying-for-mineral-form/View")
+);
+const ForgotPassword = lazy(() =>
+  import("../pages/forgot-password")
+);
+const OTP = lazy(() =>
+  import("../pages/otp")
+);
+const VerifyPhoneNumber = lazy(() =>
+  import("../pages/verify-phone-number")
+);
+const SetPassword = lazy(() =>
+  import("../pages/set-password")
+);
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -856,6 +871,58 @@ const AppRouter = () => (
             />
           }
         />
+        <Route
+          path="/view-mineral-testing-company"
+          element={
+            <PublicRoute
+              component={MineralTestingCompanyView}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <PublicRoute
+              component={ForgotPassword}
+              layout={DashboardLayout}
+            />
+          }
+        />
+         <Route
+          path="/otp"
+          element={
+            <PublicRoute
+              component={OTP}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/verify-number"
+          element={
+            <PublicRoute
+              component={VerifyPhoneNumber}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+         <Route
+          path="/set-password"
+          element={
+            <PublicRoute
+              component={SetPassword}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        
       </Routes>
     </Suspense>
   </Router>

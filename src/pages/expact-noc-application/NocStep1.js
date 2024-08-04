@@ -337,7 +337,6 @@ const NocStep1 = ({ setStep }) => {
     })();
   }, []);
 
-  console.log(state, "state");
   return (
     <>
       <div className="noc-form">
