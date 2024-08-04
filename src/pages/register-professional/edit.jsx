@@ -158,9 +158,7 @@ const RegisterProfessionalEdit = () => {
   }, [paramValue]);
 
   const handleChange = (e) => {
-    console.log('handle change')
     setModifiedValues((prevValues) => {
-      console.log(prevValues)
       return {
         ...prevValues,
         [e.target.name]: e.target.value,
@@ -306,9 +304,6 @@ const RegisterProfessionalEdit = () => {
     form.validateFields(["UploadResume"]);
   };
 
-  console.log("form", form.getFieldValue('CNIC'));
-  console.log("fileList", fileList);
-  console.log("modifiedValues.CNIC", modifiedValues.CNIC);
   return (
     <>
       <Container classes="mt-8 w-[70%]">
@@ -428,7 +423,6 @@ const RegisterProfessionalEdit = () => {
                   value={cnicValue || ""}
                   onChange={(e) => {
                     const formattedCNIC = e.target.value;
-                    console.log('Formatted CNIC:', formattedCNIC); // Debug log
                     // setModifiedValues((prevValues) => {
                     //   console.log('Previous Values:', prevValues); // Debug log
                     //   return {

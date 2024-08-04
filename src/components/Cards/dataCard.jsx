@@ -5,7 +5,6 @@ import sampleImage from "assets/images/data-card.png";
 import { useNavigate } from "react-router-dom";
 
 const DataCard = ({ type, data }) => {
-  console.log("data", data)
   const navigate = useNavigate();
 
   const handleNavigate = (url) => {
