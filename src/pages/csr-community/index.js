@@ -11,22 +11,22 @@ const items = [
     key: "1",
     label: "Edit",
   },
-  {
-    key: "2",
-    label: "View Suggestion",
-  },
-  {
-    key: "3",
-    label: "View Suggestion Details",
-  },
+  // {
+  //   key: "2",
+  //   label: "View Suggestion",
+  // },
+  // {
+  //   key: "3",
+  //   label: "View Suggestion Details",
+  // },
   {
     key: "6",
     label: "View Report",
   },
-  {
-    key: "7",
-    label: "Request Re Evaluation",
-  },
+  // {
+  //   key: "7",
+  //   label: "Request Re Evaluation",
+  // },
 ];
 
 const CsrCommunity = () => {

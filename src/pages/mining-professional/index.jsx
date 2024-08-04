@@ -98,8 +98,6 @@ const HRPro = () => {
 
   const userHasMatch = data?.data?.find((item) => item.email === user?.Email);
 
-  console.log("userHasMatch", userHasMatch)
-
   return (
     <Container classes="mt-8 w-[90%]">
       <BreadCrumbs breadcrumbs={breadcrumbs} />

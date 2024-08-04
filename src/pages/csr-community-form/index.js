@@ -71,6 +71,7 @@ const CsrCommunity = () => {
       duration: 4.5, // Duration in seconds, change as needed
       onClose: () => console.log("Notification closed"),
     });
+    navigate("/csr-community");
   };
 
   const handleSubmission = async (values) => {
