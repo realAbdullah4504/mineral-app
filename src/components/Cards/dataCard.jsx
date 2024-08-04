@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import addIcon from "assets/images/addIcon.svg";
+import viewIcon from "assets/images/viewIcon.svg";
 import sampleImage from "assets/images/data-card.png";
 import { useNavigate } from "react-router-dom";
 
 const DataCard = ({ type, data }) => {
+  console.log("data", data)
   const navigate = useNavigate();
 
   const handleNavigate = (url) => {
@@ -12,9 +14,9 @@ const DataCard = ({ type, data }) => {
 
   return (
     <>
-      {type == "add" ? (
+      {type === "add" ? (
         <div
-          className="w-full max-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
+          className="sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-[18rem] min-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
           onClick={() => handleNavigate(data.link)}
         >
           <div className="flex flex-col items-center space-y-4 ">
@@ -22,8 +24,21 @@ const DataCard = ({ type, data }) => {
               <img src={addIcon} alt="" />
             </div>
             <div className="text-[14px] font-ibm-plex-sans font-semibold w-32 text-center">
-              {" "}
-              {data.headline}{" "}
+              {data.headline}
+            </div>
+          </div>
+        </div>
+      ) : type === "edit" ? (
+        <div
+          className="sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-[18rem] min-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
+          onClick={() => handleNavigate(`/registerorganization/edit?id=${data?.id}`)}
+        >
+          <div className="flex flex-col items-center space-y-4 ">
+            <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
+              <img src={viewIcon} alt="" />
+            </div>
+            <div className="text-[14px] font-ibm-plex-sans font-semibold w-32 text-center">
+              View Your card
             </div>
           </div>
         </div>
@@ -46,10 +61,9 @@ const DataCard = ({ type, data }) => {
           </div>
           <div className="space-y-4 p-6 bg-[#f5fffc]">
             <h3 className="text-[18px] font-bold text-[#049e6c]">
-              {data.headline}
+              {data?.name}
             </h3>
 
-            <h5 className="text-gray-600 ">Rg # 123456</h5>
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 min-w-[2rem] items-center justify-center rounded-full bg-[#049e6c]">
                 <div className="h-5 w-5 text-white">
@@ -72,7 +86,7 @@ const DataCard = ({ type, data }) => {
                   </svg>{" "}
                 </div>
               </div>
-              <p>info@acme.com</p>
+              <p>{data?.email}</p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -91,7 +105,7 @@ const DataCard = ({ type, data }) => {
                   </svg>
                 </div>
               </div>
-              <p>(051) 9287657</p>
+              <p>{data?.mobileNumber}</p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -99,34 +113,26 @@ const DataCard = ({ type, data }) => {
                 <div className="h-5 w-5 text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="1.2em"
-                    height="1.2em"
-                    viewBox="0 0 512 512"
+                    width="1.4em"
+                    height="1.4em"
+                    viewBox="0 0 24 24"
                   >
                     <path
-                      fill="none"
-                      stroke="white"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                      d="M256 48c-79.5 0-144 61.39-144 137c0 87 96 224.87 131.25 272.49a15.77 15.77 0 0 0 25.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137"
+                      fill="white"
+                      d="M23 19a4 4 0 0 1-4 4h-2v-2h2a2 2 0 0 0 0-4h-2v-2h2a4 4 0 0 1 4 4M9 19a4 4 0 0 1 4-4h2v2h-2a2 2 0 0 0 0 4h2v2h-2a4 4 0 0 1-4-4"
                     />
-                    <circle
-                      cx="256"
-                      cy="192"
-                      r="48"
-                      fill="none"
-                      stroke="white"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
+                    <path
+                      fill="white"
+                      d="M14 18h4v2h-4zM9 5a3 3 0 1 0 3 3a3.01 3.01 0 0 0-3-3m0 4a1 1 0 1 1 1-1a1.003 1.003 0 0 1-1 1m-3.69 6A7 7 0 0 1 9 13.88a6 6 0 0 1 .778.064A5.97 5.97 0 0 1 13 13h.254A9.4 9.4 0 0 0 9 11.89c-2.03 0-6 1.07-6 3.58V17h4.349a6 6 0 0 1 1.188-2Z"
+                    />
+                    <path
+                      fill="white"
+                      d="M16 2h-4.18a2.988 2.988 0 0 0-5.64 0H2a2.006 2.006 0 0 0-2 2v14a2.006 2.006 0 0 0 2 2h5.141a3.6 3.6 0 0 1 0-2H2V4h14v9h2V4a2.006 2.006 0 0 0-2-2M9 3.25a.756.756 0 0 1-.75-.75a.75.75 0 0 1 1.5 0a.756.756 0 0 1-.75.75"
                     />
                   </svg>
                 </div>
               </div>
-              <p>
-                Plot No, 13, H-9/4 Sector H 9-4, Islamabad Capital Territory
-              </p>
+              <p>{data?.professionalRole}</p>
             </div>
 
             <div className="flex justify-center gap-4">
