@@ -8,6 +8,7 @@ import attockCementImg from "assets/images/Attock Cement.png";
 import pioneerCementImg from "assets/images/pioneer_cement_logo.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
 const DownstreamIndustries = () => {
   const breadcrumbs = [
@@ -34,12 +35,12 @@ const DownstreamIndustries = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "Bolan Mining Enterprises (BME)", logo: bmeImg}} />
-                <DataCard type={"detail"} data={{headline: "Oil Industries Pakistan Limited", logo: oilIndustriesImg}} />
-                <DataCard type={"detail"} data={{headline: "Lucky Cement Limited", logo: luckyCementImg}} />
-                <DataCard type={"detail"} data={{headline: "Askari Cement Limited", logo: askariCementImg}} />
-                <DataCard type={"detail"} data={{headline: "Attock Cement Pakistan Limited", logo: attockCementImg}} />
-                <DataCard type={"detail"} data={{headline: "Pioneer Cement Limited", logo: pioneerCementImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Bolan Mining Enterprises (BME)", logo: bmeImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Oil Industries Pakistan Limited", logo: oilIndustriesImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Lucky Cement Limited", logo: luckyCementImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Askari Cement Limited", logo: askariCementImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Attock Cement Pakistan Limited", logo: attockCementImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pioneer Cement Limited", logo: pioneerCementImg}} />
               </div>
             </div>
 

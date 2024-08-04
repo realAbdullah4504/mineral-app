@@ -4,6 +4,7 @@ import pmdcImg from "assets/images/pmdc.png";
 import pminingImg from "assets/images/Pakistan Mining & Exploration Inc.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
 const Associations = () => {
   const breadcrumbs = [
@@ -30,14 +31,14 @@ const Associations = () => {
           <div className="w-full flex justify-center mt-16">
             <div className="flex flex-wrap justify-center gap-20 p-4">
               <DataCard type={"add"} data={Adddata} />
-              <DataCard
+              <StaticDataCard
                 type={"detail"}
                 data={{
                   headline: "Pakistan Mineral Development Corporation (PMDC)",
                   logo: pmdcImg
                 }}
               />
-              <DataCard
+              <StaticDataCard
                 type={"detail"}
                 data={{ headline: "Pakistan Mining & Exploration Inc", logo: pminingImg }}
               />

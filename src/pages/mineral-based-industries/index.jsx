@@ -3,6 +3,7 @@ import { Container } from "components/UI";
 import DrillingServicesImg from "assets/images/drilling-services.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
 const MineralBasedIndustries = () => {
   const breadcrumbs = [
@@ -29,12 +30,12 @@ const MineralBasedIndustries = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "Khyber Group of Companies"}} />
-                <DataCard type={"detail"} data={{headline: "INDUS MINING CORPORATION"}} />
-                <DataCard type={"detail"} data={{headline: "Punjab Mineral Company (Pvt) Limited (PMC)"}} />
-                <DataCard type={"detail"} data={{headline: "Sitara Chemical Industries"}} />
-                <DataCard type={"detail"} data={{headline: "RYK Mills (Pvt.) Limited"}} />
-                <DataCard type={"detail"} data={{headline: "Olympia Chemicals Limited"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Khyber Group of Companies"}} />
+                <StaticDataCard type={"detail"} data={{headline: "INDUS MINING CORPORATION"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Punjab Mineral Company (Pvt) Limited (PMC)"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Sitara Chemical Industries"}} />
+                <StaticDataCard type={"detail"} data={{headline: "RYK Mills (Pvt.) Limited"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Olympia Chemicals Limited"}} />
               </div>
             </div>
 

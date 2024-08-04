@@ -4,6 +4,7 @@ import orrImg from "assets/images/Orr, Dignam & Co.png";
 import kmpgImg from "assets/images/KPMG.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
 const LegalTaxServices = () => {
   const breadcrumbs = [
@@ -30,8 +31,8 @@ const LegalTaxServices = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "Orr, Digman & Co. Islamabad", logo: orrImg }} />
-                <DataCard type={"detail"} data={{headline: "KPMG Pakistan", logo: kmpgImg }} />
+                <StaticDataCard type={"detail"} data={{headline: "Orr, Digman & Co. Islamabad", logo: orrImg }} />
+                <StaticDataCard type={"detail"} data={{headline: "KPMG Pakistan", logo: kmpgImg }} />
               </div>
             </div>
 
