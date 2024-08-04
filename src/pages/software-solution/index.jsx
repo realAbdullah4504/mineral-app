@@ -7,6 +7,7 @@ import mmpImg from "assets/images/MMP.png";
 import nespakImg from "assets/images/NESPAK.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
 const SoftwareSolution = () => {
   const breadcrumbs = [
@@ -33,12 +34,12 @@ const SoftwareSolution = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "i3a", logo: i3aImg}} />
-                <DataCard type={"detail"} data={{headline: "Dice"}} />
-                <DataCard type={"detail"} data={{headline: "ATI"}} />
-                <DataCard type={"detail"} data={{headline: "Urban Vision", logo: avImg}} />
-                <DataCard type={"detail"} data={{headline: "MMP (Multi-disciplinary Consultants)", logo: mmpImg}} />
-                <DataCard type={"detail"} data={{headline: "National Engineering Services Pakistan (NESPAK)", logo: nespakImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "i3a", logo: i3aImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Dice"}} />
+                <StaticDataCard type={"detail"} data={{headline: "ATI"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Urban Vision", logo: avImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "MMP (Multi-disciplinary Consultants)", logo: mmpImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "National Engineering Services Pakistan (NESPAK)", logo: nespakImg}} />
               </div>
             </div>
 

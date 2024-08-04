@@ -6,6 +6,7 @@
   import PPLImg from "assets/images/ppl.png";
   import React from "react";
   import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
   const data = {
     headline: "Apply for Registration",
@@ -35,11 +36,11 @@
             <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 {/* <DataCard type={"add"} data={data} /> */}
-                <DataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)", logo: LogoImg}} />
-                <DataCard type={"detail"} data={{headline: "Ministry of Energy (Petroleum Division)", logo: LogoImg}} />
-                <DataCard type={"detail"} data={{headline: "Pakistan Mineral Development Corporation (PMDC)", logo: PMDCImg}} />
-                <DataCard type={"detail"} data={{headline: "Frontier Work Organization (FWO)", logo: FWOImg}} />
-                <DataCard type={"detail"} data={{headline: "Pakistan Petroleum Limited (PPL)", logo: PPLImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)", logo: LogoImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Ministry of Energy (Petroleum Division)", logo: LogoImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pakistan Mineral Development Corporation (PMDC)", logo: PMDCImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Frontier Work Organization (FWO)", logo: FWOImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pakistan Petroleum Limited (PPL)", logo: PPLImg}} />
               </div>
             </div>
 

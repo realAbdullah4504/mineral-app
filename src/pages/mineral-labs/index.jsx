@@ -3,6 +3,7 @@ import { Container } from "components/UI";
 import MineralLabsImg from "assets/images/mineral-labs.png";
 import React from "react";
 import DataCard from "components/Cards/dataCard";
+import StaticDataCard from "components/Cards/staticDataCard";
 
 const MineralLabs = () => {
   const breadcrumbs = [
@@ -29,12 +30,12 @@ const MineralLabs = () => {
           <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 <DataCard type={"add"} data={Adddata} />
-                <DataCard type={"detail"} data={{headline: "Mineral Testing Laboratory"}} />
-                <DataCard type={"detail"} data={{headline: "Geological Survey of Pakistan"}} />
-                <DataCard type={"detail"} data={{headline: "SGS Pakistan (Private) Limited"}} />
-                <DataCard type={"detail"} data={{headline: "Intertek Pakistan Pvt Ltd"}} />
-                <DataCard type={"detail"} data={{headline: "Pakistan Council of Scientific and Industrial Research"}} />
-                <DataCard type={"detail"} data={{headline: "Mineral Testing Laboratory Peshawar"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Mineral Testing Laboratory"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Geological Survey of Pakistan"}} />
+                <StaticDataCard type={"detail"} data={{headline: "SGS Pakistan (Private) Limited"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Intertek Pakistan Pvt Ltd"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pakistan Council of Scientific and Industrial Research"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Mineral Testing Laboratory Peshawar"}} />
               </div>
             </div>
 
