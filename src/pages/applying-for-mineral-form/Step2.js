@@ -14,6 +14,7 @@ const initialState = {
   SampleLocation: "",
   SampleImagePath: "",
   sampleImage: "",
+  TargetedMineralOptions:[],
 };
 const Step2 = ({ setStep }) => {
   const [listingData, setListingData] = useState([]);
@@ -31,14 +32,23 @@ const Step2 = ({ setStep }) => {
   const fetchSampleData = async (id = "") => {
     try {
       if (id) {
+        let minerals = [];
         setListLoading(true);
         const { data, isError, message } = await saveSampleListingAPI(
           REQUEST_TYPES.GET,
           `${ENDPOINTS.GET_SAMPLE_DETAILS}?TestApplicationId=${id}`
         );
-        if (isError) {
+        const { data:approvedMineral, isError1, message1 } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          `${ENDPOINTS.GET_ALL_APPROVED_MINERAL}`
+        );
+        
+        if (isError || isError1) {
           setListLoading(false);
           warning(message);
+        }
+        if(!isError1 && approvedMineral){
+          minerals = approvedMineral.map((val) => (val?.name || ""));
         }
         if (!isError && data) {
           setListingData(data);
@@ -48,6 +58,7 @@ const Step2 = ({ setStep }) => {
             SampleLocation: "",
             SampleImagePath: "",
             TestApplicationId: id,
+            TargetedMineralOptions:minerals
           });
           setListLoading(false);
         }
@@ -134,7 +145,7 @@ const Step2 = ({ setStep }) => {
       name: "TargetedMineral",
       required: "true",
       type: "select",
-      options: ["All", "Other Types"],
+      options: state?.TargetedMineralOptions || [],
     },
     { label: "Sample Location", name: "SampleLocation", required: "true", type: "input" },
     { label: "Upload Sample Image", name: "SampleImagePath", type: "file" },
@@ -213,6 +224,7 @@ const Step2 = ({ setStep }) => {
           <div>Sample Listing</div>
           <ProgressPercentage percent={50} step={2} total={4}></ProgressPercentage>
         </div>
+        {contextHolder}
         <form className="space-y-4 " onSubmit={handleAddForm}>
           <div>
             {listLoading ? (
@@ -223,7 +235,8 @@ const Step2 = ({ setStep }) => {
               <Empty />
             )}
             <div className="mineral-testing-table-header">
-              <div>Sample Details</div>
+              <div>Sample Details</div>{
+                loading ? <Loader/> :
               <button type="submit" className="next-button" style={{ padding: "20PX" }}>
                 {state?.id ? "Update Sample" : "Add Sample"}
                 <svg
@@ -241,6 +254,7 @@ const Step2 = ({ setStep }) => {
                   />
                 </svg>
               </button>
+              }
             </div>
           </div>
           <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>

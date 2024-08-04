@@ -9,6 +9,7 @@ import { Space, Table } from "antd";
 import { applicationStatus } from "utils/constant/noc";
 import MoreInfo from "assets/images/geomapinfo.png";
 import { setCookiesByName } from "utils/helpers";
+
 function NocListing({ setStep }) {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,7 +30,6 @@ function NocListing({ setStep }) {
         warning(message);
       }
       if (!isError && data) {
-        console.log(data, "data");
         setRecords(data);
         setLoading(false);
       }
@@ -50,14 +50,14 @@ function NocListing({ setStep }) {
     }
   };
   const onChange = (key) => {
-    setCookiesByName("expactapplicationid", key, true);
     navigate(`/noc-view-application?id=${key}`);
   };
   const onEdit = (key) => {
-    localStorage.setItem("NOCidEdit", key);
+    setCookiesByName("expactapplicationid", key, true);
+    localStorage.setItem("NOCEditMode", true);
     localStorage.removeItem("NOCidview");
     localStorage.removeItem("NOCid");
-    navigate("/pageone");
+    setStep("NocForm");
   };
   const columns = [
     {

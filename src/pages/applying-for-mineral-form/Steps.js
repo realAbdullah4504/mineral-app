@@ -32,7 +32,6 @@ const Steps = ({ obj, showListing = false, setDisabled = "", step = 1 }) => {
   };
 
   const handleAddForm = () => {
-    console.log(formValues, "formValues");
     setListingData([...listingData, formValues]);
     setFormValues({});
   };

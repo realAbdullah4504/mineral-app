@@ -18,8 +18,12 @@ const CSRegulations = lazy(() => import("../pages/csr-regulations"));
 const CSRSuccessStories = lazy(() => import("../pages/csr-success-stories"));
 const CSRCommunity = lazy(() => import("../pages/csr-community"));
 const CSRCommunityForm = lazy(() => import("../pages/csr-community-form"));
-const CSRCommunityFormView = lazy(() => import("../pages/csr-community-form/view"));
-const CSRCommunityFormEdit = lazy(() => import("../pages/csr-community-form/edit"));
+const CSRCommunityFormView = lazy(() =>
+  import("../pages/csr-community-form/view")
+);
+const CSRCommunityFormEdit = lazy(() =>
+  import("../pages/csr-community-form/edit")
+);
 const CSR = lazy(() => import("../pages/csr"));
 const ViewResults = lazy(() => import("../pages/view-results"));
 
@@ -99,49 +103,49 @@ const StatisticsProduction = lazy(() =>
 );
 const Statisticsio = lazy(() => import("../pages/statistics-io"));
 const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
-const RegisterOrganization = lazy(() => import("../components/register-form"));
-const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
+const RegisterOrganization = lazy(() => import("../components/RegisterForm"));
+const ApplyingForMineralForm = lazy(() =>
+  import("../pages/applying-for-mineral-form")
+);
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
-const ShipmentForm = lazy(() => import("../pages/applying-for-mineral-form/Step5"));
+const ShipmentForm = lazy(() =>
+  import("../pages/applying-for-mineral-form/Step5")
+);
 const NocSponsorCompanyAddList = lazy(() =>
   import("../pages/noc-company-form")
 );
 const ExpatNocApplication = lazy(() =>
   import("../pages/expact-noc-application")
 );
-const GeoServices = lazy(() =>
-  import("../pages/geo-services")
-);
-const MiningCompanies = lazy(() =>
-  import("../pages/mining-companies")
-);
+const GeoServices = lazy(() => import("../pages/geo-services"));
+const MiningCompanies = lazy(() => import("../pages/mining-companies"));
 const MineralBasedIndustries = lazy(() =>
   import("../pages/mineral-based-industries")
 );
-const MachinerySuppliers = lazy(() =>
-  import("../pages/machinery-supplier")
-);
-const ExplosiveSuppliers = lazy(() =>
-  import("../pages/explosive-suppliers")
-);
-const LegalServices = lazy(() =>
-  import("../pages/legal-services")
-);
-const AuditAccounts = lazy(() =>
-  import("../pages/audit-accounts")
-);
-const LandSurveying = lazy(() =>
-  import("../pages/land-surveying")
-);
-const TrainingSchools = lazy(() =>
-  import("../pages/training-schools")
-);
-const OtherServices = lazy(() =>
-  import("../pages/other-services")
-);
+const MachinerySuppliers = lazy(() => import("../pages/machinery-supplier"));
+const ExplosiveSuppliers = lazy(() => import("../pages/explosive-suppliers"));
+const LegalServices = lazy(() => import("../pages/legal-services"));
+const AuditAccounts = lazy(() => import("../pages/audit-accounts"));
+const LandSurveying = lazy(() => import("../pages/land-surveying"));
+const TrainingSchools = lazy(() => import("../pages/training-schools"));
+const OtherServices = lazy(() => import("../pages/other-services"));
 const NOCApplicationView = lazy(() =>
   import("../pages/expact-noc-application/NOCApplicationView")
 );
+const SponsorCompanyView = lazy(() =>
+  import("../pages/noc-sponsor-company/ViewSponsorCompany")
+);
+const MineralTestingCompanyView = lazy(() =>
+  import("../pages/applying-for-mineral-form/View")
+);
+const ForgotPassword = lazy(() => import("../pages/forgot-password"));
+const OTP = lazy(() => import("../pages/otp"));
+const VerifyPhoneNumber = lazy(() => import("../pages/verify-phone-number"));
+const SetPassword = lazy(() => import("../pages/set-password"));
+const RegisterOrganizationEdit = lazy(() =>
+  import("../pages/register-professional/edit")
+);
+
 const AppRouter = () => (
   <Router>
     <Suspense fallback={"...Loading"}>
@@ -769,19 +773,28 @@ const AppRouter = () => (
         <Route
           path="/mineral-based-industries"
           element={
-            <PublicRoute component={MineralBasedIndustries} layout={DashboardLayout} />
+            <PublicRoute
+              component={MineralBasedIndustries}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
           path="/machinery-suppliers"
           element={
-            <PublicRoute component={MachinerySuppliers} layout={DashboardLayout} />
+            <PublicRoute
+              component={MachinerySuppliers}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
           path="/explosive-suppliers"
           element={
-            <PublicRoute component={ExplosiveSuppliers} layout={DashboardLayout} />
+            <PublicRoute
+              component={ExplosiveSuppliers}
+              layout={DashboardLayout}
+            />
           }
         />
         <Route
@@ -820,13 +833,16 @@ const AppRouter = () => (
             <PublicRoute component={ShipmentForm} layout={DashboardLayout} />
           }
         />
-         <Route
+        <Route
           path="/noc-view-application"
           element={
-            <PublicRoute component={NOCApplicationView} layout={DashboardLayout} />
+            <PublicRoute
+              component={NOCApplicationView}
+              layout={DashboardLayout}
+            />
           }
         />
-         <Route
+        <Route
           path="/csr-community-form-view/:id"
           element={
             <PublicRoute
@@ -835,12 +851,78 @@ const AppRouter = () => (
             />
           }
         />
-         <Route
+        <Route
           path="/csr-community-form-edit/:id"
           element={
             <PublicRoute
               component={CSRCommunityFormEdit}
               layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/view-sponsor-company"
+          element={
+            <PublicRoute
+              component={SponsorCompanyView}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/view-mineral-testing-company"
+          element={
+            <PublicRoute
+              component={MineralTestingCompanyView}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/registerorganization/edit"
+          element={
+            <PublicRoute
+              component={RegisterOrganizationEdit}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <PublicRoute component={ForgotPassword} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/otp"
+          element={
+            <PublicRoute
+              component={OTP}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/verify-number"
+          element={
+            <PublicRoute
+              component={VerifyPhoneNumber}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
+            />
+          }
+        />
+        <Route
+          path="/set-password"
+          element={
+            <PublicRoute
+              component={SetPassword}
+              layout={(props) => (
+                <DashboardLayout {...props} isHeader={false} isFooter={false} />
+              )}
             />
           }
         />

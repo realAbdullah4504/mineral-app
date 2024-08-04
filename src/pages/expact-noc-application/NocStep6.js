@@ -6,32 +6,39 @@ import ProgressPercentage from "components/UI/ProgressPercentage";
 import { getCookie } from "services/session/cookies";
 import { commonAPIs } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
+import { expactApplicationForm } from "utils/constant/url";
+import { saveSampleListingAPI } from "services/api/common";
+import { data } from "autoprefixer";
 const NocStep6 = ({ setStep, setAlreadyVisited }) => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [state, setState] = useState({
-    ForeignerPlacesOFvisitDetail:"",
-    ForeignerWorkPlacesWithAddress:"",
-    ForeignerPlacesWhereStay:"",
-    ForeignerVisitDurationStartDate:"",
-    ForeignerVisitDurationEndDate:"",
-    alreadyVisited:"No"
-  });
+  const [state, setState] = useState({});
   const [loading, setLoading] = useState(false);
-  const nocApplicationId = getCookie('expactapplicationid') || ""; 
+  const isEdit = localStorage.getItem("NOCEditMode");
+  const nocApplicationId = getCookie("expactapplicationid") || "";
+  const creationId = getCookiesByName("expactapplicationid");
   useEffect(() => {
-   const nocApplicationDetails =  getCookiesByName("expactapplicationformkeys", true);
-   if(nocApplicationDetails && Object.keys(nocApplicationDetails).length){
-    const {foreignerPlacesOFvisitDetail, foreignerWorkPlacesWithAddress, foreignerPlacesWhereStay, foreignerVisitDurationStartDate, foreignerVisitDurationEndDate} = nocApplicationDetails;
-    setState({
-      ForeignerPlacesOFvisitDetail:foreignerPlacesOFvisitDetail,
-      ForeignerWorkPlacesWithAddress:foreignerWorkPlacesWithAddress,
-      ForeignerPlacesWhereStay:foreignerPlacesWhereStay,
-      ForeignerVisitDurationStartDate:foreignerVisitDurationStartDate.split('T')[0],
-      ForeignerVisitDurationEndDate:foreignerVisitDurationEndDate.split('T')[0],
-    });
-    console.log('nocApplicationDetails', nocApplicationDetails)
-   }
-  }, [])
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          expactApplicationForm(nocApplicationId)
+        );
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            travelHistory: data.nocApplicationTravelHistory,
+          }));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, []);
+
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
@@ -40,15 +47,18 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const formValues = Object.fromEntries(formData.entries());
     setLoading(true);
+
     try {
       const {
-    ForeignerPlacesOFvisitDetail,
-    ForeignerWorkPlacesWithAddress,
-    ForeignerPlacesWhereStay,
-    ForeignerVisitDurationStartDate,
-    ForeignerVisitDurationEndDate,
-      } = state;
+        ForeignerPlacesOFvisitDetail,
+        ForeignerWorkPlacesWithAddress,
+        ForeignerPlacesWhereStay,
+        ForeignerVisitDurationStartDate,
+        ForeignerVisitDurationEndDate,
+      } = formValues;
 
       const payload = {
         ForeignerPlacesOFvisitDetail,
@@ -56,10 +66,10 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
         ForeignerPlacesWhereStay,
         ForeignerVisitDurationStartDate,
         ForeignerVisitDurationEndDate,
-          }
-      if(nocApplicationId){
-      payload.id = nocApplicationId;
-      }
+      };
+
+      payload.id = state.id || creationId;
+
       const { data, isError, message } = await commonAPIs(
         REQUEST_TYPES.POST,
         `${ENDPOINTS.SAVE_FOREIGNER_ACCOMMODATION_DETAILS}`,
@@ -71,26 +81,31 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
       }
       if (!isError && data) {
         setLoading(false);
-        if (state["alreadyVisited"] === "Yes") {
-      setStep("Step7");
-      setAlreadyVisited("Yes");
-    } else {
-      setStep("Step8");
-      setAlreadyVisited("No");
-    }
+
+        if (state["alreadyVisitPakistanCountry"] == "Yes") {
+          setStep("Step7");
+          setAlreadyVisited("Yes");
+        } else {
+          setStep("Step8");
+          setAlreadyVisited("No");
+        }
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.error("Error:", error);
     }
-    
   };
 
   const handlePrevious = () => {
     setStep("Step5");
   };
   const obj = [
-    { label: "Details of Places to be visited during stay", name: "ForeignerPlacesOFvisitDetail", required: "true", type: "input" },
+    {
+      label: "Details of Places to be visited during stay",
+      name: "ForeignerPlacesOFvisitDetail",
+      required: "true",
+      type: "input",
+    },
     {
       label: "Places with Address",
       name: "ForeignerWorkPlacesWithAddress",
@@ -107,31 +122,46 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
     { label: "End of Visit", name: "ForeignerVisitDurationEndDate", required: "true", type: "calendar" },
     {
       label: "Already Visited to Pakistan",
-      name: "alreadyVisited",
+      name: "alreadyVisitPakistanCountry",
       required: "true",
       type: "select",
-      options: ["No", "Yes"],
+      options: ["Yes", "No"],
     },
   ];
   const changeHandler = (e) => {
-    const {name, value} = e?.target || {};
-    setState({
-      ...state,
-      [name]:value
-    })
-  }
+    const { name, value } = e?.target || {};
+    if (name == "alreadyVisitPakistanCountry") {
+      if (value == "Yes") {
+        setState((prev) => ({ ...prev, travelHistory: ["notEmpty"] }));
+      } else {
+        setState((prev) => ({ ...prev, travelHistory: [] }));
+      }
+    }
+    setState((prev) => ({ ...prev, [name]: value }));
+  };
   const renderFormItems = () => {
     return obj.map((field) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
       };
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
 
-      const renderInput = (type = "text") => <input type={type} onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps} placeholder=" " />;
+      const renderInput = (type = "text") => {
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        let value = state[name] || state[camelCaseName] || "";
+        if (type == "date") {
+          value = value.split("T")[0];
+        }
+
+        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+      };
 
       const renderLabel = () => (
         <label
@@ -151,7 +181,14 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select onChange={(e)=> setAlreadyVisited(e.target.value)} value={state[field?.name]}{...commonProps}>
+              <select
+                // disabled={isEdit}
+                {...commonProps}
+                defaultValue={state?.travelHistory?.length ? "Yes" : "No"}
+                value={state.travelHistory?.length ? "Yes" : "No"}
+                onChange={(e) => changeHandler(e)}
+                {...commonProps}
+              >
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -169,7 +206,7 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
       );
     });
   };
-
+  console.log(state, "state");
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
@@ -194,27 +231,28 @@ const NocStep6 = ({ setStep, setAlreadyVisited }) => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
               </svg>
             </div>
-          </button>,
-          {
-            loading ? 
-            <Loader/> :
-          <button type="submit" className="next-button">
-            <div>
-              {" "}
-              Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </div>
           </button>
-          }
+          ,
+          {loading ? (
+            <Loader />
+          ) : (
+            <button type="submit" className="next-button">
+              <div>
+                {" "}
+                Next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BreadCrumbs from "components/Breadcrumbs";
 import { useState } from "react";
 import NocListing from "./NocListing";
@@ -15,6 +15,7 @@ const ExpatNocApplication = () => {
   const [step, setStep] = useState("NocListing");
   const [equipment, setEquipment] = useState("yes");
   const [alreadyVisited, setAlreadyVisited] = useState("Yes");
+
   const tabHandler = {
     NocListing: <NocListing setStep={setStep}></NocListing>,
     NocForm: <NocForm setStep={setStep}></NocForm>,
@@ -33,6 +34,15 @@ const ExpatNocApplication = () => {
     { path: "/expatriate-security", label: "Expatriate Security" },
     { path: "/expact-noc-application", label: "NOC Applications" },
   ];
+  useEffect(() => {
+    const deleteCookie = (name) => {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    };
+    localStorage.removeItem("NOCEditMode");
+    deleteCookie("expactapplicationid");
+    localStorage.removeItem("NOCidview");
+    localStorage.removeItem("NOCid");
+  }, []);
   return (
     <div className="expact-noc-application-list mx-auto mb-20 mineral-form">
       <div className="mt-[50px]">

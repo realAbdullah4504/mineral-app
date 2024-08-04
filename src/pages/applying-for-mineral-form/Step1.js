@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Loader } from "components";
 import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
-import { testApplicationDetailAPI } from "services/api/common";
+import { commonAPIs, testApplicationDetailAPI } from "services/api/common";
 import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { message, ConfigProvider } from "antd";
 import ProgressPercentage from "components/UI/ProgressPercentage";
@@ -10,19 +10,31 @@ const Step1 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState({ applyAs: "Individual" });
-
   useEffect(() => {
     const applicationDetail = getCookiesByName("testApplication", true);
-    if (Object.keys(applicationDetail).length) {
-      let payload = {};
-      const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } =
-        applicationDetail;
-      if (applicationDetail?.applyAs === "Individual") {
-        payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
-      } else {
-        payload = { ...payload, businessDomain, id };
-      }
-      setState({ ...state, ...payload });
+    const TestApplicationId = getCookiesByName("mineralEditid", true) || applicationDetail?.id  || "";
+    if(TestApplicationId) {
+      (async function () {
+        try {
+          const { data, isError, message } = await commonAPIs(
+            REQUEST_TYPES.GET,
+            `${ENDPOINTS.GET_TEST_APPLICATION_BY_ID}?TestApplicationId=${TestApplicationId}`,
+          );
+          if (isError) {
+            warning(message);
+          } else if (data) {
+            const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = data;
+            let payload = {};
+          payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
+        if (applyAs === "Company") {
+          payload = { ...payload, businessDomain };
+        }
+        setState({ ...state, ...payload });
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      })();
     }
   }, []);
   const warning = (message = "This is a warning message") => {
@@ -133,7 +145,7 @@ const Step1 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -157,9 +169,8 @@ const Step1 = ({ setStep }) => {
     setLoading(true);
     const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = state;
     let payload = {};
-    if (applyAs === "Individual") {
-      payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email };
-    } else {
+    payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email };
+    if (applyAs === "Company") {
       payload = { ...payload, businessDomain };
     }
     if (id) {
@@ -177,7 +188,6 @@ const Step1 = ({ setStep }) => {
       }
       if (!isError && data) {
         setLoading(false);
-        console.log(data, "data");
         setCookiesByName("testApplication", data, true);
         setStep("step2");
       }

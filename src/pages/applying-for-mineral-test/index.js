@@ -1,48 +1,51 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, Space, Table } from "antd";
+import { Dropdown, Space, Table, Typography } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import MoreInfo from "assets/images/geomapinfo.png";
 import { saveSampleListingAPI } from "services/api/common";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { message } from "antd";
+
+import { setCookiesByName } from "utils/helpers";
+
 import { Loader } from "components";
 const items = [
   {
-    key: "1",
+    key: "/applying-for-mineral-form",
     label: "Edit",
-    link:"#"
+    link: "/applying-for-mineral-form",
   },
   {
-    key: "2",
+    key: "/view-mineral-testing-company",
     label: "View Application",
-    link:"#"
+    link: "/view-mineral-testing-company",
   },
   {
     key: "3",
     label: "View Sample Details",
-    link:"#"
+    link: "#",
   },
   {
     key: "/shipment-detail",
     label: "Add Shipment Details",
-    link:"/shipment-detail"
+    link: "/shipment-detail",
   },
   {
     key: "5",
     label: "Payment",
-    link:"#"
+    link: "#",
   },
   {
     key: "6",
     label: "View Report",
-    link:"#"
+    link: "#",
   },
   {
     key: "7",
     label: "Request Retest",
-    link:"#"
+    link: "#",
   },
 ];
 
@@ -57,8 +60,18 @@ const TableMap = () => {
       content: message,
     });
   };
+  const onEdit = (key) => {
+    setCookiesByName("mineralEditid", key, true);
+    localStorage.setItem("mineralEditMode", true);
+    navigate(`/applying-for-mineral-form`);
+  };
+  const onChange = (key) => {
+    setCookiesByName("mineralEditid", key, true);
+    localStorage.setItem("mineralEditMode", true);
+    navigate(`/applying-for-mineral-form`);
+  };
   const handleDropdownItemClick = (e, id = "") => {
-    if(e?.key){
+    if (e?.key) {
       const url = `${e?.key}?id=${id}`;
       navigate(url);
     }
@@ -174,8 +187,6 @@ const TableMap = () => {
           warning(message);
         }
         if (!isError && data) {
-          console.log(data, "data");
-          console.log(data,"Shujahat");
           setListing(data);
           setLoading(false);
         }

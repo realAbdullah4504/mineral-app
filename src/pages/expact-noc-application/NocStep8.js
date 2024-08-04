@@ -2,29 +2,40 @@ import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { Loader } from "components";
-import { message, ConfigProvider } from "antd";
+import { message, ConfigProvider, Upload } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
-
+import { expactApplicationForm } from "utils/constant/url";
+import { Button } from "antd";
+import { commonAPIs } from "services/api/common";
+const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
 const NocStep8 = ({ setStep, alreadyVisited }) => {
+  const [toggle, setToggle] = useState({
+    visaGrantCertificate: false,
+  });
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState("");
+  const [prevImage, setPrevImage] = useState("");
   const [countryListing, setCountryListing] = useState([]);
+  const isEdit = localStorage.getItem("NOCEditMode");
   const [days, setDays] = useState({ startDate: "", endDate: "" });
-
+  const creationId = getCookiesByName("expactapplicationid");
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
       content: message,
     });
   };
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    formValues.id = state.id;
+    formValues.id = state.id || creationId;
     const {
       DateOfVisaApplication,
       VisaReferenceNumber,
@@ -37,9 +48,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
       VisaDurationInDays,
       TravelCountryName,
       VisaStayFacility,
-      VisaGrantCertificate,
     } = formValues;
-
     const formDatas = new FormData();
     const obj = {
       DateOfVisaApplication,
@@ -56,33 +65,79 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     };
     obj.Id = state.id;
     obj.VisaDurationInDays = state.VisaDurationInDays;
+
+    if (isEdit) {
+      if (state.visaPrevImg !== state.visaGrantCertificate) {
+        obj.visaGrantCertificate = state.visaPrevImg;
+      } else {
+        obj.visaGrantCertificate = state.visaGrantCertificate;
+      }
+    } else {
+      if (state.visaPrevImg) {
+        obj.visaGrantCertificate = state.visaPrevImg;
+      }
+    }
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("visaGrantCertificate", VisaGrantCertificate);
-
-    setLoading(true);
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
-        formDatas
-      );
-
-      if (isError) {
-        setLoading(false);
-        warning(message);
+    if (isEdit) {
+      if (state.visaPrevImg !== state.visaGrantCertificate) {
+        formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
       }
-      if (!isError && data) {
+    } else {
+      if (state.visaGrantCertificate !== state.visaPrevImg) {
+        formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
+      }
+    }
+    if (!state.visaGrantCertificate) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await commonAPIs(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
+          formDatas
+        );
+
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          localStorage.removeItem("NOCEditMode");
+          deleteCookie("expactapplicationid");
+          localStorage.removeItem("NOCidview");
+          localStorage.removeItem("NOCid");
+          setLoading(false);
+          setStep("NocListing");
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      } finally {
         setLoading(false);
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
-    } finally {
-      setLoading(false);
+    }
+  };
+
+  const handleChange = (fieldName, info) => {
+    const newFileList = info.fileList;
+    if (newFileList.length > 0) {
+      const file = newFileList[0].originFileObj;
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        setToggle((prev) => ({ ...prev, [fieldName]: true }));
+        setState((prev) => ({ ...prev, visaGrantCertificate: file || "" }));
+      });
+      reader.readAsDataURL(file);
+    } else {
+      setState((prev) => ({ ...prev, visaGrantCertificate: "" }));
     }
   };
 
   const changeHandler = (e, fieldName) => {
+    if (isEdit && fieldName == "visaGrantCertificate") {
+    }
     const { name, value } = e?.target || {};
     setState((prevState) => ({ ...prevState, [name]: value }));
     if (fieldName === "VisaStartDate") {
@@ -94,7 +149,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
   };
 
   const handlePrevious = () => {
-    if (alreadyVisited === "yes") {
+    if (alreadyVisited === "Yes") {
       setStep("Step7");
     } else {
       setStep("Step6");
@@ -133,7 +188,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     { label: "Stay Facility", name: "VisaStayFacility", required: "true", type: "input" },
     {
       label: "Visa Grant Certificate",
-      name: "VisaGrantCertificate",
+      name: "visaGrantCertificate",
       required: "true",
       type: "file",
     },
@@ -149,16 +204,26 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
         required: field.required,
       };
 
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
       const renderInput = (type = "text", disabled) => {
         const today = new Date().toISOString().split("T")[0];
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        let value = state[name] || state[camelCaseName] || "";
+        if (type == "date") {
+          value = value.split("T")[0];
+        }
+
         return (
           <input
             type={type}
-            onChange={(e) => changeHandler(e, field.name)}
-            value={state[commonProps?.name]}
+            value={value}
+            onChange={(e) => changeHandler(e)}
             {...commonProps}
-            placeholder=" "
             max={disabled ? today : undefined}
+            placeholder=" "
           />
         );
       };
@@ -171,18 +236,48 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
           {field.label}
         </label>
       );
-
+      const name = commonProps?.name || "";
+      const camelCaseName = name ? toCamelCase(name) : "";
+      let value = state[name] || state[camelCaseName] || "";
+      const imgurl = state[field.name == "visaGrantCertificate" ? "visaGrantCertificate" : "visaGrantCertificate"];
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
           {field.type === "calendar" &&
             renderInput("date", field.name == "VisaGrantDate" || field.name == "DateOfVisaApplication" ? true : false)}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
+          {field.type === "file" && (
+            <>
+              <Upload
+                {...commonProps}
+                // action={imgurl}
+                onChange={(info) => handleChange(field.name, info)}
+                listType="picture"
+                maxCount={1}
+                fileList={
+                  imgurl
+                    ? [
+                        {
+                          uid: "-1",
+                          name: "image.png",
+                          status: "done",
+                          url: toggle[field.name] ? URL.createObjectURL(imgurl) : baseUrl + imgurl,
+                        },
+                      ]
+                    : []
+                }
+                showUploadList={{ showRemoveIcon: false }}
+              >
+                {" "}
+                <Button>Upload</Button>
+              </Upload>
+              {/* <input type="file" onChange={changeHandler} {...commonProps} accept="image/*,application/pdf,text/*" /> */}
+            </>
+          )}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select {...commonProps} onChange={(e) => changeHandler(e)} value={state[value]}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -201,8 +296,24 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     });
   };
   useEffect(() => {
-    const formValues = getCookiesByName("expactapplicationformkeys", true);
-    setState(formValues);
+    const id = getCookiesByName("expactapplicationid", true);
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            visaPrevImg: data.visaGrantCertificate,
+          }));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
     (async function () {
       try {
         const { data, isError, message } = await saveSampleListingAPI(
@@ -229,22 +340,27 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
       const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
       return differenceInDays;
     };
-    const { startDate, endDate } = days;
-    if (startDate && endDate) {
-      const diffDays = calculateDateDifference(startDate, endDate);
-      console.log(startDate, endDate, "both");
+    const { VisaStartDate, VisaEndDate } = state;
+    if (VisaStartDate && VisaEndDate) {
+      const diffDays = calculateDateDifference(VisaStartDate, VisaEndDate);
       setState((prevState) => ({
         ...prevState,
         VisaDurationInDays: diffDays,
       }));
     }
-  }, [days.startDate, days.endDate]);
+  }, [state.VisaStartDate, state.VisaEndDate]);
+
+  useEffect(() => {
+    setPrevImage(state.visaGrantCertificate);
+  }, [state.visaGrantCertificate]);
+
   return (
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div className="text-green-600">Visa Grant Details</div>
         <ProgressPercentage percent={100} step={8} total={8}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>

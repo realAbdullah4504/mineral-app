@@ -2,15 +2,24 @@ import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { Loader } from "components";
-import { message, ConfigProvider } from "antd";
+import { message, ConfigProvider, Upload } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
-import { saveSampleDetailAPI } from "services/api/common";
+import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
+import { expactApplicationForm } from "utils/constant/url";
+import { Button } from "antd";
 
 const NocStep5 = ({ setStep, equipment }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState("");
+  const [toggle, setToggle] = useState({
+    sponsorPakistaniOfficialCNICFrontImagePath: false,
+    sponsorPakistaniOfficialCNICBackImagePath: false,
+  });
+  const creationId = getCookiesByName("expactapplicationid");
+  const isEdit = localStorage.getItem("NOCEditMode");
+  const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
   const warning = (message = "This is a warning message") => {
     messageApi.open({
       type: "warning",
@@ -21,7 +30,7 @@ const NocStep5 = ({ setStep, equipment }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    formValues.id = state.id;
+    formValues.id = state.id || creationId;
     const {
       SponsorPakistanAddress,
       SponsorAddressVisitingOrganisation,
@@ -30,8 +39,6 @@ const NocStep5 = ({ setStep, equipment }) => {
       SponsorPakistaniOfficialCNIC,
       SponsorPakistaniOfficialContactNumber,
       SponsorPakistaniOfficialAddress,
-      cnicImageFront,
-      cnicImageBack,
     } = formValues;
 
     const formDatas = new FormData();
@@ -44,31 +51,96 @@ const NocStep5 = ({ setStep, equipment }) => {
       SponsorPakistaniOfficialContactNumber,
       SponsorPakistaniOfficialAddress,
     };
+    if (isEdit) {
+      if (state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        obj.cnicImageFront = state.frontImage;
+      } else {
+        obj.cnicImageFront = state.sponsorPakistaniOfficialCNICFrontImagePath;
+      }
+      if (state.backImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        obj.cnicImageBack = state.backImage;
+      } else {
+        obj.cnicImageBack = state.sponsorPakistaniOfficialCNICBackImagePath;
+      }
+    } else {
+      if (state.frontImage) {
+        obj.cnicImageFront = state.frontImage;
+      }
+      if (state.backImage) {
+        obj.cnicImageBack = state.backImage;
+      }
+    }
+
     obj.id = state.id;
     formDatas.append("obj", JSON.stringify(obj));
-    formDatas.append("cnicImageFront", cnicImageFront);
-    formDatas.append("cnicImageBack", cnicImageBack);
+    if (isEdit) {
+      if (state.backImage !== state.sponsorPakistaniOfficialCNICBackImagePath) {
+        formDatas.append("cnicImageBack", state.sponsorPakistaniOfficialCNICBackImagePath);
+      }
+    } else {
+      if (state.sponsorPakistaniOfficialCNICBackImagePath !== state.backImage) {
+        formDatas.append("cnicImageBack", state.sponsorPakistaniOfficialCNICBackImagePath);
+      }
+    }
+    if (isEdit) {
+      if (state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        formDatas.append("cnicImageFront", state.sponsorPakistaniOfficialCNICFrontImagePath);
+      }
+    } else {
+      if (state.frontImage !== state.sponsorPakistaniOfficialCNICFrontImagePath) {
+        formDatas.append("cnicImageFront", state.sponsorPakistaniOfficialCNICFrontImagePath);
+      }
+    }
+    if (!state.sponsorPakistaniOfficialCNICBackImagePath || !state.sponsorPakistaniOfficialCNICFrontImagePath) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await saveSampleDetailAPI(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS,
+          formDatas
+        );
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          setLoading(false);
+          setStep("Step6");
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
-    setLoading(true);
-    try {
-      const { data, isError, message } = await saveSampleDetailAPI(
-        REQUEST_TYPES.POST,
-        ENDPOINTS.SAVE_EXPACT_APPLICATION_SPONSOR_DETAILS,
-        formDatas
-      );
-      if (isError) {
-        setLoading(false);
-        warning(message);
+  const handleChange = (fieldName, info) => {
+    const newFileList = info.fileList;
+    if (newFileList.length > 0) {
+      const file = newFileList[0].originFileObj;
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        setToggle((prev) => ({ ...prev, [fieldName]: true }));
+        if (fieldName === "cnicImageFront") {
+          setState((prev) => ({ ...prev, sponsorPakistaniOfficialCNICFrontImagePath: file || "" }));
+        }
+        if (fieldName === "cnicImageBack") {
+          setState((prev) => ({ ...prev, sponsorPakistaniOfficialCNICBackImagePath: file || "" }));
+        }
+      });
+      reader.readAsDataURL(file);
+    } else {
+      if (fieldName === "cnicImageFront") {
+        setState((prev) => ({ ...prev, sponsorPakistaniOfficialCNICFrontImagePath: "" }));
       }
-      if (!isError && data) {
-        setLoading(false);
-        setStep("Step6");
+      if (fieldName === "cnicImageBack") {
+        setState((prev) => ({ ...prev, sponsorPakistaniOfficialCNICBackImagePath: "" }));
       }
-    } catch (error) {
-      setLoading(false);
-      console.log(error.message);
-    } finally {
-      setLoading(false);
     }
   };
   const changeHandler = (e) => {
@@ -76,7 +148,7 @@ const NocStep5 = ({ setStep, equipment }) => {
     setState({ ...state, [name]: value });
   };
   const handlePrevious = () => {
-    if (equipment === "yes") {
+    if (equipment === "Yes") {
       setStep("Step4");
     } else {
       setStep("Step3");
@@ -148,10 +220,16 @@ const NocStep5 = ({ setStep, equipment }) => {
         placeholder: field.placeholder || "",
       };
 
-      const renderInput = (type = "text") => (
-        <input onChange={(e) => changeHandler(e)} value={state[commonProps?.name]} type={type} {...commonProps} />
-      );
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
+      const renderInput = (type = "text") => {
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        const value = state[name] || state[camelCaseName] || "";
 
+        return <input type={type} value={value} onChange={(e) => changeHandler(e)} {...commonProps} placeholder=" " />;
+      };
       const renderLabel = () => (
         <label
           htmlFor={field.name}
@@ -160,26 +238,43 @@ const NocStep5 = ({ setStep, equipment }) => {
           {field.label}
         </label>
       );
-
+      const imgurl =
+        state[
+          field.name == "cnicImageFront"
+            ? "sponsorPakistaniOfficialCNICFrontImagePath"
+            : "sponsorPakistaniOfficialCNICBackImagePath"
+        ];
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
           {field.type === "calendar" && renderInput("date")}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
-          {field.type === "select" && (
+          {field.type === "file" && (
             <>
-              {renderLabel()}
-              <select {...commonProps}>
-                <option value="" disabled style={{ opacity: 0.5 }}>
-                  Select {field.label.toLowerCase()}
-                </option>
-                {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              <Upload
+                {...commonProps}
+                // action={imgurl}
+
+                onChange={(info) => handleChange(field.name, info)}
+                listType="picture"
+                maxCount={1}
+                showUploadList={{ showRemoveIcon: false }}
+                fileList={
+                  imgurl
+                    ? [
+                        {
+                          uid: "-1",
+                          name: "image.png",
+                          status: "done",
+                          url: toggle[field.name] ? URL.createObjectURL(imgurl) : baseUrl + imgurl,
+                        },
+                      ]
+                    : []
+                }
+              >
+                {" "}
+                <Button>Upload</Button>
+              </Upload>
             </>
           )}
           {field.type === "textarea" && <textarea {...commonProps} placeholder=" " />}
@@ -189,10 +284,26 @@ const NocStep5 = ({ setStep, equipment }) => {
     });
   };
   useEffect(() => {
-    const formValues = getCookiesByName("expactapplicationformkeys", true);
-    setState(formValues);
+    const id = getCookiesByName("expactapplicationid", true);
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            frontImage: data.sponsorPakistaniOfficialCNICFrontImagePath,
+            backImage: data.sponsorPakistaniOfficialCNICBackImagePath,
+          }));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, []);
-  console.log(state, "state");
 
   return (
     <div className="noc-form">
@@ -200,6 +311,7 @@ const NocStep5 = ({ setStep, equipment }) => {
         <div className="text-green-600">Sponsor Details</div>
         <ProgressPercentage percent={62} step={5} total={8}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>

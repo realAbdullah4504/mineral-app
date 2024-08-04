@@ -144,7 +144,6 @@ const ViewCsrCommunity = () => {
       }));
     };
   
-    console.log("form", form.getFieldsValue());
 
   return (
     <Container classes="w-[70%]">
