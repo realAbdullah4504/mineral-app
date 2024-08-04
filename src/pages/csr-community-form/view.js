@@ -142,8 +142,6 @@ const ViewCsrCommunity = () => {
     form.setFieldsValue({ [e.target.name]: e.target.value });
   };
 
-  console.log("form", form.getFieldsValue());
-
   return (
     <Container classes="w-[70%]">
       <div className="flex flex-col">

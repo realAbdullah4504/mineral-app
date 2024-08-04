@@ -35,6 +35,11 @@ const TableMap = () => {
     localStorage.setItem("SponsorEditMode", true);
     navigate(`/noc-company-form`);
   };
+  const onView = (key) => {
+    setCookiesByName("companyEditRecordId", key, true);
+    localStorage.setItem("SponsorEditMode", true);
+    navigate(`/view-sponsor-company?id=${key}`);
+  };
   const applicationStatus = [
     {
       status: "PublicNewEntry",
@@ -135,7 +140,7 @@ const TableMap = () => {
           {!!(record.status == "PublicNewEntry" || record.status == "SubmissionFailed") && (
             <button onClick={() => onEdit(record.id)}>Edit</button>
           )}
-          {<button>view</button>}
+          {<button onClick={() => onView(record.id)}>view</button>}
         </Space>
       ),
     },
@@ -174,7 +179,7 @@ const TableMap = () => {
             {" "}
             <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
               {" "}
-              {!listing && (
+              {!listing.length && (
                 <button style={{ backgroundImage: `url(${MoreInfo})` }}>
                   <a href="/noc-company-form">
                     {" "}

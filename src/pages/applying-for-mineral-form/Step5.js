@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ENDPOINTS, REQUEST_TYPES } from "utils/constant/url";
 import { commonAPIs } from "services/api/common";
 import { Loader } from "components";
@@ -11,6 +12,7 @@ const ShipmentForm = ({ setStep }) => {
     shipmentReceiptImage: "",
     TrackingNumber: "",
   });
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const warning = (message = "This is a warning message") => {
@@ -39,6 +41,7 @@ const ShipmentForm = ({ setStep }) => {
         setLoading(false);
         warning(message);
       } else if (data) {
+        navigate("/applying-for-mineral-test")
         setLoading(false);
         // handle success
       }

@@ -31,16 +31,16 @@ function Listing({ dataSource, setSelectedRecord }) {
       dataIndex: "sampleLocation",
       key: "sampleLocation",
     },
-    {
-      title: "Sample Image",
-      dataIndex: "sampleImagePath",
-      key: "sampleImagePath",
-      render: (_, record) => (
-        <div onClick={() => handleEditClick(record)} style={{ cursor: "pointer", color: "#1677ff" }}>
-          View
-        </div>
-      ),
-    },
+    // {
+    //   title: "Sample Image",
+    //   dataIndex: "sampleImagePath",
+    //   key: "sampleImagePath",
+    //   render: (_, record) => (
+    //     <div onClick={() => handleEditClick(record)} style={{ cursor: "pointer", color: "#1677ff" }}>
+    //       View
+    //     </div>
+    //   ),
+    // },
     {
       title: "Action",
       key: "action",

@@ -51,6 +51,9 @@ const Login = () => {
     messageApi.open({
       type: "warning",
       content: message,
+      style: {
+        marginTop: "40vh",
+      },
     });
   };
 
@@ -159,7 +162,7 @@ const Login = () => {
               <div className="flex justify-end mt-[8px] mb-[30px]">
                 <Link
                   className="underline text-[12.71px]"
-                  to={"/forgotpassword"}
+                  to={"/forgot-password"}
                 >
                   Forgot Your Password?
                 </Link>
