@@ -10,6 +10,7 @@ import { getCookiesByName, setCookiesByName } from "utils/helpers";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { sponsorCompanyEditId } from "utils/constant/url";
+import BreadCrumbs from "components/Breadcrumbs";
 
 function NocAddListCompany() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -131,6 +132,13 @@ function NocAddListCompany() {
       },
     ],
   };
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/service-and-support", label: "Service & Support" },
+    { path: "/expatriate-security", label: "Expatriate Security" },
+    { path: "/noc-sponsor-company", label: "NOC Company" },
+    { path: "/noc-company-form", label: "Add" },
+  ];
   const changeHandler = (e) => {
     const { name, value } = e?.target || {};
     if (e.target.name == "PurposeofVisit") {
@@ -477,7 +485,12 @@ function NocAddListCompany() {
   };
 
   return (
+    <div>
+      <div className="w-[90%] relative m-auto max-w-[1440px] mt-8">
+      <BreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
     <div className="noc-company-form" style={{ width: "80%", margin: "auto" }}>
+     
       <div className="mt-8">
         <div>
           <h1 className="text-4xl font-bold text-green-700 mb-4">
@@ -518,6 +531,7 @@ function NocAddListCompany() {
           )}
         </div>
       </form>
+    </div>
     </div>
   );
 }
