@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -15,6 +15,7 @@ import { Container } from "components/UI";
 import axios from "axios";
 import { getCookie } from "services/session/cookies";
 import { getUserData } from "utils/helpers";
+import { MaskedInput } from "antd-mask-input";
 
 const CustomUploadIcon = (
   <svg
@@ -39,13 +40,17 @@ const RegisterProfessionalEdit = () => {
   const [returnLink, setReturnLink] = useState("");
   const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
-  const [value, setValue] = useState("_____ - _____ - __");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
   const [buttonText, setButtonText] = useState("Click to Upload Resume");
   const [user, setUser] = useState(null);
   const [uploadError, setUploadError] = useState(false);
+  const isApiLoading = useRef();
+  const maskInputCnicLoading = useRef();
+  const maskInputCnic = useRef();
+  const [cnicValue, setCnicValue] = useState('')
   const [modifiedValues, setModifiedValues] = useState({
+    CNIC: "",
     Qualification: "",
     DegreeTitle: "",
     University: "",
@@ -56,6 +61,7 @@ const RegisterProfessionalEdit = () => {
     Designation: "",
     JoiningYear: "",
     ProfessionSummary: "",
+    OrganizationName: "",
   });
 
   useEffect(() => {
@@ -66,8 +72,22 @@ const RegisterProfessionalEdit = () => {
   }, []);
 
   useEffect(() => {
+    if( maskInputCnic && maskInputCnic.current && maskInputCnic.current.input.value !== '_____-_____-__' && maskInputCnicLoading.current !== true) {
+      maskInputCnic.current.focus();
+      maskInputCnicLoading.current = true;
+      setTimeout(()=>{
+        maskInputCnic.current.blur()
+      },1000)
+    }
+  }, [maskInputCnic, maskInputCnic.current]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
+        if(isApiLoading.current === true) {
+          return;
+        }
+        isApiLoading.current = true;
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}api/PublicWhoIsWho/GetById?Id=${paramValue}`,
           {
@@ -99,6 +119,7 @@ const RegisterProfessionalEdit = () => {
         });
 
         setModifiedValues({
+          CNIC: fetchedData.cnic,
           Qualification: fetchedData.qualification,
           DegreeTitle: fetchedData.degreeTitle,
           University: fetchedData.university,
@@ -111,20 +132,20 @@ const RegisterProfessionalEdit = () => {
           ProfessionSummary: fetchedData.professionSummary,
           OrganizationName: fetchedData.organizationName,
         });
+        setCnicValue(fetchedData.cnic);
 
         const pdfPath = fetchedData.uploadResume;
         const pdfUrl = `${process.env.REACT_APP_FILE_URL}${pdfPath}`;
         setFileUrl(pdfUrl);
 
         setFileList([
-            {
-              uid: '-1',
-              name: 'Resume.pdf',
-              status: 'done',
-              url: pdfUrl,
-            },
-          ]);
-
+          {
+            uid: "-1",
+            name: "Resume.pdf",
+            status: "done",
+            url: pdfUrl,
+          },
+        ]);
       } catch (error) {
         notification.error({
           message: "Error",
@@ -136,34 +157,15 @@ const RegisterProfessionalEdit = () => {
     fetchData();
   }, [paramValue]);
 
-  const handleChangeCNIC = (e) => {
-    let input = e.target.value.replace(/\D/g, "");
-    let formatted = "_____ - _____ - __";
-    for (let i = 0; i < input.length; i++) {
-      formatted = formatted.replace("_", input[i]);
-    }
-    setValue(formatted);
-    form.setFieldValue({CNIC: formatted} )
-  };
-
   const handleChange = (e) => {
-    setModifiedValues((prevValues) => ({
-      ...prevValues,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Backspace") {
-      let input = value.replace(/\D/g, ""); // Remove all non-digit characters
-      input = input.slice(0, -1); // Remove the last character
-      let formatted = "_____ - _____ - __";
-      for (let i = 0; i < input.length; i++) {
-        formatted = formatted.replace("_", input[i]);
+    console.log('handle change')
+    setModifiedValues((prevValues) => {
+      console.log(prevValues)
+      return {
+        ...prevValues,
+        [e.target.name]: e.target.value,
       }
-      setValue(formatted);
-      e.preventDefault(); // Prevent the default Backspace behavior
-    }
+    });
   };
 
   const breadcrumbs = [
@@ -201,9 +203,8 @@ const RegisterProfessionalEdit = () => {
       },
       duration: 4.5, // Duration in seconds, change as needed
       onClose: () => console.log("Notification closed"),
-      
     });
-    navigate('/mining-professional');
+    navigate("/mining-professional");
   };
 
   const handleSubmission = async (values) => {
@@ -227,7 +228,6 @@ const RegisterProfessionalEdit = () => {
         );
       }
 
-      
       const companyobj = {
         Id: parseInt(paramValue),
         OrganizationType: "MiningProfessionals",
@@ -235,7 +235,7 @@ const RegisterProfessionalEdit = () => {
         Email: user?.Email,
         Name: user?.UserFullName,
         MobileNumber: user?.PhoneNumber,
-        CNIC: values.CNIC,
+        CNIC: cnicValue,
         Qualification: values.Qualification,
         DegreeTitle: values.DegreeTitle,
         University: values.University,
@@ -279,7 +279,6 @@ const RegisterProfessionalEdit = () => {
     }
     setIsModalVisible(true);
   };
-  
 
   const beforeUpload = (file) => {
     const isPdf = file.type === "application/pdf";
@@ -307,10 +306,9 @@ const RegisterProfessionalEdit = () => {
     form.validateFields(["UploadResume"]);
   };
 
-  console.log("fileURl", fileUrl);
+  console.log("form", form.getFieldValue('CNIC'));
   console.log("fileList", fileList);
-
-
+  console.log("modifiedValues.CNIC", modifiedValues.CNIC);
   return (
     <>
       <Container classes="mt-8 w-[70%]">
@@ -387,7 +385,7 @@ const RegisterProfessionalEdit = () => {
                   </label>
                 </div>
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 name="CNIC"
                 rules={[
                   {
@@ -401,7 +399,7 @@ const RegisterProfessionalEdit = () => {
                     type="text"
                     id="CNIC"
                     name="CNIC"
-                    value={form.getFieldValue("CNIC")}
+                    value={modifiedValues.CNIC || ""}
                     onChange={handleChangeCNIC}
                     onKeyDown={handleKeyDown}
                     className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
@@ -413,6 +411,49 @@ const RegisterProfessionalEdit = () => {
                     Valid CNIC No.
                   </label>
                 </div>
+              </Form.Item> */}
+
+              <Form.Item
+                // name="CNIC"
+                // rules={[
+                //   {
+                //     required: true,
+                //     pattern: new RegExp(/^\d{5}-\d{5}-\d{2}/i),
+                //     message: "Please enter correct CNIC No.",
+                //   },
+                // ]}
+              >
+                <MaskedInput
+                  ref = {maskInputCnic}
+                  value={cnicValue || ""}
+                  onChange={(e) => {
+                    const formattedCNIC = e.target.value;
+                    console.log('Formatted CNIC:', formattedCNIC); // Debug log
+                    // setModifiedValues((prevValues) => {
+                    //   console.log('Previous Values:', prevValues); // Debug log
+                    //   return {
+                    //     ...prevValues,
+                    //     CNIC: formattedCNIC,
+                    //   };
+                    // });
+                    setCnicValue(formattedCNIC)
+                    form.setFieldsValue({ CNIC: formattedCNIC });
+                  }}
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  mask= "00000-00000-00"
+                  // maskOptions={{
+                  //   mask: "00000-00000-00",
+                  //   placeholderChar: "_",
+                  //   showMask: true,
+                  //   clearMaskOnLostFocus: false,
+                  // }}
+                />
+                <label
+                  // htmlFor="CNIC"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Valid CNIC No.
+                </label>
               </Form.Item>
             </div>
 
@@ -638,7 +679,7 @@ const RegisterProfessionalEdit = () => {
                 getValueFromEvent={(e) =>
                   Array.isArray(e) ? e : e && e.fileList
                 }
-                rules={[{ required: true, message: "Please upload a file!" }]}
+                rules={fileList?.length == 0 ? [{ required: true, message: "Please upload a file!" }] : [{ required: false, message: "Please upload a file!" }]}
               >
                 <div className="relative mt-2 w-full">
                   <Upload
