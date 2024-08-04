@@ -94,19 +94,16 @@ const TableMap = () => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Name",
       dataIndex: "companyName",
       key: "companyName",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Registration Type",
       dataIndex: "registrationType",
       key: "registrationType",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Registration City",
@@ -117,20 +114,18 @@ const TableMap = () => {
       title: "Business Domain",
       dataIndex: "businessDomain",
       key: "businessDomain",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Year of Registration",
       dataIndex: "registrationYear",
       key: "registrationYear",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
 
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (text) => <div style={{ fontSize: "15px" }}>{getStatus(text)}</div>,
+      render: (text) => <span >{getStatus(text)}</span>,
     },
     {
       title: "Action",

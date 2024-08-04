@@ -199,13 +199,10 @@ const Step1 = ({ setStep }) => {
 
   return (
     <ConfigProvider>
-      <div>
-        Expatraite Security Clearance <span className="font-bold">Noc Application</span>
-      </div>
       {contextHolder}
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="mineral-testing-table-header">
-          <div className="text-2xl text-green-700 my-10 font-bold">NOC Application Details</div>
+          <div className="text-2xl text-green-700 my-10 font-bold">Application Details</div>
           <ProgressPercentage percent={25} step={1} total={4}></ProgressPercentage>
         </div>
 

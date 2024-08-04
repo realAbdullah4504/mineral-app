@@ -22,31 +22,31 @@ const items = [
     label: "View Application",
     link: "/view-mineral-testing-company",
   },
-  {
-    key: "3",
-    label: "View Sample Details",
-    link: "#",
-  },
+  // {
+  //   key: "3",
+  //   label: "View Sample Details",
+  //   link: "#",
+  // },
   {
     key: "/shipment-detail",
     label: "Add Shipment Details",
     link: "/shipment-detail",
   },
-  {
-    key: "5",
-    label: "Payment",
-    link: "#",
-  },
-  {
-    key: "6",
-    label: "View Report",
-    link: "#",
-  },
-  {
-    key: "7",
-    label: "Request Retest",
-    link: "#",
-  },
+  // {
+  //   key: "5",
+  //   label: "Payment",
+  //   link: "#",
+  // },
+  // {
+  //   key: "6",
+  //   label: "View Report",
+  //   link: "#",
+  // },
+  // {
+  //   key: "7",
+  //   label: "Request Retest",
+  //   link: "#",
+  // },
 ];
 
 const TableMap = () => {
@@ -70,8 +70,8 @@ const TableMap = () => {
     localStorage.setItem("mineralEditMode", true);
     navigate(`/applying-for-mineral-form`);
   };
-  const handleDropdownItemClick = (e, id = "") => {
-    if (e?.key) {
+  const handleDropdownItemClick = (e, id = "", status="") => {
+    if (e?.key && status ==="Draft") {
       const url = `${e?.key}?id=${id}`;
       navigate(url);
     }
@@ -139,7 +139,7 @@ const TableMap = () => {
           <Space size="middle">
             <Dropdown
               menu={{
-                onClick: (e)=>handleDropdownItemClick(e,record?.id),
+                onClick: (e)=>handleDropdownItemClick(e,record?.id, record?.status),
                 items,
               }}
               trigger={["click"]}
