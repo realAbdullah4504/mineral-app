@@ -133,9 +133,9 @@ const RegisterProfessional = () => {
       const companyobj = {
         OrganizationType: "MiningProfessionals",
         OrganizationName: values.OrganizationName,
-        Email: values.Email,
+        Email: user?.Email,
         Name: user?.UserFullName,
-        MobileNumber: values.MobileNumber,
+        MobileNumber: user?.PhoneNumber,
         CNIC: values.CNIC,
         Qualification: values.Qualification,
         DegreeTitle: values.DegreeTitle,
@@ -202,7 +202,7 @@ const RegisterProfessional = () => {
 
   return (
     <>
-      <Container classes="mt-8 w-[90%]">
+      <Container classes="mt-8 w-[70%]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <div className="flex flex-wrap mt-[20px]">
           <div
@@ -224,12 +224,12 @@ const RegisterProfessional = () => {
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
               <Form.Item
                 name="Name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Contact No.!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your Contact No.!",
+                //   },
+                // ]}
               >
                 <div className="relative mt-2 w-full">
                   <input
@@ -250,12 +250,12 @@ const RegisterProfessional = () => {
               </Form.Item>
               <Form.Item
                 name="MobileNumber"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Contact No.!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "Please input your Contact No.!",
+                //   },
+                // ]}
               >
                 <div className="relative mt-2 w-full">
                   <input
@@ -276,13 +276,13 @@ const RegisterProfessional = () => {
               </Form.Item>
               <Form.Item
                 name="Email"
-                rules={[
-                  {
-                    required: true,
-                    type: "email",
-                    message: "Please input a valid Email!",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     type: "email",
+                //     message: "Please input a valid Email!",
+                //   },
+                // ]}
               >
                 <div className="relative mt-2 w-full">
                   <input

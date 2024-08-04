@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
-import { useState, useEffect } from "react";
 import { message, ConfigProvider } from "antd";
-import { getCookiesByName, setCookiesByName } from "utils/helpers";
-import { saveSampleDetailAPI } from "services/api/common";
+import { getCookiesByName } from "utils/helpers";
+import { saveSampleDetailAPI, commonAPIs } from "services/api/common";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { Loader } from "components";
 const initialState = {
   id: "",
   geologicalInformation: "",
@@ -61,19 +61,31 @@ const Step4 = ({ setStep }) => {
       console.log(error.message);
     }
   };
-
   useEffect(() => {
     const applicationDetail = getCookiesByName("testApplication", true);
-
-    if (Object.keys(applicationDetail).length) {
-      let payload = {};
-      const { id, geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } =
-        applicationDetail;
-      payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
-      if (id) {
-        payload = { id, ...payload };
-      }
-      setState({ ...state, ...payload });
+    const TestApplicationId = getCookiesByName("mineralEditid", true) || applicationDetail?.id  || "";
+    if(TestApplicationId) {
+      (async function () {
+        try {
+          const { data, isError, message } = await commonAPIs(
+            REQUEST_TYPES.GET,
+            `${ENDPOINTS.GET_TEST_APPLICATION_BY_ID}?TestApplicationId=${TestApplicationId}`,
+          );
+          if (isError) {
+            warning(message);
+          } else if (data) {
+            let payload = {};
+            const { id, geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction } = data || {};
+            payload = { geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction };
+            if (id) {
+              payload = { id, ...payload };
+            }
+            setState({ ...state, ...payload });
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      })();
     }
   }, []);
   const handlePrevious = () => {
@@ -156,7 +168,7 @@ const Step4 = ({ setStep }) => {
             </>
           )}
           {field.type === "textarea" && (
-            <textarea {...commonProps} placeholder=" " onChange={(e) => changeHandler(e)} />
+            <textarea value={state[field?.name]} {...commonProps} placeholder=" " onChange={(e) => changeHandler(e)} />
           )}
           {field.type !== "select" && renderLabel()}
         </div>
@@ -164,11 +176,13 @@ const Step4 = ({ setStep }) => {
     });
   };
   return (
+    <ConfigProvider>
     <div className="noc-form">
       <div className="mineral-testing-table-header">
         <div>Background Information</div>
         <ProgressPercentage percent={100} step={4} total={4}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
@@ -185,6 +199,8 @@ const Step4 = ({ setStep }) => {
               previous
             </div>
           </button>
+          {
+            loading? <Loader/> :
           <button type="submit" className="next-button">
             <div>
               {" "}
@@ -201,9 +217,11 @@ const Step4 = ({ setStep }) => {
               </svg>
             </div>
           </button>
+          }
         </div>
       </form>
     </div>
+    </ConfigProvider>
   );
 };
 

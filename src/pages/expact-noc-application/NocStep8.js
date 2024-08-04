@@ -1,64 +1,194 @@
 import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
-import Operation from "antd/es/transfer/operation";
-
-const NocStep8 = ({ setState, alreadyVisited }) => {
+import { Loader } from "components";
+import { message, ConfigProvider, Upload } from "antd";
+import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
+import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
+import { getCookiesByName } from "utils/helpers";
+import { expactApplicationForm } from "utils/constant/url";
+import { Button } from "antd";
+import { commonAPIs } from "services/api/common";
+const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
+const NocStep8 = ({ setStep, alreadyVisited }) => {
+  const [toggle, setToggle] = useState({
+    visaGrantCertificate: false,
+  });
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState("");
+  const [prevImage, setPrevImage] = useState("");
+  const [countryListing, setCountryListing] = useState([]);
+  const isEdit = localStorage.getItem("NOCEditMode");
+  const [days, setDays] = useState({ startDate: "", endDate: "" });
+  const creationId = getCookiesByName("expactapplicationid");
+  const warning = (message = "This is a warning message") => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    try {
-      const response = await fetch("https://your-api-endpoint.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-      });
+    formValues.id = state.id || creationId;
+    const {
+      DateOfVisaApplication,
+      VisaReferenceNumber,
+      VisaCategory,
+      VisaSubcategory,
+      ApplicationType,
+      VisaGrantDate,
+      VisaStartDate,
+      VisaEndDate,
+      VisaDurationInDays,
+      TravelCountryName,
+      VisaStayFacility,
+    } = formValues;
+    const formDatas = new FormData();
+    const obj = {
+      DateOfVisaApplication,
+      VisaReferenceNumber,
+      VisaCategory,
+      VisaSubcategory,
+      ApplicationType,
+      VisaGrantDate,
+      VisaStartDate,
+      VisaEndDate,
+      VisaDurationInDays,
+      TravelCountryName,
+      VisaStayFacility,
+    };
+    obj.Id = state.id;
+    obj.VisaDurationInDays = state.VisaDurationInDays;
 
-      if (response.ok) {
-        setState("NocListing");
+    if (isEdit) {
+      if (state.visaPrevImg !== state.visaGrantCertificate) {
+        obj.visaGrantCertificate = state.visaPrevImg;
       } else {
-        console.error("Error:", response.statusText);
+        obj.visaGrantCertificate = state.visaGrantCertificate;
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } else {
+      if (state.visaPrevImg) {
+        obj.visaGrantCertificate = state.visaPrevImg;
+      }
+    }
+    formDatas.append("obj", JSON.stringify(obj));
+    if (isEdit) {
+      if (state.visaPrevImg !== state.visaGrantCertificate) {
+        formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
+      }
+    } else {
+      if (state.visaGrantCertificate !== state.visaPrevImg) {
+        formDatas.append("visaGrantCertificate", state.visaGrantCertificate);
+      }
+    }
+    if (!state.visaGrantCertificate) {
+      warning("Upload all images");
+    } else {
+      setLoading(true);
+      try {
+        const { data, isError, message } = await commonAPIs(
+          REQUEST_TYPES.POST,
+          ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
+          formDatas
+        );
+
+        if (isError) {
+          setLoading(false);
+          warning(message);
+        }
+        if (!isError && data) {
+          localStorage.removeItem("NOCEditMode");
+          deleteCookie("expactapplicationid");
+          localStorage.removeItem("NOCidview");
+          localStorage.removeItem("NOCid");
+          setLoading(false);
+          setStep("NocListing");
+        }
+      } catch (error) {
+        setLoading(false);
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleChange = (fieldName, info) => {
+    const newFileList = info.fileList;
+    if (newFileList.length > 0) {
+      const file = newFileList[0].originFileObj;
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        setToggle((prev) => ({ ...prev, [fieldName]: true }));
+        setState((prev) => ({ ...prev, visaGrantCertificate: file || "" }));
+      });
+      reader.readAsDataURL(file);
+    } else {
+      setState((prev) => ({ ...prev, visaGrantCertificate: "" }));
+    }
+  };
+
+  const changeHandler = (e, fieldName) => {
+    if (isEdit && fieldName == "visaGrantCertificate") {
+    }
+    const { name, value } = e?.target || {};
+    setState((prevState) => ({ ...prevState, [name]: value }));
+    if (fieldName === "VisaStartDate") {
+      setDays((prev) => ({ ...prev, startDate: e.target.value }));
+    }
+    if (fieldName === "VisaEndDate") {
+      setDays((prev) => ({ ...prev, endDate: e.target.value }));
     }
   };
 
   const handlePrevious = () => {
-    if (alreadyVisited === "yes") {
-      setState("Step7");
+    if (alreadyVisited === "Yes") {
+      setStep("Step7");
     } else {
-      setState("Step6");
+      setStep("Step6");
     }
   };
+
   const obj = [
-    { label: "Date of Visa Application", name: "visa-app-date", required: "true", type: "calendar" },
-    { label: "Visa Reference Number", name: "visa-ref-no", required: "true", type: "number" },
-    { label: "Visa category", name: "visa-category", required: "true", type: "select", options: ["Work", "Study"] },
+    { label: "Date of Visa Application", name: "DateOfVisaApplication", required: "true", type: "calendar" },
+    { label: "Visa Reference Number", name: "VisaReferenceNumber", required: "true", type: "number" },
+    {
+      label: "Visa category",
+      name: "VisaCategory",
+      required: "true",
+      type: "select",
+      options: ["Business", "Work", "Tourist"],
+    },
     {
       label: "Visa Subcategory",
-      name: "visa-subcategory",
+      name: "VisaSubcategory",
       required: "true",
       type: "select",
-      options: ["Work", "Study"],
+      options: ["Individual", "Company"],
     },
-    { label: "Application Type", name: "application-type", required: "true", type: "input" },
-    { label: "Visa Grant Date", name: "visa-grant-date", required: "true", type: "calendar" },
-    { label: "Visa Start and End Date", name: "visa-start-end-date", required: "true", type: "calendar" },
-    { label: "Visa Duration(Days)", name: "visa-duration", required: "true", type: "number" },
+    { label: "Application Type", name: "ApplicationType", required: "true", type: "input" },
+    { label: "Visa Grant Date", name: "VisaGrantDate", required: "true", type: "calendar" },
+    { label: "Visa Start Date", name: "VisaStartDate", required: "true", type: "calendar" },
+    { label: "Visa End Date", name: "VisaEndDate", required: "true", type: "calendar" },
+    { label: "Visa Duration(Days)", name: "VisaDurationInDays", disabled: true, required: "true", type: "number" },
     {
       label: "Travel Document Country",
-      name: "travel-doc-country",
+      name: "TravelCountryName",
       required: "true",
       type: "select",
-      options: ["Provide List"],
+      options: countryListing.map((item) => item.countryName),
     },
-    { label: "Stay Facility", name: "stay-facility", required: "true", type: "input" },
+    { label: "Stay Facility", name: "VisaStayFacility", required: "true", type: "input" },
     {
       label: "Visa Grant Certificate",
-      name: "visa-grant-certificate",
+      name: "visaGrantCertificate",
       required: "true",
       type: "file",
     },
@@ -68,13 +198,35 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
       const commonProps = {
         name: field.name,
         id: field.name,
-
+        disabled: field.disabled || false,
         className:
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
       };
 
-      const renderInput = (type = "text") => <input type={type} {...commonProps} placeholder=" " />;
+      const toCamelCase = (str) => {
+        return str.charAt(0).toLowerCase() + str.slice(1).replace(/-./g, (match) => match.charAt(1).toUpperCase());
+      };
+      const renderInput = (type = "text", disabled) => {
+        const today = new Date().toISOString().split("T")[0];
+        const name = commonProps?.name || "";
+        const camelCaseName = name ? toCamelCase(name) : "";
+        let value = state[name] || state[camelCaseName] || "";
+        if (type == "date") {
+          value = value.split("T")[0];
+        }
+
+        return (
+          <input
+            type={type}
+            value={value}
+            onChange={(e) => changeHandler(e)}
+            {...commonProps}
+            max={disabled ? today : undefined}
+            placeholder=" "
+          />
+        );
+      };
 
       const renderLabel = () => (
         <label
@@ -84,17 +236,48 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
           {field.label}
         </label>
       );
-
+      const name = commonProps?.name || "";
+      const camelCaseName = name ? toCamelCase(name) : "";
+      let value = state[name] || state[camelCaseName] || "";
+      const imgurl = state[field.name == "visaGrantCertificate" ? "visaGrantCertificate" : "visaGrantCertificate"];
       return (
         <div key={field.name} className="relative mt-2 w-full">
           {field.type === "input" && renderInput()}
-          {field.type === "calendar" && renderInput("date")}
+          {field.type === "calendar" &&
+            renderInput("date", field.name == "VisaGrantDate" || field.name == "DateOfVisaApplication" ? true : false)}
           {field.type === "number" && renderInput("number")}
-          {field.type === "file" && <input type="file" {...commonProps} />}
+          {field.type === "file" && (
+            <>
+              <Upload
+                {...commonProps}
+                // action={imgurl}
+                onChange={(info) => handleChange(field.name, info)}
+                listType="picture"
+                maxCount={1}
+                fileList={
+                  imgurl
+                    ? [
+                        {
+                          uid: "-1",
+                          name: "image.png",
+                          status: "done",
+                          url: toggle[field.name] ? URL.createObjectURL(imgurl) : baseUrl + imgurl,
+                        },
+                      ]
+                    : []
+                }
+                showUploadList={{ showRemoveIcon: false }}
+              >
+                {" "}
+                <Button>Upload</Button>
+              </Upload>
+              {/* <input type="file" onChange={changeHandler} {...commonProps} accept="image/*,application/pdf,text/*" /> */}
+            </>
+          )}
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
+              <select {...commonProps} onChange={(e) => changeHandler(e)} value={state[value]}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
@@ -112,6 +295,64 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
       );
     });
   };
+  useEffect(() => {
+    const id = getCookiesByName("expactapplicationid", true);
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(REQUEST_TYPES.GET, expactApplicationForm(id));
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setState(data);
+          setState((prev) => ({
+            ...prev,
+            visaPrevImg: data.visaGrantCertificate,
+          }));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+    (async function () {
+      try {
+        const { data, isError, message } = await saveSampleListingAPI(
+          REQUEST_TYPES.GET,
+          `${ENDPOINTS.GET_NATIONALITY_LISTING}`
+        );
+
+        if (isError) {
+          warning(message);
+        } else if (data) {
+          setCountryListing(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    const calculateDateDifference = (startDate, endDate) => {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const differenceInMilliseconds = end - start;
+      const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+      return differenceInDays;
+    };
+    const { VisaStartDate, VisaEndDate } = state;
+    if (VisaStartDate && VisaEndDate) {
+      const diffDays = calculateDateDifference(VisaStartDate, VisaEndDate);
+      setState((prevState) => ({
+        ...prevState,
+        VisaDurationInDays: diffDays,
+      }));
+    }
+  }, [state.VisaStartDate, state.VisaEndDate]);
+
+  useEffect(() => {
+    setPrevImage(state.visaGrantCertificate);
+  }, [state.visaGrantCertificate]);
 
   return (
     <div className="noc-form">
@@ -119,6 +360,7 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
         <div className="text-green-600">Visa Grant Details</div>
         <ProgressPercentage percent={100} step={8} total={8}></ProgressPercentage>
       </div>
+      {contextHolder}
       <form className="space-y-4 " onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">{renderFormItems()}</div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
@@ -138,9 +380,13 @@ const NocStep8 = ({ setState, alreadyVisited }) => {
               </svg>
             </div>
           </button>
-          <button type="submit" className="next-button">
-            <div> Submit</div>
-          </button>
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <button type="submit" className="next-button">
+              <div> Submit</div>
+            </button>
+          )}
         </div>
       </form>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import whiteArrow from "assets/images/whiteArrow.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button, Form, message, notification, Upload } from "antd";
 import { getCookie } from "services/session/cookies";
 import axios from "axios";
@@ -11,14 +11,16 @@ import { getUserData } from "utils/helpers";
 const breadcrumbs = [
   { path: "/", label: "Home" },
   { path: "csr", label: "CSR" },
-  { path: "csr-community", label: "Voice of Community" },
+  { path: "/csr-community", label: "Voice of Community" },
   { path: "csr-community-form", label: "Your Voice" },
 ];
 
-const CsrCommunity = () => {
+const ViewCsrCommunity = () => {
   const navigate = useNavigate();
+  const { id } = useParams(); // Extract id from URL
   const [messageApi, contextHolder] = message.useMessage();
   const [user, setUser] = useState(null);
+  const [viewData, setViewData] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [returnLink, setReturnLink] = useState("");
   const [form] = Form.useForm();
@@ -31,14 +33,42 @@ const CsrCommunity = () => {
   }, []);
 
   useEffect(() => {
-    if (user) {
+    const fetchDataById = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}api/PublicVoiceCommunity/GetById`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("token")}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            params: { id: parseInt(id, 10) }, // Use the extracted id here
+          }
+        );
+        const fetchedData = response.data.data;
+        setViewData(fetchedData);
+      } catch (error) {
+        notification.error({
+          message: "Error",
+          description: "Failed to fetch data.",
+        });
+      }
+    };
+    fetchDataById();
+  }, []);
+
+  useEffect(() => {
+    if (viewData) {
       form.setFieldsValue({
-        Name: user.UserFullName,
-        MobileNumber: parseInt(user?.PhoneNumber),
-        Email: user.Email,
+        Name: viewData.personName,
+        MobileNumber: viewData.mobileNumber,
+        Email: viewData.email,
+        commentType: viewData.commentType,
+        comment: viewData.comment,
       });
     }
-  }, [user]);
+  }, [viewData]);
 
   const success = () => {
     messageApi
@@ -75,7 +105,8 @@ const CsrCommunity = () => {
 
   const handleSubmission = async (values) => {
     try {
-      const fullurl = process.env.REACT_APP_BASE_URL + "api/PublicVoiceCommunity/AddUpdate";
+      const fullurl =
+        process.env.REACT_APP_BASE_URL + "api/PublicVoiceCommunity/AddUpdate";
       const config = {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
@@ -107,6 +138,12 @@ const CsrCommunity = () => {
     handleSubmission(values);
   };
 
+  const handleChange = (e) => {
+    form.setFieldsValue({ [e.target.name]: e.target.value });
+  };
+
+  console.log("form", form.getFieldsValue());
+
   return (
     <Container classes="w-[70%]">
       <div className="flex flex-col">
@@ -118,12 +155,17 @@ const CsrCommunity = () => {
         </div>
         <Form form={form} onFinish={onFinish} className="space-y-4">
           <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
-            <Form.Item name="Name" rules={[{ required: true, message: "Please input your Name!" }]}>
+            <Form.Item
+              name="Name"
+              rules={[{ required: true, message: "Please input your Name!" }]}
+            >
               <div className="relative mt-2 w-full">
                 <input
                   type="text"
-                  id="Name"
-                  value={user?.UserFullName}
+                  name="Name"
+                  disabled
+                  value={user ? user.UserFullName : form.getFieldValue("Name")}
+                  onChange={handleChange}
                   className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
                   placeholder=" "
                 />
@@ -135,15 +177,28 @@ const CsrCommunity = () => {
                 </label>
               </div>
             </Form.Item>
+
             <Form.Item
               name="MobileNumber"
-              rules={[{ required: true, type: "number", message: "Please input a number!" }]}
+              rules={[
+                {
+                  required: true,
+                  type: "number",
+                  message: "Please input a number!",
+                },
+              ]}
             >
               <div className="relative mt-2 w-full">
                 <input
-                  type="MobileNumber"
-                  id="MobileNumber"
-                  value={parseInt(user?.PhoneNumber)}
+                  type="number"
+                  name="MobileNumber"
+                  disabled
+                  value={
+                    user
+                      ? parseInt(user?.PhoneNumber)
+                      : form.getFieldValue("MobileNumber")
+                  }
+                  onChange={handleChange}
                   className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
                   placeholder=" "
                 />
@@ -155,12 +210,18 @@ const CsrCommunity = () => {
                 </label>
               </div>
             </Form.Item>
-            <Form.Item name="Email" rules={[{ required: true, message: "Please input email!" }]}>
+
+            <Form.Item
+              name="Email"
+              rules={[{ required: true, message: "Please input email!" }]}
+            >
               <div className="relative mt-2 w-full">
                 <input
-                  type="text"
-                  id="Email"
-                  value={user?.Email}
+                  type="email"
+                  name="Email"
+                  disabled
+                  value={user ? user.Email : form.getFieldValue("Email")}
+                  onChange={handleChange}
                   className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
                   placeholder=" "
                 />
@@ -184,11 +245,14 @@ const CsrCommunity = () => {
             >
               <div className="relative mt-2 w-full">
                 <select
-                  id="commentType"
+                  name="commentType"
+                  disabled
+                  value={form.getFieldValue("commentType") || ""}
+                  onChange={handleChange}
                   className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                   placeholder="Select your comment type"
                 >
-                  <option value="" selected disabled hidden>
+                  <option value="" disabled hidden>
                     Choose here
                   </option>
                   <option value="Suggestions">Suggestions</option>
@@ -206,25 +270,27 @@ const CsrCommunity = () => {
 
             <Form.Item
               name="comment"
+              className="lg:col-span-2"
               rules={[
                 {
                   required: true,
-                  message: "Please input your comment!",
+                  message: "Please input your Comment!",
                 },
               ]}
-              className="lg:col-span-2"
             >
               <div className="relative mt-2 w-full">
                 <textarea
-                  type="textarea"
-                  id="comment"
+                  name="comment"
+                  disabled
+                  value={form.getFieldValue("comment") || ""}
+                  onChange={handleChange}
                   rows={1}
                   className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
                   placeholder=" "
                 />
                 <label
                   htmlFor="comment"
-                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300"
                 >
                   Comment
                 </label>
@@ -236,6 +302,7 @@ const CsrCommunity = () => {
               <Button
                 type="primary"
                 htmlType="submit"
+                disabled
                 className="bg-[#009969] hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
               >
                 Submit
@@ -248,4 +315,4 @@ const CsrCommunity = () => {
   );
 };
 
-export default CsrCommunity;
+export default ViewCsrCommunity;

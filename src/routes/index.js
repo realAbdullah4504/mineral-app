@@ -18,6 +18,8 @@ const CSRegulations = lazy(() => import("../pages/csr-regulations"));
 const CSRSuccessStories = lazy(() => import("../pages/csr-success-stories"));
 const CSRCommunity = lazy(() => import("../pages/csr-community"));
 const CSRCommunityForm = lazy(() => import("../pages/csr-community-form"));
+const CSRCommunityFormView = lazy(() => import("../pages/csr-community-form/view"));
+const CSRCommunityFormEdit = lazy(() => import("../pages/csr-community-form/edit"));
 const CSR = lazy(() => import("../pages/csr"));
 const ViewResults = lazy(() => import("../pages/view-results"));
 
@@ -100,6 +102,7 @@ const StatisticsIncidents = lazy(() => import("../pages/statistics-incidents"));
 const RegisterOrganization = lazy(() => import("../components/register-form"));
 const ApplyingForMineralForm = lazy(() => import("../pages/applying-for-mineral-form"));
 const NocSponsorCompany = lazy(() => import("../pages/noc-sponsor-company"));
+const ShipmentForm = lazy(() => import("../pages/applying-for-mineral-form/Step5"));
 const NocSponsorCompanyAddList = lazy(() =>
   import("../pages/noc-company-form")
 );
@@ -135,6 +138,12 @@ const TrainingSchools = lazy(() =>
 );
 const OtherServices = lazy(() =>
   import("../pages/other-services")
+);
+const NOCApplicationView = lazy(() =>
+  import("../pages/expact-noc-application/NOCApplicationView")
+);
+const SponsorCompanyView = lazy(() =>
+  import("../pages/noc-sponsor-company/ViewSponsorCompany")
 );
 const AppRouter = () => (
   <Router>
@@ -806,6 +815,45 @@ const AppRouter = () => (
           path="/other-services"
           element={
             <PublicRoute component={OtherServices} layout={DashboardLayout} />
+          }
+        />
+        <Route
+          path="/shipment-detail"
+          element={
+            <PublicRoute component={ShipmentForm} layout={DashboardLayout} />
+          }
+        />
+         <Route
+          path="/noc-view-application"
+          element={
+            <PublicRoute component={NOCApplicationView} layout={DashboardLayout} />
+          }
+        />
+         <Route
+          path="/csr-community-form-view/:id"
+          element={
+            <PublicRoute
+              component={CSRCommunityFormView}
+              layout={DashboardLayout}
+            />
+          }
+        />
+         <Route
+          path="/csr-community-form-edit/:id"
+          element={
+            <PublicRoute
+              component={CSRCommunityFormEdit}
+              layout={DashboardLayout}
+            />
+          }
+        />
+        <Route
+          path="/view-sponsor-company"
+          element={
+            <PublicRoute
+              component={SponsorCompanyView}
+              layout={DashboardLayout}
+            />
           }
         />
       </Routes>
