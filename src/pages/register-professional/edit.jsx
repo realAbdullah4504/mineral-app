@@ -201,7 +201,9 @@ const RegisterProfessionalEdit = () => {
       },
       duration: 4.5, // Duration in seconds, change as needed
       onClose: () => console.log("Notification closed"),
+      
     });
+    navigate('/mining-professional');
   };
 
   const handleSubmission = async (values) => {
