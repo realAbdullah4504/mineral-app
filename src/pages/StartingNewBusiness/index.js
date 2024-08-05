@@ -18,12 +18,10 @@ function StartingNewBusiness() {
       title: "Sole Proprietorship",
       description: (
         <p>
-          A sole proprietorship is an unincorporated business conducted by only
-          one person and does not distinguish between the owner and the company.
-          A sole proprietorship's owner is accountable for the company's debts,
-          losses, liabilities, and all gains. The company registration process
-          in this case is carried out through the Federal Board of Revenue
-          (FBR).
+          A sole proprietorship is an unincorporated business conducted by only one person and does not distinguish
+          between the owner and the company. A sole proprietorship's owner is accountable for the company's debts,
+          losses, liabilities, and all gains. The company registration process in this case is carried out through the
+          Federal Board of Revenue (FBR).
         </p>
       ),
     },
@@ -31,13 +29,11 @@ function StartingNewBusiness() {
       title: "Association of Person",
       description: (
         <p>
-          In an instance where there is more than one individual and no more
-          than twenty, the company would be registered as a General Partnership
-          / Association of Persons with the city's respective Registrar of
-          Firms. Association of Persons may have one, two, or both types of
-          owners. It does not need complex paperwork to be created, making them
-          accessible and affordable. The business requires a bank account, a
-          registered trade name, and a registered tax number.
+          In an instance where there is more than one individual and no more than twenty, the company would be
+          registered as a General Partnership / Association of Persons with the city's respective Registrar of Firms.
+          Association of Persons may have one, two, or both types of owners. It does not need complex paperwork to be
+          created, making them accessible and affordable. The business requires a bank account, a registered trade name,
+          and a registered tax number.
         </p>
       ),
     },
@@ -45,24 +41,16 @@ function StartingNewBusiness() {
       title: "Single Member Company (SMC Private Limited)",
       description: (
         <p>
-          A single-member company (SMC), is a private business setup with one
-          member or director. It has the advantages of limited liability in such
-          that requirements of the Firms Ordinance of 1984 that apply to limited
-          liability companies also apply to sole traders, subject to specific
-          adjustments. Having a single-member company has the following
-          benefits:
+          A single-member company (SMC), is a private business setup with one member or director. It has the advantages
+          of limited liability in such that requirements of the Firms Ordinance of 1984 that apply to limited liability
+          companies also apply to sole traders, subject to specific adjustments. Having a single-member company has the
+          following benefits:
           <ul style={{ listStyle: "disc" }}>
             <li>In terms of the law, SMC is distinct from its members.</li>
-            <li>
-              The member's liability is capped at the amount of his investment.
-            </li>
+            <li>The member's liability is capped at the amount of his investment.</li>
             <li> When a member passes away, the firm continues to exist.</li>
             <li>SMCs pay a lesser amount of company tax.</li>
-            <li>
-              {" "}
-              An SMC's only member has exclusive authority over all corporate
-              operations
-            </li>
+            <li> An SMC's only member has exclusive authority over all corporate operations</li>
           </ul>
         </p>
       ),
@@ -72,18 +60,14 @@ function StartingNewBusiness() {
       description: (
         <p>
           <p>
-            In Pakistan, a Public Limited Corporation may be established by
-            three or more people for legal purposes. As with Private and
-            Single-Member companies, the partners must sign a Memorandum of
-            Association, and the public limited company must adhere to the
-            Companies Act's regulations.
+            In Pakistan, a Public Limited Corporation may be established by three or more people for legal purposes. As
+            with Private and Single-Member companies, the partners must sign a Memorandum of Association, and the public
+            limited company must adhere to the Companies Act's regulations.
             <p>
               {" "}
-              Public limited businesses can be registered in Pakistan as listed
-              or unlisted entities. The distinction between the two is that the
-              former makes its portion of the shares available for public
-              purchase. On the other hand, an unlisted firm does not sell shares
-              to the general public.
+              Public limited businesses can be registered in Pakistan as listed or unlisted entities. The distinction
+              between the two is that the former makes its portion of the shares available for public purchase. On the
+              other hand, an unlisted firm does not sell shares to the general public.
             </p>
           </p>
         </p>
@@ -93,13 +77,10 @@ function StartingNewBusiness() {
       title: "Private Limited Company (PLC)",
       description: (
         <p>
-          A Private Limited Company (PLC) sits between a partnership business
-          and a publicly held public company. It can be registered with a least
-          two individuals. The company and its stockholders each have their own
-          legal identities. The board, which the shareholders choose, works with
-          the CEO to make operational decisions for the business. Depending on
-          its size, a PLC can also need a company secretary, legal counsel, and
-          auditor.
+          A Private Limited Company (PLC) sits between a partnership business and a publicly held public company. It can
+          be registered with a least two individuals. The company and its stockholders each have their own legal
+          identities. The board, which the shareholders choose, works with the CEO to make operational decisions for the
+          business. Depending on its size, a PLC can also need a company secretary, legal counsel, and auditor.
         </p>
       ),
     },
@@ -107,16 +88,12 @@ function StartingNewBusiness() {
       title: "Non-Profit Organizations",
       description: (
         <p>
-          Non-profit companies are registered under Section 42 of the Companies
-          Act, 2017. The registration process requires drafting and submitting a
-          memorandum of association, which outlines the objectives, governance
-          structure, and operational procedures of the NPO. Additionally,
-          founding members must provide their personal details and sign the
-          memorandum. Upon approval, the organization is issued a registration
-          certificate, allowing it to operate legally and seek funding, grants,
-          and donations for its activities. Compliance with annual reporting and
-          audit requirements is crucial to maintain the NPO's status and
-          credibility.
+          Non-profit companies are registered under Section 42 of the Companies Act, 2017. The registration process
+          requires drafting and submitting a memorandum of association, which outlines the objectives, governance
+          structure, and operational procedures of the NPO. Additionally, founding members must provide their personal
+          details and sign the memorandum. Upon approval, the organization is issued a registration certificate,
+          allowing it to operate legally and seek funding, grants, and donations for its activities. Compliance with
+          annual reporting and audit requirements is crucial to maintain the NPO's status and credibility.
         </p>
       ),
     },
@@ -124,8 +101,7 @@ function StartingNewBusiness() {
   const foreignInvestorsPreReq = [
     {
       title: "Bank Account",
-      description:
-        "Open a company bank account in any commercial bank in Pakistan",
+      description: "Open a company bank account in any commercial bank in Pakistan",
     },
     {
       title: "Permit & Licenses",
@@ -155,7 +131,7 @@ function StartingNewBusiness() {
             width="100%"
           ></IntroContainer>
         </div>{" "}
-        <div className="business-mining-cards">
+        <div className="starting-business-mining-cards">
           {" "}
           {miningPoints.map((item, index) => (
             <BusinessCards item={item} index={index}></BusinessCards>
@@ -163,54 +139,36 @@ function StartingNewBusiness() {
         </div>
       </Container>
       <div className="w-full">
-        <img
-          src={StartingBusiness}
-          alt="Full Width"
-          className="w-full h-full object-center"
-        />
+        <img src={StartingBusiness} alt="Full Width" className="w-full h-full object-center" />
       </div>
       <Container classes="mt-8 w-[90%]">
         <div className="starting-business-investor">
           <IntroContainer
             title={
               <h1>
-                Additional steps for foreign{" "}
-                <span style={{ color: "green" }}>Investor</span>
+                Additional steps for foreign <span style={{ color: "green" }}>Investor</span>
               </h1>
             }
             content={
               <div>
                 <p>
                   <p>
-                    A foreign investor may establish an independent business
-                    with any of the above mentioned corporate structures. He can
-                    establish a sole proprietorship, can enter into partnership
-                    with any local person or foreigner and even can establish a
-                    company with or without participation of local
-                    shareholder(s) and director(s). If a foreign enterprise
-                    wishes to establish a business
+                    A foreign investor may establish an independent business with any of the above mentioned corporate
+                    structures. He can establish a sole proprietorship, can enter into partnership with any local person
+                    or foreigner and even can establish a company with or without participation of local shareholder(s)
+                    and director(s). If a foreign enterprise wishes to establish a business
                   </p>
-                  <span
-                    id="more-content-startingbusiness"
-                    className="showmore-content"
-                    style={{ display: "none" }}
-                  >
-                    in Pakistan as a part of its international operations, in
-                    addition to the said corporate structures it also has
-                    following choices: It can obtain registration with the Board
-                    of Investment, Government of Pakistan (the Board), for
-                    opening of a branch office, marketing office or liaison
-                    office. Regulations of the Board impose certain restrictions
-                    on the operations of the enterprise. It can appoint an agent
-                    in Pakistan. Relevant provisions of the Contract Act, 1872
-                    shall apply in such agency arrangements. It can enter into
-                    joint ventures with other business entities. Relevant
-                    provisions of Contract Act, 1872 and Partnership Act 1932
-                    are applicable to these ventures. The financial year for
-                    most of the business enterprises is from 1st July to 30th
-                    June of every year. All listed companies are required to
-                    follow the best corporate practices with special reference
-                    to financial statements and audits etc.
+                  <span id="more-content-startingbusiness" className="showmore-content" style={{ display: "none" }}>
+                    in Pakistan as a part of its international operations, in addition to the said corporate structures
+                    it also has following choices: It can obtain registration with the Board of Investment, Government
+                    of Pakistan (the Board), for opening of a branch office, marketing office or liaison office.
+                    Regulations of the Board impose certain restrictions on the operations of the enterprise. It can
+                    appoint an agent in Pakistan. Relevant provisions of the Contract Act, 1872 shall apply in such
+                    agency arrangements. It can enter into joint ventures with other business entities. Relevant
+                    provisions of Contract Act, 1872 and Partnership Act 1932 are applicable to these ventures. The
+                    financial year for most of the business enterprises is from 1st July to 30th June of every year. All
+                    listed companies are required to follow the best corporate practices with special reference to
+                    financial statements and audits etc.
                   </span>
                 </p>
                 <ShowMore

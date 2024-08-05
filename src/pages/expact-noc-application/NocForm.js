@@ -40,19 +40,19 @@ const NocForm = ({ setStep }) => {
         {
           label: "Sub-Lease Issue Date (If Applicable) (Optional)",
           name: "SubLeaseIssueDate",
-          required: "false",
+          required: false,
           type: "calendar",
         },
         {
           label: "Sub-Lease Expiry Date (If Applicable) (Optional)",
           name: "SubLeaseExpireDate",
-          required: "false",
+          required: false,
           type: "calendar",
         },
         {
           label: "Mining Sub-Lease Letter (If Applicable) (Optional)", //found
           name: "SubLeaseLetter",
-          required: "false",
+          required: false,
           type: "file",
         },
       ],
@@ -66,13 +66,13 @@ const NocForm = ({ setStep }) => {
         {
           label: "Sub-Lease Issue Date (If Applicable) (Optional)",
           name: "SubLeaseIssueDate",
-          required: "false",
+          required: false,
           type: "calendar",
         },
         {
           label: "Sub-Lease Expiry Date (If Applicable) (Optional)",
           name: "SubLeaseExpireDate",
-          required: "false",
+          required: false,
           type: "calendar",
         },
         {
@@ -512,7 +512,7 @@ const NocForm = ({ setStep }) => {
           )}
         </div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
-          <button onClick={()=> setStep('NocListing')} type="button" className="next-button">
+          <button onClick={() => setStep("NocListing")} type="button" className="next-button">
             <div>
               Cancel
               <svg
@@ -531,28 +531,29 @@ const NocForm = ({ setStep }) => {
               </svg>
             </div>
           </button>
-          {
-            loading ? <Loader/> :
-          <button type="submit" className="next-button">
-            <div>
-              Start Application
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                />
-              </svg>
-            </div>
-          </button>
-          }
+          {loading ? (
+            <Loader />
+          ) : (
+            <button type="submit" className="next-button">
+              <div>
+                Start Application
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

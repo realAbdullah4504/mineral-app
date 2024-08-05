@@ -70,8 +70,12 @@ const TableMap = () => {
     localStorage.setItem("mineralEditMode", true);
     navigate(`/applying-for-mineral-form`);
   };
-  const handleDropdownItemClick = (e, id = "", status="") => {
-    if (e?.key && status ==="Draft") {
+  const handleDropdownItemClick = (e, id = "", status = "") => {
+    if (e?.key && status === "Draft") {
+      const url = `${e?.key}?id=${id}`;
+      navigate(url);
+    }
+    if (e?.key !== "/applying-for-mineral-form" && status === "Submitted") {
       const url = `${e?.key}?id=${id}`;
       navigate(url);
     }
@@ -139,7 +143,7 @@ const TableMap = () => {
           <Space size="middle">
             <Dropdown
               menu={{
-                onClick: (e)=>handleDropdownItemClick(e,record?.id, record?.status),
+                onClick: (e) => handleDropdownItemClick(e, record?.id, record?.status),
                 items,
               }}
               trigger={["click"]}
@@ -162,7 +166,7 @@ const TableMap = () => {
               </a>
             </Dropdown>
           </Space>
-        )
+        );
       },
     },
   ];
@@ -173,7 +177,6 @@ const TableMap = () => {
     { path: "/mineral-testing-labs", label: "Mineral Testing Labs" },
     { path: "/applying-for-mineral-test", label: "Apply" },
   ];
-
   useEffect(() => {
     (async function () {
       setLoading(true);
