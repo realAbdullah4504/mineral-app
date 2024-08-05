@@ -195,10 +195,10 @@ function ApplicationView() {
                    Second Page Start
                   */}
 
-                <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                <h3 className="text-4xl font-bold text-green-700 mb-4">
                   Application Details
                 </h3>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                 <Col className="column" flex="1 0 25%">
                     <Form.Item
                       name="applyAs"
@@ -209,8 +209,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 <Col className="column" flex="1 0 25%">
@@ -223,8 +224,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                   <Col className="column" flex="1 0 25%">
@@ -237,13 +239,14 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 </Flex>
 
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                   <Col className="column" flex="1 0 15%">
                     <Form.Item
                       name="mobileNumber"
@@ -254,8 +257,9 @@ function ApplicationView() {
                           //message: "Please input Middle Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                   <Col className="column" flex="1 0 15%">
@@ -268,8 +272,9 @@ function ApplicationView() {
                           //message: "Please enter Last Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                   <Col className="column" flex="1 0 15%">
@@ -282,13 +287,14 @@ function ApplicationView() {
                           //message: "Please enter Last Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 </Flex>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
-                <Col className="column" flex="1 0 25%">
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Col className="column" flex="1 0 15%">
                     <Form.Item
                       name="address"
                       label="Address"
@@ -298,10 +304,13 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
+                  <Col className="column" flex="1 0 15%"></Col>
+                  <Col className="column" flex="1 0 15%"></Col>
                 </Flex>
                 {/*
                    Second Page End
@@ -313,7 +322,7 @@ function ApplicationView() {
                 {sampleListing && sampleListing.length ? (
                   <>
                     <div style={{ width: "90%" }}>
-                      <h3 style={{ marginTop: "10px", marginLeft: "5px", paddingBottom: "10px", color: "#27ae60" }}>
+                      <h3 className="text-4xl font-bold text-green-700 mb-4">
                         Sample Details
                       </h3>
                       <ConfigProvider
@@ -351,10 +360,10 @@ function ApplicationView() {
                       ninth page start
                   */}
 
-              <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+              <h3 className="text-4xl font-bold text-green-700 mb-4">
                 Mineral Test Information - Mineral Lab
                 </h3>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                 <Col className="column" flex="1 0 25%">
                     <Form.Item
                       name="mineralTestId"
@@ -365,8 +374,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 <Col className="column" flex="1 0 25%">
@@ -379,8 +389,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                   <Col className="column" flex="1 0 25%">
@@ -393,13 +404,14 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 </Flex>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
-                <Col className="column" flex="1 0 25%">
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Col className="column" flex="1 0 15%">
                     <Form.Item
                       name="purposeOfTest"
                       label="Purpose of Test"
@@ -409,15 +421,18 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
+                  <Col className="column" flex="1 0 15%"></Col>
+                  <Col className="column" flex="1 0 15%"></Col>
                 </Flex>
-                <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                <h3 className="text-4xl font-bold text-green-700 mb-4">
                 Background Information
                 </h3>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                 <Col className="column" flex="1 0 25%">
                     <Form.Item
                       name="geologicalInformation"
@@ -428,8 +443,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      classsName="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 <Col className="column" flex="1 0 25%">
@@ -442,8 +458,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      classsName="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                   <Col className="column" flex="1 0 25%">
@@ -456,13 +473,14 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      classsName="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 </Flex>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
-                <Col className="column" flex="1 0 25%">
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Col className="column" flex="1 0 15%">
                     <Form.Item
                       name="additionalInstruction"
                       label="Additional Information"
@@ -472,15 +490,18 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      classsName="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
+                  <Col className="column" flex="1 0 15%"></Col>
+                  <Col className="column" flex="1 0 15%"></Col>
                 </Flex>
-                <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                <h3 className="text-4xl font-bold text-green-700 mb-4">
                 Shipment Detail
                 </h3>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                 <Col className="column" flex="1 0 25%">
                     <Form.Item
                       name="sampleSubmissionMode"
@@ -491,8 +512,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                 <Col className="column" flex="1 0 25%">
@@ -505,8 +527,9 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
                   <Col className="column" flex="1 0 25%">
@@ -519,17 +542,18 @@ function ApplicationView() {
                             //message: "Please upload Grant Letter!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload fileList={fileList}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload fileList={fileList} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                           Upload Receipt
                           </Button>
                         </Upload>
                       </Form.Item>
                     </Col>
                 </Flex>
-                <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
-                <Col className="column" flex="1 0 25%">
+                <Flex gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
+                <Col className="column" flex="1 0 15%">
                     <Form.Item
                       name="trackingNumber"
                       label="Tracking Number"
@@ -539,10 +563,13 @@ function ApplicationView() {
                           //message: "Please input First Name!",
                         },
                       ]}
+                      className="w-full"
                     >
-                      <Input className={styles.inputclass} />
+                      <Input className="w-full py-3" />
                     </Form.Item>
                   </Col>
+                  <Col className="column" flex="1 0 15%"></Col>
+                  <Col className="column" flex="1 0 15%"></Col>
                 </Flex>
               </Form>
               }
