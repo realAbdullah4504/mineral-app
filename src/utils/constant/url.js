@@ -19,17 +19,17 @@ export const ENDPOINTS = {
   GET_SAMPLE_DETAILS: `${REACT_APP_BASE_URL}api/PublicTestApplication/GetSampleDetailList`,
   SAVE_SAMPLE_DETAILS: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveSampleDetail`,
   GET_MINERAL_TEST: `${REACT_APP_BASE_URL}api/MineralTest/GetAllMineralTest`,
-  GET_MINERAL_TEST_ID_DETAILS: `${REACT_APP_BASE_URL}/api/MineralTest/GetLabByMineralTestId`,
+  GET_MINERAL_TEST_ID_DETAILS: `${REACT_APP_BASE_URL}api/MineralTest/GetLabByMineralTestId`,
   SAVE_TEST_INFO: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveTestInformation`,
   SAVE_BACKGROUND_INFO: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveBackgroundInformation`,
   SAVE_SHIPMENT_INFO: `${REACT_APP_BASE_URL}api/PublicTestApplication/SaveShipmentDetails`,
   Mineral_Form_Listing: `${REACT_APP_BASE_URL}api/PublicTestApplication/GetAllTestApplication`,
   NOC_Form_Listing: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetAllNOC`,
   NOC_SPONSOR_Listing: `${REACT_APP_BASE_URL}api/PublicCompany/GetAllCompanies`,
-  NOC_SPONSOR_CITY_Listing: `${REACT_APP_BASE_URL}/api/City/GetAllCities`,
+  NOC_SPONSOR_CITY_Listing: `${REACT_APP_BASE_URL}api/City/GetAllCities`,
   SAVE_NOC_SPONSOR_FORM: `${REACT_APP_BASE_URL}api/PublicCompany/CreateUpdate`,
   GET_BANK_LISTING: `${REACT_APP_BASE_URL}api/Bank/GetAll`,
-  GET_NOC_SPONSOR_DETAIL_COMPANY: `${REACT_APP_BASE_URL}/api/PublicCompany/GetCompanyDetail`,
+  GET_NOC_SPONSOR_DETAIL_COMPANY: `${REACT_APP_BASE_URL}api/PublicCompany/GetCompanyDetail`,
   GET_NATIONALITY_LISTING: `${REACT_APP_BASE_URL}api/PublicNOCApplication/GetAllNationality`,
   SAVE_EXPACT_CREATE_FORM_APPLICATION: `${REACT_APP_BASE_URL}api/PublicNOCApplication/SaveNOCApplicationDetails`,
   GET_EXPACT_APPLICATION_FORM: `${REACT_APP_BASE_URL}api/Bank/GetAll`,
@@ -50,7 +50,7 @@ export const ENDPOINTS = {
   GET_ALL_CITIES: `${REACT_APP_BASE_URL}api/City/GetAllCities`,
   GET_SPONSOR_COMPANY_BY_ID: `${REACT_APP_BASE_URL}api/PublicCompany/GetCompanyById`,
   
-  SAVE_CITIES_LISTING: `${REACT_APP_BASE_URL}/api/City/GetAllCities`,
+  SAVE_CITIES_LISTING: `${REACT_APP_BASE_URL}api/City/GetAllCities`,
 };
 
 export const mineralTestIdDetails = (testId) => {
