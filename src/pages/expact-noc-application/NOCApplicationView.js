@@ -576,7 +576,7 @@ function NOCApplicationView() {
               <BreadCrumbs breadcrumbs={breadcrumbs} />
               <div className="mineral-testing-title">NOC Application View</div>
             </div>
-            <h3 style={{ paddingBottom: "40px", color: "#27ae60" }}>NOC Application Details</h3>
+            <h3 className="text-4xl font-bold text-green-700 mb-4">NOC Application Details</h3>
           </div>
           <div className="wrapper__container">
             <div className="wrapper__form" style={{ width: "100%" }}>
@@ -616,7 +616,7 @@ function NOCApplicationView() {
                   autoComplete="off"
                   disabled={true}
                 >
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="nocType"
@@ -627,8 +627,12 @@ function NOCApplicationView() {
                             //message: "Please select Type!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="NOC Type">
+                        <Select
+                        //  className={styles.inputselect}
+                        className="w-full h-[50px]"
+                          placeholder="NOC Type">
                           <Option value="Normal">Normal</Option>
                           <Option value="Urgent">Urgent</Option>
                         </Select>
@@ -644,13 +648,17 @@ function NOCApplicationView() {
                             //message: "Please input Title/License!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input
+                        //  className={styles.inputclass}
+                        className="w-full py-3"
+                          />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%"></Col>
+                    <Col className="column" flex="1 0 15%"></Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="TitleIssueDate"
@@ -661,8 +669,12 @@ function NOCApplicationView() {
                             //message: "Please select Title Issue Date!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <DatePicker name="TitleIssueDate" className={styles.inputselect} format={dateFormat} />
+                        <DatePicker name="TitleIssueDate"
+                        //  className={styles.inputselect}
+                        className="w-full py-3"
+                          format={dateFormat} />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -675,16 +687,18 @@ function NOCApplicationView() {
                             //message: "Please select Title Expiry Date!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <DatePicker
                           name="TitleExpireDate"
-                          className={styles.inputselect}
+                          // className={styles.inputselect}
+                          className="w-full py-3"
                           onChange={onChange}
                           format={dateFormat}
                         />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="TitleGrantLetter"
                         label="Title Grant Letter"
@@ -694,9 +708,13 @@ function NOCApplicationView() {
                             //message: "Please upload Grant Letter!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props} fileList={fileList}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props} fileList={fileList} className="w-full">
+                          <Button
+                          //  className={styles.fileupload}
+                          className="w-full py-6"
+                            icon={<UploadOutlined />}>
                             Grant Letter
                           </Button>
                         </Upload>
@@ -706,31 +724,39 @@ function NOCApplicationView() {
 
                   {data?.subLeaseLetterPath ? (
                     <>
-                      <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                      <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                         <Col className="column" flex="1 0 15%">
-                          <Form.Item name="SubLeaseIssueDate" label="SubLease Issue Date">
+                          <Form.Item name="SubLeaseIssueDate" label="SubLease Issue Date" className="w-full">
                             <DatePicker
                               name="SubLeaseIssueDate"
-                              className={styles.inputselect}
+                              // className={styles.inputselect}
+                              className="w-full py-3"
                               onChange={onChange}
                               format={dateFormat}
                             />
                           </Form.Item>
                         </Col>
                         <Col className="column" flex="1 0 15%">
-                          <Form.Item name="SubLeaseExpireDate" label="SubLease Expiry Date">
+                          <Form.Item name="SubLeaseExpireDate" label="SubLease Expiry Date" className="w-full">
                             <DatePicker
                               name="SubLeaseExpireDate"
-                              className={styles.inputselect}
+                              // className={styles.inputselect}
+                              className="w-full py-3"
                               onChange={onChange}
                               format={dateFormat}
                             />
                           </Form.Item>
                         </Col>
-                        <Col className="column" flex="1 0 25%">
-                          <Form.Item name="SubLeaseLetter" label="Mining Sub-Lease Letter (If Applicable) (Optional)">
-                            <Upload {...props1} fileList={fileList1}>
-                              <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Col className="column" flex="1 0 15%">
+                          <Form.Item name="SubLeaseLetter" label="Mining Sub-Lease Letter (If Applicable) (Optional)" 
+                          className="w-full"
+                          >
+                            <Upload {...props1} fileList={fileList1} className="w-full">
+                              <Button
+                              //  className={styles.fileupload}
+                              className="w-full py-6"
+                                icon={<UploadOutlined />}
+                                >
                                 Sub Lease Letter
                               </Button>
                             </Upload>
@@ -747,7 +773,7 @@ function NOCApplicationView() {
                       <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
                         Deposit Details
                       </h3>
-                      <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                      <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                         <Col className="column" flex="1 0 15%">
                           <Form.Item
                             name="DepositDate"
@@ -758,10 +784,12 @@ function NOCApplicationView() {
                                 //message: "Please select Deposit Date!",
                               },
                             ]}
+                            className="w-full"
                           >
                             <DatePicker
                               name="DepositDate"
-                              className={styles.inputselect}
+                              // className={styles.inputselect}
+                              className="w-full py-3"
                               onChange={onChange}
                               format={dateFormat}
                             />
@@ -777,15 +805,19 @@ function NOCApplicationView() {
                                 //message: "Please select Bank!",
                               },
                             ]}
+                            className="w-full"
                           >
-                            <Select className={styles.inputselect} placeholder="Banks List">
+                            <Select 
+                            // className={styles.inputselect}
+                            className="w-full h-[50px]"
+                             placeholder="Banks List">
                               {bankList.map((data) => {
                                 return <Option value={data.id}>{data.name}</Option>;
                               })}
                             </Select>
                           </Form.Item>
                         </Col>
-                        <Col className="column" flex="1 0 25%">
+                        <Col className="column" flex="1 0 15%">
                           <Form.Item
                             name="BranchName"
                             label="Branch Name"
@@ -795,13 +827,17 @@ function NOCApplicationView() {
                                 //message: "Please input Branch Name!",
                               },
                             ]}
+                            className="w-full"
                           >
-                            <Input className={styles.inputclass} />
+                            <Input
+                            //  className={styles.inputclass}
+                            className="w-full py-3"
+                              />
                           </Form.Item>
                         </Col>
                       </Flex>
 
-                      <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                      <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                         <Col className="column" flex="1 0 15%">
                           <Form.Item
                             name="DepositAmountInNumber"
@@ -812,8 +848,12 @@ function NOCApplicationView() {
                                 //message: "Please input Deposit Amount in Number!",
                               },
                             ]}
+                            className="w-full"
                           >
-                            <Input className={styles.inputclass} />
+                            <Input
+                            //  className={styles.inputclass} 
+                            className="w-full py-3"
+                             />
                           </Form.Item>
                         </Col>
                         <Col className="column" flex="1 0 15%">
@@ -826,11 +866,15 @@ function NOCApplicationView() {
                                 //message: "Please input Deposit Amount in Words!",
                               },
                             ]}
+                            className="w-full"
                           >
-                            <Input className={styles.inputclass} />
+                            <Input
+                            //  className={styles.inputclass} 
+                            className="w-full py-3"
+                             />
                           </Form.Item>
                         </Col>
-                        <Col className="column" flex="1 0 25%">
+                        <Col className="column" flex="1 0 15%">
                           <Form.Item
                             name="depositSlip"
                             label="Deposit Slip"
@@ -840,9 +884,13 @@ function NOCApplicationView() {
                                 //message: "Please upload Slip!",
                               },
                             ]}
+                            className="w-full"
                           >
-                            <Upload {...props2} fileList={fileList2}>
-                              <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                            <Upload {...props2} fileList={fileList2} className="w-full">
+                              <Button
+                              //  className={styles.fileupload}
+                              className="w-full py-6"
+                                icon={<UploadOutlined />}>
                                 Deposit Slip
                               </Button>
                             </Upload>
@@ -860,10 +908,10 @@ function NOCApplicationView() {
                      Second Page Start
                     */}
 
-                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 className="text-4xl font-bold text-green-700 mb-4">
                     Expatriate Personal Details
                   </h3>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="gender"
@@ -874,8 +922,12 @@ function NOCApplicationView() {
                             //message: "Please select Gender!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Gender">
+                        <Select
+                        //  className={styles.inputselect}
+                        className="w-full h-[50px]"
+                          placeholder="Gender">
                           <Option value="Male">Male</Option>
                           <Option value="Female">Female</Option>
                         </Select>
@@ -891,8 +943,12 @@ function NOCApplicationView() {
                             //message: "Please select Title!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Title">
+                        <Select 
+                        // className={styles.inputselect}
+                        className="w-full h-[50px]"
+                         placeholder="Title">
                           <Option value="Mr.">Mr.</Option>
                           <Option value="Miss">Ms.</Option>
                           <Option value="Mrs.">Mrs.</Option>
@@ -900,7 +956,7 @@ function NOCApplicationView() {
                       </Form.Item>
                     </Col>
 
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="firstName"
                         label="First Name"
@@ -910,13 +966,17 @@ function NOCApplicationView() {
                             //message: "Please input First Name!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input 
+                        // className={styles.inputclass} 
+                        className="w-full py-3"
+                        />
                       </Form.Item>
                     </Col>
                   </Flex>
 
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="middleName"
@@ -927,8 +987,12 @@ function NOCApplicationView() {
                             //message: "Please input Middle Name!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input 
+                        // className={styles.inputclass}
+                        className="w-full py-3"
+                         />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -941,11 +1005,15 @@ function NOCApplicationView() {
                             //message: "Please enter Last Name!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input 
+                        // className={styles.inputclass}
+                        className="w-full py-3"
+                         />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="dateofBirth"
                         label="Date of Birth"
@@ -955,17 +1023,19 @@ function NOCApplicationView() {
                             //message: "Please Select Date of Birth!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <DatePicker
                           name="dateofBirth"
-                          className={styles.inputselect}
+                          // className={styles.inputselect}
+                          className="w-full py-3"
                           onChange={onChange}
                           format={dateFormat}
                         />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="fatherName"
@@ -976,8 +1046,12 @@ function NOCApplicationView() {
                             //message: "Please input Father's Name!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input
+                        //  className={styles.inputclass}
+                        className="w-full py-3"
+                          />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -990,11 +1064,15 @@ function NOCApplicationView() {
                             //message: "Please input Permanent Address!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input
+                        //  className={styles.inputclass} 
+                        className="w-full py-3"
+                         />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="nationality"
                         label="Nationality"
@@ -1004,8 +1082,9 @@ function NOCApplicationView() {
                             //message: "Please input Nationality!",
                           },
                         ]}
+                        className="w-full "
                       >
-                        <Select className={styles.inputselect} placeholder="Country List">
+                        <Select className="w-full h-[50px]" placeholder="Country List">
                           {nationalityList.map((data) => {
                             return <Option value={data.nationalityName}>{data.nationalityName}</Option>;
                           })}
@@ -1013,7 +1092,7 @@ function NOCApplicationView() {
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="country"
@@ -1024,8 +1103,9 @@ function NOCApplicationView() {
                             message: "Please select Country!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select showSearch className={styles.inputselect} placeholder="Country List">
+                        <Select showSearch className="w-full h-[50px]" placeholder="Country List">
                           {nationalityList.map((data) => {
                             return <Option value={data.countryName}>{data.countryName}</Option>;
                           })}
@@ -1042,11 +1122,12 @@ function NOCApplicationView() {
                             //message: "Please input Passport No.!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input className={styles.inputclass} />
+                        <Input className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="passportimage"
                         label="Passport Image"
@@ -1056,16 +1137,17 @@ function NOCApplicationView() {
                             //message: "Please upload Passport image!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props4} fileList={fileList4}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props4} fileList={fileList4} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                             Passport
                           </Button>
                         </Upload>
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="picture"
@@ -1076,9 +1158,10 @@ function NOCApplicationView() {
                             //message: "Please upload Picture!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props3} fileList={fileList3}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props3} fileList={fileList3} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                             Picture
                           </Button>
                         </Upload>
@@ -1094,10 +1177,10 @@ function NOCApplicationView() {
                   {/*
                         Third Page Start
                     */}
-                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 className="text-4xl font-bold text-green-700 mb-4">
                     Professional Details
                   </h3>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="profession"
@@ -1108,8 +1191,9 @@ function NOCApplicationView() {
                             //message: "Please input Profession!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Geologist">
+                        <Select className="w-full h-[50px]" placeholder="Geologist">
                           <Option value="Geologist">Geologist</Option>
                           <Option value="MiningEngineer">Mining Engineer</Option>
                           <Option value="Miner">Miner</Option>
@@ -1127,8 +1211,9 @@ function NOCApplicationView() {
                             //message: "Please input Qualification!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Qualification">
+                        <Select className="w-full h-[50px]" placeholder="Qualification">
                           <Option value="PHD">PHD</Option>
                           <Option value="Masters">Masters</Option>
                           <Option value="Graduation">Graduation</Option>
@@ -1137,7 +1222,7 @@ function NOCApplicationView() {
                         </Select>
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="jobDescription"
                         label="Expertise/Job Description"
@@ -1147,8 +1232,9 @@ function NOCApplicationView() {
                             //message: "Please input Expertise/Job Description!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Director" className={styles.inputclass} />
+                        <Input placeholder="Director" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
@@ -1161,10 +1247,10 @@ function NOCApplicationView() {
                         Fourth Page Start
                     */}
 
-                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 className="text-4xl font-bold text-green-700 mb-4">
                     Purpose of Visit
                   </h3>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="PurposeofVisit"
@@ -1175,8 +1261,9 @@ function NOCApplicationView() {
                             //message: "Please select Purpose!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Visit">
+                        <Select className="w-full h-[50px]" placeholder="Visit">
                           <Option value="WorkDrilling">Work-Drilling</Option>
                           <Option value="SiteVisit">Site Visit</Option>
                           <Option value="Survey">Survey</Option>
@@ -1198,11 +1285,12 @@ function NOCApplicationView() {
                             //message: "Please input Nature of Job!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Stay and vigilance of work" className={styles.inputclass} />
+                        <Input placeholder="Stay and vigilance of work" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="ProjectName"
                         label="Name of Project"
@@ -1212,12 +1300,13 @@ function NOCApplicationView() {
                             //message: "Please input Name of Project!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Name of Project" className={styles.inputclass} />
+                        <Input placeholder="Name of Project" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="ProjectDistrict"
@@ -1228,8 +1317,9 @@ function NOCApplicationView() {
                             //message: "Please input Project Location!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Base Camp Mining Site, Chitral" className={styles.inputclass} />
+                        <Input placeholder="Base Camp Mining Site, Chitral" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1242,11 +1332,12 @@ function NOCApplicationView() {
                             //message: "Please input Project Details!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Details" className={styles.inputclass} />
+                        <Input placeholder="Details" className="w-full py-3"/>
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="tentativeDate"
                         label="Tentative Date expected to Visit Field"
@@ -1256,12 +1347,13 @@ function NOCApplicationView() {
                             //message: "Please Select Tentative Date!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <RangePicker name="tentativeDate" className={styles.inputselect} format={dateFormat} />
+                        <RangePicker name="tentativeDate" className="w-full py-3" format={dateFormat} />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="mapminingtitle"
@@ -1272,16 +1364,17 @@ function NOCApplicationView() {
                             //message: "Please upload Map!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props5} fileList={fileList5}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props5} fileList={fileList5} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                             Coordinates Map
                           </Button>
                         </Upload>
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%"></Col>
-                    <Col className="column" flex="1 0 25%"></Col>
+                    <Col className="column" flex="1 0 15%"></Col>
                   </Flex>
 
                   {/*
@@ -1334,10 +1427,10 @@ function NOCApplicationView() {
                         sixth page start
                     */}
 
-                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 className="text-4xl font-bold text-green-700 mb-4">
                     Sponsor Details
                   </h3>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="licensenumber"
@@ -1348,8 +1441,9 @@ function NOCApplicationView() {
                             //message: "Please input Title/License Number!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Title/License Number" className={styles.inputclass} />
+                        <Input placeholder="Title/License Number" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1362,11 +1456,12 @@ function NOCApplicationView() {
                             //message: "Please input Sponsoring Company!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Sponsoring Company" className={styles.inputclass} />
+                        <Input placeholder="Sponsoring Company" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="pakistanAddress"
                         label="Pakistan Address"
@@ -1376,12 +1471,13 @@ function NOCApplicationView() {
                             //message: "Please input Pakistan Address!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Pakistan Address" className={styles.inputclass} />
+                        <Input placeholder="Pakistan Address" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="addressVisitingOrganisations"
@@ -1392,8 +1488,9 @@ function NOCApplicationView() {
                             //message: "Please input Name and Address of Visiting Organisations!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Name and Address of Visiting Organisations" className={styles.inputclass} />
+                        <Input placeholder="Name and Address of Visiting Organisations" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1406,11 +1503,12 @@ function NOCApplicationView() {
                             //message: "Please input Name & Designation of Conducting Offical!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Name & Designation of Conducting Offical" className={styles.inputclass} />
+                        <Input placeholder="Name & Designation of Conducting Offical" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="pakistaniOfficalName"
                         label="Name of  Pakistani Offical"
@@ -1420,12 +1518,13 @@ function NOCApplicationView() {
                             //message: "Please input Name of Pakistani Offical!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Name of Pakistani Offical" className={styles.inputclass} />
+                        <Input placeholder="Name of Pakistani Offical" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="contactNo"
@@ -1436,8 +1535,9 @@ function NOCApplicationView() {
                             //message: "Please input Contact No. of Pakistani Offical!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Contact No. of Pakistani Offical" className={styles.inputclass} />
+                        <Input placeholder="Contact No. of Pakistani Offical" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1450,11 +1550,12 @@ function NOCApplicationView() {
                             //message: "Please input Address of Pakistani Offical!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Address of Pakistani Offical" className={styles.inputclass} />
+                        <Input placeholder="Address of Pakistani Offical" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="cincNo"
                         label="CINC No. of Pakistani Offical"
@@ -1464,12 +1565,13 @@ function NOCApplicationView() {
                             //message: "Please input CINC No. of Pakistani Offical!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="CINC No. of Pakistani Offical" className={styles.inputclass} />
+                        <Input placeholder="CINC No. of Pakistani Offical" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="cnicImageFront"
@@ -1480,9 +1582,10 @@ function NOCApplicationView() {
                             //message: "Please upload CNIC Image!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props6} fileList={fileList6}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props6} fileList={fileList6} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                             CINC Front Image
                           </Button>
                         </Upload>
@@ -1498,15 +1601,16 @@ function NOCApplicationView() {
                             //message: "Please upload CNIC Image!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props8} fileList={fileList8}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props8} fileList={fileList8} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                             CINC Back Image
                           </Button>
                         </Upload>
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%"></Col>
+                    <Col className="column" flex="1 0 15%"></Col>
                   </Flex>
 
                   {/*
@@ -1517,10 +1621,10 @@ function NOCApplicationView() {
                         seventh page start
                     */}
 
-                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 className="text-4xl font-bold text-green-700 mb-4">
                     Foreigner's Accommodation Details
                   </h3>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="ForeignerPlacesOFvisitDetail"
@@ -1531,8 +1635,9 @@ function NOCApplicationView() {
                             //message: "Please input Details of Places!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Details of Places" className={styles.inputclass} />
+                        <Input placeholder="Details of Places" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1546,11 +1651,12 @@ function NOCApplicationView() {
                             //message: "Please input Places!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Places with Address" className={styles.inputclass} />
+                        <Input placeholder="Places with Address" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="ForeignerPlacesWhereStay"
                         label="Places where the foreigner will stay"
@@ -1560,12 +1666,13 @@ function NOCApplicationView() {
                             //message: "Please input Place of Stay!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Place of Stay" className={styles.inputclass} />
+                        <Input placeholder="Place of Stay" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="ForeignerVisitDurationDate"
@@ -1576,8 +1683,9 @@ function NOCApplicationView() {
                             //message: "Please select Duration of Visit!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <RangePicker name="Durtion of Visit" className={styles.inputselect} format={dateFormat} />
+                        <RangePicker name="Durtion of Visit" className="w-full py-3" format={dateFormat} />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%"></Col>
@@ -1632,10 +1740,10 @@ function NOCApplicationView() {
                         ninth page start
                     */}
 
-                  <h3 style={{ marginTop: "10px", paddingBottom: "10px", color: "#27ae60" }}>
+                  <h3 className="text-4xl font-bold text-green-700 mb-4">
                     Visa Grant Details
                   </h3>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="DateOfVisaApplication"
@@ -1646,8 +1754,10 @@ function NOCApplicationView() {
                             //message: "Please select Date of Visa Application!",
                           },
                         ]}
+                        className="w-full"
+
                       >
-                        <DatePicker name="DateOfVisaApplication" className={styles.inputselect} format={dateFormat} />
+                        <DatePicker name="DateOfVisaApplication" className="w-full py-3" format={dateFormat} />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1660,11 +1770,12 @@ function NOCApplicationView() {
                             //message: "Please input Visa Reference Number!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Visa Reference Number" className={styles.inputclass} />
+                        <Input placeholder="Visa Reference Number" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="VisaCategory"
                         label="Visa Category"
@@ -1674,8 +1785,9 @@ function NOCApplicationView() {
                             //message: "Please select Visa Category!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Select Category">
+                        <Select className="w-full h-[50px]" placeholder="Select Category">
                           <Option value="Business">Business</Option>
                           <Option value="Work">Work</Option>
                           <Option value="Tourist">Tourist</Option>
@@ -1683,7 +1795,7 @@ function NOCApplicationView() {
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="VisaSubcategory"
@@ -1694,8 +1806,9 @@ function NOCApplicationView() {
                             //message: "Please select Visa Subcategory!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Select Subcategory">
+                        <Select className="w-full h-[50px]" placeholder="Select Subcategory">
                           <Option value="Individual">Individual</Option>
                           <Option value="Company">Company</Option>
                         </Select>
@@ -1711,11 +1824,12 @@ function NOCApplicationView() {
                             //message: "Please input Application Type!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Application Type" className={styles.inputclass} />
+                        <Input placeholder="Application Type" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="VisaGrantDate"
                         label="Visa Grant Date"
@@ -1725,12 +1839,13 @@ function NOCApplicationView() {
                             //message: "Please select Visa Grant Date!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <DatePicker name="VisaGrantDate" className={styles.inputselect} format={dateFormat} />
+                        <DatePicker name="VisaGrantDate" className="w-full py-3" format={dateFormat} />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="VisaStartDate"
@@ -1741,8 +1856,9 @@ function NOCApplicationView() {
                             //message: "Please select Visa Start Date!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <DatePicker name="VisaStartDate" className={styles.inputselect} format={dateFormat} />
+                        <DatePicker name="VisaStartDate" className="w-full py-3" format={dateFormat} />
                       </Form.Item>
                     </Col>
                     <Col className="column" flex="1 0 15%">
@@ -1756,10 +1872,10 @@ function NOCApplicationView() {
                           },
                         ]}
                       >
-                        <DatePicker name="VisaEndDate" className={styles.inputselect} format={dateFormat} />
+                        <DatePicker name="VisaEndDate" className="w-full py-3" format={dateFormat} />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="VisaDurationInDays"
                         label="Visa Duration (Days)"
@@ -1769,12 +1885,13 @@ function NOCApplicationView() {
                             //message: "Please input Visa Duration!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="300" className={styles.inputclass} />
+                        <Input placeholder="300" className="w-full py-3" />
                       </Form.Item>
                     </Col>
                   </Flex>
-                  <Flex wrap gap="center" horizontal justify="space-around" style={{ width: "100%" }}>
+                  <Flex wrap gap="middle" horizontal justify="space-around" style={{ width: "100%" }}>
                     <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="TravelCountryName"
@@ -1785,8 +1902,9 @@ function NOCApplicationView() {
                             //message: "Please select Travel Document Country!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Select className={styles.inputselect} placeholder="Select Country">
+                        <Select className="w-full h-[50px]" placeholder="Select Country">
                           {nationalityList.map((data) => {
                             return <Option value={data.nationalityName}>{data.nationalityName}</Option>;
                           })}
@@ -1803,11 +1921,12 @@ function NOCApplicationView() {
                             //message: "Please input Stay Facility!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Input placeholder="Stay Facility" className={styles.inputclass} />
+                        <Input placeholder="Stay Facility" className="w-full py-3" />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="VisaGrantCertificate"
                         label="Visa Grant Certificate"
@@ -1817,9 +1936,10 @@ function NOCApplicationView() {
                             //message: "Please upload Visa Grant Certificate!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props7} fileList={fileList7}>
-                          <Button className={styles.fileupload} icon={<UploadOutlined />}>
+                        <Upload {...props7} fileList={fileList7} className="w-full">
+                          <Button className="w-full py-6" icon={<UploadOutlined />}>
                             Visa Grant Certificate
                           </Button>
                         </Upload>
