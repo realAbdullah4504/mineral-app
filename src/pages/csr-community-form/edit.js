@@ -100,6 +100,7 @@ const ViewCsrCommunity = () => {
         duration: 4.5,
         onClose: () => console.log("Notification closed"),
       });
+      navigate("/csr-community");
     };
   
     const handleSubmission = async (values) => {
@@ -144,7 +145,6 @@ const ViewCsrCommunity = () => {
       }));
     };
   
-    console.log("form", form.getFieldsValue());
 
   return (
     <Container classes="w-[70%]">

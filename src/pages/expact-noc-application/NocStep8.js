@@ -64,7 +64,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
       VisaStayFacility,
     };
     obj.Id = state.id;
-    obj.VisaDurationInDays = state.VisaDurationInDays;
+    obj.VisaDurationInDays = state.VisaDurationInDays || state?.visaDurationInDays;
 
     if (isEdit) {
       if (state.visaPrevImg !== state.visaGrantCertificate) {

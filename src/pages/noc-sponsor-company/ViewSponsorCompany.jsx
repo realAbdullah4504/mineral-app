@@ -159,7 +159,6 @@ function SponsorCompanyView() {
       setLoading(false);
     } catch (error) {
         setLoading(false);
-        console.log(error.message);
     }
   };
   useEffect(() => {
@@ -177,7 +176,6 @@ function SponsorCompanyView() {
   const onFinish = (values) => {
     console.log("Success:", values);
 
-    console.log(dayjs(values.registrationyear).year());
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -185,8 +183,6 @@ function SponsorCompanyView() {
   };
 
   const onChange = (date, datestring) => {
-    console.log("datestring : " + datestring);
-    console.log("Date : " + date);
     date.value = datestring;
   };
 
@@ -230,7 +226,6 @@ function SponsorCompanyView() {
   ];
 
   const getStatus = (item) => {
-    console.log("getStatus", item);
     const rarray = companyStatusList.filter((value) => value.status === item);
 
     if (rarray.length > 0) {
@@ -249,9 +244,6 @@ function SponsorCompanyView() {
     },
     beforeUpload: (file) => {
       setFileList([...fileList, file]);
-      console.log("File List 1");
-      console.log(fileList);
-      console.log("File");
       return false;
     },
     fileList,
@@ -298,9 +290,9 @@ function SponsorCompanyView() {
   ];
   return (
     <Container>
-      <div className="wrapper">
-        <div className="addwrapper">
-          <div className="wrapper__head">
+      <div className="wrapper ">
+        <div className="addwrapper ">
+          <div className="wrapper__head ">
             <div className="breadcrumbbar mt-[50px]">
               <BreadCrumbs breadcrumbs={breadcrumbs} />
               <div className="mineral-testing-title">Sponsor Company View</div>
@@ -308,9 +300,9 @@ function SponsorCompanyView() {
           </div>
           {
             loading? <Loader/> : 
-            <div className="wrapper__container">
+            <div className="wrapper__container ">
             <div
-              className="wrapper__form"
+              className="wrapper__form "
               style={{ width: "100%", alignContent: "center" }}
             >
               <ConfigProvider
@@ -339,6 +331,8 @@ function SponsorCompanyView() {
                   disabled={true}
                   style={{
                     width: "100%",
+                  
+                  
                   }}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
@@ -353,11 +347,11 @@ function SponsorCompanyView() {
                           style={{ display: "flex", paddingLeft: "40px" }}
                           span={8}
                         >
-                          <div style={{ display: "flex" }}>
+                          <div style={{ display: "flex" ,   }} >
                             <div style={{ display: "flex" }}>
-                              <div style={{ width: "360px" }}>
+                              <div style={{ width: "360px" , }}>
                                 <Form.Item noStyle>
-                                  <span className={styles.spantext}>
+                                  <span  className={styles.spantext}>
                                     <span style={{ color: "red" }}> * </span>
                                     Company Logo
                                   </span>
@@ -522,7 +516,7 @@ function SponsorCompanyView() {
                           ></h3>
                         </div>
                         <div className="expatview_button_cover">
-                          <div>
+                          {/* <div>
                             <div style={{ width: "100%", textAlign: "right" }}>
                               <button
                                 type="primary"
@@ -538,7 +532,7 @@ function SponsorCompanyView() {
                                 />
                               </button>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </>
@@ -562,10 +556,20 @@ function SponsorCompanyView() {
                       </Form.Item>
                     </Col>
                   </Flex>
-
+                  <h3
+                    // style={{
+                    //   marginTop: "10px",
+                    //   marginLeft: "130px",
+                    //   paddingBottom: "10px",
+                    //   color: "#27ae60",
+                    // }}
+                    className="text-4xl font-bold text-green-700 mb-4"
+                  >
+                   General Details
+                  </h3>
                   <Flex
                     wrap
-                    gap="center"
+                    gap="middle"
                     horizontal
                     justify="space-around"
                     style={{ width: "100%" }}
@@ -580,11 +584,13 @@ function SponsorCompanyView() {
                             //message: "Please enter Company Name!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           id="companyName"
                           placeholder="HSB Holdings"
-                          className={styles.inputclass}
+                          // className={styles.inputclass}
+                          className="w-full py-3"
                         />
                       </Form.Item>
                     </Col>
@@ -598,18 +604,19 @@ function SponsorCompanyView() {
                             //message: "Please select Type!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Select
-                          className={styles.inputselect}
+                          className="w-full h-[50px]  "
                           placeholder="Registration Type"
                         >
-                          <Option value="Company">Company</Option>
+                          <Option className="" value="Company">Company</Option>
                           <Option value="Individual">Individual</Option>
                         </Select>
                       </Form.Item>
                     </Col>
 
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="cityId"
                         label="Registration City"
@@ -619,9 +626,11 @@ function SponsorCompanyView() {
                             //message: "Please select City!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Select
-                          className={styles.inputselect}
+                          // className={styles.inputselect}
+                          className="w-full h-[50px]  "
                           placeholder="Registration City"
                         >
                           {citiesList.map((data) => {
@@ -636,12 +645,12 @@ function SponsorCompanyView() {
 
                   <Flex
                     wrap
-                    gap="center"
+                    gap="middle"
                     horizontal
                     justify="space-around"
                     style={{ width: "100%" }}
                   >
-                    <Col className="column" flex="1 0 15%">
+                    <Col className="column " flex="1 0 15%">
                       <Form.Item
                         name="registrationyear"
                         label="Registration Year"
@@ -651,16 +660,18 @@ function SponsorCompanyView() {
                             //message: "Please input!",
                           },
                         ]}
+
+                        className="w-full"
                       >
                         <DatePicker
                           name="registrationyear"
-                          className={styles.inputselect}
+                          className={"w-full py-3"}
                           picker="year"
                           onChange={onChange}
                         />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 15%">
+                    <Col className="column " flex="1 0 15%">
                       <Form.Item
                         name="businessDomain"
                         label="Business Domain"
@@ -670,18 +681,21 @@ function SponsorCompanyView() {
                             //message: "Please select Business Domain!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Select
-                          className={styles.inputselect}
+                          // className={styles.inputselect}
+                          className="w-full h-[50px]  "
                           placeholder="Business Domain"
+                     
                         >
-                          <Option value="Mining">Mining</Option>
+                          <Option  value="Mining">Mining</Option>
                           <Option value="Services">Services</Option>
                         </Select>
                       </Form.Item>
                     </Col>
 
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column " flex="1 0 15%">
                       <Form.Item
                         name="ntnNumber"
                         label="NTN/FTN/Tax No."
@@ -691,22 +705,23 @@ function SponsorCompanyView() {
                             //message: "Please input NTN Number!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           placeholder="Enter NTN/FTN Number"
-                          className={styles.inputclass}
+                          className={"w-full py-3"}
                         />
                       </Form.Item>
                     </Col>
                   </Flex>
                   <Flex
                     wrap
-                    gap="center"
+                    gap="middle"
                     horizontal
                     justify="space-around"
-                    style={{ width: "100%" }}
+                    style={{ width: "100%"  }}
                   >
-                    <Col className="column" flex="1 0 15%">
+                    <Col className="column  flex  " flex="1 0 15%">
                       <Form.Item
                         name="logoPath"
                         label="Company Logo"
@@ -715,16 +730,18 @@ function SponsorCompanyView() {
                             //required: true,
                             //message: "Please upload Logo!",
                           },
+                         
                         ]}
+                         className="w-full "
                       >
-                        <Upload {...props2} fileList={fileList2}>
-                          <Button className={styles.fileupload}>
+                        <Upload {...props2} fileList={fileList2}    className="w-full " >
+                          <Button className={` w-full  py-5 `}  >
                             Upload Logo <UploadOutlined />
                           </Button>
                         </Upload>
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 15%">
+                    <Col className="column " flex="1 0 15%">
                       <Form.Item
                         name="companyRegistrationCertificates"
                         label="Company's Registration Certificate"
@@ -734,16 +751,17 @@ function SponsorCompanyView() {
                             //message: "Enter Company's Registration Certificate!",
                           },
                         ]}
+                         className="w-full "
                       >
-                        <Upload {...props}>
-                          <Button className={styles.fileupload}>
+                        <Upload {...props }  className="w-full ">
+                          <Button   className="w-full py-5" >
                             Company's Registration Certificate{" "}
                             <UploadOutlined />
                           </Button>
                         </Upload>
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column " flex="1 0 15%">
                       <Form.Item
                         name="companyTaxRegistrationCertificates"
                         label="Taxpayer Registration Certificate"
@@ -753,9 +771,10 @@ function SponsorCompanyView() {
                             //message: "Please upload Taxpayer Registration Certificate!",
                           },
                         ]}
+                        className="w-full"
                       >
-                        <Upload {...props1} fileList={fileList1}>
-                          <Button className={styles.fileupload}>
+                        <Upload {...props1} fileList={fileList1} className="w-full">
+                          <Button className="w-full py-5">
                             Taxpayer Registration Certificate <UploadOutlined />
                           </Button>
                         </Upload>
@@ -764,18 +783,19 @@ function SponsorCompanyView() {
                   </Flex>
 
                   <h3
-                    style={{
-                      marginTop: "10px",
-                      marginLeft: "130px",
-                      paddingBottom: "10px",
-                      color: "#27ae60",
-                    }}
+                    // style={{
+                    //   marginTop: "10px",
+                    //   marginLeft: "130px",
+                    //   paddingBottom: "10px",
+                    //   color: "#27ae60",
+                    // }}
+                    className="text-4xl font-bold text-green-700 mb-4"
                   >
                     Contact Details
                   </h3>
                   <Flex
                     wrap
-                    gap="center"
+                    gap="middle"
                     horizontal
                     justify="space-around"
                     style={{ width: "100%" }}
@@ -790,10 +810,12 @@ function SponsorCompanyView() {
                             //message: "Please input your Address",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           placeholder="Enter Address"
-                          className={styles.inputclass}
+                          // className={styles.inputclass}
+                          className="w-full py-3"
                         />
                       </Form.Item>
                     </Col>
@@ -807,16 +829,18 @@ function SponsorCompanyView() {
                             //message: "Please Phone Number!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           maxLength={11}
                           placeholder="03001234567"
-                          className={styles.inputclass}
+                          // className={styles.inputclass}
+                          className="w-full py-3"
                           pattern="[0-9.]+"
                         />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="mobileNumber"
                         label="Mobile Number"
@@ -826,19 +850,21 @@ function SponsorCompanyView() {
                             //message: "Please Mobile Number!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           pattern="[0-9.]+"
                           placeholder="03001234567"
                           maxLength={11}
-                          className={styles.inputclass}
+                          // className={styles.inputclass}
+                          className="w-full py-3"
                         />
                       </Form.Item>
                     </Col>
                   </Flex>
                   <Flex
                     wrap
-                    gap="center"
+                    gap="middle"
                     horizontal
                     justify="space-around"
                     style={{ width: "100%" }}
@@ -857,10 +883,12 @@ function SponsorCompanyView() {
                             //message: "Please input your E-mail!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           placeholder="email@email.com"
-                          className={styles.inputclass}
+                          // className={styles.inputclass}
+                          className="w-full py-3"
                         />
                       </Form.Item>
                     </Col>
@@ -875,16 +903,18 @@ function SponsorCompanyView() {
                             //message: "Please input Fax Number!",
                           },
                         ]}
+                        className="w-full"
                       >
                         <Input
                           maxLength={11}
                           placeholder="03001234567"
-                          className={styles.inputnumber}
+                          // className={styles.inputnumber}
+                          className="w-full py-3"
                           pattern="[0-9.]+"
                         />
                       </Form.Item>
                     </Col>
-                    <Col className="column" flex="1 0 25%">
+                    <Col className="column" flex="1 0 15%">
                       <Form.Item
                         name="contactPersonName"
                         label="Contact Person Name"
@@ -894,10 +924,12 @@ function SponsorCompanyView() {
                             //message: "Please enter Contact Person!",
                           },
                         ]}
+                        className="w-full "
                       >
                         <Input
                           placeholder="Enter Contact person Name"
-                          className={styles.inputclass}
+                          // className={styles.inputclass}
+                          className="w-full py-3"
                         />
                       </Form.Item>
                     </Col>

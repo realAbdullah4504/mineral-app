@@ -319,6 +319,7 @@ const NocForm = ({ setStep }) => {
       warning("Upload all images");
     } else {
       try {
+        setLoading(true);
         const { data, isError, message } = await saveSampleDetailAPI(
           REQUEST_TYPES.POST,
           ENDPOINTS.SAVE_EXPACT_CREATE_FORM_APPLICATION,
@@ -511,7 +512,7 @@ const NocForm = ({ setStep }) => {
           )}
         </div>
         <div className="button-group-mineral-form" style={{ marginTop: "30px", marginBottom: "30px" }}>
-          <button type="button" className="next-button">
+          <button onClick={()=> setStep('NocListing')} type="button" className="next-button">
             <div>
               Cancel
               <svg
@@ -530,6 +531,8 @@ const NocForm = ({ setStep }) => {
               </svg>
             </div>
           </button>
+          {
+            loading ? <Loader/> :
           <button type="submit" className="next-button">
             <div>
               Start Application
@@ -549,6 +552,7 @@ const NocForm = ({ setStep }) => {
               </svg>
             </div>
           </button>
+          }
         </div>
       </form>
     </div>

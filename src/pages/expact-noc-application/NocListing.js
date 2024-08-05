@@ -12,6 +12,7 @@ import { setCookiesByName } from "utils/helpers";
 
 function NocListing({ setStep }) {
   const [records, setRecords] = useState([]);
+  const [sponsorCompany, setSponsorCompany] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
@@ -25,14 +26,19 @@ function NocListing({ setStep }) {
     setLoading(true);
     try {
       const { data, isError, message } = await commonAPIs(REQUEST_TYPES.GET, ENDPOINTS.GET_NOC_APPLICATIONS);
-      if (isError) {
+      const { data:sponsorCompanies, isError1, message1 } = await commonAPIs(REQUEST_TYPES.GET, ENDPOINTS.NOC_SPONSOR_Listing);
+      if (isError || isError1) {
         setLoading(false);
         warning(message);
       }
       if (!isError && data) {
         setRecords(data);
-        setLoading(false);
       }
+      if (!isError1 && sponsorCompanies) {
+        setSponsorCompany(sponsorCompanies);
+      }
+      setLoading(false);
+
     } catch (error) {
       setLoading(false);
       console.log(error.message);
@@ -117,6 +123,8 @@ function NocListing({ setStep }) {
           {" "}
           <div className="geological-moreinfo hover:text-black " style={{ paddingBottom: "0px" }}>
             {" "}
+            {
+              sponsorCompany && sponsorCompany.length && sponsorCompany[0]?.status === 'ApprovalPassed' ?
             <button style={{ backgroundImage: `url(${MoreInfo})`, width: "120%" }} onClick={() => setStep("NocForm")}>
               <div
                 style={{
@@ -143,7 +151,8 @@ function NocListing({ setStep }) {
                   />
                 </svg>
               </div>
-            </button>
+            </button> : <span style={{backgroundColor:"#ffffcc", padding:'10px'}}>Wait for Sponsor Company Approval</span>
+            }
           </div>
         </div>
       </div>

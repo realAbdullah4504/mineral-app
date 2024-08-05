@@ -2,7 +2,6 @@ import React from "react";
 import { Flex, Progress } from "antd";
 
 function ProgressPercentage({ percent, step, total = 4 }) {
-  console.log(percent, "percent");
   return (
     <Flex
       vertical

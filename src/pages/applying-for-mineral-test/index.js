@@ -13,40 +13,40 @@ import { setCookiesByName } from "utils/helpers";
 import { Loader } from "components";
 const items = [
   {
-    key: "1",
+    key: "/applying-for-mineral-form",
     label: "Edit",
-    link: "#",
+    link: "/applying-for-mineral-form",
   },
   {
-    key: "2",
+    key: "/view-mineral-testing-company",
     label: "View Application",
-    link: "#",
+    link: "/view-mineral-testing-company",
   },
-  {
-    key: "3",
-    label: "View Sample Details",
-    link: "#",
-  },
+  // {
+  //   key: "3",
+  //   label: "View Sample Details",
+  //   link: "#",
+  // },
   {
     key: "/shipment-detail",
     label: "Add Shipment Details",
     link: "/shipment-detail",
   },
-  {
-    key: "5",
-    label: "Payment",
-    link: "#",
-  },
-  {
-    key: "6",
-    label: "View Report",
-    link: "#",
-  },
-  {
-    key: "7",
-    label: "Request Retest",
-    link: "#",
-  },
+  // {
+  //   key: "5",
+  //   label: "Payment",
+  //   link: "#",
+  // },
+  // {
+  //   key: "6",
+  //   label: "View Report",
+  //   link: "#",
+  // },
+  // {
+  //   key: "7",
+  //   label: "Request Retest",
+  //   link: "#",
+  // },
 ];
 
 const TableMap = () => {
@@ -70,8 +70,8 @@ const TableMap = () => {
     localStorage.setItem("mineralEditMode", true);
     navigate(`/applying-for-mineral-form`);
   };
-  const handleDropdownItemClick = (e, id = "") => {
-    if (e?.key) {
+  const handleDropdownItemClick = (e, id = "", status="") => {
+    if (e?.key && status ==="Draft") {
       const url = `${e?.key}?id=${id}`;
       navigate(url);
     }
@@ -133,16 +133,37 @@ const TableMap = () => {
     },
     {
       title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle" style={{ textAlign: "left!important", paddingLeft: "0px" }}>
-          <Typography.Link onClick={() => onChange(record.id)}>View</Typography.Link>
-          {
-            record?.status === "Draft" ? 
-            <button onClick={() => onEdit(record.id)}>Edit</button> : ""
-          }
-        </Space>
-      ),
+      key: "operation",
+      render: (text, record) => {
+        return (
+          <Space size="middle">
+            <Dropdown
+              menu={{
+                onClick: (e)=>handleDropdownItemClick(e,record?.id, record?.status),
+                items,
+              }}
+              trigger={["click"]}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                  />
+                </svg>
+              </a>
+            </Dropdown>
+          </Space>
+        )
+      },
     },
   ];
 
@@ -166,8 +187,6 @@ const TableMap = () => {
           warning(message);
         }
         if (!isError && data) {
-          console.log(data, "data");
-          console.log(data,"Shujahat");
           setListing(data);
           setLoading(false);
         }

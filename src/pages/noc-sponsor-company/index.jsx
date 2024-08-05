@@ -35,6 +35,11 @@ const TableMap = () => {
     localStorage.setItem("SponsorEditMode", true);
     navigate(`/noc-company-form`);
   };
+  const onView = (key) => {
+    setCookiesByName("companyEditRecordId", key, true);
+    localStorage.setItem("SponsorEditMode", true);
+    navigate(`/view-sponsor-company?id=${key}`);
+  };
   const applicationStatus = [
     {
       status: "PublicNewEntry",
@@ -89,19 +94,16 @@ const TableMap = () => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Name",
       dataIndex: "companyName",
       key: "companyName",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Registration Type",
       dataIndex: "registrationType",
       key: "registrationType",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Registration City",
@@ -112,20 +114,18 @@ const TableMap = () => {
       title: "Business Domain",
       dataIndex: "businessDomain",
       key: "businessDomain",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
     {
       title: "Year of Registration",
       dataIndex: "registrationYear",
       key: "registrationYear",
-      render: (text) => <div style={{ fontSize: "15px" }}>{text}</div>,
     },
 
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (text) => <div style={{ fontSize: "15px" }}>{getStatus(text)}</div>,
+      render: (text) => <span >{getStatus(text)}</span>,
     },
     {
       title: "Action",
@@ -135,7 +135,7 @@ const TableMap = () => {
           {!!(record.status == "PublicNewEntry" || record.status == "SubmissionFailed") && (
             <button onClick={() => onEdit(record.id)}>Edit</button>
           )}
-          {<button>view</button>}
+          {<button onClick={() => onView(record.id)}>view</button>}
         </Space>
       ),
     },
@@ -174,7 +174,7 @@ const TableMap = () => {
             {" "}
             <div className="geological-moreinfo" style={{ paddingBottom: "0px" }}>
               {" "}
-              {!listing && (
+              {!listing.length && (
                 <button style={{ backgroundImage: `url(${MoreInfo})` }}>
                   <a href="/noc-company-form">
                     {" "}

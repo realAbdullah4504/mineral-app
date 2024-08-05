@@ -18,7 +18,19 @@ const NocStep1 = ({ setStep }) => {
   });
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
-  const [state, setState] = useState("");
+  const [state, setState] = useState({
+    ExpatTitle:"",
+      Gender:"",
+      FirstName:"",
+      MiddleName:"",
+      LastName:"",
+      DOB:"",
+      FatherName:"",
+      PermanentAddress:"",
+      PassportNo:"",
+      CountryName:"",
+      NationalityName:"",
+  });
   const [nationalityListing, setNationalityListing] = useState([]);
   const isEdit = localStorage.getItem("NOCEditMode");
   const creationId = getCookiesByName("expactapplicationid");
@@ -230,8 +242,8 @@ const NocStep1 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select {...commonProps}>
-                <option value="" disabled style={{ opacity: 0.5 }}>
+              <select onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps}>
+                <option disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
                 {field.options.map((option) => (
@@ -308,10 +320,22 @@ const NocStep1 = ({ setStep }) => {
           warning(message);
         } else if (data) {
           setState(data);
+          const {expatTitle, gender, firstName, middleName, lastName, dob, fatherName, passportNo, permanentAddress, nationalityName, countryName, passportImagePath, expatriatePersonalDetailImage} = data;
           setState((prev) => ({
             ...prev,
-            passportImagePrev: data.passportImagePath,
-            colorPassportImagePrev: data.expatriatePersonalDetailImage,
+            ExpatTitle: expatTitle,
+            Gender: gender,
+            FirstName: firstName,
+            MiddleName:middleName,
+            LastName:lastName,
+            DOB:dob?.split("T")[0],
+            FatherName:fatherName,
+            PermanentAddress:permanentAddress,
+            PassportNo:passportNo,
+            NationalityName:nationalityName,
+            CountryName:countryName,
+            passportImagePrev: passportImagePath,
+            colorPassportImagePrev: expatriatePersonalDetailImage,
           }));
         }
       } catch (error) {
@@ -337,7 +361,6 @@ const NocStep1 = ({ setStep }) => {
     })();
   }, []);
 
-  console.log(state, "state");
   return (
     <>
       <div className="noc-form">
