@@ -262,6 +262,15 @@
   padding-bottom: 30px;
   font-size: 20px;
 }
+.starting-business-mining-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  width: 85%;
+  margin: auto;
+  padding-bottom: 30px;
+  font-size: 20px;
+}
 
 .business-mining-card-content p {
   padding: 15px;

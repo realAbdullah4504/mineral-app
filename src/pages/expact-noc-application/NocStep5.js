@@ -143,10 +143,18 @@ const NocStep5 = ({ setStep, equipment }) => {
       }
     }
   };
+
   const changeHandler = (e) => {
     const { name, value } = e?.target || {};
-    setState({ ...state, [name]: value });
+
+    if (name == "SponsorPakistaniOfficialCNIC") {
+      // const cnic = addDashes(value);
+      setState({ ...state, [name]: value });
+    } else {
+      setState({ ...state, [name]: value });
+    }
   };
+
   const handlePrevious = () => {
     if (equipment === "Yes") {
       setStep("Step4");
@@ -189,10 +197,11 @@ const NocStep5 = ({ setStep, equipment }) => {
       type: "input",
     },
     {
-      label: "CNIC of Pakistani Official",
+      label: "CNIC of Pakistani Official  (format: xxxxx-xxxxxxx-x):",
       name: "SponsorPakistaniOfficialCNIC",
       required: "true",
-      type: "number",
+      type: "input",
+      pattern: "^\\d{5}-\\d{7}-\\d{1}$",
       placeholder: "12345-1234567-8",
     },
     {
@@ -218,6 +227,7 @@ const NocStep5 = ({ setStep, equipment }) => {
           "border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0",
         required: field.required,
         placeholder: field.placeholder || "",
+        ...(field.pattern ? { pattern: field.pattern } : {}),
       };
 
       const toCamelCase = (str) => {

@@ -57,14 +57,25 @@ const NocStep2 = ({ setStep }) => {
       name: "Profession",
       required: "true",
       type: "select",
-      options: ["Geologist", "MiningEngineer", "Miner", "Operator"],
+      options: [
+        { name: "Geologist", value: "Geologist" },
+        { name: "Mining Engineer", value: "MiningEngineer" },
+        { name: "Miner", value: "Miner" },
+        { name: "Operator", value: "Operator" },
+      ],
     },
     {
       label: "Qualification",
       name: "Qualification",
       required: "true",
       type: "select",
-      options: ["PHD", "Masters", "Graduation", "Diploma", "Certification"],
+      options: [
+        { name: "PHD", value: "PHD" },
+        { name: "Masters", value: "Masters" },
+        { name: "Graduation", value: "Graduation" },
+        { name: "Diploma", value: "Diploma" },
+        { name: "Certification", value: "Certification" },
+      ],
     },
     {
       label: "Expertise/Job Description",
@@ -116,11 +127,13 @@ const NocStep2 = ({ setStep }) => {
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>
-                {field.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
+                {field.options.map((option) => {
+                  return (
+                    <option key={option.name} value={option.value}>
+                      {option.name}
+                    </option>
+                  );
+                })}
               </select>
             </>
           )}
