@@ -125,7 +125,7 @@ const RegisterOrganization = () => {
 
   const handleSubmission = async (values) => {
     const fullurl =
-      process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
+      process.env.REACT_APP_BASE_URL + "api/PublicWhoIsWho/CreateUpdate";
     const config = {
       headers: {
         Authorization: `Bearer ${getCookie("token")}`,

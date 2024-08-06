@@ -22,37 +22,37 @@ const sampleData = [
   {
     name: "Salman Ahmad",
     email: "SA89@gmail.com",
-    mobileNumber: "04255681432",
+    qualification: "Masters",
     professionalRole: "CEO",
   },
   {
     name: "Waqar Ilyas Raja",
     email: "SH-illyas@gmail.com",
-    mobileNumber: "03287863583",
+    qualification: "Masters",
     professionalRole: "Manager",
   },
   {
     name: "Chanazib Sai",
     email: "SH-illyas@gmail.com",
-    mobileNumber: "03215547896",
+    qualification: "Bachelors",
     professionalRole: "Software Engineer",
   },
   {
     name: "Sardar Sarmad",
     email: "SS.123G@gmail.com",
-    mobileNumber: "03151451568",
+    qualification: "Bachelors",
     professionalRole: "Project Manager",
   },
   {
     name: "Haji Maula Bakhsh",
     email: "Bashsh321@gmail.com",
-    mobileNumber: "03337814440",
+    qualification: "FSC",
     professionalRole: "Miner",
   },
   {
     name: "Toor Khan",
     email: "Toor55@gmail.com",
-    mobileNumber: "03424578963",
+    qualification: "Matric",
     professionalRole: "Coal Miner",
   },
 ];
