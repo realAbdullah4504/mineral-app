@@ -592,7 +592,7 @@ const AppRouter = () => (
         <Route
           path="/applying-for-mineral-test"
           element={
-            <PublicRoute component={Tablemap} layout={DashboardLayout} />
+            <PrivateRoute component={Tablemap} layout={DashboardLayout} />
           }
         />
 
@@ -696,7 +696,7 @@ const AppRouter = () => (
         <Route
           path="/applying-for-mineral-form"
           element={
-            <PublicRoute
+            <PrivateRoute
               component={ApplyingForMineralForm}
               layout={DashboardLayout}
             />
@@ -705,7 +705,7 @@ const AppRouter = () => (
         <Route
           path="/noc-sponsor-company"
           element={
-            <PublicRoute
+            <PrivateRoute
               component={NocSponsorCompany}
               layout={DashboardLayout}
             />
@@ -714,7 +714,7 @@ const AppRouter = () => (
         <Route
           path="/noc-company-form"
           element={
-            <PublicRoute
+            <PrivateRoute
               component={NocSponsorCompanyAddList}
               layout={DashboardLayout}
             />
@@ -746,7 +746,7 @@ const AppRouter = () => (
         <Route
           path="/expact-noc-application"
           element={
-            <PublicRoute
+            <PrivateRoute
               component={ExpatNocApplication}
               layout={DashboardLayout}
             />

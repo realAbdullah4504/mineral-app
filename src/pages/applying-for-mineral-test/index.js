@@ -70,13 +70,18 @@ const TableMap = () => {
     localStorage.setItem("mineralEditMode", true);
     navigate(`/applying-for-mineral-form`);
   };
-  const handleDropdownItemClick = (e, id = "", status = "") => {
-    if (e?.key && status === "Draft") {
-      const url = `${e?.key}?id=${id}`;
+  const handleDropdownItemClick = (e, record = {}) => {
+    const {id , status, sampleSubmissionMode, shipmentBy, shipmentReceiptImage} = record; 
+    let url = e?.key;
+    if(url === "/shipment-detail" && sampleSubmissionMode && shipmentBy && shipmentReceiptImage){
+      return false;
+    }
+    else if (url && status === "Draft") {
+       url = `${url}?id=${id}`;
       navigate(url);
     }
-    if (e?.key !== "/applying-for-mineral-form" && status === "Submitted") {
-      const url = `${e?.key}?id=${id}`;
+    else if (url !== "/applying-for-mineral-form" && status === "Submitted") {
+      url = `${url}?id=${id}`;
       navigate(url);
     }
   };
@@ -88,16 +93,16 @@ const TableMap = () => {
     },
     {
       title: "Name",
-      dataIndex: "testName",
-      key: "testName",
+      dataIndex: "companyNameOrName",
+      key: "companyNameOrName",
       render: (text) => {
         return <strong>{text}</strong>;
       },
     },
     {
       title: "Type of Test",
-      dataIndex: "mineralTestId",
-      key: "mineralTestId",
+      dataIndex: "testName",
+      key: "testName",
     },
     {
       title: "Mineral Lab",
@@ -143,7 +148,7 @@ const TableMap = () => {
           <Space size="middle">
             <Dropdown
               menu={{
-                onClick: (e) => handleDropdownItemClick(e, record?.id, record?.status),
+                onClick: (e) => handleDropdownItemClick(e, record),
                 items,
               }}
               trigger={["click"]}

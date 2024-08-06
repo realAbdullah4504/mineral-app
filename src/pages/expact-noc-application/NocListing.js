@@ -9,7 +9,19 @@ import { Space, Table } from "antd";
 import { applicationStatus } from "utils/constant/noc";
 import MoreInfo from "assets/images/geomapinfo.png";
 import { setCookiesByName } from "utils/helpers";
-
+const items = [
+  {
+    key: "/noc-company-form",
+    label: "Edit",
+    link: "/noc-company-form",
+  },
+  {
+    key: "/noc-view-application",
+    label: "View",
+    link: "/noc-view-application",
+  },
+  
+];
 function NocListing({ setStep }) {
   const [records, setRecords] = useState([]);
   const [sponsorCompany, setSponsorCompany] = useState([]);
@@ -58,15 +70,18 @@ function NocListing({ setStep }) {
       return "-";
     }
   };
-  const onChange = (key) => {
-    navigate(`/noc-view-application?id=${key}`);
-  };
-  const onEdit = (key) => {
-    setCookiesByName("expactapplicationid", key, true);
+ 
+  const handleDropdownItemClick = (e, id = "", status = "") => {
+    let url = e?.key;
+    if (url === "/noc-view-application") {
+    navigate(`${url}?id=${id}`);
+    }else if(status === 'PublicNewEntry' || status === 'SubmissionFailed'){
+    setCookiesByName("expactapplicationid", id, true);
     localStorage.setItem("NOCEditMode", true);
     localStorage.removeItem("NOCidview");
     localStorage.removeItem("NOCid");
     setStep("NocForm");
+    }
   };
   const columns = [
     {
@@ -103,77 +118,44 @@ function NocListing({ setStep }) {
       key: "status",
       render: (key) => getStatus(key),
     },
-    // {
-    //   title: "Action",
-    //   key: "operation",
-    //   render: (text, record) => {
-    //     return (
-    //       <Space size="middle">
-    //         <Dropdown
-    //           menu={{
-    //             onClick: (e) => handleDropdownItemClick(e, record?.id),
-    //             items,
-    //           }}
-    //           trigger={["click"]}
-    //         >
-    //           <a onClick={(e) => e.preventDefault()}>
-    //             <svg
-    //               xmlns="http://www.w3.org/2000/svg"
-    //               fill="none"
-    //               viewBox="0 0 24 24"
-    //               strokeWidth="1.5"
-    //               stroke="currentColor"
-    //               className="size-6"
-    //             >
-    //               <path
-    //                 strokeLinecap="round"
-    //                 strokeLinejoin="round"
-    //                 d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
-    //               />
-    //             </svg>
-    //           </a>
-    //         </Dropdown>
-    //       </Space>
-    //     );
-    //   },
-    // },
+   
     {
       title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle" style={{ textAlign: "left!important", paddingLeft: "0px" }}>
-          <Typography.Link onClick={() => onChange(record.id)}>View</Typography.Link>
-          {record.status === "PublicNewEntry" || record.status === "SubmissionFailed" ? (
-            <Typography.Link onClick={() => onEdit(record.id)}>Edit</Typography.Link>
-          ) : (
-            <></>
-          )}
-        </Space>
-      ),
+      key: "operation",
+      render: (text, record) => {
+        return (
+          <Space size="middle">
+            <Dropdown
+              menu={{
+                onClick: (e) => handleDropdownItemClick(e, record?.id, record?.status),
+                items,
+              }}
+              trigger={["click"]}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                  />
+                </svg>
+              </a>
+            </Dropdown>
+          </Space>
+        );
+      },
     },
   ];
-  const handleDropdownItemClick = (e, id = "") => {
-    const url = `${e?.key}?id=${id}`;
-    navigate(url);
-  };
-  const items = [
-    {
-      key: "/applying-for-mineral-form",
-      label: "Edit",
-      link: "/applying-for-mineral-form",
-    },
-    {
-      key: "/view-mineral-testing-company",
-      label: "View Application",
-      link: "/view-mineral-testing-company",
-    },
-
-    {
-      key: "/shipment-detail",
-      label: "Add Shipment Details",
-      link: "/shipment-detail",
-    },
-  ];
+  
+  
   return (
     <div>
       <div className="mineral-testing-table-header">
