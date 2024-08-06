@@ -30,7 +30,9 @@ const DataCard = ({ type, data }) => {
       ) : type === "edit" ? (
         <div
           className="sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-[18rem] min-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
-          onClick={() => handleNavigate(`/registerorganization/edit?id=${data?.id}`)}
+          onClick={() =>
+            handleNavigate(`/registerorganization/edit?id=${data?.id}`)
+          }
         >
           <div className="flex flex-col items-center space-y-4 ">
             <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
@@ -95,16 +97,27 @@ const DataCard = ({ type, data }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="1.2em"
                     height="1.2em"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 48 48"
                   >
-                    <path
-                      fill="white"
-                      d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25c1.12.37 2.32.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z"
-                    />
+                    <g
+                      fill="none"
+                      stroke="white"
+                      stroke-linejoin="round"
+                      stroke-width="4"
+                    >
+                      <path
+                        fill="white"
+                        d="M2 17.4L23.022 9l21.022 8.4l-21.022 8.4z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        d="M44.044 17.51v9.223m-32.488-4.908v12.442S16.366 39 23.022 39c6.657 0 11.467-4.733 11.467-4.733V21.825"
+                      />
+                    </g>
                   </svg>
                 </div>
               </div>
-              <p>{data?.mobileNumber}</p>
+              <p>{data?.qualification}</p>
             </div>
 
             <div className="flex items-center gap-2">

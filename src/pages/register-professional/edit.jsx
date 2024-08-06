@@ -6,7 +6,7 @@ import { Container } from "components/UI";
 import axios from "axios";
 import { getCookie } from "services/session/cookies";
 import { getUserData } from "utils/helpers";
-// import { MaskedInput } from "antd-mask-input";
+import { MaskedInput } from "antd-mask-input";
 
 const CustomUploadIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24">
@@ -198,7 +198,7 @@ const RegisterProfessionalEdit = () => {
 
   const handleSubmission = async (values) => {
     try {
-      const fullurl = process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
+      const fullurl = process.env.REACT_APP_BASE_URL + "api/PublicWhoIsWho/CreateUpdate";
       const config = {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
@@ -399,7 +399,8 @@ const RegisterProfessionalEdit = () => {
               //   },
               // ]}
               >
-                {/* <MaskedInput
+                <MaskedInput
+                disabled
                   ref = {maskInputCnic}
                   value={cnicValue || ""}
                   onChange={(e) => {
@@ -422,7 +423,7 @@ const RegisterProfessionalEdit = () => {
                   //   showMask: true,
                   //   clearMaskOnLostFocus: false,
                   // }}
-                /> */}
+                />
                 <label
                   // htmlFor="CNIC"
                   className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"

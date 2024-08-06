@@ -218,6 +218,10 @@ export const SubMenuWhoIsWho = [
   {
     name:"Other Services",
     link: "/other-services",
+  },
+  {
+    name:"Apply For Registration",
+    link: "/registerorganization",
   }
 ];
 
