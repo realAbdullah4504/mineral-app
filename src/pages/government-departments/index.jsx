@@ -2,7 +2,8 @@
   import { Container } from "components/UI";
   import LogoImg from "assets/images/logo.jpg";
   import PMDCImg from "assets/images/pmdc.png";
-  import FWOImg from "assets/images/fwo.png";
+  import SaindakImg from "assets/images/saindakLogo.png";
+  import PmplImg from "assets/images/pmplLogo.png";
   import PPLImg from "assets/images/ppl.png";
   import React from "react";
   import DataCard from "components/Cards/dataCard";
@@ -36,11 +37,12 @@ import StaticDataCard from "components/Cards/staticDataCard";
             <div className="w-full flex justify-center mt-16">
               <div className="flex flex-wrap justify-center gap-20 p-4">
                 {/* <DataCard type={"add"} data={data} /> */}
-                <StaticDataCard type={"detail"} data={{headline: "National Mineral Data Cell (NMDC)", logo: LogoImg}} />
-                <StaticDataCard type={"detail"} data={{headline: "Ministry of Energy (Petroleum Division)", logo: LogoImg}} />
-                <StaticDataCard type={"detail"} data={{headline: "Pakistan Mineral Development Corporation (PMDC)", logo: PMDCImg}} />
-                <StaticDataCard type={"detail"} data={{headline: "Frontier Work Organization (FWO)", logo: FWOImg}} />
-                <StaticDataCard type={"detail"} data={{headline: "Pakistan Petroleum Limited (PPL)", logo: PPLImg}} />
+                <StaticDataCard type={"detail"} data={{headline: "Ministry of Energy ",title: "(Petroleum Division)",subTitle: "(Mineral Wing)", logo: LogoImg, email: "info@minerals.gov.pk", phone: "051 9202337", address: "2nd Floor, Petroleum House, Ataturk Avenue, G-5/2, Islamabad"}} />
+                <StaticDataCard type={"detail"} data={{headline: "National Mineral Data Cell ",title: "(NMDC)",subTitle: "(Petroleum Division)", logo: LogoImg, email: "nmdc@minerals.gov.pk", phone: "051 9203225", address: "2nd Floor, Petroleum House, Ataturk Avenue, G-5/2, Islamabad"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pakistan Mineral Development Corporation ",title: "(PMDC)", logo: PMDCImg, email: "info@pmdc.gov.pk", phone: "+92-51-9265123-4", address: "Plot No 13, H-9/4, Islamabad"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Saindak Metals Limted", logo: SaindakImg, email: "info@saindak.com.pk", phone: "+92819201646", address: "Gul Bagh Samungli Road Quetta, Balochistan "}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pakistan Mineral Private Limited",title: "(PMPL)", logo: PmplImg, email: "procurement@ghpl.com.pk", phone: "051 9211249", address: "5th Floor, Petroleum House, Ataturk Avenue, G-5/2, Islamabad"}} />
+                <StaticDataCard type={"detail"} data={{headline: "Pakistan Petroleum Limited ",title: "(PPL)", logo: PPLImg, email: "info@test.com", phone: "+92-51-2624800-7", address: "7th Avenue, Sector G-6/1, Islamabad"}} />
               </div>
             </div>
 

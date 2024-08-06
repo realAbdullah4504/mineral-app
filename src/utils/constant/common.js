@@ -499,10 +499,10 @@ export const registerOrganizationOption = [
   //   value: "GovernmentDepartments",
   //   label: "Government Departments",
   // },
-  {
-    value: "MiningProfessionals",
-    label: "Mining Professionals",
-  },
+  // {
+  //   value: "MiningProfessionals",
+  //   label: "Mining Professionals",
+  // },
   {
     value: "GeotechnicalGeophysicalGeologicalServices",
     label: "Geotechnical, Geophysical & Geological Services",
