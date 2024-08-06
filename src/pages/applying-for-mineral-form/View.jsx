@@ -79,7 +79,7 @@ function ApplicationView() {
       if (!isError && sampleListing) {
         setSampleList(sampleListing);
       }
-      const {applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email, mineralTestId, labId, testPrice, purposeOfTest, geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction, sampleSubmissionMode, shipmentBy, shipmentReceiptImage, trackingNumber } = data || {}
+      const {applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email, mineralTestName, labName, testPrice, purposeOfTest, geologicalInformation, typeOfWorkRequired, requirementRegardingReports, additionalInstruction, sampleSubmissionMode, shipmentBy, shipmentReceiptImage, trackingNumber } = data || {}
       if (shipmentReceiptImage) {
         let str = shipmentReceiptImage;
         let file = {
@@ -98,8 +98,8 @@ function ApplicationView() {
           address,
           mobileNumber,
           email,
-          mineralTestId,
-          labId, 
+          mineralTestId:mineralTestName,
+          labId:labName, 
           testPrice, 
           purposeOfTest,
           geologicalInformation,

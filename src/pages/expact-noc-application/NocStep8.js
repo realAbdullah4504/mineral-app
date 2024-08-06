@@ -73,6 +73,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
         obj.visaGrantCertificate = state.visaGrantCertificate;
       }
     } else {
+      obj.VisaDurationInDays = state.VisaDurationInDays || state?.visaDurationInDays;
       if (state.visaPrevImg) {
         obj.visaGrantCertificate = state.visaPrevImg;
       }
@@ -103,12 +104,12 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
           warning(message);
         }
         if (!isError && data) {
-          localStorage.removeItem("NOCEditMode");
-          deleteCookie("expactapplicationid");
-          localStorage.removeItem("NOCidview");
-          localStorage.removeItem("NOCid");
+          // localStorage.removeItem("NOCEditMode");
+          // deleteCookie("expactapplicationid");
+          // localStorage.removeItem("NOCidview");
+          // localStorage.removeItem("NOCid");
           setLoading(false);
-          setStep("NocListing");
+          // setStep("NocListing");
         }
       } catch (error) {
         setLoading(false);

@@ -44,7 +44,7 @@ const ExpatNocApplication = () => {
     localStorage.removeItem("NOCid");
   }, []);
   return (
-    <div className="expact-noc-application-list mx-auto mb-20 mineral-form">
+    <div className="table-data" style={{ marginBottom: "50px" }}>
       <div className="mt-[50px]">
         <BreadCrumbs breadcrumbs={breadcrumbs} />
         <div className="mineral-testing-title">Applying for NOC Applications</div>

@@ -19,17 +19,17 @@ const NocStep1 = ({ setStep }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState({
-    ExpatTitle:"",
-      Gender:"",
-      FirstName:"",
-      MiddleName:"",
-      LastName:"",
-      DOB:"",
-      FatherName:"",
-      PermanentAddress:"",
-      PassportNo:"",
-      CountryName:"",
-      NationalityName:"",
+    ExpatTitle: "",
+    Gender: "",
+    FirstName: "",
+    MiddleName: "",
+    LastName: "",
+    DOB: "",
+    FatherName: "",
+    PermanentAddress: "",
+    PassportNo: "",
+    CountryName: "",
+    NationalityName: "",
   });
   const [nationalityListing, setNationalityListing] = useState([]);
   const isEdit = localStorage.getItem("NOCEditMode");
@@ -181,9 +181,15 @@ const NocStep1 = ({ setStep }) => {
         const name = commonProps?.name || "";
         const camelCaseName = name ? toCamelCase(name) : "";
         let value = state[name] || state[camelCaseName] || "";
+
         if (type == "date") {
           value = state["dob"]?.split("T")[0] || "";
+
+          if (value == "0001-01-01") {
+            value = null;
+          }
         }
+
         return (
           <input
             type={type}
@@ -320,20 +326,34 @@ const NocStep1 = ({ setStep }) => {
           warning(message);
         } else if (data) {
           setState(data);
-          const {expatTitle, gender, firstName, middleName, lastName, dob, fatherName, passportNo, permanentAddress, nationalityName, countryName, passportImagePath, expatriatePersonalDetailImage} = data;
+          const {
+            expatTitle,
+            gender,
+            firstName,
+            middleName,
+            lastName,
+            dob,
+            fatherName,
+            passportNo,
+            permanentAddress,
+            nationalityName,
+            countryName,
+            passportImagePath,
+            expatriatePersonalDetailImage,
+          } = data;
           setState((prev) => ({
             ...prev,
             ExpatTitle: expatTitle,
             Gender: gender,
             FirstName: firstName,
-            MiddleName:middleName,
-            LastName:lastName,
-            DOB:dob?.split("T")[0],
-            FatherName:fatherName,
-            PermanentAddress:permanentAddress,
-            PassportNo:passportNo,
-            NationalityName:nationalityName,
-            CountryName:countryName,
+            MiddleName: middleName,
+            LastName: lastName,
+            DOB: dob?.split("T")[0],
+            FatherName: fatherName,
+            PermanentAddress: permanentAddress,
+            PassportNo: passportNo,
+            NationalityName: nationalityName,
+            CountryName: countryName,
             passportImagePrev: passportImagePath,
             colorPassportImagePrev: expatriatePersonalDetailImage,
           }));

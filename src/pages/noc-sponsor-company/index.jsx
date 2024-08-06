@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Space, Table } from "antd";
+import { Space, Table, Dropdown } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import MoreInfo from "assets/images/geomapinfo.png";
@@ -10,6 +10,19 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "components";
 import { setCookiesByName } from "utils/helpers";
+const items = [
+  {
+    key: "/noc-company-form",
+    label: "Edit",
+    link: "/noc-company-form",
+  },
+  {
+    key: "/view-sponsor-company",
+    label: "View",
+    link: "/view-sponsor-company",
+  },
+  
+];
 const TableMap = () => {
   const navigate = useNavigate();
   const [listing, setListing] = useState([]);
@@ -30,15 +43,18 @@ const TableMap = () => {
     { path: "/expatriate-security", label: "Expatriate Security" },
     { path: "/noc-sponsor-company", label: "NOC Company" },
   ];
-  const onEdit = (key) => {
-    setCookiesByName("companyEditRecordId", key, true);
+
+  const handleDropdownItemClick = (e, id = "", status = "") => {
+    let url = e?.key;
+    if (e?.key === "/view-sponsor-company") {
+      url = `${url}?id=${id}`;
+      setCookiesByName("companyEditRecordId", id, true);
     localStorage.setItem("SponsorEditMode", true);
-    navigate(`/noc-company-form`);
-  };
-  const onView = (key) => {
-    setCookiesByName("companyEditRecordId", key, true);
-    localStorage.setItem("SponsorEditMode", true);
-    navigate(`/view-sponsor-company?id=${key}`);
+    }else{
+      setCookiesByName("companyEditRecordId", id, true);
+      localStorage.setItem("SponsorEditMode", true);
+    }
+    navigate(url);
   };
   const applicationStatus = [
     {
@@ -129,15 +145,37 @@ const TableMap = () => {
     },
     {
       title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle" style={{ textAlign: "left!important", paddingLeft: "0px" }}>
-          {!!(record.status == "PublicNewEntry" || record.status == "SubmissionFailed") && (
-            <button onClick={() => onEdit(record.id)}>Edit</button>
-          )}
-          {<button onClick={() => onView(record.id)}>view</button>}
-        </Space>
-      ),
+      key: "operation",
+      render: (text, record) => {
+        return (
+          <Space size="middle">
+            <Dropdown
+              menu={{
+                onClick: (e) => handleDropdownItemClick(e, record?.id, record?.status),
+                items,
+              }}
+              trigger={["click"]}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+                  />
+                </svg>
+              </a>
+            </Dropdown>
+          </Space>
+        );
+      },
     },
   ];
 

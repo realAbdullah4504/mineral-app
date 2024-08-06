@@ -44,11 +44,22 @@ const MineralForm = () => {
       breadcrumbs: [{ path: "#", label: "Background Information" }],
     },
   };
-
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/service-and-support", label: "Services & Support" },
+    { path: "/mineral-testing-labs", label: "Mineral Testing Labs" },
+    { path: "/applying-for-mineral-test", label: "Apply" },
+  ];
   return (
-    <div className="mineral-form">
+    <div className="mineral-forms" style={{ width: "80%", margin: "auto" }}>
+      <div className="mt-[50px]">
+        <BreadCrumbs breadcrumbs={breadcrumbs} />
+      </div>
       <div className="mineral-testing-title">Mineral Testing Labs</div>
-      <BreadCrumbs breadcrumbs={steps[state]["breadcrumbs"]} />
+      <div className="mineral-form" style={{ width: "100%" }}>
+        {" "}
+        <BreadCrumbs breadcrumbs={steps[state]["breadcrumbs"]} />
+      </div>
       <div className="mineral-testing-table-header"></div>
       <div> {steps[state]["component"]}</div>
     </div>

@@ -12,24 +12,25 @@ const Step1 = ({ setStep }) => {
   const [state, setState] = useState({ applyAs: "Individual" });
   useEffect(() => {
     const applicationDetail = getCookiesByName("testApplication", true);
-    const TestApplicationId = getCookiesByName("mineralEditid", true) || applicationDetail?.id  || "";
-    if(TestApplicationId) {
+    const TestApplicationId = getCookiesByName("mineralEditid", true) || applicationDetail?.id || "";
+    if (TestApplicationId) {
       (async function () {
         try {
           const { data, isError, message } = await commonAPIs(
             REQUEST_TYPES.GET,
-            `${ENDPOINTS.GET_TEST_APPLICATION_BY_ID}?TestApplicationId=${TestApplicationId}`,
+            `${ENDPOINTS.GET_TEST_APPLICATION_BY_ID}?TestApplicationId=${TestApplicationId}`
           );
           if (isError) {
             warning(message);
           } else if (data) {
-            const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } = data;
+            const { id, applyAs, companyNameOrName, cnicOrNTNNumber, businessDomain, address, mobileNumber, email } =
+              data;
             let payload = {};
-          payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
-        if (applyAs === "Company") {
-          payload = { ...payload, businessDomain };
-        }
-        setState({ ...state, ...payload });
+            payload = { applyAs, companyNameOrName, cnicOrNTNNumber, address, mobileNumber, email, id };
+            if (applyAs === "Company") {
+              payload = { ...payload, businessDomain };
+            }
+            setState({ ...state, ...payload });
           }
         } catch (error) {
           console.log(error.message);
@@ -106,6 +107,12 @@ const Step1 = ({ setStep }) => {
       ],
     },
   };
+  const breadcrumbs = [
+    { path: "/", label: "Home" },
+    { path: "/service-and-support", label: "Services & Support" },
+    { path: "/mineral-testing-labs", label: "Mineral Testing Labs" },
+    { path: "/applying-for-mineral-test", label: "Apply" },
+  ];
 
   const renderFormItems = (key, obj) => {
     return obj.map((field) => {
@@ -145,7 +152,7 @@ const Step1 = ({ setStep }) => {
           {field.type === "select" && (
             <>
               {renderLabel()}
-              <select onChange={(e)=> changeHandler(e)} value={state[field?.name]} {...commonProps}>
+              <select onChange={(e) => changeHandler(e)} value={state[field?.name]} {...commonProps}>
                 <option value="" disabled style={{ opacity: 0.5 }}>
                   Select {field.label.toLowerCase()}
                 </option>

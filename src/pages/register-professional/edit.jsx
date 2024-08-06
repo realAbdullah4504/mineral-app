@@ -1,29 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Select,
-  Upload,
-  message,
-  notification,
-} from "antd";
+import { Button, Form, Input, Modal, Select, Upload, message, notification } from "antd";
 import BreadCrumbs from "components/Breadcrumbs";
 import { Container } from "components/UI";
 import axios from "axios";
 import { getCookie } from "services/session/cookies";
 import { getUserData } from "utils/helpers";
-import { MaskedInput } from "antd-mask-input";
+// import { MaskedInput } from "antd-mask-input";
 
 const CustomUploadIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1.4em"
-    height="1.4em"
-    viewBox="0 0 24 24"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24">
     <path
       fill="#86efac"
       d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
@@ -48,7 +34,7 @@ const RegisterProfessionalEdit = () => {
   const isApiLoading = useRef();
   const maskInputCnicLoading = useRef();
   const maskInputCnic = useRef();
-  const [cnicValue, setCnicValue] = useState('')
+  const [cnicValue, setCnicValue] = useState("");
   const [modifiedValues, setModifiedValues] = useState({
     CNIC: "",
     Qualification: "",
@@ -72,19 +58,24 @@ const RegisterProfessionalEdit = () => {
   }, []);
 
   useEffect(() => {
-    if( maskInputCnic && maskInputCnic.current && maskInputCnic.current.input.value !== '_____-_____-__' && maskInputCnicLoading.current !== true) {
+    if (
+      maskInputCnic &&
+      maskInputCnic.current &&
+      maskInputCnic.current.input.value !== "_____-_____-__" &&
+      maskInputCnicLoading.current !== true
+    ) {
       maskInputCnic.current.focus();
       maskInputCnicLoading.current = true;
-      setTimeout(()=>{
-        maskInputCnic.current.blur()
-      },1000)
+      setTimeout(() => {
+        maskInputCnic.current.blur();
+      }, 1000);
     }
   }, [maskInputCnic, maskInputCnic.current]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(isApiLoading.current === true) {
+        if (isApiLoading.current === true) {
           return;
         }
         isApiLoading.current = true;
@@ -162,7 +153,7 @@ const RegisterProfessionalEdit = () => {
       return {
         ...prevValues,
         [e.target.name]: e.target.value,
-      }
+      };
     });
   };
 
@@ -207,8 +198,7 @@ const RegisterProfessionalEdit = () => {
 
   const handleSubmission = async (values) => {
     try {
-      const fullurl =
-        process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
+      const fullurl = process.env.REACT_APP_BASE_URL + "/api/PublicWhoIsWho/CreateUpdate";
       const config = {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
@@ -220,10 +210,7 @@ const RegisterProfessionalEdit = () => {
 
       const bodyFormData = new FormData();
       if (fileList.length > 0) {
-        bodyFormData.append(
-          "UploadResume",
-          fileList[0].originFileObj || fileList[0]
-        );
+        bodyFormData.append("UploadResume", fileList[0].originFileObj || fileList[0]);
       }
 
       const companyobj = {
@@ -255,9 +242,7 @@ const RegisterProfessionalEdit = () => {
         setErrorMsg("Transaction succeeded: false");
       }
     } catch (error) {
-      setErrorMsg(
-        `Error Status: ${error.response.status} Message : ${error.response.statusText}`
-      );
+      setErrorMsg(`Error Status: ${error.response.status} Message : ${error.response.statusText}`);
     }
   };
 
@@ -291,9 +276,7 @@ const RegisterProfessionalEdit = () => {
 
   const handleFileChange = (info) => {
     const { fileList } = info;
-    const filteredFileList = fileList.filter(
-      (file) => file.type === "application/pdf"
-    );
+    const filteredFileList = fileList.filter((file) => file.type === "application/pdf");
     setFileList(filteredFileList.slice(-1));
     if (filteredFileList.length === 0) {
       setUploadError(true);
@@ -320,9 +303,7 @@ const RegisterProfessionalEdit = () => {
         <div className="flex justify-center flex-col space-y-6 py-12">
           <Form form={form} onFinish={onFinish} className="space-y-4">
             <div className="space-y-2 text-start">
-              <h2 className="text-[26px] font-medium text-[#009969]">
-                Personal Information
-              </h2>
+              <h2 className="text-[26px] font-medium text-[#009969]">Personal Information</h2>
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
@@ -409,16 +390,16 @@ const RegisterProfessionalEdit = () => {
               </Form.Item> */}
 
               <Form.Item
-                // name="CNIC"
-                // rules={[
-                //   {
-                //     required: true,
-                //     pattern: new RegExp(/^\d{5}-\d{5}-\d{2}/i),
-                //     message: "Please enter correct CNIC No.",
-                //   },
-                // ]}
+              // name="CNIC"
+              // rules={[
+              //   {
+              //     required: true,
+              //     pattern: new RegExp(/^\d{5}-\d{5}-\d{2}/i),
+              //     message: "Please enter correct CNIC No.",
+              //   },
+              // ]}
               >
-                <MaskedInput
+                {/* <MaskedInput
                   ref = {maskInputCnic}
                   value={cnicValue || ""}
                   onChange={(e) => {
@@ -441,7 +422,7 @@ const RegisterProfessionalEdit = () => {
                   //   showMask: true,
                   //   clearMaskOnLostFocus: false,
                   // }}
-                />
+                /> */}
                 <label
                   // htmlFor="CNIC"
                   className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
@@ -452,9 +433,7 @@ const RegisterProfessionalEdit = () => {
             </div>
 
             <div className="space-y-2 text-start">
-              <h2 className="text-[26px] font-medium text-[#009969] ">
-                Qualifications
-              </h2>
+              <h2 className="text-[26px] font-medium text-[#009969] ">Qualifications</h2>
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
@@ -498,8 +477,7 @@ const RegisterProfessionalEdit = () => {
                 rules={[
                   {
                     required: true,
-                    message:
-                      "Please input your Degree/Diploma/Certification Title!",
+                    message: "Please input your Degree/Diploma/Certification Title!",
                   },
                 ]}
               >
@@ -578,9 +556,7 @@ const RegisterProfessionalEdit = () => {
             </div>
 
             <div className="space-y-2 text-start">
-              <h2 className="text-[26px] font-medium text-[#009969] ">
-                Professional Information
-              </h2>
+              <h2 className="text-[26px] font-medium text-[#009969] ">Professional Information</h2>
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
@@ -670,10 +646,12 @@ const RegisterProfessionalEdit = () => {
                 name="UploadResume"
                 valuePropName="fileList"
                 className="w-full"
-                getValueFromEvent={(e) =>
-                  Array.isArray(e) ? e : e && e.fileList
+                getValueFromEvent={(e) => (Array.isArray(e) ? e : e && e.fileList)}
+                rules={
+                  fileList?.length == 0
+                    ? [{ required: true, message: "Please upload a file!" }]
+                    : [{ required: false, message: "Please upload a file!" }]
                 }
-                rules={fileList?.length == 0 ? [{ required: true, message: "Please upload a file!" }] : [{ required: false, message: "Please upload a file!" }]}
               >
                 <div className="relative mt-2 w-full">
                   <Upload
@@ -730,9 +708,7 @@ const RegisterProfessionalEdit = () => {
             </div>
 
             <div className="space-y-2 text-start">
-              <h2 className="text-[26px] font-medium text-[#009969] ">
-                Current Employment
-              </h2>
+              <h2 className="text-[26px] font-medium text-[#009969] ">Current Employment</h2>
             </div>
 
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
@@ -845,11 +821,7 @@ const RegisterProfessionalEdit = () => {
           </Button>,
         ]}
       >
-        <iframe
-          src={fileUrl}
-          style={{ width: "100%", height: "500px" }}
-          frameBorder="0"
-        />
+        <iframe src={fileUrl} style={{ width: "100%", height: "500px" }} frameBorder="0" />
       </Modal>
     </>
   );
