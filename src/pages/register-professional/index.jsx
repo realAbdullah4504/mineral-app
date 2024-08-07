@@ -15,6 +15,7 @@ import { Container } from "components/UI";
 import axios from "axios";
 import { getCookie } from "services/session/cookies";
 import { getUserData } from "utils/helpers";
+import { MaskedInput } from "antd-mask-input";
 
 const CustomUploadIcon = (
   <svg
@@ -36,7 +37,6 @@ const RegisterProfessional = () => {
   const [returnLink, setReturnLink] = useState("");
   const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
-  const [value, setValue] = useState("_____ - _____ - __");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
   const [buttonText, setButtonText] = useState("Click to Upload Resume");
@@ -49,28 +49,6 @@ const RegisterProfessional = () => {
       setUser(data);
     }
   }, []);
-
-  const handleChange = (e) => {
-    let input = e.target.value.replace(/\D/g, "");
-    let formatted = "_____ - _____ - __";
-    for (let i = 0; i < input.length; i++) {
-      formatted = formatted.replace("_", input[i]);
-    }
-    setValue(formatted);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Backspace") {
-      let input = value.replace(/\D/g, ""); // Remove all non-digit characters
-      input = input.slice(0, -1); // Remove the last character
-      let formatted = "_____ - _____ - __";
-      for (let i = 0; i < input.length; i++) {
-        formatted = formatted.replace("_", input[i]);
-      }
-      setValue(formatted);
-      e.preventDefault(); // Prevent the default Backspace behavior
-    }
-  };
 
   const breadcrumbs = [
     { path: "/", label: "Home" },
@@ -109,10 +87,11 @@ const RegisterProfessional = () => {
       onClose: () => console.log("Notification closed"),
     });
 
-    navigate('/mining-professional');
+    navigate("/mining-professional");
   };
 
   const handleSubmission = async (values) => {
+    
     try {
       const fullurl =
         process.env.REACT_APP_BASE_URL + "api/PublicWhoIsWho/CreateUpdate";
@@ -307,28 +286,32 @@ const RegisterProfessional = () => {
                 name="CNIC"
                 rules={[
                   {
-                    required: true,
-                    message: "Please input your Valid CNIC No.!",
+                    required: false,
+                    pattern: new RegExp(/^\d{5}\-\d{7}-\d{1}/i),
+                    // message: "Please enter correct CNIC No.",
                   },
                 ]}
               >
-                <div class="relative mt-2 w-full">
-                  <input
-                    type="text"
-                    id="CNIC"
-                    value={user?.cnic}
-                    disabled
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                    className={`border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-100 text-gray-500 px-2.5 pb-2.5 pt-4 text-sm focus:border-green-600 focus:outline-none focus:ring-0`}
-                  />
-                  <label
-                    for="CNIC"
-                    className={`absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white text-gray-500 px-2 text-sm duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600`}
-                  >
-                    Valid CNIC No.
-                  </label>
-                </div>
+                <MaskedInput
+                id="CNIC"
+                name="CNIC"
+                value={form.getFieldValue("CNIC")}
+      onChange={(e) => form.setFieldsValue({ CNIC: e.target.value })}
+                  className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
+                  maskOptions={{
+                    mask: "00000-0000000-0",
+                    placeholderChar: "_",
+
+                    showMask: true,
+                    clearMaskOnLostFocus: true,
+                  }}
+                />
+                <label
+                  // htmlFor="CNIC"
+                  className="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 focus:border-green-600"
+                >
+                  Valid CNIC No.
+                </label>
               </Form.Item>
             </div>
 

@@ -2,19 +2,22 @@ import React, { Component } from "react";
 import { useState, useEffect } from "react";
 import ProgressPercentage from "components/UI/ProgressPercentage";
 import { Loader } from "components";
-import { message, ConfigProvider, Upload } from "antd";
+import { message, ConfigProvider, Upload, notification } from "antd";
 import { REQUEST_TYPES, ENDPOINTS } from "utils/constant/url";
 import { saveSampleDetailAPI, saveSampleListingAPI } from "services/api/common";
 import { getCookiesByName } from "utils/helpers";
 import { expactApplicationForm } from "utils/constant/url";
 import { Button } from "antd";
 import { commonAPIs } from "services/api/common";
+import { useNavigate } from "react-router-dom";
 const baseUrl = "https://nurseries-bucket.s3.eu-central-1.amazonaws.com/";
 const NocStep8 = ({ setStep, alreadyVisited }) => {
   const [toggle, setToggle] = useState({
     visaGrantCertificate: false,
   });
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState("");
   const [prevImage, setPrevImage] = useState("");
@@ -28,9 +31,40 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
       content: message,
     });
   };
-  const deleteCookie = (name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  const success = () => {
+    messageApi
+      .open({
+        type: "loading",
+        content: "Processing..",
+        duration: 1,
+      })
+      .then(() => {
+        message.success({
+          type: "success",
+          content: "Saved successfully.",
+          duration: 2.5,
+          style: {
+            marginTop: "40vh",
+          },
+        });
+        navigate("//expatriate-security");
+      });
+
+    // Show notification
+    // notification.success({
+    //   message: "Registration Completed",
+    //   description: "Your registration has been successfully completed.",
+    //   placement: "topRight",
+    //   style: {
+    //     backgroundColor: "#f6ffed",
+    //     border: "1px solid #b7eb8f",
+    //   },
+    //   duration: 4.5, // Duration in seconds, change as needed
+    //   onClose: () => console.log("Notification closed"),
+    // });
+    // navigate("/expact-noc-application");
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -93,6 +127,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     } else {
       setLoading(true);
       try {
+        
         const { data, isError, message } = await commonAPIs(
           REQUEST_TYPES.POST,
           ENDPOINTS.SAVE_EXPACT_APPLICATION_VISAGRANT_DETAILS,
@@ -108,6 +143,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
           // deleteCookie("expactapplicationid");
           // localStorage.removeItem("NOCidview");
           // localStorage.removeItem("NOCid");
+          success()
           setLoading(false);
           // setStep("NocListing");
         }
@@ -317,6 +353,7 @@ const NocStep8 = ({ setStep, alreadyVisited }) => {
     })();
     (async function () {
       try {
+      
         const { data, isError, message } = await saveSampleListingAPI(
           REQUEST_TYPES.GET,
           `${ENDPOINTS.GET_NATIONALITY_LISTING}`
