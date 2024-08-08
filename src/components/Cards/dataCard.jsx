@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import addIcon from "assets/images/addIcon.svg";
 import viewIcon from "assets/images/viewIcon.svg";
+import editIcon from "assets/images/editIcon.svg";
 import sampleImage from "assets/images/data-card.png";
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +28,7 @@ const DataCard = ({ type, data }) => {
             </div>
           </div>
         </div>
-      ) : type === "edit" ? (
+      ) : type === "view" ? (
         <div
           className="sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-[18rem] min-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
           onClick={() =>
@@ -43,6 +44,22 @@ const DataCard = ({ type, data }) => {
             </div>
           </div>
         </div>
+      ) : type === "edit" ? (
+        <div
+        className="sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-[18rem] min-w-[18rem] p-8 flex justify-center items-center border-2 rounded-lg shadow-xl cursor-pointer"
+        onClick={() =>
+          handleNavigate(`/registerorganization/edit?id=${data?.id}`)
+        }
+      >
+        <div className="flex flex-col items-center space-y-4 ">
+          <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
+            <img src={editIcon} alt="" />
+          </div>
+          <div className="text-[14px] font-ibm-plex-sans font-semibold w-32 text-center">
+            Edit Your card
+          </div>
+        </div>
+      </div>
       ) : (
         <div className="w-full max-w-[18rem] border-2 rounded-lg shadow-xl">
           <div className="relative mt-0">

@@ -102,7 +102,7 @@ function NOCApplicationView() {
       })
       .then(() => {
         message.success("Saved successfully.", 2.5);
-        navigate("/pagetwo");
+        navigate("/expact-noc-application");
       });
   };
 

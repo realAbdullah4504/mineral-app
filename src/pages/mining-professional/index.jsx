@@ -59,6 +59,7 @@ const sampleData = [
 
 const HRPro = () => {
   const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -96,7 +97,35 @@ const HRPro = () => {
     fetchData();
   }, []);
 
-  const userHasMatch = data?.data?.find((item) => item.email === user?.Email);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}api/PublicWhoIsWho/GetAllWhoIsWho`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("token")}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        setAllData(response.data);
+      } catch (error) {
+        notification.error({
+          message: "Error",
+          description: "Failed to fetch data.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  },[])
+
+
+  const userHasMatch = allData?.data?.find((item) => item.status === "PublicNewEntry" || "SubmissionFailed");
 
   return (
     <Container classes="mt-8 w-[90%]">
@@ -110,8 +139,10 @@ const HRPro = () => {
 
           <div className="w-full flex justify-center mt-16">
             <div className="flex flex-wrap justify-center gap-20 p-4">
-              {!userHasMatch && <DataCard type={"add"} data={Adddata} />}
-              {userHasMatch && <DataCard type={"edit"} data={userHasMatch} />}
+              {allData.length === 0 && <DataCard type={"add"} data={Adddata} />}
+              {(userHasMatch?.status === "PublicNewEntry" || userHasMatch?.status === "SubmissionFailed") && <DataCard type={"edit"} data={userHasMatch} />}
+{!(userHasMatch?.status === "PublicNewEntry" || userHasMatch?.status === "SubmissionFailed") && <DataCard type={"view"} data={userHasMatch} />}
+
               {data?.data?.length > 0 &&
                 data.data.map((item, index) => (
                   <div key={index} className="sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-[18rem] min-w-[18rem]">

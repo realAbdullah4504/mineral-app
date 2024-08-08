@@ -30,6 +30,7 @@ const RegisterProfessionalEdit = () => {
   const [fileUrl, setFileUrl] = useState("");
   const [buttonText, setButtonText] = useState("Click to Upload Resume");
   const [user, setUser] = useState(null);
+  const [prevResume, setPrevResume] = useState("")
   const [uploadError, setUploadError] = useState(false);
   const isApiLoading = useRef();
   const maskInputCnicLoading = useRef();
@@ -124,6 +125,7 @@ const RegisterProfessionalEdit = () => {
           OrganizationName: fetchedData.organizationName,
         });
         setCnicValue(fetchedData.cnic);
+        setPrevResume(fetchedData.uploadResume)
 
         const pdfPath = fetchedData.uploadResume;
         const pdfUrl = `${process.env.REACT_APP_FILE_URL}${pdfPath}`;
@@ -163,6 +165,7 @@ const RegisterProfessionalEdit = () => {
   ];
 
   const success = () => {
+    
     messageApi
       .open({
         type: "loading",
@@ -178,22 +181,22 @@ const RegisterProfessionalEdit = () => {
             marginTop: "40vh",
           },
         });
-        navigate(returnLink);
+        navigate("/mining-professional");
       });
 
     // Show notification
-    notification.success({
-      message: "Registration Completed",
-      description: "Your registration has been successfully completed.",
-      placement: "topRight",
-      style: {
-        backgroundColor: "#f6ffed",
-        border: "1px solid #b7eb8f",
-      },
-      duration: 4.5, // Duration in seconds, change as needed
-      onClose: () => console.log("Notification closed"),
-    });
-    navigate("/mining-professional");
+    // notification.success({
+    //   message: "Registration Completed",
+    //   description: "Your registration has been successfully completed.",
+    //   placement: "topRight",
+    //   style: {
+    //     backgroundColor: "#f6ffed",
+    //     border: "1px solid #b7eb8f",
+    //   },
+    //   duration: 4.5, // Duration in seconds, change as needed
+    //   onClose: () => console.log("Notification closed"),
+    // });
+    // navigate("/mining-professional");
   };
 
   const handleSubmission = async (values) => {
@@ -231,6 +234,7 @@ const RegisterProfessionalEdit = () => {
         PECRegistrationNo: values.PECRegistrationNo,
         Designation: values.Designation,
         JoiningYear: values.JoiningYear,
+        UploadResume: prevResume,
       };
 
       bodyFormData.append("obj", JSON.stringify(companyobj));
@@ -286,6 +290,8 @@ const RegisterProfessionalEdit = () => {
     form.setFieldsValue({ UploadResume: filteredFileList });
     form.validateFields(["UploadResume"]);
   };
+
+  console.log("form", form.getFieldsValue())
 
   return (
     <>
@@ -416,7 +422,7 @@ const RegisterProfessionalEdit = () => {
                     form.setFieldsValue({ CNIC: formattedCNIC });
                   }}
                   className="border-1 peer block w-full appearance-none rounded-lg border border-green-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-green-600 focus:outline-none focus:ring-0"
-                  mask= "00000-00000-00"
+                  mask= "00000-0000000-0"
                   // maskOptions={{
                   //   mask: "00000-00000-00",
                   //   placeholderChar: "_",
