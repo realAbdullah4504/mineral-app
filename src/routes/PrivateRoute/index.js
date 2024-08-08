@@ -10,7 +10,9 @@ const useAuth = () => {
     if (accessToken) {
       const payLoad = jwtDecode(accessToken);
        isExpired = Date.now() > payLoad.exp * 1000;
-       logOut();
+       if(isExpired){
+         logOut();
+       }
     }
   return (accessToken && !isExpired) ? true : false;
 };
